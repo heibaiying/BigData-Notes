@@ -19,7 +19,7 @@
     </tr>
     <tr>
       <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#一hadoop">Hadoop</a></td>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#二hvie">Hive</a></td>
+      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#二hive">Hive</a></td>
       <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#三spark">Spark</a></td>
       <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#四flume">Flume</a></td>
       <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#五oozie">Oozie</a></td>
