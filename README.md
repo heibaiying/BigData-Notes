@@ -1,5 +1,12 @@
 # BigData-Notes
-> 大数据常用技术栈学习之路——2019起步
+
+
+
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/bigdata-notes-icon.png"/> </div>
+
+
+
+> 2019大数据常用技术栈学习之路 — — 持续更新中
 
 
 
