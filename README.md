@@ -2,7 +2,7 @@
 
 
 
-<div align="center"> <img width="500px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/bigdata-notes-icon.png"/> </div>
+<div align="center"> <img width="470px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/bigdata-notes-icon.png"/> </div>
 
 
 
