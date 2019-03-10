@@ -25,17 +25,17 @@
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala.jpg"></th>
     </tr>
     <tr>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#一hadoop">Hadoop</a></td>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#二hive">Hive</a></td>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#三spark">Spark</a></td>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#四flume">Flume</a></td>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#五oozie">Oozie</a></td>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#六sqoop">Sqoop</a></td>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#七azkaban">Azkaban</a></td>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#八hbase">Hbase</a></td>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#九kafka">Kafka</a></td>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#十zookeeper">Zookeeper</a></td>
-      <td align="center"><a href="https://github.com/heibaiying/BigData-Notes#十一scala">Scala</a></td>
+      <td align="center"><a href="#一hadoop">Hadoop</a></td>
+      <td align="center"><a href="#二hive">Hive</a></td>
+      <td align="center"><a href="#三spark">Spark</a></td>
+      <td align="center"><a href="#四flume">Flume</a></td>
+      <td align="center"><a href="#五oozie">Oozie</a></td>
+      <td align="center"><a href="#六sqoop">Sqoop</a></td>
+      <td align="center"><a href="#七azkaban">Azkaban</a></td>
+      <td align="center"><a href="#八hbase">Hbase</a></td>
+      <td align="center"><a href="#九kafka">Kafka</a></td>
+      <td align="center"><a href="#十zookeeper">Zookeeper</a></td>
+      <td align="center"><a href="#十一scala">Scala</a></td>
     </tr>
   </table>
 
