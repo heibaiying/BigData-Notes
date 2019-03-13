@@ -1,5 +1,6 @@
 # Hadoop-YARN
-<nav>
+
+<nav>
 <a href="#一hadoop-yarn-简介">一、hadoop yarn 简介</a><br/>
 <a href="#二YARN架构">二、YARN架构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-ResourceManager"> 1. ResourceManager</a><br/>
@@ -20,13 +21,13 @@
 
 **Apache YARN** (Yet Another Resource Negotiator)  在 hadoop 2 中被引入，作为hadoop集群资源管理系统。用户可以将各种各样的计算框架部署在YARN上，由YARN进行统一管理和资源的分配。
 
-<div width="600px" align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/yarn-base.png"/> </div>
+<div align="center"> <img width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/yarn-base.png"/> </div>
 
 
 
 ## 二、YARN架构
 
-<div width="600px" align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Figure3Architecture-of-YARN.png"/> </div>
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Figure3Architecture-of-YARN.png"/> </div>
 
 ####  1. ResourceManager
 
@@ -46,7 +47,7 @@ NodeManager管理YARN集群中的每个节点。NodeManager 提供针对集群�
 
 ## 三、YARN工作原理简述
 
-<div width="600px" align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/yarn工作原理简图.png"/> </div>
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/yarn工作原理简图.png"/> </div>
 
 1. Client提交作业到YARN上；
 
@@ -60,7 +61,7 @@ NodeManager管理YARN集群中的每个节点。NodeManager 提供针对集群�
 
 ## 四、YARN工作原理详述
 
-<div width="600px" align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/yarn工作原理.png"/> </div>
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/yarn工作原理.png"/> </div>
 
 
 
