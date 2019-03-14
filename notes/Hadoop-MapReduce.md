@@ -1,5 +1,6 @@
 # 分布式计算框架——MapReduce
-<nav>
+
+<nav>
 <a href="#一MapReduce-概述">一、MapReduce 概述</a><br/>
 <a href="#二MapReduce-编程模型简述">二、MapReduce 编程模型简述</a><br/>
 <a href="#三MapReduce-编程模型详述">三、MapReduce 编程模型详述</a><br/>
@@ -80,7 +81,7 @@ combiner是map运算后的可选操作，其实际上是一个本地化的reduce
 
 但并非所有场景都适合使用combiner，使用它的原则是combiner的输入不会影响到reduce计算的最终输入，例如：如果计算只是求总数，最大值，最小值可以使用combiner，但是做平均值计算使用combiner的话，最终的reduce计算结果就会出错。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/mapreduce-combiner.png"/> </div>
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/mapreduce-combiner.png"/> </div>
 
 ### 3.3 partitioner
 
