@@ -1,4 +1,4 @@
-# Hadoop-YARN
+# 集群资源管理器——YARN
 
 <nav>
 <a href="#一hadoop-yarn-简介">一、hadoop yarn 简介</a><br/>

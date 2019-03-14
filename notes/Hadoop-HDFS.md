@@ -1,5 +1,6 @@
-# Hadoop-HDFS
-<nav>
+# 分布式文件存储系统——HDFS
+
+<nav>
 <a href="#一介绍">一、介绍</a><br/>
 <a href="#二HDFS-设计原理">二、HDFS 设计原理</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-HDFS-架构">2.1 HDFS 架构</a><br/>
@@ -20,7 +21,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-跨平台移植性">3.4 跨平台移植性</a><br/>
 <a href="#四HDFS-shell">四、HDFS shell</a><br/>
 <a href="#五HDFS-API">五、HDFS API</a><br/>
+<a href="#附图解HDFS存储原理">附：图解HDFS存储原理</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-HDFS写数据原理">1. HDFS写数据原理</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-HDFS读数据原理">2. HDFS读数据原理</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-HDFS故障类型和其检测方法">3. HDFS故障类型和其检测方法</a><br/>
 </nav>
+
 
 
 ## 一、介绍
@@ -132,8 +138,55 @@ HDFS的设计便于从一个平台移植到另一个平台。这有助于HDFS作
 
 
 
+## 附：图解HDFS存储原理
+
+说明：本小结图片引用自博客[翻译经典 HDFS 原理讲解漫画](https://blog.csdn.net/hudiefenmu/article/details/37655491)
+
+### 1. HDFS写数据原理
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hdfs-write-1.jpg"/> </div>
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hdfs-write-2.jpg"/> </div>
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hdfs-write-3.jpg"/> </div>
+
+
+
+### 2. HDFS读数据原理
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hdfs-read-1.jpg"/> </div>
+
+
+
+### 3. HDFS故障类型和其检测方法
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hdfs-tolerance-1.jpg"/> </div>
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hdfs-tolerance-2.jpg"/> </div>
+
+
+
+**第二部分：读写故障的处理**
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hdfs-tolerance-3.jpg"/> </div>
+
+
+
+**第三部分：DataNode故障处理**
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hdfs-tolerance-4.jpg"/> </div>
+
+
+
+**副本布局策略**：
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hdfs-tolerance-5.jpg"/> </div>
+
+
+
 ## 参考资料
 
 1. [Apache Hadoop 2.9.2 > HDFS Architecture](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html)
 2. Tom White. hadoop权威指南 [M]. 清华大学出版社, 2017.
+3. [翻译经典 HDFS 原理讲解漫画](https://blog.csdn.net/hudiefenmu/article/details/37655491)
 

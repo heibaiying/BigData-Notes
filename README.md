@@ -6,7 +6,7 @@
 
 
 
-> 2019大数据常用技术栈学习之路 — — 持续更新中
+> 大数据常用技术栈学习之路 — — 持续更新中
 
 
 
@@ -40,8 +40,12 @@
   </table>
 
 
-
 ## 一、Hadoop
+
+1. [分布式文件存储系统——HDFS](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-HDFS.md)
+2. [分布式计算框架——MapReduce](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-MapReduce.md)
+3. [集群资源管理器——YARN](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-YARN.md)
+
 ## 二、Hive
 ## 三、Spark
 ## 四、Flume
