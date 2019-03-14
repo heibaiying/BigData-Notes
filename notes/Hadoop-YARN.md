@@ -3,7 +3,7 @@
 <nav>
 <a href="#一hadoop-yarn-简介">一、hadoop yarn 简介</a><br/>
 <a href="#二YARN架构">二、YARN架构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-ResourceManager"> 1. ResourceManager</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-ResourceManager">1. ResourceManager</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-ApplicationMaster">2. ApplicationMaster </a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-NodeManager">3. NodeManager</a><br/>
 <a href="#三YARN工作原理简述">三、YARN工作原理简述</a><br/>
@@ -29,7 +29,7 @@
 
 <div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Figure3Architecture-of-YARN.png"/> </div>
 
-####  1. ResourceManager
+#### 1. ResourceManager
 
 以主要后台进程的形式运行，它通常在专用机器上运行，在各种竞争的应用程序之间仲裁可用的集群资源。ResourceManager 会追踪集群中有多少可用的活动节点和资源，协调用户提交的哪些应用程序应该在何时获取这些资源。ResourceManager 是惟一拥有此信息的进程，所以它可通过某种共享的、安全的、多租户的方式制定分配（或者调度）决策（例如，依据应用程序优先级、队列容量、ACLs、数据位置等）。
 
