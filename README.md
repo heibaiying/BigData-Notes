@@ -40,6 +40,10 @@
   </table>
 
 
+> 本仓库涉及的所有软件的详细搭建步骤整理至：[linux下大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/linux下大数据常用软件安装指南.md)
+
+
+
 ## 一、Hadoop
 
 1. [分布式文件存储系统——HDFS](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-HDFS.md)
