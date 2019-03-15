@@ -4,3 +4,6 @@
 
 1. [linux环境下JDK的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/JDK安装.md)
 
+### 二、Hadoop
+
+1. [hadoop单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/hadoop单机版本环境搭建.md)
