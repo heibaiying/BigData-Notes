@@ -5,7 +5,7 @@
 
 <nav>
 <a href="#一安装JDK">一、安装JDK</a><br/>
-<a href="#二配置-SSH-免密登录">二、配置 ssh 免密登录</a><br/>
+<a href="#二配置-SSH-免密登录">二、配置 SSH 免密登录</a><br/>
 <a href="#三HadoopHDFS安装">三、Hadoop(HDFS)安装</a><br/>
 </nav>
 
@@ -13,13 +13,13 @@
 
 ## 一、安装JDK
 
-Hadoop 需要在java环境下运行，所以需要先安装jdk,安装步骤见[Linux下JDK的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/JDK%E5%AE%89%E8%A3%85.md)
+Hadoop 需要在java环境下运行，所以需要先安装Jdk,安装步骤见[Linux下JDK的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/JDK%E5%AE%89%E8%A3%85.md)
 
 
 
 ## 二、配置 SSH 免密登录
 
-Hadoop 组件之间的各个节点需要进行通讯，所以需要配置ssh 免密登录。
+Hadoop 组件之间的各个节点需要进行通讯，所以需要配置SSH免密登录。
 
 #### 2.1 配置ip地址和主机名映射，在配置文件末尾添加ip地址和主机名映射
 
@@ -58,7 +58,7 @@ ssh-keygen -t rsa
 
 #### 3.1 下载CDH 版本的Hadoop
 
-从[CDH官方下载地址](http://archive.cloudera.com/cdh5/cdh/5/)下载所需版本的hadoop（本用例下载的版本为hadoop-2.6.0-cdh5.15.2.tar.gz ）,上传至服务器对应文件夹（这里我传至新建的/usr/app/ 目录）；
+从[CDH官方下载地址](http://archive.cloudera.com/cdh5/cdh/5/)下载所需版本的Hadoop（本用例下载的版本为hadoop-2.6.0-cdh5.15.2.tar.gz ）,上传至服务器对应文件夹（这里我传至新建的/usr/app/ 目录）；
 
 
 
@@ -151,7 +151,7 @@ sudo systemctl stop firewalld.service
 
 #### 3.6 验证是否启动成功
 
-方式一：执行jps 查看 NameNode和DataNode的进程是否已经存在
+方式一：执行jps 查看NameNode和DataNode的进程是否已经存在
 
 ```shell
 [root@hadoop001 hadoop-2.6.0-cdh5.15.2]# jps
@@ -165,4 +165,4 @@ sudo systemctl stop firewalld.service
 
 方式二：访问50070端口 http://192.168.43.202:50070 。如果jps查看进程均以启动，但是无法访问页面，则需要关闭防火墙。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop安装验证.png"/> </div>
+<div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop安装验证.png"/> </div>
