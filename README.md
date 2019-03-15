@@ -51,6 +51,9 @@
 3. [集群资源管理器——YARN](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-YARN.md)
 
 ## 二、Hive
+
+1. [数据仓库——Hive](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive.md)
+
 ## 三、Spark
 ## 四、Flume
 ## 五、Oozie
