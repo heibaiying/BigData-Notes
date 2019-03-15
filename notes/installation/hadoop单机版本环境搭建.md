@@ -5,7 +5,7 @@
 
 <nav>
 <a href="#一安装JDK">一、安装JDK</a><br/>
-<a href="#二配置-ssh-免密登录">二、配置 ssh 免密登录</a><br/>
+<a href="#二配置-SSH-免密登录">二、配置 ssh 免密登录</a><br/>
 <a href="#三HadoopHDFS安装">三、Hadoop(HDFS)安装</a><br/>
 </nav>
 
@@ -17,7 +17,7 @@ Hadoop 需要在java环境下运行，所以需要先安装jdk,安装步骤见[L
 
 
 
-## 二、配置 ssh 免密登录
+## 二、配置 SSH 免密登录
 
 Hadoop 组件之间的各个节点需要进行通讯，所以需要配置ssh 免密登录。
 
