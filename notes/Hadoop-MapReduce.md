@@ -39,9 +39,7 @@ MapReduce框架专门用于`<key，value>`对，也就是说，框架将作业�
 4. **shuffling**：由于Mapping操作可能是在不同的机器上并行处理的，所以需要通过shuffling将相同的数据分到同一个节点上去合并，这样才能统计出最终的结果，此时得到K2为每一个单词，List(V2)为可迭代集合，V2就是Mapping中的V2；
 5. **Reducing** : 这里的案例是统计单词出现的总次数，所以Reducing迭代List(V2)，并计算其和值，最终输出。
 
-MapReduce 编程模型中`splitting` 和` shuffing`操作都是由框架实现的，实际上，主要需要我们实现的是`mapping`和`reducing`
-
-中的编程逻辑，这也就是为何该框架叫做MapReduce的原因。
+MapReduce 编程模型中`splitting` 和` shuffing`操作都是由框架实现的，实际上，主要需要我们实现的是`mapping`和`reducing`中的编程逻辑，这也就是为何该框架叫做MapReduce的原因。
 
 
 
