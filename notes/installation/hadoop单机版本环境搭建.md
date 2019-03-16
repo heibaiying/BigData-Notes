@@ -6,8 +6,22 @@
 <nav>
 <a href="#一安装JDK">一、安装JDK</a><br/>
 <a href="#二配置-SSH-免密登录">二、配置 SSH 免密登录</a><br/>
-<a href="#三HadoopHDFS安装">三、Hadoop(HDFS)安装</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-配置ip地址和主机名映射在配置文件末尾添加ip地址和主机名映射">2.1 配置ip地址和主机名映射，在配置文件末尾添加ip地址和主机名映射</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--执行下面命令行一路回车生成公匙和私匙"> 2.2  执行下面命令行，一路回车，生成公匙和私匙</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-进入`~ssh`目录下查看生成的公匙和私匙并将公匙写入到授权文件">3.3 进入`~/.ssh`目录下，查看生成的公匙和私匙，并将公匙写入到授权文件</a><br/>
+<a href="#三HadoopHDFS环境搭建">三、Hadoop(HDFS)环境搭建</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-下载CDH-版本的Hadoop">3.1 下载CDH 版本的Hadoop</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-解压软件压缩包">3.2 解压软件压缩包</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-修改Hadoop相关配置文件">3.3 修改Hadoop相关配置文件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-关闭防火墙">3.4 关闭防火墙</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-启动HDFS">3.5 启动HDFS</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#36-验证是否启动成功">3.6 验证是否启动成功</a><br/>
+<a href="#四HadoopYARN环境搭建">四、Hadoop(YARN)环境搭建</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-修改Hadoop配置文件指明mapreduce运行在YARN上">4.1 修改Hadoop配置文件，指明mapreduce运行在YARN上</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-在sbin目录下启动YARN">4.2 在sbin目录下启动YARN</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-验证是否启动成功">4.3 验证是否启动成功</a><br/>
 </nav>
+
 
 
 
@@ -52,7 +66,7 @@ ssh-keygen -t rsa
 
 
 
-## 三、Hadoop(HDFS)安装
+## 三、Hadoop(HDFS)环境搭建
 
 
 
@@ -155,14 +169,73 @@ sudo systemctl stop firewalld.service
 
 ```shell
 [root@hadoop001 hadoop-2.6.0-cdh5.15.2]# jps
-5379 Jps
-11413 NameNode
-11529 DataNode
-11789 SecondaryNameNode
+9137 DataNode
+9026 NameNode
+9390 SecondaryNameNode
 ```
 
 
 
-方式二：访问50070端口 http://192.168.43.202:50070 。如果jps查看进程均以启动，但是无法访问页面，则需要关闭防火墙。
+方式二：访问50070端口 http://ip地址:50070 。如果jps查看进程均以启动，但是无法访问页面，则需要关闭防火墙。
 
 <div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop安装验证.png"/> </div>
+
+
+
+## 四、Hadoop(YARN)环境搭建
+
+#### 4.1 修改Hadoop配置文件，指明mapreduce运行在YARN上
+
+etc/hadoop/mapred-site.xml:
+
+```shell
+# 如果没有mapred-site.xml，则拷贝一份样例文件后再修改
+cp ./mapred-site.xml.template ./mapred-site.xml
+```
+
+```xml
+<configuration>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+</configuration>
+```
+
+etc/hadoop/yarn-site.xml:
+
+```xml
+<configuration>
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+</configuration>
+```
+
+
+
+#### 4.2 在sbin目录下启动YARN
+
+```shell
+./start-yarn.sh
+```
+
+
+
+#### 4.3 验证是否启动成功
+
+方式一：执行jps查看NodeManager和ResourceManager的进程是否已经存在
+
+```shell
+[root@hadoop001 hadoop-2.6.0-cdh5.15.2]# jps
+9137 DataNode
+9026 NameNode
+12294 NodeManager
+12185 ResourceManager
+9390 SecondaryNameNode
+```
+
+方式二：访问8088端口 http://ip地址:8088。如果jps查看进程均以启动，但是无法访问页面，则需要关闭防火墙。
+
+<div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-yarn安装验证.png"/> </div>
