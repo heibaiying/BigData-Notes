@@ -51,7 +51,7 @@ MapReduce 编程模型中`splitting` 和` shuffing`操作都是由框架实现�
 
 ### 3.1 InputFormat & RecordReaders 
 
-、通过InputFormat 将输出文件拆分为多个InputSplit，并由RecordReaders 将InputSplit 转换为标准的<key,value>键值对，作为map的输出。这一步的意义在于只有先进行逻辑拆分并转为标准的格式后，才能为多个map提供输入，进行并行处理；
+InputFormat将输出文件拆分为多个InputSplit，并由RecordReaders将InputSplit转换为标准的<key,value>键值对，作为map的输出。这一步的意义在于只有先进行逻辑拆分并转为标准的格式后，才能为多个map提供输入，进行并行处理；
 
 `InputFormat` 为一个抽象类，其中定义了两个抽象方法，而实际的操作则由其实现类来进行。其源码如下：
 
