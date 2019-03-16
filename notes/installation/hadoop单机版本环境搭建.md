@@ -236,6 +236,6 @@ etc/hadoop/yarn-site.xml:
 9390 SecondaryNameNode
 ```
 
-方式二：访问8088端口 http://ip地址:8088。如果jps查看进程均以启动，但是无法访问页面，则需要关闭防火墙。
+方式二：访问8088端口 http://ip地址:8088 。如果jps查看进程均以启动，但是无法访问页面，则需要关闭防火墙。
 
 <div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-yarn安装验证.png"/> </div>
