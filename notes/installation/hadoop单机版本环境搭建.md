@@ -86,9 +86,18 @@ ssh-keygen -t rsa
 
 #### 3.3 把路径添加到环境变量
 
+```shell
+# vi /etc/profile
+```
+
 ```
 export HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
 export  PATH=${HADOOP_HOME}/bin:$PATH
+```
+
+```shell
+# 执行source命令,使得配置立即生效
+# source /etc/profile
 ```
 
 
