@@ -101,6 +101,14 @@ YARN中的任务将其进度和状态(包括counter)返回给应用管理器, �
 
 ## 五、提交作业到YARN上运行
 
+在${HADOOP_HOME}/share/hadoop/mapreduce 目录下，存放了样例文本，可以提交计算pi的MApReduce作业作为用例：
+
+```shell
+# 提交格式为
+# hadoop jar jar包路径 主类名称 主类参数
+# hadoop jar hadoop-mapreduce-examples-2.6.0-cdh5.15.2.jar pi 3 3
+```
+
 
 
 ## 参考资料

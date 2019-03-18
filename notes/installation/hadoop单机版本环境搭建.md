@@ -79,12 +79,21 @@ ssh-keygen -t rsa
 #### 3.2 解压软件压缩包
 
 ```shell
-tar -zvxf hadoop-2.6.0-cdh5.15.2.tar.gz 
+# tar -zvxf hadoop-2.6.0-cdh5.15.2.tar.gz 
 ```
 
 
 
-#### 3.3 修改Hadoop相关配置文件
+#### 3.3 把路径添加到环境变量
+
+```
+export HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
+export  PATH=${HADOOP_HOME}/bin:$PATH
+```
+
+
+
+#### 3.4 修改Hadoop相关配置文件
 
 cd 到 安装目录的/etc/hadoop/ 文件夹下：
 
@@ -134,7 +143,7 @@ hadoop001
 
 
 
-#### 3.4 关闭防火墙
+#### 3.5 关闭防火墙
 
 由于防火墙可能会影响节点间通讯，所以建议关闭，执行命令：
 
@@ -147,7 +156,7 @@ sudo systemctl stop firewalld.service
 
 
 
-#### 3.5 启动HDFS
+#### 3.6 启动HDFS
 
 1. 第一次执行的时候一定要格式化文件系统，执行以下命令格式化文件系统（hdfs命令位于安装目录的bin目录下）。
 
@@ -163,7 +172,7 @@ sudo systemctl stop firewalld.service
 
 
 
-#### 3.6 验证是否启动成功
+#### 3.7 验证是否启动成功
 
 方式一：执行jps 查看NameNode和DataNode的进程是否已经存在
 
@@ -210,6 +219,11 @@ etc/hadoop/yarn-site.xml:
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property>
+    <!--这个目录需要和上面配置的hadoop.tmp.dir的路径保持一致-->
+    <property>
+    	<name>yarn.nodemanager.local-dirs</name>
+    	<value>/usr/app/tmp/nm-local-dir</value>
+  	</property>
 </configuration>
 ```
 
