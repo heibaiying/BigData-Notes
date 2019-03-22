@@ -15,7 +15,7 @@
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop.jpg"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive.jpg"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark.jpg"></th>
-       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink.jpg"></th>
+       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/oozie.jpg"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop.png"></th>
