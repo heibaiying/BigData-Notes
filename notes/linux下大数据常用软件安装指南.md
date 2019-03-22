@@ -10,13 +10,13 @@
 
 ## 二、Hadoop
 
-1. [Hadoop单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop单机版本环境搭建.md)
+1. [Hadoop单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/hadoop单机版本环境搭建.md)
 
 
 
 ## 三、Spark
 
-1. [Spark单机版本环境搭建]((https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Spark单机版本环境搭建.md))
+1. [Spark单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Spark单机版本环境搭建.md)
 
 
 

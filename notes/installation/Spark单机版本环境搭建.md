@@ -82,7 +82,7 @@ JAVA_HOME=/usr/java/jdk1.8.0_201
 
 访问8080端口，查看Spark的Web-UI界面
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-web-ui.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-web-ui.png"/> </div>
 
 
 
@@ -118,4 +118,4 @@ wordCounts.collect
 
 通过spark shell web-ui可以查看作业的执行情况，访问端口为4040
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-shell-web-ui.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-shell-web-ui.png"/> </div>
