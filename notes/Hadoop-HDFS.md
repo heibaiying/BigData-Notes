@@ -1,31 +1,31 @@
 # 分布式文件存储系统——HDFS
 
-<nav>
-<a href="#一介绍">一、介绍</a><br/>
-<a href="#二HDFS-设计原理">二、HDFS 设计原理</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-HDFS-架构">2.1 HDFS 架构</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-文件系统命名空间">2.2 文件系统命名空间</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-数据复制">2.3 数据复制</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-数据复制的实现原理">2.4 数据复制的实现原理</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25--副本的选择">2.5  副本的选择</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-架构的稳定性">2.6 架构的稳定性</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-心跳机制和重新复制">1. 心跳机制和重新复制</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-数据的完整性">2. 数据的完整性</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3元数据的磁盘故障">3.元数据的磁盘故障</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4支持快照">4.支持快照</a><br/>
-<a href="#三HDFS-的特点">三、HDFS 的特点</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-高容错">3.1 高容错</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-高吞吐量">3.2 高吞吐量</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33--大文件支持">3.3  大文件支持</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-简单一致性模型">3.3 简单一致性模型</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-跨平台移植性">3.4 跨平台移植性</a><br/>
-<a href="#四HDFS-shell">四、HDFS shell</a><br/>
-<a href="#五HDFS-API">五、HDFS API</a><br/>
-<a href="#附图解HDFS存储原理">附：图解HDFS存储原理</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-HDFS写数据原理">1. HDFS写数据原理</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-HDFS读数据原理">2. HDFS读数据原理</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-HDFS故障类型和其检测方法">3. HDFS故障类型和其检测方法</a><br/>
-</nav>
+><nav>
+><a href="#一介绍">一、介绍</a><br/>
+><a href="#二HDFS-设计原理">二、HDFS 设计原理</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-HDFS-架构">2.1 HDFS 架构</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-文件系统命名空间">2.2 文件系统命名空间</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-数据复制">2.3 数据复制</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-数据复制的实现原理">2.4 数据复制的实现原理</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25--副本的选择">2.5  副本的选择</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-架构的稳定性">2.6 架构的稳定性</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-心跳机制和重新复制">1. 心跳机制和重新复制</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-数据的完整性">2. 数据的完整性</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3元数据的磁盘故障">3.元数据的磁盘故障</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4支持快照">4.支持快照</a><br/>
+><a href="#三HDFS-的特点">三、HDFS 的特点</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-高容错">3.1 高容错</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-高吞吐量">3.2 高吞吐量</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33--大文件支持">3.3  大文件支持</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-简单一致性模型">3.3 简单一致性模型</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-跨平台移植性">3.4 跨平台移植性</a><br/>
+><a href="#四HDFS-shell">四、HDFS shell</a><br/>
+><a href="#五HDFS-API">五、HDFS API</a><br/>
+><a href="#附图解HDFS存储原理">附：图解HDFS存储原理</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-HDFS写数据原理">1. HDFS写数据原理</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-HDFS读数据原理">2. HDFS读数据原理</a><br/>
+>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-HDFS故障类型和其检测方法">3. HDFS故障类型和其检测方法</a><br/>
+></nav>
 
 
 
