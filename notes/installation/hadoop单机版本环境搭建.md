@@ -2,26 +2,20 @@
 
 
 
+>**系统环境**：centos 7.6
+>
+>**JDK版本**：jdk 1.8.0_20
+>
+>**Hadoop版本**：hadoop-2.6.0-cdh5.15.2
+
+
 
 <nav>
 <a href="#一安装JDK">一、安装JDK</a><br/>
 <a href="#二配置-SSH-免密登录">二、配置 SSH 免密登录</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-配置ip地址和主机名映射在配置文件末尾添加ip地址和主机名映射">2.1 配置ip地址和主机名映射，在配置文件末尾添加ip地址和主机名映射</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22--执行下面命令行一路回车生成公匙和私匙"> 2.2  执行下面命令行，一路回车，生成公匙和私匙</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-进入`~ssh`目录下查看生成的公匙和私匙并将公匙写入到授权文件">3.3 进入`~/.ssh`目录下，查看生成的公匙和私匙，并将公匙写入到授权文件</a><br/>
 <a href="#三HadoopHDFS环境搭建">三、Hadoop(HDFS)环境搭建</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-下载CDH-版本的Hadoop">3.1 下载CDH 版本的Hadoop</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-解压软件压缩包">3.2 解压软件压缩包</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-修改Hadoop相关配置文件">3.3 修改Hadoop相关配置文件</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-关闭防火墙">3.4 关闭防火墙</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-启动HDFS">3.5 启动HDFS</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#36-验证是否启动成功">3.6 验证是否启动成功</a><br/>
 <a href="#四HadoopYARN环境搭建">四、Hadoop(YARN)环境搭建</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-修改Hadoop配置文件指明mapreduce运行在YARN上">4.1 修改Hadoop配置文件，指明mapreduce运行在YARN上</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-在sbin目录下启动YARN">4.2 在sbin目录下启动YARN</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-验证是否启动成功">4.3 验证是否启动成功</a><br/>
 </nav>
-
 
 
 

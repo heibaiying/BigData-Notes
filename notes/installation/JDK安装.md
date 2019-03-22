@@ -1,20 +1,20 @@
 # Linux下JDK的安装
 
-**系统环境**：centos 7.6
-
-**JDK版本**：jdk 1.8.0_20
 
 
+>**系统环境**：centos 7.6
+>
+>**JDK版本**：jdk 1.8.0_20
 
-## 安装步骤：
+
 
 ### 1. 下载jdk安装包
 
-在[官网](https://www.oracle.com/technetwork/java/javase/downloads/index.html)下载所需版本的jdk，上传至服务器对应位置。（这里我们下载的版本为[jdk1.8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) ,上传至服务器的/usr/java/目录下）
+在[官网](https://www.oracle.com/technetwork/java/javase/downloads/index.html)下载所需版本的jdk，上传至服务器对应位置（这里我们下载的版本为[jdk1.8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) ,上传至服务器的/usr/java/目录下）
 
 
 
-### 2. 解压jdk-8u201-linux-x64.tar.gz安装包
+### 2. 解压安装包
 
 ```shell
 [root@ java]# tar -zxvf jdk-8u201-linux-x64.tar.gz
