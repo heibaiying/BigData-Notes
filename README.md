@@ -15,10 +15,11 @@
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop.jpg"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive.jpg"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark.jpg"></th>
+       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink.jpg"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/oozie.jpg"></th>
-      <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop.png"></th>
+      <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper.jpg"></th>
@@ -28,16 +29,18 @@
       <td align="center"><a href="#一hadoop">Hadoop</a></td>
       <td align="center"><a href="#二hive">Hive</a></td>
       <td align="center"><a href="#三spark">Spark</a></td>
-      <td align="center"><a href="#四flume">Flume</a></td>
-      <td align="center"><a href="#五oozie">Oozie</a></td>
-      <td align="center"><a href="#六sqoop">Sqoop</a></td>
-      <td align="center"><a href="#七azkaban">Azkaban</a></td>
-      <td align="center"><a href="#八hbase">Hbase</a></td>
-      <td align="center"><a href="#九kafka">Kafka</a></td>
-      <td align="center"><a href="#十zookeeper">Zookeeper</a></td>
-      <td align="center"><a href="#十一scala">Scala</a></td>
+      <td align="center"><a href="#四flink">Flink</a></td>
+      <td align="center"><a href="#五flume">Flume</a></td>
+      <td align="center"><a href="#六oozie">Oozie</a></td>
+      <td align="center"><a href="#七sqoop">Sqoop</a></td>
+      <td align="center"><a href="#八azkaban">Azkaban</a></td>
+      <td align="center"><a href="#九hbase">Hbase</a></td>
+      <td align="center"><a href="#十kafka">Kafka</a></td>
+      <td align="center"><a href="#十一zookeeper">Zookeeper</a></td>
+      <td align="center"><a href="#十二scala">Scala</a></td>
     </tr>
   </table>
+
 
 
 > 本仓库涉及的所有软件的详细搭建步骤整理至：[linux下大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/linux下大数据常用软件安装指南.md)
@@ -55,11 +58,14 @@
 1. [数据仓库——Hive](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive.md)
 
 ## 三、Spark
-## 四、Flume
-## 五、Oozie
-## 六、Sqoop
-## 七、Azkaban
-## 八、Hbase
-## 九、Kafka
-## 十、Zookeeper
-## 十一、Scala
+
+## 四、Flink
+
+## 五、Flume
+## 六、Oozie
+## 七、Sqoop
+## 八、Azkaban
+## 九、Hbase
+## 十、Kafka
+## 十一、Zookeeper
+## 十二、Scala
