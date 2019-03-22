@@ -107,7 +107,7 @@ hadoop,hadoop
 #### 3. 在scala交互式命令行中执行如下命名
 
 ```scala
-val file = spark.sparkContext.textFile("file:///usr/app//wc.txt")
+val file = spark.sparkContext.textFile("file:///usr/app/wc.txt")
 val wordCounts = file.flatMap(line => line.split(",")).map((word => (word, 1))).reduceByKey(_ + _)
 wordCounts.collect
 ```
