@@ -2,11 +2,11 @@
 
 
 
->**系统环境**：centos 7.6
+>系统环境：centos 7.6
 >
->**JDK版本**：jdk 1.8.0_20
+>JDK版本：jdk 1.8.0_20
 >
->**Hadoop版本**：hadoop-2.6.0-cdh5.15.2
+>Hadoop版本：hadoop-2.6.0-cdh5.15.2
 
 
 
