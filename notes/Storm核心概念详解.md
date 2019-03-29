@@ -1,13 +1,13 @@
-# storm 核心概念核心概念详解
+# Storm 核心概念核心概念详解
 
 <nav>
-<a href="#一storm核心概念">一、storm核心概念</a><br/>
+<a href="#一storm核心概念">一、Storm核心概念</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--Topologies拓扑">1.1  Topologies（拓扑）</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12--Streams流">1.2  Streams（流）</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-Spouts">1.3 Spouts</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-Bolts"> 1.4 Bolts</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-Stream-groupings分组策略">1.5 Stream groupings（分组策略）</a><br/>
-<a href="#二storm架构详解">二、storm架构详解</a><br/>
+<a href="#二storm架构详解">二、Storm架构详解</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-nimbus进程">2.1 nimbus进程</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-supervisor进程">2.2 supervisor进程</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-Zookeeper的作用">2.3 Zookeeper的作用</a><br/>
@@ -15,10 +15,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-executor线程">2.5 executor线程</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-并行度">2.6 并行度</a><br/>
 <a href="#三Linux下Storm单机版本环境搭建">三、Linux下Storm单机版本环境搭建</a><br/>
-<a href="#四storm词频统计案例">四、storm词频统计案例</a><br/>
+<a href="#四storm词频统计案例">四、Storm词频统计案例</a><br/>
 </nav>
 
-## 一、storm核心概念
+## 一、Storm核心概念
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spout-bolt.png"/> </div>
 
@@ -182,7 +182,7 @@ Storm 中一共有8个内置的 Stream Grouping。也可以通过实现 `CustomS
 
 
 
-## 二、storm架构详解
+## 二、Storm架构详解
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Internal-Working-of-Apache-Storm.png"/> </div>
 
@@ -253,7 +253,7 @@ task是最终运行spout或bolt中代码的单元。topology启动后，1个comp
 
 
 
-## 四、storm词频统计案例
+## 四、Storm词频统计案例
 
 
 
