@@ -1,5 +1,6 @@
 # storm 核心概念核心概念详解
-<nav>
+
+<nav>
 <a href="#一storm核心概念">一、storm核心概念</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#11--Topologies拓扑">1.1  Topologies（拓扑）</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#12--Streams流">1.2  Streams（流）</a><br/>
@@ -19,7 +20,7 @@
 
 ## 一、storm核心概念
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spout-bolt.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spout-bolt.png"/> </div>
 
 ### 1.1  Topologies（拓扑）
 
@@ -164,7 +165,7 @@ Bolt 中最主要的方法是 `execute` 方法, 当有一个新 Tuple 输入的�
 
 ### 1.5 Stream groupings（分组策略）
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/topology-tasks.png"/> </div>
+<div align="center"> <img width="400px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/topology-tasks.png"/> </div>
 
 spouts和bolts在集群上执行任务时，是由多个Task并行执行（如上图，每一个圆圈代表一个Task）。当一个tuple需要从Bolt A发送给Bolt B执行的时候，我们怎么知道需要发送给Bolt B的哪一个Task执行？这是由Stream groupings 分组策略来决定的。
 
@@ -183,7 +184,7 @@ Storm 中一共有8个内置的 Stream Grouping。也可以通过实现 `CustomS
 
 ## 二、storm架构详解
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Internal-Working-of-Apache-Storm.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Internal-Working-of-Apache-Storm.png"/> </div>
 
 ### 2.1 nimbus进程
 
@@ -233,7 +234,7 @@ storm集群的任务执行者 ，循环执行task代码。
 
 ### 2.6 并行度
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/relationships-worker-processes-executors-tasks.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/relationships-worker-processes-executors-tasks.png"/> </div>
 
 1个worker进程执行的是1个topology的子集（注：不会出现1个worker为多个topology服务）。1个worker进程会启动1个或多个executor线程来执行1个topology的component(spout或bolt)。因此1个运行中的topology就是由集群中多台物理机上的多个worker进程组成的。
 

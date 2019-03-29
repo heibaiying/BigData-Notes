@@ -6,13 +6,6 @@
 
 
 
-<nav>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1安装环境要求">1.安装环境要求</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2下载并解压">2.下载并解压</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3配置环境变量">3.配置环境变量</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4启动相关进程">4.启动相关进程</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5验证是否启动成功">5.验证是否启动成功</a><br/>
-</nav>
 ### 1.安装环境要求
 
 按照[官方文档](http://storm.apache.org/releases/1.2.2/Setting-up-a-Storm-cluster.html)的要求：
@@ -22,9 +15,7 @@
 > 1. Java 7+ (Apache Storm 1.x is tested through travis ci against both java 7 and java 8 JDKs)
 > 2. Python 2.6.6 (Python 3.x should work too, but is not tested as part of our CI enviornment)
 
-storm 运行依赖于Java 7+ 和 Python 2.6.6 +，所以需要先安装以上两个软件。
-
- 由于以上两个软件在多个环境中都有依赖，其安装步骤单独整理至:
+storm 运行依赖于Java 7+ 和 Python 2.6.6 +，所以需要先安装以上两个软件。由于以上两个软件在多个环境中都有依赖，其安装步骤单独整理至:
 
 + [Linux环境下JDK安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
 
@@ -34,7 +25,7 @@ storm 运行依赖于Java 7+ 和 Python 2.6.6 +，所以需要先安装以上两
 
 ### 2.下载并解压
 
-官方下载地址：http://storm.apache.org/downloads.html
+官方下载地址：http://storm.apache.org/downloads.html 
 
 下载后进行解压：
 
@@ -99,4 +90,4 @@ nohup sh storm logviewer &
 
 验证方式二： 访问8080端口，查看Web-UI界面
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-web-ui.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-web-ui.png"/> </div>
