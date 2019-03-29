@@ -31,7 +31,7 @@
       <td align="center"><a href="#二hive">Hive</a></td>
       <td align="center"><a href="#三spark">Spark</a></td>
       <td align="center"><a href="#四flink">Flink</a></td>
-      <td align="center"><a href="#五storm">storm</a></td>
+      <td align="center"><a href="#五storm">Storm</a></td>
       <td align="center"><a href="#六flume">Flume</a></td>
       <td align="center"><a href="#七oozie">Oozie</a></td>
       <td align="center"><a href="#八sqoop">Sqoop</a></td>
@@ -46,7 +46,7 @@
 
 
 
-> 本仓库涉及的所有软件的详细搭建步骤整理至：[Linux下大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Linux下大数据常用软件安装指南.md)
+> 本仓库涉及的所有软件的详细搭建步骤整理至：[Linux下大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Linux中大数据常用软件安装指南.md)
 
 
 
