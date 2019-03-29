@@ -69,7 +69,7 @@
 
 ## 五、Storm
 
-1. [storm核心概念详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm核心概念详解.md)
+1. [Storm核心概念详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm核心概念详解.md)
 
 ## 六、Flume
 ## 七、Oozie
