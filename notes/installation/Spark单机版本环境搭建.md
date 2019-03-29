@@ -4,7 +4,6 @@
 
 >**系统环境**：centos 7.6
 >
->**Spark版本**：spark-2.2.3-bin-hadoop2.6
 
 
 
