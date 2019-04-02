@@ -25,6 +25,12 @@
 
 
 
+### 五、Hbase
+
+1. [Hbase基本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hbase%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
+
+
+
 ### 五、Linux
 
 + [虚拟机静态IP配置](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/虚拟机静态IP配置.md)

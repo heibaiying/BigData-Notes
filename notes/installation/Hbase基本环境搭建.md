@@ -2,21 +2,8 @@
 
 <nav>
 <a href="#一安装前置条件说明">一、安装前置条件说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-JDK版本说明">1.1 JDK版本说明</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-standalone-模式和伪集群模式的区别">1.2 standalone 模式和伪集群模式的区别</a><br/>
 <a href="#二Standalone-模式">二、Standalone 模式</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-下载并解压">2.1 下载并解压</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-配置环境变量">2.2 配置环境变量</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-进行Hbase相关配置">2.3 进行Hbase相关配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-启动Hbase">2.4 启动Hbase</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-验证启动是否成功">2.5 验证启动是否成功</a><br/>
 <a href="#三伪集群模式安装Pseudo-Distributed">三、伪集群模式安装（Pseudo-Distributed）</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-Hadoop单机伪集群安装">3.1 Hadoop单机伪集群安装</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-Hbase版本选择">3.2 Hbase版本选择</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-软件下载解压">3.3 软件下载解压</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-配置环境变量">3.4 配置环境变量</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-进行Hbase相关配置">3.5 进行Hbase相关配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#36-验证启动是否成功">3.6 验证启动是否成功</a><br/>
 </nav>
 
 ## 一、安装前置条件说明
@@ -119,7 +106,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 
 验证方式二：访问Hbase Web UI 页面，默认端口为`16010`
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-web-ui.png"/> </div>
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-web-ui.png"/> </div>
 
 
 
@@ -127,21 +114,21 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 
 ### 3.1 Hadoop单机伪集群安装
 
-因为上面的单机版本采用了本地文件系统作为存储，为了演示Hbase支持的多种存储方式，这里我们采用HDFS作为Hbase的存储方案。需要预先安装Hadoop,Hadoop安装方式见本仓库[Hadoop单机伪集群搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop单机版本环境搭建.md)
+这里我们采用HDFS作为Hbase的存储方案，需要预先安装Hadoop。（如果你没有安装Hadoop，依然可以按照Standalone 模式，采用本地文件系统作为存储方案）
 
-> 需要说明的是：Hbase即使是伪集群安装模式依然可以采用本地文件系统作为存储。
-
-
+> [Hadoop单机伪集群搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop单机版本环境搭建.md)
 
 ### 3.2 Hbase版本选择
 
-Hbase的版本必须要与Hadoop的版本兼用，不然会发生各种Jar包冲突，由于我们Hadoop采用的版本为`hadoop-2.6.0-cdh5.15.2`,所以这里保持CDH版本一致，我们选择的Hbase版本为`hbase-1.2.0-cdh5.15.2` ，Hbase 1.2 的安装需要依赖JDK 1.7+ 。故所有软件版本如下：
+Hbase的版本必须要与Hadoop的版本兼容，不然会发生各种Jar包冲突。
 
-+ **hadoop 版本**： hadoop-2.6.0-cdh5.15.2
+由于我们Hadoop采用的版本为`hadoop-2.6.0-cdh5.15.2`,所以这里保持CDH版本一致，我们选择的Hbase版本为`hbase-1.2.0-cdh5.15.2` ，Hbase 1.2 的安装需要依赖JDK 1.7+ 。所有软件版本如下：
 
-+ **hbase 版本**： hbase-1.2.0-cdh5.15.2
++ hadoop 版本： hadoop-2.6.0-cdh5.15.2
 
-+ **JDK 版本**：JDK 1.8
++ hbase 版本： hbase-1.2.0-cdh5.15.2
+
++ JDK 版本：JDK 1.8
 
 
 
@@ -236,4 +223,4 @@ hadoop001
 
 验证方式二：访问Hbase Web UI 界面，需要注意的是1.2 版本的Hbase的访问端口为`60010`
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-60010.png"/> </div>
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-60010.png"/> </div>

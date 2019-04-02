@@ -1,5 +1,6 @@
 # Hbase系统架构及数据结构
-<nav>
+
+<nav>
 <a href="#一基本概念">一、基本概念</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-Row-Key-行键">2.1 Row Key (行键)</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-Column-Family列族">2.2 Column Family（列族）</a><br/>
@@ -22,23 +23,23 @@
 
 一个典型的Hbase Table 表如下：
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-webtable.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-webtable.png"/> </div>
 
 ### 2.1 Row Key (行键)
 
-row key是用来检索记录的主键。访问Hbase table中的行，只有三种方式：
+Row Key是用来检索记录的主键。访问Hbase Table中的行，只有三种方式：
 
-+ 通过单个row key访问
++ 通过单个Row Key访问
 
-+ 通过row key的range
++ 通过Row Key的range
 
 + 全表扫描
 
-Row key行键 (Row key)可以是任意字符串(最大长度是 64KB，实际应用中长度一般为 10-100bytes)，在Hbase内部，row key保存为字节数组。存储时，数据按照Row key的字典序(byte order)排序存储。设计key时，要充分排序存储这个特性，将经常一起读取的行存储放到一起。(位置相关性)
+Row Key (行键)可以是任意字符串(最大长度是 64KB，实际应用中长度一般为 10-100bytes)，在Hbase内部，Row Key保存为字节数组。存储时，数据按照Row Key的字典序(byte order)排序存储。设计key时，要充分排序存储这个特性，将经常一起读取的行存储放到一起(位置相关性)。
 
-注意：
+需要注意以下两点：
 
-+ 字典序对int排序的结果是1,10,100,11,12,13,14,15,16,17,18,19,2,20,21,…,9,91,92,93,94,95,96,97,98,99。要保持整形的自然序，行键必须用0作左填充。
++ 字典序对int排序的结果是1,10,100,11,12,13,14,15,16,17,18,19,2,20,21,…,9,91,92,93,94,95,96,97,98,99。要保持整型的自然序，行键必须用0作左填充。
 
 + 行的一次读写是原子操作 (不论一次读写多少列)。
 
@@ -46,7 +47,7 @@ Row key行键 (Row key)可以是任意字符串(最大长度是 64KB，实际应
 
 ### 2.2 Column Family（列族）
 
-hbase表中的每个列（Column），都归属与某个列族。列族是表的schema的一部分(列不是)，必须在使用表之前定义。列名都以列族作为前缀。例如courses:history，courses:math都属于courses 这个列族。
+hbase表中的每个列（Column），都归属与某个列族。列族是表的schema的一部分(列不是)，必须在使用表之前定义。列名都以列族作为前缀。例如`courses:history`，`courses:math`都属于`courses `这个列族。
 
 
 
@@ -64,13 +65,13 @@ HBase 中的列由列族和列限定符组成，它们由`:`（冒号）字符�
 
 ### 2.5 Cell
 
-cell是行，列族和列限定符的组合，并包含值和时间戳。
+Cell是行，列族和列限定符的组合，并包含值和时间戳。
 
 
 
 ### 2.6 Timestamp(时间戳)
 
-HBase 中通过row和columns确定的为一个存贮单元称为cell。每个 cell都保存着同一份数据的多个版本。版本通过时间戳来索引。时间戳的类型是 64位整型。时间戳可以由hbase(在数据写入时自动 )赋值，此时时间戳是精确到毫秒的当前系统时间。时间戳也可以由客户显式赋值。如果应用程序要避免数据版本冲突，就必须自己生成具有唯一性的时间戳。每个 cell中，不同版本的数据按照时间倒序排序，即最新的数据排在最前面。
+HBase 中通过`row`和`columns`确定的为一个存储单元称为Cell。每个Cell都保存着同一份数据的多个版本。版本通过时间戳来索引。时间戳的类型是 64位整型。时间戳可以由hbase(在数据写入时自动 )赋值，此时时间戳是精确到毫秒的当前系统时间。时间戳也可以由客户显式赋值。如果应用程序要避免数据版本冲突，就必须自己生成具有唯一性的时间戳。每个Cell中，不同版本的数据按照时间倒序排序，即最新的数据排在最前面。
 
 
 
@@ -78,11 +79,11 @@ HBase 中通过row和columns确定的为一个存贮单元称为cell。每个 ce
 
 ### 2.1 Regions
 
-Hbase Table中的所有行都按照row key的字典序排列。HBase Tables 通过行键的范围（row key range）被水平切分成多个Region, 一个Region包含了在start key 和 end key之间的所有行。
+Hbase Table中的所有行都按照Row Key的字典序排列。HBase Tables 通过行键的范围（row key range）被水平切分成多个Region, 一个Region包含了在start key 和 end key之间的所有行。
 
 <div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HBaseArchitecture-Blog-Fig2.png"/> </div>
 
-每个表一开始只有一个Region ，随着数据不断插入表，Region不断增大，当增大到一个阀值的时候，Region就会等分会两个新的Region。当Table中的行不断增多，就会有越来越多的Region。
+每个表一开始只有一个Region，随着数据不断插入表，Region不断增大，当增大到一个阀值的时候，Region就会等分会两个新的Region。当Table中的行不断增多，就会有越来越多的Region。
 
 <div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-region-splite.png"/> </div>
 
@@ -92,11 +93,11 @@ Region是Hbase中**分布式存储和负载均衡的最小单元**。最小单�
 
 ### 2.2 Region Server
 
-Region Server在HDFS data node上运行。
+Region Server在HDFS DataNode上运行。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-hadoop.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-hadoop.png"/> </div>
 
-Region Server 存取一个子表时，会创建一个 Region 对象，然后对表的每个列族 (Column Family) 创建一个 Store 实例，每个 Store 都会有 0 个或多个 StoreFile 与之对应，每个 StoreFile 都会对应一个 HFile，HFile 就是实际的存储文件。因此，一个 Region 有多少个列族就有多少个 Store。
+Region Server存取一个子表时，会创建一个 Region 对象，然后对表的每个列族 (Column Family) 创建一个 Store 实例，每个 Store 都会有 0 个或多个 StoreFile 与之对应，每个 StoreFile 都会对应一个 HFile，HFile 就是实际的存储文件。因此，一个 Region 有多少个列族就有多少个 Store。
 
 Region Server还具有以下组件：
 
@@ -111,17 +112,17 @@ Region Server还具有以下组件：
 
 ### 3.1 系统架构
 
-HBase系统遵循master/salve架构，由三种不同类型的组件组成。
+HBase系统遵循Master/Salve架构，由三种不同类型的组件组成。
 
 **Zookeeper**
 
-1. 保证任何时候，集群中只有一个master
+1. 保证任何时候，集群中只有一个Master
 
 2. 存贮所有Region的寻址入口
 
 3. 实时监控Region Server的状态，将Region server的上线和下线信息实时通知给Master
 
-4. 存储Hbase的schema,包括有哪些Table，每个Table有哪些column family
+4. 存储Hbase的schema,包括有哪些Table，每个Table有哪些Column Family
 
 **Master**
 
@@ -153,7 +154,7 @@ HBase系统遵循master/salve架构，由三种不同类型的组件组成。
 
 + 如果Region Server或主HMaster未能发送心跳，则会话过期并删除相应的临时节点。这会触发定义在该节点上的Watcher事件，使得Region Server或备用Region Server得到通知。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HBaseArchitecture-Blog-Fig5.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HBaseArchitecture-Blog-Fig5.png"/> </div>
 
 
 
@@ -161,11 +162,11 @@ HBase系统遵循master/salve架构，由三种不同类型的组件组成。
 
 ### 4.1 写入数据的流程
 
-1. client向region server提交写请求
+1. client向Region server提交写请求
 
-2. region server找到目标region
+2. Region server找到目标Region
 
-3. region检查数据是否与schema一致
+3. Region检查数据是否与schema一致
 
 4. 如果客户端没有指定版本，则获取当前系统时间作为数据版本
 
@@ -193,7 +194,7 @@ HBase系统遵循master/salve架构，由三种不同类型的组件组成。
 
 注：META 表是Hbase中一张特殊的表，它保存了Hbase中所有数据表的Region位置信息，ZooKeeper存储着META 表的位置。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HBaseArchitecture-Blog-Fig7.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HBaseArchitecture-Blog-Fig7.png"/> </div>
 
 > 更为详细读取数据流程参考：
 >
