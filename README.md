@@ -76,6 +76,16 @@
 ## 八、Sqoop
 ## 九、Azkaban
 ## 十、Hbase
+
+1. Hbase基本环境搭建（Standalone /pseudo-distributed mode）
+
+2. Hbase系统架构及数据结构
+3. Hbase shell
+4. Hbase Java Api
+5. Hbase 协处理器
+6. Hbase 备份与恢复
+7. Hbase上的sql层——phoenix
+
 ## 十一、Kafka
 ## 十二、Zookeeper
 ## 十三、Scala
