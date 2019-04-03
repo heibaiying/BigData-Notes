@@ -80,7 +80,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 </configuration>
 ```
 
-`hbase.rootdi`r: 配置hbase数据的存储路径
+`hbase.rootdir`: 配置hbase数据的存储路径
 
 `hbase.zookeeper.property.dataDir`: 配置zookeeper数据的存储路径
 
