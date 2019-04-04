@@ -14,8 +14,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-worker进程">2.4 worker进程</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-executor线程">2.5 executor线程</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-并行度">2.6 并行度</a><br/>
-<a href="#三Linux下Storm单机版本环境搭建">三、Linux下Storm单机版本环境搭建</a><br/>
-<a href="#四storm词频统计案例">四、Storm词频统计案例</a><br/>
 </nav>
 
 ## 一、Storm核心概念
@@ -246,17 +244,6 @@ task是最终运行spout或bolt中代码的单元。topology启动后，1个comp
 
 + 每个worker进程默认启动一个executor线程
 + 每个executor默认启动一个task线程
-
-
-
-## 三、Linux下Storm单机版本环境搭建
-
-
-
-## 四、Storm词频统计案例
-
-
-
 
 
 ## 参考资料

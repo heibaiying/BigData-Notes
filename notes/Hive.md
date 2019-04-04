@@ -8,7 +8,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-command-line-shell--thriftjdbc">2.1 command-line shell & thrift/jdbc</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-Metastore">2.2 Metastore</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-执行流程">2.3 执行流程</a><br/>
-<a href="#三Hive环境搭建">三、Hive环境搭建</a><br/>
 </nav>
 
 
@@ -48,12 +47,6 @@ hive里的表名、表结构、字段名、字段类型、表的分隔符等信�
 3. 在物理性执行计划中还包括序列化和反序列化（SerDes），用户自定义函数（User Defined Functions，UTFs）；
 4. 把最终的物理执行计划生成**执行引擎**（Execution）提交到mapreduce上去执行；
 5. mapreduce的执行肯定有输入和输出，那么这个输入输出可以是hadoop文件系统上的（Hadoop Storage）比如hdfs，hbase包括本地的文件也都是可以的。
-
-
-
-## 三、Hive环境搭建
-
-
 
 
 

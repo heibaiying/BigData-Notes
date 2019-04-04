@@ -9,7 +9,7 @@
 
 ### 二、Hadoop
 
-1. [Hadoop单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop单机版本环境搭建.md)
+1. [Hadoop单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/hadoop%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
 
 
 

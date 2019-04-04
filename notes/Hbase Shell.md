@@ -1,5 +1,5 @@
 # Hbase 常用 Shell 命令
-<nav>
+<nav>
 <a href="#一基本命令">一、基本命令</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-获取帮助">1.1 获取帮助</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-查看服务器状态">1.2 查看服务器状态</a><br/>
@@ -25,7 +25,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#44--条件查询">4.4  条件查询</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#45--条件过滤">4.5  条件过滤</a><br/>
 </nav>
-
 
 
 ## 一、基本命令
@@ -197,7 +196,7 @@ hbase中访问数据有两种基本的方式
 
 get访问指定key的数据，而scan可以设置begin和end来访问一个范围内所有的数据。get本质上就是begin和end相同的一种特殊的scan。
 
-### 4.1Get查询
+#### 4.1Get查询
 
 ```shell
 # 获取指定行中所有列的数据信息
