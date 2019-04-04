@@ -10,7 +10,7 @@
 
 ### 1.1 JDK版本说明
 
-Hbase 需要依赖JDK环境，同时Hbase 2.0+ 以上版本不再支持JDK 1.7 ，需要安装JDK 1.8+ 。JDK 安装方式见本仓库：
+HBase 需要依赖JDK环境，同时HBase 2.0+ 以上版本不再支持JDK 1.7 ，需要安装JDK 1.8+ 。JDK 安装方式见本仓库：
 
 > [Linux环境下JDK安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
 
@@ -52,7 +52,7 @@ export PATH=$HBASE_HOME/bin:$PATH
 # source /etc/profile
 ```
 
-### 2.3 进行Hbase相关配置
+### 2.3 进行HBase相关配置
 
 修改安装目录下的`conf/hbase-env.sh`,指定JDK的安装路径：
 
@@ -86,9 +86,9 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 
 `hbase.unsafe.stream.capability.enforce`: 使用本地文件系统存储，不使用HDFS的情况下需要禁用此配置，设置为false。
 
-### 2.4 启动Hbase
+### 2.4 启动HBase
 
-由于已经将Hbase的bin目录配置到环境变量，直接使用以下命令启动
+由于已经将HBase的bin目录配置到环境变量，直接使用以下命令启动
 
 ```shell
 # start-hbase.sh
@@ -104,7 +104,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 15500 HMaster
 ```
 
-验证方式二：访问Hbase Web UI 页面，默认端口为`16010`
+验证方式二：访问HBaseWeb UI 页面，默认端口为`16010`
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-web-ui.png"/> </div>
 
@@ -120,13 +120,13 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 
 ### 3.2 Hbase版本选择
 
-Hbase的版本必须要与Hadoop的版本兼容，不然会发生各种Jar包冲突。
+HBase的版本必须要与Hadoop的版本兼容，不然会发生各种Jar包冲突。
 
-由于我们Hadoop采用的版本为`hadoop-2.6.0-cdh5.15.2`,所以这里保持CDH版本一致，我们选择的Hbase版本为`hbase-1.2.0-cdh5.15.2` ，Hbase 1.2 的安装需要依赖JDK 1.7+ 。所有软件版本如下：
+由于我们Hadoop采用的版本为`hadoop-2.6.0-cdh5.15.2`,所以这里保持CDH版本一致，我们选择的HBase版本为`hbase-1.2.0-cdh5.15.2` ，HBase 1.2 的安装需要依赖JDK 1.7+ 。所有软件版本如下：
 
-+ hadoop 版本： hadoop-2.6.0-cdh5.15.2
++ Hadoop 版本： hadoop-2.6.0-cdh5.15.2
 
-+ hbase 版本： hbase-1.2.0-cdh5.15.2
++ HBase 版本： hbase-1.2.0-cdh5.15.2
 
 + JDK 版本：JDK 1.8
 
@@ -163,7 +163,7 @@ export PATH=$HBASE_HOME/bin:$PATH
 
 
 
-### 3.5 进行Hbase相关配置
+### 3.5 进行HBase相关配置
 
 1.修改安装目录下的`conf/hbase-env.sh`,指定JDK的安装路径：
 
@@ -204,7 +204,7 @@ hadoop001
 
 ### 3.6 验证启动是否成功
 
-验证方式一：JPS 查看进程，其中HMaster,HRegionServer,HQuorumPeer三个进程是Hbase的进程（其中HQuorumPeer是Hbase内置的Zookeeper的进程），其余的为HDFS和YARN的进程。
+验证方式一：JPS 查看进程，其中HMaster,HRegionServer,HQuorumPeer三个进程是HBase的进程（其中HQuorumPeer是Hbase内置的Zookeeper的进程），其余的为HDFS和YARN的进程。
 
 ```shell
 [root@hadoop001 conf]# jps
@@ -221,6 +221,6 @@ hadoop001
 21933 HMaster
 ```
 
-验证方式二：访问Hbase Web UI 界面，需要注意的是1.2 版本的Hbase的访问端口为`60010`
+验证方式二：访问HBase Web UI 界面，需要注意的是1.2 版本的HBase的访问端口为`60010`
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-60010.png"/> </div>
