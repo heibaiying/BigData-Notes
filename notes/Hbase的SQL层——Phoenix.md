@@ -1,5 +1,6 @@
 # Hbase的SQL中间层——Phoenix
-<nav>
+
+<nav>
 <a href="#一Phoenix简介">一、Phoenix简介</a><br/>
 <a href="#二Phoenix安装">二、Phoenix安装</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-下载并解压">2.1 下载并解压</a><br/>
@@ -26,7 +27,7 @@ Phoenix是HBase的开源SQL层。使得您可以使用标准JDBC API而不是常
 
 Phoenix完全使用Java编写，作为HBase内嵌的JDBC驱动。Phoenix查询引擎会将SQL查询转换为一个或多个HBase scan，并编排并行执行以生成标准的JDBC结果集，同时Phoenix还拥有二级索引等Hbase不具备的特性，这使得Phoenix具有极好的性能表现。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Phoenix-hadoop.png"/> </div>
+<div align="center"> <img width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Phoenix-hadoop.png"/> </div>
 
 
 
