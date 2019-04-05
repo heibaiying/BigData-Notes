@@ -64,5 +64,5 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 
 出现对应的版本信息则代表配置成功
 
-<div align="center"> ![flume-version](https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-version.png)</div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-version.png/></div>
 
