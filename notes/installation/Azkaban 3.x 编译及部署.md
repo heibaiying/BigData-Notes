@@ -103,7 +103,7 @@ tar -zxvf  azkaban-solo-server-3.70.0.tar.gz
 
 ### 2.2 修改时区
 
-这一步不是必须的。但是因为Azkaban默认采用的时区是`America/Los_Angeles`,如果你的调度任务中有定时任务的话，就需要进行相应的更改，这里我更改为更为常用的`Asia/shanghai`
+这一步不是必须的。但是因为Azkaban默认采用的时区是`America/Los_Angeles`,如果你的调度任务中有定时任务的话，就需要进行相应的更改，这里我更改为更为常用的`Asia/Shanghai`
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-setting.png"/> </div>
 
