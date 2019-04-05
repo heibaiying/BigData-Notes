@@ -84,7 +84,7 @@
 5. HBase 协处理器
 6. HBase 备份与恢复
 7. [HBase的SQL中间层——Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%E7%9A%84SQL%E5%B1%82%E2%80%94%E2%80%94Phoenix.md)
-8. [Spring/Spring Boot 整合 Mybatis + Phoenix]()
+8. [Spring/Spring Boot 整合 Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spring%2BMybtais%2BPhoenix%E6%95%B4%E5%90%88.md)
 ## 十一、Kafka
 ## 十二、Zookeeper
 ## 十三、Scala
