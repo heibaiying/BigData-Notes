@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    #zookeeper地址
+    url: jdbc:phoenix:192.168.0.105:2181
+    driver-class-name: org.apache.phoenix.jdbc.PhoenixDriver
+
+    # 如果不想配置对数据库连接池做特殊配置的话,以下关于连接池的配置就不是必须的
+    # spring-boot 2.X 默认采用高性能的 Hikari 作为连接池 更多配置可以参考 https://github.com/brettwooldridge/HikariCP#configuration-knobs-baby
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      # 池中维护的最小空闲连接数
+      minimum-idle: 10
+      # 池中最大连接数，包括闲置和使用中的连接
+      maximum-pool-size: 20
+      # 此属性控制从池返回的连接的默认自动提交行为。默认为true
+      auto-commit: true
+      # 允许最长空闲时间
+      idle-timeout: 30000
+      # 此属性表示连接池的用户定义名称，主要显示在日志记录和JMX管理控制台中，以标识池和池配置。 默认值：自动生成
+      pool-name: custom-hikari
+      #此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      # 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      # 连接测试sql 这个地方需要根据数据库方言差异而配置 例如 oracle 就应该写成  select 1 from dual
+      connection-test-query: SELECT 1
+
+# mybatis 相关配置
+mybatis:
+  configuration:
+    # 是否打印sql语句 调试的时候可以开启
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heibaiying.dao.PopulationDao">
+
+
+    <select id="queryAll" resultType="com.heibaiying.bean.USPopulation">
+        SELECT * FROM us_population
+    </select>
+
+    <insert id="save">
+        UPSERT INTO us_population VALUES( #{state}, #{city}, #{population} )
+    </insert>
+
+    <select id="queryByStateAndCity" resultType="com.heibaiying.bean.USPopulation">
+        SELECT * FROM us_population WHERE state=#{state} AND city = #{city}
+    </select>
+
+    <delete id="deleteByStateAndCity">
+        DELETE FROM us_population WHERE state=#{state} AND city = #{city}
+    </delete>
+
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 开启注解包扫描-->
+    <context:component-scan base-package="com.heibaiying.*"/>
+
+    <!--指定配置文件的位置-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!--配置数据源-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!--Phoenix配置-->
+        <property name="driverClassName" value="${phoenix.driverClassName}"/>
+        <property name="url" value="${phoenix.url}"/>
+    </bean>
+
+    <!--配置 mybatis 会话工厂 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--指定mapper文件所在的位置-->
+        <property name="mapperLocations" value="classpath*:/mappers/**/*.xml"/>
+        <property name="configLocation" value="classpath:mybatisConfig.xml"/>
+    </bean>
+
+    <!--扫描注册接口 -->
+    <!--作用:从接口的基础包开始递归搜索，并将它们注册为 MapperFactoryBean(只有至少一种方法的接口才会被注册;, 具体类将被忽略)-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定会话工厂 -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!-- 指定mybatis接口所在的包 -->
+        <property name="basePackage" value="com.heibaiying.dao"/>
+    </bean>
+
+</beans>
