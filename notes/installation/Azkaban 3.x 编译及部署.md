@@ -20,7 +20,7 @@
 
 Azkaban 在3.0版本之后就不提供对应的安装包，需要我们下载源码自行编译。
 
-下载所需版本的Azkaban源码，Azkaban的源码托管在GitHub上，Github地址为https://github.com/azkaban/azkaban，可以使用`git clone`的方式获取源码，也可以使用`wget`直接下载对应elease版本的`tar.gz`文件,这里我采用第二种方式：
+下载所需版本的Azkaban源码，Azkaban的源码托管在GitHub上，Github地址为https://github.com/azkaban/azkaban ，可以使用`git clone`的方式获取源码，也可以使用`wget`直接下载对应elease版本的`tar.gz`文件,这里我采用第二种方式：
 
 ```shell
 # 下载
