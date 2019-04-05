@@ -123,7 +123,7 @@ tar -zxvf  azkaban-solo-server-3.70.0.tar.gz
 
 验证方式二：访问8081端口，查看Web UI界面,默认的登录名密码都是azkaban，如果需要修改或新增，则在`conf/azkaban-users.xml `文件中进行配置
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-web-ui.png"/> </div>
+<div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-web-ui.png"/> </div>
 
 
 
