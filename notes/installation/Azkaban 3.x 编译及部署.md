@@ -1,0 +1,129 @@
+# Azkaban 3.x 编译及部署
+
+<nav>
+<a href="#一Azkaban-编译">一、Azkaban 编译</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-下载并解压">1.1 下载并解压</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-准备编译环境">1.2 准备编译环境</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-项目编译">1.3 项目编译</a><br/>
+<a href="#二Azkaban-部署模式介绍">二、Azkaban 部署模式介绍</a><br/>
+<a href="#三-Solo-Server-模式部署">三 、Solo Server 模式部署</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--解压">2.1  解压</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-修改时区">2.2 修改时区</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-启动">2.3 启动</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-验证">2.4 验证</a><br/>
+</nav>
+
+
+## 一、Azkaban 编译
+
+### 1.1 下载并解压
+
+Azkaban 在3.0版本之后就不提供对应的安装包，需要我们下载源码自行编译。
+
+下载所需版本的Azkaban源码，Azkaban的源码托管在GitHub上，Github地址为https://github.com/azkaban/azkaban，可以使用`git clone`的方式获取源码，也可以使用`wget`直接下载对应elease版本的`tar.gz`文件,这里我采用第二种方式：
+
+```shell
+# 下载
+wget https://github.com/azkaban/azkaban/archive/3.70.0.tar.gz
+# 解压
+tar -zxvf azkaban-3.70.0.tar.gz
+```
+
+### 1.2 准备编译环境
+
+#### 1. JDK
+
+Azkaban 编译依赖JDK 1.8+ ，JDK安装方式见本仓库：
+
+> [Linux环境下JDK安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
+
+#### 2. Gradle
+
+Azkaban 3.70.0编译需要依赖`gradle-4.6-all.zip`, 简单介绍一下，Gradle是一个基于Apache Ant和Apache Maven概念的项目自动化构建开源工具，类似于Maven，但是由于采用Groovy语言进行项目配置，所以比Maven更为灵活，目前广泛用于Android开发、Spring项目构建。
+
+需要注意的是不同版本的Azkaban依赖Gradle版本不同，可以在解压后的`/gradle/wrapper/gradle-wrapper.properties`文件查看
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-gradle-wrapper.png"/> </div>
+
+默认情况下，会去图中指定的地址下载，但是下载速度很慢，故建议先下载至`/gradle/wrapper/`目录下
+
+```shell
+# wget https://services.gradle.org/distributions/gradle-4.6-all.zip
+```
+
+然后修改配置文件`gradle-wrapper.properties`中的`distributionUrl`属性，指明使用本地的gradle编译
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-gradle-wrapper-2.png"/> </div>
+
+#### 3. Git
+
+Azkaban 的编译过程中用到Git下载部分需要的Jar包的，所以需要预先安装Git
+
+```shell
+# yum install git
+```
+
+### 1.3 项目编译
+
+在的根目录下执行编译命令，编译成功后会有`BUILD SUCCESSFUL`的提示。
+
+```shell
+# ./gradlew build installDist -x test
+```
+
+编译过程中需要注意以下问题：
+
++ 因为编译的过程需要下载大量的Jar包，下载速度根据网络情况而定，通常都不会很快，如果网络不好，耗费半个小时，一个小时都是很正常的；
++ 编译过程中如果出现网络问题而导致JAR无法下载，编译可能会被强行终止，这时候重复执行编译命令即可，gradle会把已经下载的JAR存储到本地，所以不用担心会重复下载JAR包。
+
+
+
+## 二、Azkaban 部署模式介绍
+
+>After version 3.0, we provide two modes: the stand alone “solo-server” mode and distributed multiple-executor mode. The following describes thedifferences between the two modes.
+
+按照官方文档的说明，Azkaban 3.x 之后版本提供2种运行模式：
+
++ solo server model（单服务模式）：元数据默认存放在内置的H2数据库（也可以修改为MYSQL），该模式中 webServer 和 executorServer 运行在同一个进程中，进程名是AzkabanSingleServer。该模式适用于小规模的使用。
+
++ multiple-executor（分布式多服务模式）：存放元数据的数据库为MYSQL，采用主从设置进行备份，管理服务器（webServer）和执行服务器（executorServer）在不同进程中运行，这种模式下，管理服务器和执行服务器互不影响，适合用于生产环境。
+
+
+
+## 三 、Solo Server 模式部署
+
+### 2.1  解压
+
+Solo Server 模式安装包在编译后的`/azkaban-solo-server/build/distributions`目录下，找到后进行解压即可
+
+```shell
+# 解压
+tar -zxvf  azkaban-solo-server-3.70.0.tar.gz
+```
+
+### 2.2 修改时区
+
+这一步不是必须的。但是因为Azkaban默认采用的时区是`America/Los_Angeles`,如果你的调度任务中有定时任务的话，就需要进行相应的更改，这里我更改为更为常用的`Asia/shanghai`
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-setting.png"/> </div>
+
+### 2.3 启动
+
+执行启动命令，需要注意的是一定要在根目录下执行，不能进入`bin`目录下执行，不然会抛出`Cannot find 'database.properties'`异常。
+
+```shell
+# bin/start-solo.sh
+```
+
+### 2.4 验证
+
+验证方式一：JPS 查看是否有`AzkabanSingleServer`进程
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/akaban-jps.png"/> </div>
+
+验证方式二：访问8081端口，查看Web UI界面,默认的登录名密码都是azkaban，如果需要修改或新增，则在`conf/azkaban-users.xml `文件中进行配置
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-web-ui.png"/> </div>
+
+
+
