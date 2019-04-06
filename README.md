@@ -18,7 +18,6 @@
        <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink.png"></th>
        <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume.png"></th>
-      <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/oozie.jpg"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase.png"></th>
@@ -33,16 +32,14 @@
       <td align="center"><a href="#四flink">Flink</a></td>
       <td align="center"><a href="#五storm">Storm</a></td>
       <td align="center"><a href="#六flume">Flume</a></td>
-      <td align="center"><a href="#七oozie">Oozie</a></td>
-      <td align="center"><a href="#八sqoop">Sqoop</a></td>
-      <td align="center"><a href="#九azkaban">Azkaban</a></td>
-      <td align="center"><a href="#十hbase">HBase</a></td>
-      <td align="center"><a href="#十一kafka">Kafka</a></td>
-      <td align="center"><a href="#十二zookeeper">Zookeeper</a></td>
-      <td align="center"><a href="#十三scala">Scala</a></td>
+      <td align="center"><a href="#七sqoop">Sqoop</a></td>
+      <td align="center"><a href="#八azkaban">Azkaban</a></td>
+      <td align="center"><a href="#九hbase">HBase</a></td>
+      <td align="center"><a href="#十kafka">Kafka</a></td>
+      <td align="center"><a href="#十一zookeeper">Zookeeper</a></td>
+      <td align="center"><a href="#十二scala">Scala</a></td>
     </tr>
   </table>
-
 
 
 
@@ -55,27 +52,52 @@
 1. [分布式文件存储系统——HDFS](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-HDFS.md)
 2. [分布式计算框架——MapReduce](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-MapReduce.md)
 3. [集群资源管理器——YARN](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-YARN.md)
+4. Hadoop单机伪集群环境搭建
 
 ## 二、Hive
 
 1. [数据仓库Hive](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive.md)
+2. Linux环境下Hive的安装部署
 
 ## 三、Spark
 
-1. RDD详解
-2. Spark Transformation 和 Action
+1. Spark简介
+2. Spark单机版本环境搭建
+3. RDD详解
+4. Spark Transformation 和 Action
 
 ## 四、Flink
 
+TODO
+
 ## 五、Storm
 
-1. [Storm核心概念详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm核心概念详解.md)
+1. Strom简介
+2. [Storm核心概念详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm核心概念详解.md)
+3. Storm单机版本环境搭建
+4. Storm编程模型
 
 ## 六、Flume
-## 七、Oozie
-## 八、Sqoop
-## 九、Azkaban
-## 十、HBase
+
+1. Flume简介
+2. Linux环境下Flume的安装部署
+3. Flume的使用
+4. Flume整合Kafka
+
+## 七、Sqoop
+
+1. Sqoop简介
+
+2. Sqoop的基本使用
+
+## 八、Azkaban
+
+1. Azkaban项目简介
+2. Azkaban3.x编译及部署
+3. Azkaban Flow 1.0 的使用
+4. Azkaban Flow 2.0 的使用
+
+## 九、HBase
 
 1. [HBase基本环境搭建（Standalone /pseudo-distributed mode）](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hbase%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
 2. [HBase系统架构及数据结构](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md)
@@ -85,6 +107,19 @@
 6. HBase 备份与恢复
 7. [HBase的SQL中间层——Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%E7%9A%84SQL%E5%B1%82%E2%80%94%E2%80%94Phoenix.md)
 8. [Spring/Spring Boot 整合 Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spring%2BMybtais%2BPhoenix%E6%95%B4%E5%90%88.md)
-## 十一、Kafka
-## 十二、Zookeeper
-## 十三、Scala
+## 十、Kafka
+
+1. Kafka 简介及消息处理过程分析
+2. 基于Zookeeper搭建Kafka高可用集群
+3. Kafka 副本机制以及选举原理剖析
+
+## 十一、Zookeeper
+
+1. Zookeeper 简介及原理介绍
+2. Zookeeper 集群搭建Zookeeper 
+3. 分布式锁实现方案Zookeeper  
+4. 集群升级、迁移深入分析 Zookeeper  
+5. Zab协议及选举机制
+
+## 十二、Scala
+

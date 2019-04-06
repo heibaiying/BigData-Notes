@@ -47,7 +47,7 @@ export PATH=$FLUME_HOME/bin:$PATH
 # cp flume-env.sh.template flume-env.sh
 ```
 
-修改安装目录下的`flume-env.sh`,指定JDK的安装路径：
+修改`flume-env.sh`,指定JDK的安装路径：
 
 ```shell
 # Enviroment variables can be set here.
