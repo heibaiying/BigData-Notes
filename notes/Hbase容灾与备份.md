@@ -1,5 +1,6 @@
 # Hbase容灾与备份
-<nav>
+
+<nav>
 <a href="#一前言">一、前言</a><br/>
 <a href="#二CopyTable">二、CopyTable</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-简介">2.1 简介</a><br/>
@@ -14,11 +15,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-简介">4.1 简介</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-配置">4.2 配置</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-常用命令">4.3 常用命令</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-Take-a-Snapshot">1. Take a Snapshot</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-Listing-Snapshots">2. Listing Snapshots</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-Deleting-Snapshots">3. Deleting Snapshots</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-Clone-a-table-from-snapshot">4. Clone a table from snapshot</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5-Restore-a-snapshot">5. Restore a snapshot</a><br/>
 </nav>
 
 ## 一、前言
