@@ -86,7 +86,7 @@ TODO
 
 ## 七、Sqoop
 
-1. Sqoop简介
+1. [Sqoop简介与安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Sqoop简介与安装.md)
 
 2. Sqoop的基本使用
 
