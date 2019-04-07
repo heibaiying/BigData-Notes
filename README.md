@@ -93,7 +93,7 @@ TODO
 ## 八、Azkaban
 
 1. Azkaban项目简介
-2. [Azkaban3.x编译及部署](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Azkaban%203.x%20%E7%BC%96%E8%AF%91%E5%8F%8A%E9%83%A8%E7%BD%B2.md)
+2. [Azkaban3.x 编译及部署](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Azkaban%203.x%20%E7%BC%96%E8%AF%91%E5%8F%8A%E9%83%A8%E7%BD%B2.md)
 3. [Azkaban Flow 1.0 的使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Azkaban%20Flow%201.0%20%E7%9A%84%E4%BD%BF%E7%94%A8.md)
 4. [Azkaban Flow 2.0 的使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Azkaban%20Flow%202.0%20%E7%9A%84%E4%BD%BF%E7%94%A8.md)
 
