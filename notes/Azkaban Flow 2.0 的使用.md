@@ -1,4 +1,23 @@
 # Azkaban Flow 2.0的使用
+<nav>
+<a href="#一Flow-20-简介">一、Flow 2.0 简介</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-Flow-20-的产生">1.1 Flow 2.0 的产生</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本结构">1.2 基本结构</a><br/>
+<a href="#二YAML语法">二、YAML语法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本规则">2.1 基本规则</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-对象的写法">2.2 对象的写法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-map的写法">2.3 map的写法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-数组的写法">2.3 数组的写法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-单双引号">2.5 单双引号</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-特殊符号">2.6 特殊符号</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#27-配置引用">2.7 配置引用</a><br/>
+<a href="#三简单任务调度">三、简单任务调度</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-任务配置">3.1 任务配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-打包上传">3.2 打包上传</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-执行结果">3.3 执行结果</a><br/>
+<a href="#四多任务调度">四、多任务调度</a><br/>
+<a href="#五内嵌流">五、内嵌流</a><br/>
+</nav>
 
 ## 一、Flow 2.0 简介
 
@@ -193,7 +212,7 @@ azkaban-flow-version: 2.0
 
 ### 3.2 打包上传
 
-![azkaban-simple](D:\BigData-Notes\pictures\azkaban-simple.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-simple.png"/> </div>
 
 
 
@@ -201,7 +220,7 @@ azkaban-flow-version: 2.0
 
 由于在1.0 版本中已经介绍过web ui的使用，这里就不再赘述，对于1.0和2.0版本，只有配置的方式是不同的，其他上传执行的操作方式都是相同的。执行结果如下：
 
-![azkaban-simle-result](D:\BigData-Notes\pictures\azkaban-simle-result.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-simle-result.png"/> </div>
 
 ## 四、多任务调度
 
@@ -276,11 +295,11 @@ nodes:
 
 内嵌流的DAG图如下：
 
-![azkaban-embeded-flow](D:\BigData-Notes\pictures\azkaban-embeded-flow.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-embeded-flow.png"/> </div>
 
 执行情况如下：
 
-![azkaban-embeded-success](D:\BigData-Notes\pictures\azkaban-embeded-success.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-embeded-success.png"/> </div>
 
 
 

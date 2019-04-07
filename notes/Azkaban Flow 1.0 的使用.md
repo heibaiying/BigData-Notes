@@ -1,4 +1,23 @@
 # Azkaban Flow 1.0 的使用
+<nav>
+<a href="#一简介">一、简介</a><br/>
+<a href="#二基本任务调度">二、基本任务调度</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-新建项目">2.1 新建项目</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-任务配置">2.2 任务配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-打包上传">2.3 打包上传</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-执行任务">2.4 执行任务</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-执行结果">2.5 执行结果</a><br/>
+<a href="#三多任务调度">三、多任务调度</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-依赖配置">3.1 依赖配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-压缩上传">3.2 压缩上传</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-依赖关系">3.3 依赖关系</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-执行结果">3.4 执行结果</a><br/>
+<a href="#四调度HDFS作业">四、调度HDFS作业</a><br/>
+<a href="#五调度MR作业">五、调度MR作业</a><br/>
+<a href="#六调度Hive作业">六、调度Hive作业</a><br/>
+<a href="#七在线修改作业配置">七、在线修改作业配置</a><br/>
+<a href="#<div-align="center">-<img--src="httpsgithubcomheibaiyingBigData-Notesblobmasterpicturesazkaban-click-editpng">-<div>八可能出现的问题"><div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-click-edit.png"/> </div>八、可能出现的问题</a><br/>
+</nav>
 
 ## 一、简介
 
@@ -15,7 +34,7 @@ Azkaban提供了人性化的WEB UI界面，使得我们可以通过界面上传�
 
 在Azkaban主界面可以创建对应的项目
 
-![azkaban-create-project](D:\BigData-Notes\pictures\azkaban-create-project.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-create-project.png"/> </div>
 
 ### 2.2 任务配置
 
@@ -31,29 +50,29 @@ command=echo 'Hello Azkaban!'
 
 将`Hello-Azkaban.job `打包为`zip`压缩文件
 
-![azkaban-zip](D:\BigData-Notes\pictures\azkaban-zip.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-zip.png"/> </div>
 
 通过Web UI 界面上传
 
-![azkaban-upload](D:\BigData-Notes\pictures\azkaban-upload.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-upload.png"/> </div>
 
 上传成功后可以看到对应的Flows
 
-![azkaban-flows](D:\BigData-Notes\pictures\azkaban-flows.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-flows.png"/> </div>
 
 ### 2.4 执行任务
 
 点击页面上的`Execute Flow`执行任务
 
-![azkaban-execute](D:\BigData-Notes\pictures\azkaban-execute.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-execute.png"/> </div>
 
 ### 2.5 执行结果
 
 点击`detail`可以查看到任务的执行日志
 
-![azkaban-successed](D:\BigData-Notes\pictures\azkaban-successed.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-successed.png"/> </div>
 
-![azkaban-log](D:\BigData-Notes\pictures\azkaban-log.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-log.png"/> </div>
 
 ## 三、多任务调度
 
@@ -102,17 +121,17 @@ dependencies=Task-D
 
 压缩后进行上传，这里需要注意的是一个Project只能接收一个压缩包，这里我还沿用上面的Project，默认后面的压缩包会覆盖前面的压缩包
 
-![azkaban-task-abcde-zip](D:\BigData-Notes\pictures\azkaban-task-abcde-zip.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-task-abcde-zip.png"/> </div>
 
 ### 3.3 依赖关系
 
 多个任务存在依赖时，默认采用最后一个任务的文件名作为Flow的名称，其依赖关系可以在页面上得以直观的体现
 
-![azkaban-dependencies](D:\BigData-Notes\pictures\azkaban-dependencies.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-dependencies.png"/> </div>
 
 ### 3.4 执行结果
 
-![azkaban-task-abcde](D:\BigData-Notes\pictures\azkaban-task-abcde.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-task-abcde.png"/> </div>
 
 这里说明一下在Flow1.0的情况下，是无法通过一个job文件完成多个任务的配置的，但是Flow 2.0 就很好的解决了这个问题。
 
@@ -127,7 +146,7 @@ command=/usr/app/hadoop-2.6.0-cdh5.15.2/bin/hadoop fs -ls /
 
 执行结果：
 
-![azkaban-hdfs](D:\BigData-Notes\pictures\azkaban-hdfs.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-hdfs.png"/> </div>
 
 ## 五、调度MR作业
 
@@ -140,7 +159,7 @@ command=/usr/app/hadoop-2.6.0-cdh5.15.2/bin/hadoop jar /usr/app/hadoop-2.6.0-cdh
 
 执行结果：
 
-![azkaban-mr](D:\BigData-Notes\pictures\azkaban-mr.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-mr.png"/> </div>
 
 ## 六、调度Hive作业
 
@@ -173,25 +192,25 @@ desc emp;
 
 打包的时候将`job`文件与`sql`文件一并进行打包
 
-![azkaban-hive](D:\BigData-Notes\pictures\azkaban-hive.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-hive.png"/> </div>
 
 执行结果如下：
 
-![azkaban-hive-result](D:\BigData-Notes\pictures\azkaban-hive-result.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-hive-result.png"/> </div>
 
 ## 七、在线修改作业配置
 
 在测试的时候，我们可能要频繁修改配置，如果每次修改都要重新打包上传这是比较麻烦的，所幸的是Azkaban是支持配置的在线修改的，点击需要修改的Flow，就可以进入详情页面：
 
-![azkaban-project-edit](D:\BigData-Notes\pictures\azkaban-project-edit.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-project-edit.png"/> </div>
 
 在详情页面点击`Eidt`按钮可以进入编辑页面
 
-![azkaban-edit](D:\BigData-Notes\pictures\azkaban-edit.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-edit.png"/> </div>
 
 在编辑页面可以新增配置或者修改配置
 
-## ![azkaban-click-edit](D:\BigData-Notes\pictures\azkaban-click-edit.png)八、可能出现的问题
+## <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-click-edit.png"/> </div>八、可能出现的问题
 
 如果出现以下异常,多半是因为执行主机内存不足引起，azkaban要求执行主机可用内存必须大于3G才能满足执行任务的条件
 
@@ -199,7 +218,7 @@ desc emp;
 Cannot request memory (Xms 0 kb, Xmx 0 kb) from system for job
 ```
 
-![azkaban-memory](D:\BigData-Notes\pictures\azkaban-memory.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-memory.png"/> </div>
 
 如果你的执行主机没办法增大内存，则可以通过配置`commonprivate.properties` 文件关闭内存检查，
 

@@ -202,7 +202,15 @@ hadoop001
 
 
 
-### 3.6 验证启动是否成功
+### 3.6 启动
+
+```shell
+# bin/start-hbase.sh
+```
+
+
+
+### 3.7 验证启动是否成功
 
 验证方式一：JPS 查看进程，其中HMaster,HRegionServer,HQuorumPeer三个进程是HBase的进程（其中HQuorumPeer是Hbase内置的Zookeeper的进程），其余的为HDFS和YARN的进程。
 

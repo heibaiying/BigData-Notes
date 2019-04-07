@@ -29,6 +29,12 @@
 
 ## 一、基本命令
 
+首先打开Hbase Shell
+
+```shell
+# habse shell
+```
+
 #### 1.1 获取帮助
 
 ```shell
