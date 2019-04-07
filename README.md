@@ -52,17 +52,17 @@
 1. [分布式文件存储系统——HDFS](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-HDFS.md)
 2. [分布式计算框架——MapReduce](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-MapReduce.md)
 3. [集群资源管理器——YARN](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-YARN.md)
-4. Hadoop单机伪集群环境搭建
+4. [Hadoop单机伪集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/hadoop%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
 
 ## 二、Hive
 
 1. [数据仓库Hive](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive.md)
-2. Linux环境下Hive的安装部署
+2. [Linux环境下Hive的安装部署](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux%E7%8E%AF%E5%A2%83%E4%B8%8BHive%E7%9A%84%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2.md)
 
 ## 三、Spark
 
 1. Spark简介
-2. Spark单机版本环境搭建
+2. [Spark单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Spark%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
 3. RDD详解
 4. Spark Transformation 和 Action
 
@@ -74,13 +74,13 @@ TODO
 
 1. Strom简介
 2. [Storm核心概念详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm核心概念详解.md)
-3. Storm单机版本环境搭建
+3. [Storm单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Storm%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
 4. Storm编程模型
 
 ## 六、Flume
 
 1. Flume简介
-2. Linux环境下Flume的安装部署
+2. [Linux环境下Flume的安装部署](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux%E4%B8%8BFlume%E7%9A%84%E5%AE%89%E8%A3%85.md)
 3. Flume的使用
 4. Flume整合Kafka
 
@@ -93,9 +93,9 @@ TODO
 ## 八、Azkaban
 
 1. Azkaban项目简介
-2. Azkaban3.x编译及部署
-3. Azkaban Flow 1.0 的使用
-4. Azkaban Flow 2.0 的使用
+2. [Azkaban3.x编译及部署](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Azkaban%203.x%20%E7%BC%96%E8%AF%91%E5%8F%8A%E9%83%A8%E7%BD%B2.md)
+3. [Azkaban Flow 1.0 的使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Azkaban%20Flow%201.0%20%E7%9A%84%E4%BD%BF%E7%94%A8.md)
+4. [Azkaban Flow 2.0 的使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Azkaban%20Flow%202.0%20%E7%9A%84%E4%BD%BF%E7%94%A8.md)
 
 ## 九、HBase
 
@@ -104,7 +104,7 @@ TODO
 3. [HBase常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%20Shell.md)
 4. HBase Java API
 5. HBase 协处理器
-6. HBase 备份与恢复
+6. [HBase 容灾与备份](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%E5%AE%B9%E7%81%BE%E4%B8%8E%E5%A4%87%E4%BB%BD.md)
 7. [HBase的SQL中间层——Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%E7%9A%84SQL%E5%B1%82%E2%80%94%E2%80%94Phoenix.md)
 8. [Spring/Spring Boot 整合 Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spring%2BMybtais%2BPhoenix%E6%95%B4%E5%90%88.md)
 ## 十、Kafka

@@ -2,7 +2,6 @@
 *.iml
 *.ipr
 *.iws
-*.jar
 *.sw?
 *~
 .#*

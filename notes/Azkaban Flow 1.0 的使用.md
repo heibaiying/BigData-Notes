@@ -1,5 +1,6 @@
 # Azkaban Flow 1.0 的使用
-<nav>
+
+<nav>
 <a href="#一简介">一、简介</a><br/>
 <a href="#二基本任务调度">二、基本任务调度</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-新建项目">2.1 新建项目</a><br/>
@@ -16,8 +17,8 @@
 <a href="#五调度MR作业">五、调度MR作业</a><br/>
 <a href="#六调度Hive作业">六、调度Hive作业</a><br/>
 <a href="#七在线修改作业配置">七、在线修改作业配置</a><br/>
-<a href="#<div-align="center">-<img--src="httpsgithubcomheibaiyingBigData-Notesblobmasterpicturesazkaban-click-editpng">-<div>八可能出现的问题"><div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-click-edit.png"/> </div>八、可能出现的问题</a><br/>
 </nav>
+
 
 ## 一、简介
 
@@ -210,7 +211,9 @@ desc emp;
 
 在编辑页面可以新增配置或者修改配置
 
-## <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-click-edit.png"/> </div>八、可能出现的问题
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-click-edit.png"/> </div>
+
+## 附：可能出现的问题
 
 如果出现以下异常,多半是因为执行主机内存不足引起，azkaban要求执行主机可用内存必须大于3G才能满足执行任务的条件
 

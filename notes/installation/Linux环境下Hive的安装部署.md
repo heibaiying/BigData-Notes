@@ -4,14 +4,8 @@
 >
 > 系统环境：Centos 7.6
 
-<nav>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-下载并解压">1.1 下载并解压</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-配置环境变量">1.2 配置环境变量</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-修改配置">1.3 修改配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-拷贝数据库驱动">1.4 拷贝数据库驱动</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-初始化元数据库">1.5 初始化元数据库</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-启动">1.6 启动</a><br/>
-</nav>
+
+
 ### 1.1 下载并解压
 
 下载所需版本的Hive，这里我下载的是`cdh5.15.2`版本的Hive。下载地址为：http://archive.cloudera.com/cdh5/cdh/5/
@@ -92,7 +86,7 @@ HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
 
 ### 1.4 拷贝数据库驱动
 
-将MySQL驱动拷贝到Hive安装目录的`lib`目录下, MySQL驱动的下载地址为https://dev.mysql.com/downloads/connector/j/  , 在本仓库的resources目录下我也上传了一份，有需要的可以自行下载。
+将MySQL驱动拷贝到Hive安装目录的`lib`目录下, MySQL驱动的下载地址为https://dev.mysql.com/downloads/connector/j/  , 在本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录下我也上传了一份，有需要的可以自行下载。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-mysql.png"/> </div>
 
