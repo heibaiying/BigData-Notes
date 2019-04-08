@@ -109,7 +109,7 @@ Endpoint协处理器类似于关系型数据库中的存储过程。客户端可
 
 静态加载分以下三步：
 
-#### **1. 在hbase-site.xml定义需要加载的协处理器**
+1. 在hbase-site.xml定义需要加载的协处理器
 
 ```xml
 <property>
@@ -121,17 +121,16 @@ Endpoint协处理器类似于关系型数据库中的存储过程。客户端可
 \<name>标签的值必须是下面其中之一：
 
 + RegionObservers 和 Endpoints协处理器：`hbase.coprocessor.region.classes` 
-
 + WALObservers协处理器： `hbase.coprocessor.wal.classes` 
-+ MasterObservers协处理器：`hbase.coprocessor.master.classes` 
++ MasterObservers协处理器：`hbase.coprocessor.master.classes`
 
 \<value>必须是协处理器实现类的全限定类名。如果为加载指定了多个类，则类名必须以逗号分隔。
 
-#### **2. 将jar（包含代码和所有依赖项）放入HBase安装目录中的`lib`目录下**
+2. 将jar（包含代码和所有依赖项）放入HBase安装目录中的`lib`目录下
 
-#### **3. 重启HBase**
+3. 重启HBase
 
-
+</br>
 
 ### 4.2 静态卸载
 
@@ -156,13 +155,13 @@ Endpoint协处理器类似于关系型数据库中的存储过程。客户端可
 
 ### 5.1 HBase Shell动态加载
 
-#### **1. 使用HBase Shell禁用表**
+1. 使用HBase Shell禁用表
 
 ```shell
 hbase > disable 'tableName'
 ```
 
-#### **2. 使用如下命令加载协处理器**
+2. 使用如下命令加载协处理器
 
 ```shell
 hbase > alter 'tableName', METHOD => 'table_att', 'Coprocessor'=>'hdfs://<namenode>:<port>/
@@ -172,23 +171,23 @@ arg1=1,arg2=2'
 
 Coprocessor 包含由管道（|）字符分隔的四个参数，按顺序解释如下：
 
-+ **JAR包路径**：通常为JAR包在HDFS上的路径。关于路径以下两点需要注意：
++ JAR包路径：通常为JAR包在HDFS上的路径。关于路径以下两点需要注意：
 
   + 允许使用通配符，例如：hdfs：// \<namenode>：\<port> / user /\<hadoop-user>/*.jar 来添加指定的JAR包；
 
   + 可以使指定目录，例如：hdfs：//\<namenode>：\<port> / user / \<hadoop-user> /，这会添加目录中的所有JAR包，但不会搜索子目录中的JAR包。
 
-+ **类名**：协处理器的完整类名。
-+ **优先级**：协处理器的优先级，遵循数字的自然序，即值越小优先级越高。可以为空，在这种情况下，将分配默认优先级值。
-+ **参数（可选）**：传递的协处理器的可选参数。
++ 类名：协处理器的完整类名。
++ 优先级：协处理器的优先级，遵循数字的自然序，即值越小优先级越高。可以为空，在这种情况下，将分配默认优先级值。
++ 参数（可选）：传递的协处理器的可选参数。
 
-#### **3. 启用表**
+3. 启用表
 
 ```shell
 hbase > enable 'tableName'
 ```
 
-#### **4. 验证协处理器是否已加载**
+4. 验证协处理器是否已加载
 
 ```shell
 hbase > describe 'tableName'
@@ -196,7 +195,7 @@ hbase > describe 'tableName'
 
 协处理器出现在`TABLE_ATTRIBUTES`属性中则代表加载成功。
 
-
+</br>
 
 ### 5.2 HBase Shell动态卸载
 
@@ -218,7 +217,7 @@ hbase> alter 'tableName', METHOD => 'table_att_unset', NAME => 'coprocessor$1'
 hbase> enable 'tableName'
 ```
 
-
+</br>
 
 ### 5.3 Java API 动态加载
 
