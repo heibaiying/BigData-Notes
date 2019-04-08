@@ -42,14 +42,14 @@ Observer协处理器类似于关系型数据库中的触发器，当发生某些
 
 当前Observer协处理器有以下四种类型：
 
-+ **RegionObserver**
-  RegionObserver协处理器允许您观察Region上的事件，例如Get和Put操作。
-+ **RegionServerObserver**
-  RegionServerObserver允许您观察与RegionServer操作相关的事件，例如启动，停止或执行合并，提交或回滚。
-+ **MasterObserver**
-  MasterObserver允许您观察与HBase Master相关的事件，例如表创建，删除或schema修改。
-+ **WalObserver**
-  WalObserver允许您观察与预写日志（WAL）相关的事件。
++ **RegionObserver** : 
+  允许您观察Region上的事件，例如Get和Put操作。
++ **RegionServerObserver** : 
+  允许您观察与RegionServer操作相关的事件，例如启动，停止或执行合并，提交或回滚。
++ **MasterObserver** : 
+  允许您观察与HBase Master相关的事件，例如表创建，删除或schema修改。
++ **WalObserver** : 
+  允许您观察与预写日志（WAL）相关的事件。
 
 </br>
 
@@ -118,13 +118,13 @@ Endpoint协处理器类似于关系型数据库中的存储过程。客户端可
 </property>
 ```
 
-\<name>标签的值必须是下面其中之一：
+  \<name>标签的值必须是下面其中之一：
 
-+ RegionObservers 和 Endpoints协处理器：`hbase.coprocessor.region.classes` 
-+ WALObservers协处理器： `hbase.coprocessor.wal.classes` 
-+ MasterObservers协处理器：`hbase.coprocessor.master.classes`
+  + RegionObservers 和 Endpoints协处理器：`hbase.coprocessor.region.classes` 
+  + WALObservers协处理器： `hbase.coprocessor.wal.classes` 
+  + MasterObservers协处理器：`hbase.coprocessor.master.classes`
 
-\<value>必须是协处理器实现类的全限定类名。如果为加载指定了多个类，则类名必须以逗号分隔。
+  \<value>必须是协处理器实现类的全限定类名。如果为加载指定了多个类，则类名必须以逗号分隔。
 
 2. 将jar（包含代码和所有依赖项）放入HBase安装目录中的`lib`目录下
 
