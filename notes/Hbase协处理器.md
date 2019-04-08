@@ -173,9 +173,9 @@ Coprocessor 包含由管道（|）字符分隔的四个参数，按顺序解释�
 
 + JAR包路径：通常为JAR包在HDFS上的路径。关于路径以下两点需要注意：
 
-  + 允许使用通配符，例如：hdfs：// \<namenode>：\<port> / user /\<hadoop-user>/*.jar 来添加指定的JAR包；
+  + 允许使用通配符，例如：`hdfs://<namenode>:<port>/user/<hadoop-user>/*.jar` 来添加指定的JAR包；
 
-  + 可以使指定目录，例如：hdfs：//\<namenode>：\<port> / user / \<hadoop-user> /，这会添加目录中的所有JAR包，但不会搜索子目录中的JAR包。
+  + 可以使指定目录，例如：`hdfs://<namenode>:<port>/user/<hadoop-user>/` ，这会添加目录中的所有JAR包，但不会搜索子目录中的JAR包。
 
 + 类名：协处理器的完整类名。
 + 优先级：协处理器的优先级，遵循数字的自然序，即值越小优先级越高。可以为空，在这种情况下，将分配默认优先级值。
