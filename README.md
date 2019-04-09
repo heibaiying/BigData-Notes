@@ -79,10 +79,9 @@ TODO
 
 ## 六、Flume
 
-1. Flume简介
+1. [Flume简介及基本使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Flume简介及基本使用.md)
 2. [Linux环境下Flume的安装部署](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux%E4%B8%8BFlume%E7%9A%84%E5%AE%89%E8%A3%85.md)
-3. Flume的基本使用
-4. Flume整合Kafka
+3. [Flume整合Kafka](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Flume整合Kafka.md)
 
 ## 七、Sqoop
 
