@@ -3,7 +3,7 @@
 
 ## 一、前置条件
 
-Flume需要依赖JDK环境，JDK安装方式见本仓库：
+Flume需要依赖JDK 1.8+，JDK安装方式见本仓库：
 
 > [Linux环境下JDK安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
 

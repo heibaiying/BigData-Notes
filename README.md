@@ -6,7 +6,7 @@
 
 
 
-> Java 程序员的大数据学习之路 — — 持续更新中
+> Java 程序员的大数据学习之路（2019） — — 持续更新中
 
 
 
@@ -43,7 +43,7 @@
 
 
 
-> 本仓库涉及的所有软件的详细搭建步骤整理至：[Linux下大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Linux中大数据常用软件安装指南.md)
+> 为方便查阅，所有软件的安装步骤统一整理至：[Linux下大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Linux中大数据常用软件安装指南.md)
 
 
 
@@ -81,7 +81,7 @@ TODO
 
 1. Flume简介
 2. [Linux环境下Flume的安装部署](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux%E4%B8%8BFlume%E7%9A%84%E5%AE%89%E8%A3%85.md)
-3. Flume的使用
+3. Flume的基本使用
 4. Flume整合Kafka
 
 ## 七、Sqoop
