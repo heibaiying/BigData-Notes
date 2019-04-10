@@ -98,14 +98,16 @@ TODO
 
 ## 九、HBase
 
-1. [HBase基本环境搭建（Standalone /pseudo-distributed mode）](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hbase%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
+1. Hbase 简介
 2. [HBase系统架构及数据结构](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md)
-3. [HBase常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%20Shell.md)
-4. HBase Java API
-5. [HBase 协处理器](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase协处理器.md)
-6. [HBase 容灾与备份](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%E5%AE%B9%E7%81%BE%E4%B8%8E%E5%A4%87%E4%BB%BD.md)
-7. [HBase的SQL中间层——Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%E7%9A%84SQL%E5%B1%82%E2%80%94%E2%80%94Phoenix.md)
-8. [Spring/Spring Boot 整合 Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spring%2BMybtais%2BPhoenix%E6%95%B4%E5%90%88.md)
+3. [HBase基本环境搭建（Standalone /pseudo-distributed mode）](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hbase%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
+4. [HBase常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%20Shell.md)
+5. HBase Java API
+6. Hbase 过滤器
+7. [HBase 协处理器](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase协处理器.md)
+8. [HBase 容灾与备份](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%E5%AE%B9%E7%81%BE%E4%B8%8E%E5%A4%87%E4%BB%BD.md)
+9. [HBase的SQL中间层——Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%E7%9A%84SQL%E5%B1%82%E2%80%94%E2%80%94Phoenix.md)
+10. [Spring/Spring Boot 整合 Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spring%2BMybtais%2BPhoenix%E6%95%B4%E5%90%88.md)
 ## 十、Kafka
 
 1. Kafka 简介及消息处理过程分析
