@@ -53,6 +53,7 @@
 2. [分布式计算框架——MapReduce](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-MapReduce.md)
 3. [集群资源管理器——YARN](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-YARN.md)
 4. [Hadoop单机伪集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/hadoop%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
+5. [HDFS常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/HDFS常用Shell命令.md)
 
 ## 二、Hive
 
