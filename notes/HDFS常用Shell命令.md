@@ -4,9 +4,9 @@
 
 ```shell
 # 显示当前目录结构
-hadoop fs -ls  
+hadoop fs -ls  <path>
 # 递归显示当前目录结构
-hadoop fs -ls  -R 
+hadoop fs -ls  -R  <path>
 # 显示根目录下内容
 hadoop fs -ls  /
 ```
@@ -15,18 +15,18 @@ hadoop fs -ls  /
 
 ```shell
 # 创建目录
-hadoop fs -mkdir 
+hadoop fs -mkdir  <path> 
 # 递归创建目录
-hadoop fs -mkdir -p  
+hadoop fs -mkdir -p  <path>  
 ```
 
 **3. 删除操作**
 
 ```shell
 # 删除文件
-hadoop fs -rm
+hadoop fs -rm  <path>
 # 递归删除目录和文件
-hadoop fs -rm -R 
+hadoop fs -rm -R  <path> 
 ```
 
 **4. 从本地加载文件到HDFS**
@@ -50,16 +50,16 @@ hadoop fs -copyToLocal [dst] [localsrc]
 
 ```shell
 # 二选一执行即可
-hadoop fs -text 
-hadoop fs -cat  
+hadoop fs -text  <path> 
+hadoop fs -cat  <path>  
 ```
 
 **7. 显示文件的最后一千字节**
 
 ```shell
-hadoop fs -tail
+hadoop fs -tail  <path> 
 # 和Linux下一样，会持续监听文件内容变化 并显示文件的最后一千字节
-hadoop fs -tail -f
+hadoop fs -tail -f  <path> 
 ```
 
 **8. 拷贝文件**
@@ -80,7 +80,7 @@ hadoop fs -mv [src] [dst]
 + -s : 显示所有文件大小总和，
 + -h : 将以更友好的方式显示文件大小（例如64.0m而不是67108864）
 ```shell
-hadoop fs -du 
+hadoop fs -du  <path>  
 ```
 
 **11. 合并下载多个文件**
@@ -124,7 +124,7 @@ hadoop fs -chown [-R] [OWNER][:[GROUP]] URI [URI ]
 
 **15. 文件检测**
 ```shell
-hadoop fs -test - [defsz] URI
+hadoop fs -test - [defsz]  URI
 ```
 可选选项：
 + -d：如果路径是目录，返回0。
