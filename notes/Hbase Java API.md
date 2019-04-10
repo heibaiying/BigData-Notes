@@ -678,7 +678,7 @@ public class HBaseUtils {
 
 ## 四、正确连接Hbase
 
-在上面的代码中在类加载时候就初始化了Connection连接，并且之后的方法都是复用这个Connection，这时我们可能会考虑是否可以使用义连接池来获取更好的性能表现？实际上这是没有必要的。
+在上面的代码中在类加载时候就初始化了Connection连接，并且之后的方法都是复用这个Connection，这时我们可能会考虑是否可以使用自定义连接池来获取更好的性能表现？实际上这是没有必要的。
 
 首先官方对于`Connection Pooling`做了如下表述：
 
@@ -688,7 +688,7 @@ access (e.g., web-servers or  application servers  that may serve many
 application threads in a single JVM), you can pre-create a Connection,   
 as shown in the following example:
 
-#对于高并发多线程访问的应用程序（例如，在单个JVM中存在的为多个线程服务的Web服务器或应用程序服务器），  
+对于高并发多线程访问的应用程序（例如，在单个JVM中存在的为多个线程服务的Web服务器或应用程序服务器），  
 您只需要预先创建一个Connection。例子如下：
 ```
 
@@ -709,7 +709,7 @@ connection to zookeeper.  Connections are instantiated through the ConnectionFac
 The lifecycle of the connection is managed by the caller,  who has to close() the connection   
 to release the resources. 
 
-# Connection是一个集群连接，封装了与多台服务器（Matser/Region Server）的底层连接以及与zookeeper的连接。  
+Connection是一个集群连接，封装了与多台服务器（Matser/Region Server）的底层连接以及与zookeeper的连接。  
 连接通过ConnectionFactory  类实例化。连接的生命周期由调用者管理，调用者必须使用close()关闭连接以释放资源。
 ```
 
@@ -754,7 +754,7 @@ connection = ConnectionFactory.createConnection(config);
 
 从以上的表述中，可以看出HBase中Connection类已经实现了对连接的管理功能，所以我们不需要自己在Connection之上再做额外的管理。
 
-另外，Connection是线程安全的，而Table和Admin则不是线程安全的，因此正确的做法是一个进程共用一个Connection对象，而在不同的线程中使用单独的Table和Admin对象，且Table和Admin的获取`getTable()`和`getAdmin()`都是轻量级的操作，所以不必担心性能的消耗，在使用完成后建议显示的调用`close()`方法关闭它们。
+另外，Connection是线程安全的，但Table和Admin却不是线程安全的，因此正确的做法是一个进程共用一个Connection对象，而在不同的线程中使用单独的Table和Admin对象。Table和Admin的获取`getTable()`和`getAdmin()`都是轻量级的操作，所以不必担心性能的消耗，同时使用完成后建议显示的调用`close()`方法关闭它们。
 
 
 
