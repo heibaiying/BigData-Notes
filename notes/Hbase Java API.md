@@ -11,7 +11,7 @@
 
 ## 一、简述
 
-截至到目前（2019年4月），Hbase 主要有1.x 和 2.x 两个主要的版本，两个版本的Java API的接口和方法都是有所不同的，1.x 中某些方法在2.x中被标识为`@deprecated `过时，所以下面关于API的样例，我会分别给出1.x和2.x两个版本。完整的代码见本仓库：
+截至到目前（2019年4月），HBase 主要有1.x 和 2.x 两个主要的版本，两个版本的Java API的接口和方法有所不同的，1.x 中某些方法在2.x中被标识为`@deprecated `过时，所以下面关于API的样例，我会分别给出1.x和2.x两个版本。完整的代码见本仓库：
 
 >+ [Java API 1.x Examples](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hbase/hbase-java-api-1.x)
 >
@@ -23,7 +23,7 @@
 
 #### 2.1 新建Maven工程，导入项目依赖
 
-要使用Java API 操作HBase,仅需要引入`hbase-client`。这里我服务端的Hbase版本为`hbase-1.2.0-cdh5.15.2`，对应的`Hbase client` 选取 1.2.0  版本 
+要使用Java API 操作HBase,仅需要引入`hbase-client`。这里我服务端的HBase版本为`hbase-1.2.0-cdh5.15.2`，对应的`Hbase client` 选取 1.2.0  版本 
 
 ```xml
 <dependency>
@@ -412,7 +412,7 @@ public class HBaseUtilsTest {
 
 2.x 版本相比于1.x 废弃了一部分方法，关于废弃的方法在源码中都会指明新的替代方法，比如，在2.x中创建表时：`HTableDescriptor`和`HColumnDescriptor`等类都标识为废弃，且会在3.0.0版本移除，取而代之的是使用`TableDescriptorBuilder`和`ColumnFamilyDescriptorBuilder`来定义表和列族。在升级版本时，可以用源码中指明的新的替代方法来代替过期的方法。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/deprecated.png"/> </div>
+<div align="center"> <img width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/deprecated.png"/> </div>
 
 
 
@@ -683,10 +683,13 @@ public class HBaseUtils {
 首先官方对于`Connection Pooling`做了如下表述：
 
 ```properties
-Connection Pooling
-For applications which require high-end multithreaded access (e.g., web-servers or application servers that may serve many application threads in a single JVM), you can pre-create a Connection, as shown in the following example:
+Connection Pooling For applications which require high-end multithreaded   
+access (e.g., web-servers or  application servers  that may serve many   
+application threads in a single JVM), you can pre-create a Connection,   
+as shown in the following example:
 
-#对于高并发多线程访问的应用程序（例如，在单个JVM中存在的为多个线程服务的Web服务器或应用程序服务器），您只需要预先创建一个Connection。例子如下：
+#对于高并发多线程访问的应用程序（例如，在单个JVM中存在的为多个线程服务的Web服务器或应用程序服务器），  
+您只需要预先创建一个Connection。例子如下：
 ```
 
 ```java
@@ -701,9 +704,13 @@ try (Connection connection = ConnectionFactory.createConnection(conf);
 之所以能这样使用，这是因为Connection并不是一个简单的socket连接，[接口文档](https://hbase.apache.org/apidocs/org/apache/hadoop/hbase/client/Connection.html)中对Connection的表述是：
 
 ```properties
-A cluster connection encapsulating lower level individual connections to actual servers and a connection to zookeeper. Connections are instantiated through the ConnectionFactory class. The lifecycle of the connection is managed by the caller, who has to close() the connection to release the resources. 
+A cluster connection encapsulating lower level individual connections to actual servers and a  
+connection to zookeeper.  Connections are instantiated through the ConnectionFactory class.  
+The lifecycle of the connection is managed by the caller,  who has to close() the connection   
+to release the resources. 
 
-# Connection是一个集群连接，封装了与多台服务器（Matser/Region Server）的底层连接以及与zookeeper的连接。连接通过ConnectionFactory类实例化。连接的生命周期由调用者管理，调用者必须使用close()关闭连接以释放资源。
+# Connection是一个集群连接，封装了与多台服务器（Matser/Region Server）的底层连接以及与zookeeper的连接。  
+连接通过ConnectionFactory  类实例化。连接的生命周期由调用者管理，调用者必须使用close()关闭连接以释放资源。
 ```
 
 之所以封装这些连接，是因为HBase客户端需要连接三个不同的服务角色：
@@ -712,11 +719,11 @@ A cluster connection encapsulating lower level individual connections to actual 
 + HBase Master：主要用于执行HBaseAdmin接口的一些操作，例如建表等。
 + HBase RegionServer：用于读、写数据。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-arc.png"/> </div>
+<div align="center"> <img width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-arc.png"/> </div>
 
 Connection对象和实际的socket连接之间的对应关系如下图：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-connection.png"/> </div>
+<div align="center"> <img width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-connection.png"/> </div>
 
 > 上面两张图片引用自博客：[连接HBase的正确姿势](https://yq.aliyun.com/articles/581702?spm=a2c4e.11157919.spm-cont-list.1.146c27aeFxoMsN%20%E8%BF%9E%E6%8E%A5HBase%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF)
 
