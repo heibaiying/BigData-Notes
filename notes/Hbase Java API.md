@@ -11,7 +11,7 @@
 
 ## 一、简述
 
-截至到目前（2019年4月），HBase 主要有1.x 和 2.x 两个主要的版本，两个版本的Java API的接口和方法有所不同的，1.x 中某些方法在2.x中被标识为`@deprecated `过时，所以下面关于API的样例，我会分别给出1.x和2.x两个版本。完整的代码见本仓库：
+截至到目前（2019年4月），HBase 主要有1.x 和 2.x 两个主要的版本，两个版本的Java API的接口和方法有所不同的，1.x 中某些方法在2.x中被标识为`@deprecated`过时，所以下面关于API的样例，我会分别给出1.x和2.x两个版本。完整的代码见本仓库：
 
 >+ [Java API 1.x Examples](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hbase/hbase-java-api-1.x)
 >
