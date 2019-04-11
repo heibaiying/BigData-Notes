@@ -55,9 +55,7 @@ Azkaban 和 Oozie 都是目前使用最为广泛的工作流调度程序，其�
 
 #### 运行模式
 
-> After version 3.0, we provide two modes: the stand alone “solo-server” mode and distributed multiple-executor mode. The following describes thedifferences between the two modes.
-
-按照官方文档的说明，Azkaban 3.x 之后版本提供2种运行模式：
+Azkaban 3.x 之后版本提供2种运行模式：
 
 - solo server model（单服务模式）：元数据默认存放在内置的H2数据库（也可以修改为MYSQL），该模式中 webServer 和 executorServer 运行在同一个进程中，进程名是AzkabanSingleServer。该模式适用于小规模的使用。
 - multiple-executor（分布式多服务模式）：存放元数据的数据库为MYSQL，采用主从设置进行备份，管理服务器（webServer）和执行服务器（executorServer）在不同进程中运行，这种模式下，管理服务器和执行服务器互不影响，适合用于生产环境。
