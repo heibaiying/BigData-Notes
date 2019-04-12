@@ -36,7 +36,7 @@ Hbase提供了种类丰富的过滤器（filter）来提高数据处理的效率
 
 ## 二、过滤器基础
 
-#### 2.1  Filter接口和FilterBase抽象类
+### 2.1  Filter接口和FilterBase抽象类
 
 Filter接口中定义了过滤器的基本方法，FilterBase抽象类实现了Filter接口。所有内置的过滤器则直接或者间接继承自FilterBase抽象类。用户只需要将定义好的过滤器通过`setFilter`方法传递给`Scan`或`put`的实例即可。
 
@@ -68,7 +68,7 @@ FilterBase的所有子类过滤器如下：<div align="center"> <img  src="https
 
 
 
-#### 2.2 过滤器分类
+### 2.2 过滤器分类
 
 HBase 内置过滤器可以分为三类：分别是比较过滤器，专用过滤器和包装过滤器。分别在下面的三个小节中做详细的介绍。
 
@@ -85,7 +85,7 @@ HBase 内置过滤器可以分为三类：分别是比较过滤器，专用过�
   }
 ```
 
-#### 3.1 比较运算符
+### 3.1 比较运算符
 
 - LESS (<)
 - LESS_OR_EQUAL (<=)
@@ -114,7 +114,7 @@ public enum CompareOperator {
 >
 > 所以1.x 版本的比较运算符需要使用`CompareFilter.CompareOp`枚举类， 2.0 版本HBase 则需要使用 `CompareOperator`枚举类。
 
-#### 3.2 比较器
+### 3.2 比较器
 
 所有比较器均继承自`ByteArrayComparable`抽象类
 
@@ -136,7 +136,7 @@ BinaryPrefixComparator 和 BinaryComparator的区别不是很好表述，这里�
 + 如果使用的是`BinaryPrefixComparator `比较器，则比较以`abcd`字节数组的长度为准，即`efgh`不会参与比较，这时候认为`abcd`与`abcdefgh` 是满足`EQUAL`条件的；
 + 如果使用的是`BinaryComparator`比较器，则认为其是不相等的。
 
-#### 3.3 比较过滤器种类
+### 3.3 比较过滤器种类
 
 比较过滤器共有五个（Hbase 1.x 版本和2.x 版本相同），见下图：
 
@@ -158,7 +158,7 @@ BinaryPrefixComparator 和 BinaryComparator的区别不是很好表述，这里�
 
 DependentColumnFilter 的使用稍微复杂一点，这里单独做如下说明。
 
-#### 3.4 DependentColumnFilter 
+### 3.4 DependentColumnFilter 
 
 可以把DependentColumnFilter理解为**一个valueFilter和一个时间戳过滤器的组合**。DependentColumnFilter 有三个带参构造器，这里选择一个参数最全的进行说明：
 
@@ -199,7 +199,7 @@ DependentColumnFilter dependentColumnFilter = new DependentColumnFilter(
 
 专用过滤器通常直接继承自`FilterBase`，适用于范围更小的筛选规则。
 
-#### 4.1 单列列值过滤器 (SingleColumnValueFilter)
+### 4.1 单列列值过滤器 (SingleColumnValueFilter)
 
 基于某列（参考列）的值决定某行数据是否被过滤。其实例有以下方法：
 
@@ -216,11 +216,11 @@ singleColumnValueFilter.setFilterIfMissing(true);
 scan.setFilter(singleColumnValueFilter);
 ```
 
-#### 4.2 单列列值排除器 (SingleColumnValueExcludeFilter) 
+### 4.2 单列列值排除器 (SingleColumnValueExcludeFilter) 
 
 `SingleColumnValueExcludeFilter`继承自上面的`SingleColumnValueFilter`，过滤行为与其相反。
 
-#### 4.3 行键前缀过滤器 (PrefixFilter)
+### 4.3 行键前缀过滤器 (PrefixFilter)
 
 基于RowKey值决定某行数据是否被过滤。
 
@@ -229,7 +229,7 @@ PrefixFilter prefixFilter = new PrefixFilter(Bytes.toBytes("xxx"));
 scan.setFilter(prefixFilter);
 ```
 
-#### 4.4 列名前缀过滤器 (ColumnPrefixFilter)
+### 4.4 列名前缀过滤器 (ColumnPrefixFilter)
 
 基于列限定符（列名）决定某行数据是否被过滤。
 
@@ -238,7 +238,7 @@ ColumnPrefixFilter columnPrefixFilter = new ColumnPrefixFilter(Bytes.toBytes("xx
  scan.setFilter(columnPrefixFilter);
 ```
 
-#### 4.5 分页过滤器 (PageFilter)
+### 4.5 分页过滤器 (PageFilter)
 
 可以使用这个过滤器实现对结果按行进行分页，创建PageFilter实例的时候需要传入每页的行数。
 
@@ -302,7 +302,7 @@ System.out.println("total rows: " + totalRows);
 
 
 
-#### 4.6 时间戳过滤器 (TimestampsFilter)
+### 4.6 时间戳过滤器 (TimestampsFilter)
 
 ```java
 List<Long> list = new ArrayList<>();
@@ -311,7 +311,7 @@ TimestampsFilter timestampsFilter = new TimestampsFilter(list);
 scan.setFilter(timestampsFilter);
 ```
 
-#### 4.7 首次行键过滤器 (FirstKeyOnlyFilter)
+### 4.7 首次行键过滤器 (FirstKeyOnlyFilter)
 
 FirstKeyOnlyFilter只扫描每行的第一列，扫描完第一列后就结束对当前行的扫描，并跳转到下一行。相比于全表扫描，其性能更好，通常用于行数统计的场景，因为如果某一行存在，则行中必然至少有一列。
 
@@ -324,7 +324,7 @@ scan.set(firstKeyOnlyFilter);
 
 包装过滤器就是通过包装其他过滤器以实现某些拓展的功能。
 
-#### 5.1 SkipFilter过滤器
+### 5.1 SkipFilter过滤器
 
 SkipFilter包装一个过滤器，当被包装的过滤器遇到一个需要过滤的KeyValue实例时，则拓展过滤整行数据。下面是一个使用示例：
 
@@ -338,7 +338,7 @@ Filter filter2 = new SkipFilter(filter1);
 
 
 
-#### 5.2 WhileMatchFilter过滤器
+### 5.2 WhileMatchFilter过滤器
 
 WhileMatchFilter包装一个过滤器，当被包装的过滤器遇到一个需要过滤的KeyValue实例时，WhileMatchFilter则结束本次扫描，返回已经扫描到的结果。下面是其使用示例：
 
