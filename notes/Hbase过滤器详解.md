@@ -418,7 +418,7 @@ public FilterList(final Filter... filters)
   }
 ```
 
-
+使用示例如下：
 
 ```java
 List<Filter> filters = new ArrayList<Filter>();
