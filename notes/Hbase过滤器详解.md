@@ -170,11 +170,9 @@ DependentColumnFilter(final byte [] family, final byte[] qualifier,
 
 + family  ：列族
 + qualifier ：列限定符（列名）
-+ boolean dropDependentColumn ：决定参考列是否被包含在返回结果内，为true时表示参考列被返回，为false时表示被丢弃
-
-+ CompareOperator op ：比较运算符
-
-+ ByteArrayComparable valueComparator ：比较器
++ dropDependentColumn ：决定参考列是否被包含在返回结果内，为true时表示参考列被返回，为false时表示被丢弃
++ op ：比较运算符
++ valueComparator ：比较器
 
 这里举例进行说明：
 
