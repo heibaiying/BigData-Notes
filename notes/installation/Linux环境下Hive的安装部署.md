@@ -110,7 +110,7 @@ HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
 由于已经将Hive的bin目录配置到环境变量，直接使用以下命令启动，成功进入交互式命令行后执行`show databases`命令，无异常则代表搭建成功。
 
 ```shell
-# Hive
+# hive
 ```
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-install-2.png"/> </div>
