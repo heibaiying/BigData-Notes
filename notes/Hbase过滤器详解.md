@@ -185,11 +185,11 @@ DependentColumnFilter dependentColumnFilter = new DependentColumnFilter(
     new BinaryPrefixComparator(Bytes.toBytes("xiaolan")));
 ```
 
-(1)  这里会先去查找`student:name`中值以`xiaolan`开头的所有数据获得`参考数据集`，这一步的查找等同于valueFilter过滤器；
++ 这里会先去查找`student:name`中值以`xiaolan`开头的所有数据获得`参考数据集`，这一步的查找等同于valueFilter过滤器；
 
-(2)  其次再用参考数据集中所有数据的时间戳去检索其他列，获得时间戳相同的其他列的数据作为`结果数据集`，这一步等同于时间戳过滤器；
++ 其次再用参考数据集中所有数据的时间戳去检索其他列，获得时间戳相同的其他列的数据作为`结果数据集`，这一步等同于时间戳过滤器；
 
-(3)  最后如果`dropDependentColumn `为true，则返回`参考数据集`+`结果数据集`，若为false，则抛弃参考数据集，只返回结果数据集。
++ 最后如果`dropDependentColumn `为true，则返回`参考数据集`+`结果数据集`，若为false，则抛弃参考数据集，只返回结果数据集。
 
 
 
