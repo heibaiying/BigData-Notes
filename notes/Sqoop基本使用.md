@@ -1,30 +1,21 @@
 # Sqoop基本使用
-<nav>
+
+<nav>
 <a href="#一Sqoop-基本命令">一、Sqoop 基本命令</a><br/>
 <a href="#二Sqoop-与-MySQL">二、Sqoop 与 MySQL</a><br/>
 <a href="#三Sqoop-与-HDFS">三、Sqoop 与 HDFS</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-MySQL数据导入到HDFS">3.1 MySQL数据导入到HDFS</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入命令">1. 导入命令</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-导入验证">2. 导入验证</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-HDFS数据导出到MySQL">3.2 HDFS数据导出到MySQL</a><br/>
 <a href="#四Sqoop-与-Hive">四、Sqoop 与 Hive</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-MySQL数据导入到Hive">3.1 MySQL数据导入到Hive</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入命令">1. 导入命令</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-导入验证">2. 导入验证</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-可能出现的问题">3. 可能出现的问题</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-Hive-导出数据到MySQL">3.2 Hive 导出数据到MySQL</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-查看Hive表在HDFS的存储位置">1. 查看Hive表在HDFS的存储位置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-执行导出命令">3.2 执行导出命令</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-MySQL数据导入到Hive">4.1 MySQL数据导入到Hive</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-Hive-导出数据到MySQL">4.2 Hive 导出数据到MySQL</a><br/>
 <a href="#五Sqoop-与-HBase">五、Sqoop 与 HBase</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-MySQL导入数据到HBase">5.1 MySQL导入数据到HBase</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入数据">1. 导入数据</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-导入验证">2. 导入验证</a><br/>
 <a href="#六全库导出">六、全库导出</a><br/>
 <a href="#七Sqoop-数据过滤">七、Sqoop 数据过滤</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#71-query参数">7.1 query参数</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#72-增量导入">7.2 增量导入</a><br/>
 <a href="#八类型支持">八、类型支持</a><br/>
 </nav>
+
 
 ## 一、Sqoop 基本命令
 
@@ -140,7 +131,7 @@ CREATE TABLE help_keyword_from_hdfs LIKE help_keyword ;
 
 ## 四、Sqoop 与 Hive
 
-### 3.1 MySQL数据导入到Hive
+### 4.1 MySQL数据导入到Hive
 
 Sqoop导入数据到Hive是通过先将数据导入到HDFS上的临时目录，然后再将数据从HDFS上Load到Hive中，最后将临时目录删除。可以使用`target-dir`来指定临时目录。
 
@@ -196,7 +187,7 @@ sqoop import \
 
 <br/>
 
-### 3.2 Hive 导出数据到MySQL
+### 4.2 Hive 导出数据到MySQL
 
 由于Hive的数据是存储在HDFS上的，所以Hive导入数据到MySQL，实际上就是HDFS导入数据到MySQL。
 

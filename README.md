@@ -88,7 +88,7 @@ TODO
 
 1. [Sqoop简介与安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Sqoop简介与安装.md)
 
-2. [Sqoop的基本使用]((https://github.com/heibaiying/BigData-Notes/blob/master/notes/Sqoop简介与安装.md)Sqoop基本使用)
+2. [Sqoop的基本使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Sqoop基本使用.md)
 
 ## 八、Azkaban
 
