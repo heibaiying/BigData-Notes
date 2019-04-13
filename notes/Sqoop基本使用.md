@@ -1,0 +1,402 @@
+# Sqoop基本使用
+<nav>
+<a href="#一Sqoop-基本命令">一、Sqoop 基本命令</a><br/>
+<a href="#二Sqoop-与-MySQL">二、Sqoop 与 MySQL</a><br/>
+<a href="#三Sqoop-与-HDFS">三、Sqoop 与 HDFS</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-MySQL数据导入到HDFS">3.1 MySQL数据导入到HDFS</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入命令">1. 导入命令</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-导入验证">2. 导入验证</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-HDFS数据导出到MySQL">3.2 HDFS数据导出到MySQL</a><br/>
+<a href="#四Sqoop-与-Hive">四、Sqoop 与 Hive</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-MySQL数据导入到Hive">3.1 MySQL数据导入到Hive</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入命令">1. 导入命令</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-导入验证">2. 导入验证</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-可能出现的问题">3. 可能出现的问题</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-Hive-导出数据到MySQL">3.2 Hive 导出数据到MySQL</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-查看Hive表在HDFS的存储位置">1. 查看Hive表在HDFS的存储位置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-执行导出命令">3.2 执行导出命令</a><br/>
+<a href="#五Sqoop-与-HBase">五、Sqoop 与 HBase</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-MySQL导入数据到HBase">5.1 MySQL导入数据到HBase</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-导入数据">1. 导入数据</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-导入验证">2. 导入验证</a><br/>
+<a href="#六全库导出">六、全库导出</a><br/>
+<a href="#七Sqoop-数据过滤">七、Sqoop 数据过滤</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#71-query参数">7.1 query参数</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#72-增量导入">7.2 增量导入</a><br/>
+<a href="#八类型支持">八、类型支持</a><br/>
+</nav>
+
+## 一、Sqoop 基本命令
+
+**1. 查看所有命令**
+
+```shell
+# sqoop help
+```
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-help.png"/> </div>
+
+**2. 查看某条命令的具体使用方法**
+
+```shell
+# sqoop help 命令名
+```
+
+
+
+## 二、Sqoop 与 MySQL
+
+**1. 查询MySQL所有数据库**
+
+通常用于Sqoop与MySQL连通测试。
+
+```shell
+sqoop list-databases \
+--connect jdbc:mysql://hadoop001:3306/ \
+--username root \
+--password root
+```
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-list-databases.png"/> </div>
+
+**2. 查询指定数据库中所有数据表**
+
+```shell
+sqoop list-tables \
+--connect jdbc:mysql://hadoop001:3306/mysql \
+--username root \
+--password root
+```
+
+
+
+## 三、Sqoop 与 HDFS
+
+### 3.1 MySQL数据导入到HDFS
+
+#### 1. 导入命令
+
+导出MySQL数据库中的`help_keyword`表到HDFS的`/sqoop`目录下，如果导入目录存在则先删除再导入，使用3个map tasks并行导入。
+
+```shell
+sqoop import \
+--connect jdbc:mysql://hadoop001:3306/mysql \     
+--username root \
+--password root \
+--table help_keyword \           # 待导入的表
+--delete-target-dir \            # 目标目录存在则先删除
+--target-dir /sqoop \            # 导入的目标目录
+--fields-terminated-by '\t'  \   # 指定导出数据的分隔符
+-m 3                             # 指定并行执行的map tasks数量
+```
+
+> 注：help_keyword表是MySQL的一张字典表，只要安装MySQL就会存在这张表，之后的示例均使用这张表。
+
+从打印的日志我们可以看到输入数据被平均`split`为三份，分别启动三个`map task`对应处理。MapReduce出现`successfully`则代表导入成功。
+
+数据默认是以表主键列进行的拆分，如果你的表没有主键，有以下两种方案：
+
++ 添加`-- autoreset-to-one-mapper`参数，代表只启动一个`map task`，即不并行执行；
+
++ 若任要并行执行，则需要使用`--split-by <column-name>` 指明用于拆分数据的参考列。
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-map-task.png"/> </div>
+
+#### 2. 导入验证
+
+```shell
+# 查看导入后的目录
+hadoop fs -ls  -R /sqoop
+# 查看导入内容
+hadoop fs -text  /sqoop/part-m-00000
+```
+
+查看HDFS导入目录,可以看到表中数据被分为3部分进行存储，这是由指定的并行度决定的。
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop_hdfs_ls.png"/> </div>
+
+<br/>
+
+### 3.2 HDFS数据导出到MySQL
+
+```shell
+sqoop export  \
+    --connect jdbc:mysql://hadoop001:3306/mysql \
+    --username root \
+    --password root \
+    --table help_keyword_from_hdfs \        # 导出数据存储在MySQL的help_keyword_from_hdf的表中
+    --export-dir /sqoop  \
+    --input-fields-terminated-by '\t'\
+    --m 3 
+```
+
+表必须预先创建，建表语句如下：
+
+```sql
+CREATE TABLE help_keyword_from_hdfs LIKE help_keyword ;
+```
+
+
+
+## 四、Sqoop 与 Hive
+
+### 3.1 MySQL数据导入到Hive
+
+Sqoop导入数据到Hive是通过先将数据导入到HDFS上的临时目录，然后再将数据从HDFS上Load到Hive中，最后将临时目录删除。可以使用`target-dir`来指定临时目录。
+
+#### 1. 导入命令
+
+```shell
+sqoop import \
+  --connect jdbc:mysql://hadoop001:3306/mysql \
+  --username root \
+  --password root \
+  --table help_keyword \        # 待导入的表     
+  --delete-target-dir \         # 如果临时目录存在删除
+  --target-dir /sqoop_hive  \   # 临时目录位置
+  --hive-database sqoop_test \  # 导入到Hive中的sqoop_test数据库 数据库需要预先创建，不指定则默认使用Hive中的default库
+  --hive-import \               # 导入到Hive
+  --hive-overwrite \            # 如果Hive表中有数据则覆盖，这会清除表中原有的数据，然后再写入
+  -m 3                          # 并行度
+```
+
+导入到Hive中的`sqoop_test`数据库需要预先创建，不指定则默认使用Hive中的`default`库
+
+```shell
+ # 查看hive中的所有数据库
+ hive>  SHOW DATABASES;
+ # 创建sqoop_test数据库
+ hive>  CREATE DATABASE sqoop_test;
+```
+
+#### 2. 导入验证
+
+```shell
+# 查看 sqoop_test 数据库的所有表
+ hive>  SHOW  TABLES  IN  sqoop_test;
+# 查看表中数据
+ hive> SELECT * FROM sqoop_test.help_keyword;
+```
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop_hive_tables.png"/> </div>
+
+#### 3. 可能出现的问题
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop_hive_error.png"/> </div>
+
+如果执行报错`java.io.IOException: java.lang.ClassNotFoundException: org.apache.hadoop.hive.conf.HiveConf`,
+
+则需将Hive安装目录下`lib`下的hive-exec-**.jar 放到sqoop 的`lib` 
+
+```shell
+[root@hadoop001 lib]# ll hive-exec-*
+-rw-r--r--. 1 1106 4001 19632031 11月 13 21:45 hive-exec-1.1.0-cdh5.15.2.jar
+[root@hadoop001 lib]# cp hive-exec-1.1.0-cdh5.15.2.jar  ${SQOOP_HOME}/lib
+```
+
+<br/>
+
+### 3.2 Hive 导出数据到MySQL
+
+由于Hive的数据是存储在HDFS上的，所以Hive导入数据到MySQL，实际上就是HDFS导入数据到MySQL。
+
+#### 1. 查看Hive表在HDFS的存储位置
+
+```shell
+# 进入对应的数据库
+hive> use sqoop_test;
+# 查看表信息
+hive> desc formatted help_keyword;
+```
+
+Location属性为其存储位置：
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-hive-location.png"/> </div>
+
+这里可以使用hdfs命令查看一下这个目录，可以看到这和我们在上一小节直接存储到HDFS的文件结构相同：
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-hive-hdfs.png"/> </div>
+
+#### 3.2 执行导出命令
+
+```shell
+sqoop export  \
+    --connect jdbc:mysql://hadoop001:3306/mysql \
+    --username root \
+    --password root \
+    --table help_keyword_from_hive \
+    --export-dir /user/hive/warehouse/sqoop_test.db/help_keyword  \
+    -input-fields-terminated-by '\001' \             # 需要注意的是 hive 中默认的分隔符为 \001
+    --m 3 
+```
+MySQL中的表需要预先创建：
+
+```sql
+CREATE TABLE help_keyword_from_hive LIKE help_keyword ;
+```
+
+
+
+## 五、Sqoop 与 HBase
+
+> 本小节只讲解RDBMS导入数据到HBase，因为暂时没有命令支持HBase直接导出到RDBMS。
+
+### 5.1 MySQL导入数据到HBase
+
+#### 1. 导入数据
+
+将`help_keyword`表中数据导入到HBase 上的 `help_keyword_hbase`表中，使用原表的主键`help_keyword_id`作为RowKey，原表的所有列都会在`keywordInfo`列族下，目前只支持全部导入到一个列族下，不支持分别指定列族。
+
+```shell
+sqoop import \
+    --connect jdbc:mysql://hadoop001:3306/mysql \
+    --username root \
+    --password root \
+    --table help_keyword \              # 待导入的表
+    --hbase-table help_keyword_hbase \  # hbase 表名称，表需要预先创建
+    --column-family keywordInfo \       # 所有列导入到 keywordInfo 列族下 
+    --hbase-row-key help_keyword_id     # 使用原表的help_keyword_id作为RowKey
+```
+
+导入的HBase表需要预先创建
+
+```shell
+# 查看所有表
+hbase> list
+# 创建表
+hbase> create 'help_keyword_hbase', 'keywordInfo'
+# 查看表信息
+hbase> desc 'help_keyword_hbase'
+```
+
+#### 2. 导入验证
+
+使用`scan`查看表数据
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop_hbase.png"/> </div>
+
+
+
+
+
+## 六、全库导出
+
+Sqoop支持通过`import-all-tables`命令进行全库导出到HDFS/Hive，但需要注意有以下两个限制：
+
++ 所有表必须有主键；或者使用`--autoreset-to-one-mapper`，代表只启动一个`map task`;
++ 你既不能使用非默认的分割列也不能通过WHERE子句添加任何限制
+
+> 第二点翻译得比较拗口，这里列出官方原本的说明：
+>
+> + You must not intend to use non-default splitting column, nor impose any conditions via a `WHERE` clause.
+
+全库导出到HDFS：
+
+```shell
+sqoop import-all-tables \
+    --connect jdbc:mysql://hadoop001:3306/数据库名 \
+    --username root \
+    --password root \
+    --warehouse-dir  /sqoop_all \     # 每个表会单独导出到一个目录，需要用此参数指明所有目录的父目录
+    --fields-terminated-by '\t'  \
+    -m 3
+```
+
+全库导出到Hive：
+
+```shell
+sqoop import-all-tables -Dorg.apache.sqoop.splitter.allow_text_splitter=true \
+  --connect jdbc:mysql://hadoop001:3306/数据库名 \
+  --username root \
+  --password root \
+  --hive-database sqoop_test \         # 导出到Hive对应的库   
+  --hive-import \
+  --hive-overwrite \
+  -m 3
+```
+
+
+
+## 七、Sqoop 数据过滤
+
+### 7.1 query参数
+
+这里主要介绍`--query`参数，Sqoop可以使用`query`参数定义查询SQL，从而可以导出任何所需的结果集。其他参数`--table`， `- column`和`--where`能实现的查询都能使用`--query`实现。
+
+**query的使用示例**
+
+```shell
+sqoop import \
+  --connect jdbc:mysql://hadoop001:3306/mysql \
+  --username root \
+  --password root \
+  --query 'select * from help_keyword where  $CONDITIONS and  help_keyword_id < 50' \  
+  --delete-target-dir \            
+  --target-dir /sqoop_hive  \ 
+  --hive-database sqoop_test \           # 指定导入目标数据库 不指定则默认使用Hive中的default库
+  --hive-table filter_help_keyword \     # 指定导入目标表
+  --split-by help_keyword_id \           # 指定用于split的列      
+  --hive-import \                        # 导入到Hive
+  --hive-overwrite \                     、
+  -m 3                                  
+```
+
+在使用`query`进行数据过滤时，需要注意以下三点：
+
++ 必须用`--hive-table`指明目标表；
+
++ 如果并行度`-m`不为1或者没有指定`--autoreset-to-one-mapper`，则需要用` --split-by `指明参考列；
+
++ query自定义查询的SQL语句必须包含`$CONDITIONS`，这是固定写法，作用是动态替换。
+
+  
+
+### 7.2 增量导入
+
+```shell
+sqoop import \
+    --connect jdbc:mysql://hadoop001:3306/mysql \
+    --username root \
+    --password root \
+    --table help_keyword \
+    --target-dir /sqoop_hive  \
+    --hive-database sqoop_test \         
+    --incremental  append  \             # 指明模式
+    --check-column  help_keyword_id \    # 指明用于增量导入的参考列
+    --last-value 300  \                  # 指定参考列上次导入的最大值
+    --hive-import \   
+    -m 3  
+```
+
+incremental 模式有以下两个可选的选项：
+
++ append：要求参考列的值必须是递增的，所有大于`last-value`的值都会被导入；
+
++ lastmodified：要求参考列的值必须是timestamp类型，且插入数据时候要在参考列插入当前时间戳，更新数据时也要更新参考列时间戳，所有时间晚于``last-value``的数据都会被导入。
+
+通过上面的解释我们可以看出来，其实Sqoop的增量导入并没有太多神器的地方，完全就是依靠维护的参考列来判断哪些是增量数据。当然我们也可以使用上面介绍的`query`来手动进行增量导出，这样反而更加灵活。
+
+
+
+## 八、类型支持
+
+Sqoop默认支持数据库的大多数字段类型，但是某些特殊类型是不支持的。遇到不支持的类型，程序会抛出异常`Hive does not support the SQL type for column xxx`异常，此时可以通过下面两个参数进行强制类型转换：
+
+可以通过下面两个参数进行强制类型转换：
+
++ --map-column-java\<mapping>   参数：重写SQL到Java类型的映射
++  --map-column-hive \<mapping> 参数： 重写Hive到Java类型的映射
+
+下面例子演示了将原先`id`字段强制转为String类型，`value`字段强制转为Integer类型：
+
+```
+$ sqoop import ... --map-column-java id=String,value=Integer
+```
+
+
+
+
+
+## 参考资料
+
+[Sqoop User Guide (v1.4.7)](http://sqoop.apache.org/docs/1.4.7/SqoopUserGuide.html)
