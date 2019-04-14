@@ -36,7 +36,7 @@ Hive构建在Hadoop之上的，可以将结构化的数据文件映射成表，�
 
 ### 2.2 Metastore
 
-hive里的表名、表结构、字段名、字段类型、表的分隔符等信息就叫做元数据。Metastore是用来存储Hive的元数据，默认元数据是存储在derby关系型数据库中，但是derby是能同时只有一个实例，也就是说不能多个命令行接口同时使用，所以可以替换mysql等。
+hive里的表名、表结构、字段名、字段类型、表的分隔符等信息就叫做元数据。Metastore是用来存储Hive的元数据，默认元数据是存储在derby关系型数据库中，但使用derby时只能有一个实例，也就是说不能多个命令行接口同时使用，通常使用MySQL代替derby。
 
 这里还需要说明的是hive进行的是同一的元数据管理，就是说你在hive上创建了一张表，然后在presto／impala／sparksql 中都是可以直接使用的，同样的你在presto／impala／sparksql中创建一张表，在hive中也是可以使用的。
 
