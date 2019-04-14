@@ -1,5 +1,6 @@
 # Hbase简介
-<nav>
+
+<nav>
 <a href="#一Hadoop的局限">一、Hadoop的局限</a><br/>
 <a href="#二HBase简介">二、HBase简介</a><br/>
 <a href="#三HBase-Table">三、HBase Table</a><br/>
@@ -8,7 +9,7 @@
 
 ## 一、Hadoop的局限
 
-HBase是一个构建在Hadoop文件系统之上的面向列的数据库管理系统。既然有了Hadoop为什么还需要HBase ? 这里首先介绍一下Hadoop的限制。
+HBase是一个构建在Hadoop文件系统之上的面向列的数据库管理系统。既然是基于Hadoop的，那么就需要先介绍一下Hadoop存在的限制。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase.jpg"/> </div>
 
