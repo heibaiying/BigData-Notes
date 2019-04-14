@@ -13,7 +13,7 @@ HBase是一个构建在Hadoop文件系统之上的面向列的数据库管理系
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase.jpg"/> </div>
 
- Hadoop擅长存储任意的、半结构甚至非结构化的数据，主要通过HDFS来存储，使用MapReduce来处理。但是Hadoop只能执行批处理，并且只能以顺序方式访问数据。这意味着即使是最简单的工作，也必须搜索整个数据集。面对日益复杂的业务需求，需要一个新的解决方案来实现对海量数据的随机访问。实现数据的随机访问是传统的RDBMS所擅长的，但其却不能存储海量的数据。在这种情况下，必须有一种新的方案来解决海量数据存储和随机访问并存的问题，HBase就是其中之一。
+ Hadoop擅长存储任意的、半结构甚至非结构化的数据，主要通过HDFS来存储，使用MapReduce来处理。但是Hadoop只能执行批处理，并且只能以顺序方式访问数据，这意味着即使是最简单的工作，也必须搜索整个数据集，无法实现对数据的随机访问。实现数据的随机访问是传统的RDBMS所擅长的，但其却不能存储海量的数据。在这种情况下，必须有一种新的方案来解决海量数据存储和随机访问的问题，HBase就是其中之一。
 
 > 注：HBase，Cassandra，couchDB，Dynamo和MongoDB都能存储海量数据并支持随机访问。
 
