@@ -99,7 +99,7 @@ TODO
 
 ## 九、HBase
 
-1. Hbase 简介
+1. [Hbase 简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase简介.md)
 2. [HBase系统架构及数据结构](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md)
 3. [HBase基本环境搭建（Standalone /pseudo-distributed mode）](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hbase%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
 4. [HBase常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase%20Shell.md)
