@@ -10,7 +10,7 @@
 <a href="#二storm架构详解">二、Storm架构详解</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-nimbus进程">2.1 nimbus进程</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-supervisor进程">2.2 supervisor进程</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-Zookeeper的作用">2.3 Zookeeper的作用</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-zookeeper的作用">2.3 zookeeper的作用</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-worker进程">2.4 worker进程</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-executor线程">2.5 executor线程</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-并行度">2.6 并行度</a><br/>
@@ -206,7 +206,7 @@ Storm 中一共有8个内置的 Stream Grouping。也可以通过实现 `CustomS
 
 
 
-### 2.3 Zookeeper的作用
+### 2.3 zookeeper的作用
 
 Nimbus和Supervisor进程都被设计为**快速失败**（遇到任何意外情况时进程自毁）和**无状态**（所有状态保存在Zookeeper或磁盘上）。  因此，如果Nimbus或Supervisor守护进程死亡，它们会重新启动，并从zookeeper上获取之前的状态数据，就像什么都没发生一样。
 
