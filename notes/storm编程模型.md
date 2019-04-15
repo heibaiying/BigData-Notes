@@ -77,8 +77,9 @@ public interface ISpout extends Serializable {
     void deactivate();
 
     /**
-     * 这是一个核心方法，主要通过在此方法中调用collector将tuples发送给下一个接收器，这个方法必须是非阻塞的。              * nextTuple/ack/fail/是在同一个线程中执行的，所以不用考虑线程安全方面。当没有tuples发出时应该
-     * 让nextTuple休眠（sleep）一下，以免浪费CPU。
+     * 这是一个核心方法，主要通过在此方法中调用collector将tuples发送给下一个接收器，这个方法必须是非阻塞的。              
+     * nextTuple/ack/fail/是在同一个线程中执行的，所以不用考虑线程安全方面。当没有tuples发出时应该让nextTuple
+     * 休眠(sleep)一下，以免浪费CPU。
      */
     void nextTuple();
 
