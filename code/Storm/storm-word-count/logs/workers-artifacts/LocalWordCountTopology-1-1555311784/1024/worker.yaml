@@ -1,0 +1,4 @@
+worker-id: 9cdf2e0f-b135-41c6-b3fd-1502afddf212
+logs.users: []
+logs.groups: []
+topology.submitter.user: ciic
