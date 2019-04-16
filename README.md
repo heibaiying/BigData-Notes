@@ -76,7 +76,7 @@ TODO
 1. [Storm和流处理简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm和流处理简介.md)
 2. [Storm核心概念详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm核心概念详解.md)
 3. [Storm单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Storm%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
-4. [Storm编程模型详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Storm编程模型详解.md)
+4. [Storm编程模型详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm编程模型详解.md)
 
 ## 六、Flume
 
