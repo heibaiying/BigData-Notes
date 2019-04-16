@@ -10,8 +10,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-IBolt-接口">4.1 IBolt 接口</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-BaseRichBolt抽象类">4.2 BaseRichBolt抽象类</a><br/>
 <a href="#五词频统计案例">五、词频统计案例</a><br/>
-<a href="#六提交到服务器运行">六、提交到服务器运行</a><br/>
+<a href="#六提交到服务器集群运行">六、提交到服务器集群运行</a><br/>
 </nav>
+
+
 
 
 ## 一、简介
@@ -218,7 +220,19 @@ public interface IRichBolt extends IBolt, IComponent {
 
 ### 5.2 代码实现
 
-#### 1.DataSourceSpout
+#### 1. 项目依赖
+
+```xml
+<dependency>
+    <groupId>org.apache.storm</groupId>
+    <artifactId>storm-core</artifactId>
+    <version>1.2.2</version>
+</dependency>
+```
+
+
+
+#### 2. DataSourceSpout
 
 ```java
 public class DataSourceSpout extends BaseRichSpout {
@@ -273,7 +287,7 @@ HBase	Hive
 Hadoop	Spark	HBase	Storm
 ```
 
-#### 2. SplitBolt
+#### 3. SplitBolt
 
 ```java
 public class SplitBolt extends BaseRichBolt {
@@ -301,7 +315,7 @@ public class SplitBolt extends BaseRichBolt {
 }
 ```
 
-#### 3. CountBolt
+#### 4. CountBolt
 
 ```java
 public class CountBolt extends BaseRichBolt {
@@ -335,15 +349,14 @@ public class CountBolt extends BaseRichBolt {
 }
 ```
 
-#### 4.  WordCountApp
+#### 5.  LocalWordCountApp
 
 通过TopologyBuilder将上面定义好的组件进行串联形成 Topology，并提交到本地集群（LocalCluster）运行。在通常开发中，可用本地集群进行，测试完成后再提交到服务器集群运行。
 
 ```java
-public class WordCountApp{
+public class LocalWordCountApp {
 
     public static void main(String[] args) {
-        
         TopologyBuilder builder = new TopologyBuilder();
         
         builder.setSpout("DataSourceSpout", new DataSourceSpout());
@@ -356,7 +369,7 @@ public class WordCountApp{
 
         // 创建本地集群用于测试 这种模式不需要本机安装storm,直接运行该Main方法即可
         LocalCluster cluster = new LocalCluster();
-        cluster.submitTopology("LocalWordCountTopology",
+        cluster.submitTopology("LocalWordCountApp",
                 new Config(), builder.createTopology());
     }
 
@@ -365,7 +378,7 @@ public class WordCountApp{
 
 
 
-#### 5. 运行结果
+#### 6. 运行结果
 
 启动`WordCountApp`的main方法即可运行，采用本地模式storm会自动在本地搭建一个集群，所以启动的过程会稍慢一点，启动成功后即可看到输出日志。
 
@@ -373,5 +386,83 @@ public class WordCountApp{
 
 
 
-## 六、提交到服务器运行
+## 六、提交到服务器集群运行
+
+#### 6.1 代码更改
+
+提交到服务器的代码和本地代码略有不同，提交到服务器集群时需要使用`StormSubmitter`进行提交。主要代码如下。
+
+> 为了结构清晰，这里新建ClusterWordCountApp类来演示集群提交。实际开发中可以将两种模式的代码写在同一个类中，通过外部传参来决定启动何种模式。
+
+```java
+public class ClusterWordCountApp {
+
+    public static void main(String[] args) {
+        TopologyBuilder builder = new TopologyBuilder();
+        
+        builder.setSpout("DataSourceSpout", new DataSourceSpout());
+        
+        // 指明将 DataSourceSpout 的数据发送到 SplitBolt 中处理
+        builder.setBolt("SplitBolt", new SplitBolt()).shuffleGrouping("DataSourceSpout");
+        
+        //  指明将 SplitBolt 的数据发送到 CountBolt 中 处理
+        builder.setBolt("CountBolt", new CountBolt()).shuffleGrouping("SplitBolt");
+
+        // 使用StormSubmitter提交Topology到服务器集群
+        try {
+            StormSubmitter.submitTopology("ClusterWordCountApp",  new Config(), builder.createTopology());
+        } catch (AlreadyAliveException | InvalidTopologyException | AuthorizationException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+```
+
+#### 6.2 打包上传
+
+打包后上传到服务器任意位置，这里我打包后的名称为`storm-word-count-1.0.jar`
+
+```shell
+# mvn clean package -DskipTests=true
+```
+
+#### 6.3 提交Topology
+
+使用以下命令提交Topology到集群：
+
+```shell
+# 命令格式：storm  jar  jar包位置  主类的全路径  ...可选传参
+storm jar /usr/appjar/storm-word-count-1.0.jar  com.heibaiying.wordcount.ClusterWordCountApp
+```
+
+出现`successfully`则代表提交成功
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-submit-success.png"/> </div>
+
+#### 6.4 查看Topology与停止Topology（命令行方式）
+
+```shell
+# 查看所有Topology
+storm list
+
+# 停止  storm kill topology-name [-w wait-time-secs]
+storm kill ClusterWordCountApp -w 3
+```
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-list-kill.png"/> </div>
+
+#### 6.5 查看Topology与停止Topology（界面方式）
+
+使用UI界面同样也可进行同样的操作，进入WEB UI界面（8080端口），在`Topology Summary`中点击对应Topology 即可进入详情页面进行操作。
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-ui-actions.png"/> </div>
+
+
+
+
+
+
+
+
 
