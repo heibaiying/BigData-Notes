@@ -4,7 +4,7 @@
 <a href="#一Storm">一、Storm</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-简介">1.1 简介</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-Storm-与-Hadoop对比">1.2 Storm 与 Hadoop对比</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-Storm-与spark-Streaming对比">1.3 Storm 与  spark Streaming对比</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-Storm-与Spark-Streaming对比">1.3 Storm 与  Spark Streaming对比</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-Storm-与-Flink对比">1.4 Storm 与 Flink对比</a><br/>
 <a href="#二流处理">二、流处理</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-静态数据处理">2.1 静态数据处理</a><br/>
@@ -16,7 +16,7 @@
 
 #### 1.1 简介
 
-storm 是一个开源的分布式实时计算系统，可以简单、可靠进行大数据流的处理。通常用于实时分析，在线机器学习、持续计算、分布式RPC、ETL等场景。storm具有以下特点：
+Storm 是一个开源的分布式实时计算系统，可以简单、可靠进行大数据流的处理。通常用于实时分析，在线机器学习、持续计算、分布式RPC、ETL等场景。Storm具有以下特点：
 
 + 支持水平横向扩展；
 + 具有高容错性，通过ACK机制每个消息都不丢失；
@@ -33,9 +33,9 @@ Hadoop采用HDFS存储数据，采用MapReduce处理数据。MapReduce主要是�
 
 
 
-#### 1.3 Storm 与 spark Streaming对比
+#### 1.3 Storm 与 Spark Streaming对比
 
-严格意义上说spark Streaming并不是实时计算框架。 Spark Streaming接收实时输入的数据流，并将数据拆分为批处理，由Spark引擎处理后批量生成结果流。只不过 Spark Streaming 能够将数据流按秒级进行拆分，使得其能够得到接近于流处理的效果，但其本质上还是批处理（或微批处理）。
+严格意义上说Spark Streaming并不是实时计算框架。 Spark Streaming接收实时输入的数据流，并将数据拆分为批处理，由Spark引擎处理后批量生成结果流。只不过 Spark Streaming 能够将数据流按秒级进行拆分，使得其能够得到接近于流处理的效果，但其本质上还是批处理（或微批处理）。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/streaming-flow.png"/> </div>
 
@@ -86,11 +86,11 @@ storm和Flink都是真正意义上的实时计算框架。其对比如下：
 
 - **应用程序立即对数据做出反应**：降低了数据的滞后性，使得数据更具有时效性，更能反映对未来的预期；
 
-- **流处理可以处理更大的数据量：**直接处理数据流，并且只保留数据中有意义的子集，并将其传送到下一个处理单元，逐级过滤数据，降低需要处理的数据量，从而能够承受更大的数据量；
+- **流处理可以处理更大的数据量**：直接处理数据流，并且只保留数据中有意义的子集，并将其传送到下一个处理单元，逐级过滤数据，降低需要处理的数据量，从而能够承受更大的数据量；
 
 - **流处理更贴近现实的数据模型**：在实际的环境中，一切数据都是持续变化的，要想能够通过过去的数据推断未来的趋势，必须保证数据的不断输入和模型的不断修正，典型的就是金融市场、股票市场，流处理能更好的应对这些数据的连续性的特征和及时性的需求；
 
-- **流处理分散和分离基础设施：**流式处理减少了对大型数据库的需求。相反，每个流处理程序通过流处理框架维护了自己的数据和状态，这使得流处理程序更适合微服务架构。
+- **流处理分散和分离基础设施**：流式处理减少了对大型数据库的需求。相反，每个流处理程序通过流处理框架维护了自己的数据和状态，这使得流处理程序更适合微服务架构。
 
 
 
