@@ -33,6 +33,7 @@ settings.xml
 target
 classes
 out
+logs
 transaction-logs
 .flattened-pom.xml
 secrets.yml

@@ -1,6 +1,6 @@
 package com.heibaiying.wordcount.component;
 
-import org.apache.storm.shade.org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.storm.spout.SpoutOutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.topology.OutputFieldsDeclarer;

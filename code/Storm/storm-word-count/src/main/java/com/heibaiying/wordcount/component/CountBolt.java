@@ -28,7 +28,7 @@ public class CountBolt extends BaseRichBolt {
         count++;
         counts.put(word, count);
         // 输出
-        System.out.print("当前实时统计结果:");
+        System.out.print("Real-time analysis results : ");
         counts.forEach((key, value) -> System.out.print(key + ":" + value + "; "));
         System.out.println();
     }
