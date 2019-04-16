@@ -389,7 +389,7 @@ public class LocalWordCountApp {
 
 ## 六、提交到服务器集群运行
 
-#### 6.1 代码更改
+### 6.1 代码更改
 
 提交到服务器的代码和本地代码略有不同，提交到服务器集群时需要使用`StormSubmitter`进行提交。主要代码如下。
 
@@ -420,7 +420,7 @@ public class ClusterWordCountApp {
 }
 ```
 
-#### 6.2 打包上传
+### 6.2 打包上传
 
 打包后上传到服务器任意位置，这里我打包后的名称为`storm-word-count-1.0.jar`
 
@@ -428,7 +428,7 @@ public class ClusterWordCountApp {
 # mvn clean package -Dmaven.test.skip=true
 ```
 
-#### 6.3 提交Topology
+### 6.3 提交Topology
 
 使用以下命令提交Topology到集群：
 
@@ -441,7 +441,7 @@ storm jar /usr/appjar/storm-word-count-1.0.jar  com.heibaiying.wordcount.Cluster
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-submit-success.png"/> </div>
 
-#### 6.4 查看Topology与停止Topology（命令行方式）
+### 6.4 查看Topology与停止Topology（命令行方式）
 
 ```shell
 # 查看所有Topology
@@ -453,7 +453,7 @@ storm kill ClusterWordCountApp -w 3
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-list-kill.png"/> </div>
 
-#### 6.5 查看Topology与停止Topology（界面方式）
+### 6.5 查看Topology与停止Topology（界面方式）
 
 使用UI界面同样也可进行同样的操作，进入WEB UI界面（8080端口），在`Topology Summary`中点击对应Topology 即可进入详情页面进行操作。
 
@@ -469,7 +469,7 @@ storm kill ClusterWordCountApp -w 3
 
 ## 七、通用打包方法
 
-#### 1. mvn package的局限性
+### 1. mvn package的局限性
 
 上面我们直接使用`mvn package`进行项目打包，这对于没有使用外部依赖包的项目是可行的。但如果项目中使用了第三方JAR包，就会出现问题，因为`package`打包后的JAR中是不含有依赖包的，如果此时你提交到服务器上运行，就会出现找不到第三方依赖的异常。
 
@@ -508,7 +508,7 @@ private String productData() {
 
 
 
-#### 2. 官方推荐的的打包方法
+### 2. 官方推荐的的打包方法
 
 >If you're using Maven, the [Maven Assembly Plugin](http://maven.apache.org/plugins/maven-assembly-plugin/) can do the packaging for you. Just add this to your pom.xml:
 >
