@@ -58,7 +58,7 @@ export PATH=$STORM_HOME/bin:$PATH
 
 ### 4.启动相关进程
 
-因为要启动多个进程，所以统一采用后台进程的方式启动，采用后台启动时需要进入到`$STORM_HOME/bin`目录下，命令如下：
+因为要启动多个进程，所以统一采用后台进程的方式启动，采用后台启动时需要进入到`${STORM_HOME}/bin`目录下，命令如下：
 
 ```shell
 # 启动zookeeper
