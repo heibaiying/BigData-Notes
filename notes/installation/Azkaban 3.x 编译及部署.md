@@ -117,7 +117,7 @@ tar -zxvf  azkaban-solo-server-3.70.0.tar.gz
 
 ### 2.4 验证
 
-验证方式一：JPS 查看是否有`AzkabanSingleServer`进程
+验证方式一：jps查看是否有`AzkabanSingleServer`进程
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/akaban-jps.png"/> </div>
 
