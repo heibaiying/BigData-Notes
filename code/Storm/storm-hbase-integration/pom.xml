@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.heibaiying</groupId>
-    <artifactId>storm-redis-integration</artifactId>
+    <artifactId>storm-hbase-integration</artifactId>
     <version>1.0</version>
 
     <properties>
@@ -46,12 +46,12 @@
             <artifactId>storm-core</artifactId>
             <version>${storm.version}</version>
         </dependency>
+        <!--Storm整合HBase依赖-->
         <dependency>
             <groupId>org.apache.storm</groupId>
-            <artifactId>storm-redis</artifactId>
+            <artifactId>storm-hbase</artifactId>
             <version>${storm.version}</version>
         </dependency>
     </dependencies>
-
 
 </project>

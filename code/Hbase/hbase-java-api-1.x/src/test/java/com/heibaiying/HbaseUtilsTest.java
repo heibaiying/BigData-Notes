@@ -14,7 +14,7 @@ import java.util.List;
 
 public class HBaseUtilsTest {
 
-    private static final String TABLE_NAME = "class";
+    private static final String TABLE_NAME = "WordCount";
     private static final String TEACHER = "teacher";
     private static final String STUDENT = "student";
 
@@ -67,7 +67,7 @@ public class HBaseUtilsTest {
         ResultScanner scanner = HBaseUtils.getScanner(TABLE_NAME);
         if (scanner != null) {
             scanner.forEach(result -> System.out.println(Bytes.toString(result.getRow()) + "->" + Bytes
-                    .toString(result.getValue(Bytes.toBytes(STUDENT), Bytes.toBytes("name")))));
+                    .toString(result.getValue(Bytes.toBytes("cf"), Bytes.toBytes("count")))));
             scanner.close();
         }
     }

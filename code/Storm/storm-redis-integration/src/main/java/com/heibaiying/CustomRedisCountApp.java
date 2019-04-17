@@ -18,22 +18,26 @@ import org.apache.storm.topology.TopologyBuilder;
  */
 public class CustomRedisCountApp {
 
+    private static final String DATA_SOURCE_SPOUT = "dataSourceSpout";
+    private static final String SPLIT_BOLT = "splitBolt";
+    private static final String STORE_BOLT = "storeBolt";
+
     private static final String REDIS_HOST = "192.168.200.226";
     private static final int REDIS_PORT = 6379;
 
     public static void main(String[] args) {
         TopologyBuilder builder = new TopologyBuilder();
-        builder.setSpout("dataSourceSpout", new DataSourceSpout());
+        builder.setSpout(DATA_SOURCE_SPOUT, new DataSourceSpout());
         // split
-        builder.setBolt("splitBolt", new SplitBolt()).shuffleGrouping("dataSourceSpout");
+        builder.setBolt(SPLIT_BOLT, new SplitBolt()).shuffleGrouping(DATA_SOURCE_SPOUT);
         // save to redis and count
         JedisPoolConfig poolConfig = new JedisPoolConfig.Builder()
                 .setHost(REDIS_HOST).setPort(REDIS_PORT).build();
         RedisStoreMapper storeMapper = new WordCountStoreMapper();
         RedisCountStoreBolt countStoreBolt = new RedisCountStoreBolt(poolConfig, storeMapper);
-        builder.setBolt("storeBolt", countStoreBolt).shuffleGrouping("splitBolt");
+        builder.setBolt(STORE_BOLT, countStoreBolt).shuffleGrouping(SPLIT_BOLT);
 
-        // 如果外部传参cluster则代表线上环境启动否则代表本地启动
+        // 如果外部传参cluster则代表线上环境启动,否则代表本地启动
         if (args.length > 0 && args[0].equals("cluster")) {
             try {
                 StormSubmitter.submitTopology("ClusterCustomRedisCountApp", new Config(), builder.createTopology());
