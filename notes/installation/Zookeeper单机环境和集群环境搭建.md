@@ -18,7 +18,7 @@
 
 ## 一、单机环境搭建
 
-#### 1.1 下载
+### 1.1 下载
 
 下载对应版本Zookeeper，这里我下载的版本`3.4.14`。官方下载地址：https://archive.apache.org/dist/zookeeper/
 
@@ -26,13 +26,13 @@
 # wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz
 ```
 
-#### 1.2 解压
+### 1.2 解压
 
 ```shell
 # tar -zxvf zookeeper-3.4.14.tar.gz
 ```
 
-#### 1.3 配置环境变量
+### 1.3 配置环境变量
 
 ```shell
 # vim /etc/profile
@@ -51,7 +51,7 @@ export PATH=$ZOOKEEPER_HOME/bin:$PATH
 # source /etc/profile
 ```
 
-#### 1.4 修改配置
+### 1.4 修改配置
 
 进入安装目录的`conf/`目录下，拷贝配置样本并进行修改
 
@@ -104,7 +104,7 @@ clientPort=2181
 
 
 
-#### 1.5 启动
+### 1.5 启动
 
 由于已经配置过环境变量，直接使用下面命令启动即可
 
@@ -112,7 +112,7 @@ clientPort=2181
 zkServer.sh start
 ```
 
-#### 1.6 验证
+### 1.6 验证
 
 使用JPS验证进程是否已经启动，出现`QuorumPeerMain`则代表启动成功
 
@@ -129,7 +129,7 @@ zkServer.sh start
 
 > 以下演示为单机上搭建集群，对于Zookeeper，多机集群搭建步骤和单机一致。
 
-#### 2.1 修改配置
+### 2.1 修改配置
 
 拷贝三份zookeeper安装包，分别修改其配置文件，主要是修改`dataDir`、`dataLogDir`以及配置集群信息。
 
@@ -184,7 +184,7 @@ server.3=127.0.0.1:2289:3389
 
 > 为节省篇幅，以上配置文件均略去英文注释
 
-#### 2.2 标识节点
+### 2.2 标识节点
 
 分别在三个节点的数据存储目录下新建`myid`文件,并写入对应的节点标识。
 
@@ -212,7 +212,7 @@ echo "2" > /usr/local/zookeeper-cluster/data/02/myid
 echo "3" > /usr/local/zookeeper-cluster/data/03/myid
 ```
 
-#### 2.3 启动集群
+### 2.3 启动集群
 
 分别启动三个节点：
 
@@ -225,7 +225,7 @@ echo "3" > /usr/local/zookeeper-cluster/data/03/myid
 /usr/app/zookeeper-cluster/zookeeper03/bin/zkServer.sh start
 ```
 
-#### 2.4 集群验证
+### 2.4 集群验证
 
 使用jps查看进程，并且使用`zkServer.sh status`查看集群各个节点状态。如图三个节点进程均启动成功，并且两个节点为follower节点，一个节点为leader节点。
 
