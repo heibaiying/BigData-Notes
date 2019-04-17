@@ -12,6 +12,10 @@ import org.apache.storm.redis.common.config.JedisPoolConfig;
 import org.apache.storm.redis.common.mapper.RedisStoreMapper;
 import org.apache.storm.topology.TopologyBuilder;
 
+
+/**
+ * 利用自定义的RedisBolt实现词频统计
+ */
 public class CustomRedisCountApp {
 
     private static final String REDIS_HOST = "192.168.200.226";

@@ -10,6 +10,9 @@ import org.apache.storm.tuple.Values;
 
 import java.util.Map;
 
+/**
+ * 将每行数据按照指定分隔符进行拆分
+ */
 public class SplitBolt extends BaseRichBolt {
 
     private OutputCollector collector;

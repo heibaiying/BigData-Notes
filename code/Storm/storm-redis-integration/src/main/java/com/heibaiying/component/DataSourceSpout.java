@@ -11,6 +11,10 @@ import org.apache.storm.utils.Utils;
 
 import java.util.*;
 
+
+/**
+ * 产生词频样本的数据源
+ */
 public class DataSourceSpout extends BaseRichSpout {
 
     private List<String> list = Arrays.asList("Spark", "Hadoop", "HBase", "Storm", "Flink", "Hive");

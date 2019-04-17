@@ -11,6 +11,9 @@ import org.apache.storm.tuple.Values;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 进行词频统计
+ */
 public class CountBolt extends BaseRichBolt {
 
     private Map<String, Integer> counts = new HashMap<>();

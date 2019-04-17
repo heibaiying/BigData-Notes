@@ -8,6 +8,10 @@ import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.tuple.Tuple;
 import redis.clients.jedis.JedisCommands;
 
+
+/**
+ * 自定义RedisBolt 利用Redis的哈希数据结构的hincrby key field功能进行词频统计
+ */
 public class RedisCountStoreBolt extends AbstractRedisBolt {
 
     private final RedisStoreMapper storeMapper;
