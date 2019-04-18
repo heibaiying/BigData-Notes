@@ -1,5 +1,6 @@
 package com.heibaiying;
 
+import com.heibaiying.component.CountBolt;
 import com.heibaiying.component.DataSourceSpout;
 import com.heibaiying.component.SplitBolt;
 import org.apache.storm.Config;
@@ -18,9 +19,6 @@ import java.util.Map;
 
 /**
  * 进行词频统计 并将统计结果存储到HBase中
- * <p>
- * 编译打包: mvn clean assembly:assembly -Dmaven.test.skip=true
- * hdfs://hadoop001:8020/hbase
  */
 public class WordCountToHBaseApp {
 
@@ -45,11 +43,13 @@ public class WordCountToHBaseApp {
         // 定义流数据与HBase中数据的映射
         SimpleHBaseMapper mapper = new SimpleHBaseMapper()
                 .withRowKeyField("word")
-                .withColumnFields(new Fields("word"))
-                .withCounterFields(new Fields("count"))
-                .withColumnFamily("cf");
+                .withColumnFields(new Fields("word","count"))
+                .withColumnFamily("info");
 
-        // 给HBaseBolt传入表名、数据映射关系、和HBase的配置信息
+        /*
+         * 给HBaseBolt传入表名、数据映射关系、和HBase的配置信息
+         * 表需要预先创建: create 'WordCount','info'
+         */
         HBaseBolt hbase = new HBaseBolt("WordCount", mapper)
                 .withConfigKey("hbase.conf");
 
@@ -58,12 +58,14 @@ public class WordCountToHBaseApp {
         builder.setSpout(DATA_SOURCE_SPOUT, new DataSourceSpout(),1);
         // split
         builder.setBolt(SPLIT_BOLT, new SplitBolt(), 1).shuffleGrouping(DATA_SOURCE_SPOUT);
+        // count
+        builder.setBolt(COUNT_BOLT, new CountBolt(),1).shuffleGrouping(SPLIT_BOLT);
         // save to HBase
-        builder.setBolt(HBASE_BOLT, hbase, 1).fieldsGrouping(SPLIT_BOLT, new Fields("word"));
+        builder.setBolt(HBASE_BOLT, hbase, 1).shuffleGrouping(COUNT_BOLT);
 
 
         // 如果外部传参cluster则代表线上环境启动,否则代表本地启动
-        if (args.length > 1 && args[1].equals("cluster")) {
+        if (args.length > 0 && args[0].equals("cluster")) {
             try {
                 StormSubmitter.submitTopology("ClusterWordCountToRedisApp", config, builder.createTopology());
             } catch (AlreadyAliveException | InvalidTopologyException | AuthorizationException e) {

@@ -17,10 +17,6 @@ import org.apache.storm.topology.TopologyBuilder;
 
 /**
  * 进行词频统计 并将统计结果存储到Redis中
- * <p>
- * 编译打包:           mvn clean assembly:assembly -Dmaven.test.skip=true
- * 提交Topology到集群: storm jar /usr/appjar/storm-redis-integration-1.0-with-dependencies.jar  com.heibaiying.WordCountToRedisApp cluster
- * 停止Topology:      storm kill ClusterWordCountApp -w 3
  */
 public class WordCountToRedisApp {
 

@@ -5,13 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.heibaiying</groupId>
-    <artifactId>storm-redis-integration</artifactId>
+    <artifactId>storm-kafka-integration</artifactId>
     <version>1.0</version>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <storm.version>1.2.2</storm.version>
-    </properties>
 
     <build>
         <plugins>
@@ -73,6 +68,10 @@
         </plugins>
     </build>
 
+    <properties>
+        <storm.version>1.2.2</storm.version>
+        <kafka.version>2.2.0</kafka.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -82,10 +81,14 @@
         </dependency>
         <dependency>
             <groupId>org.apache.storm</groupId>
-            <artifactId>storm-redis</artifactId>
+            <artifactId>storm-kafka-client</artifactId>
             <version>${storm.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
     </dependencies>
-
 
 </project>
