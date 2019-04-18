@@ -131,7 +131,7 @@ zkServer.sh start
 
 ### 2.1 修改配置
 
-拷贝三份zookeeper安装包，分别修改其配置文件，主要是修改`dataDir`、`dataLogDir`以及配置集群信息。
+拷贝三份zookeeper安装包，分别修改其配置文件`zoo.cfg`，主要是修改`dataDir`、`dataLogDir`以及配置集群信息。
 
 如果是多台服务器，则集群中每个节点通讯端口和选举端口可相同，IP地址修改为每个节点所在主机IP即可。
 
@@ -160,7 +160,7 @@ initLimit=10
 syncLimit=5
 dataDir=/usr/local/zookeeper-cluster/data/02
 dataLogDir=/usr/local/zookeeper-cluster/log/02
-clientPort=2181
+clientPort=2182
 
 server.1=127.0.0.1:2287:3387
 server.2=127.0.0.1:2288:3388
@@ -175,7 +175,7 @@ initLimit=10
 syncLimit=5
 dataDir=/usr/local/zookeeper-cluster/data/03
 dataLogDir=/usr/local/zookeeper-cluster/log/03
-clientPort=2181
+clientPort=2183
 
 server.1=127.0.0.1:2287:3387
 server.2=127.0.0.1:2288:3388
