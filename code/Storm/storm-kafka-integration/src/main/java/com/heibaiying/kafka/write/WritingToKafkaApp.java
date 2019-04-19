@@ -14,7 +14,7 @@ import org.apache.storm.topology.TopologyBuilder;
 import java.util.Properties;
 
 /**
- * 写入数据到Kafka的特定主题中
+ * 写入数据到Kafka中
  */
 public class WritingToKafkaApp {
 

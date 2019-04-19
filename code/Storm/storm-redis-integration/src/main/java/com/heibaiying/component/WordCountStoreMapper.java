@@ -5,7 +5,7 @@ import org.apache.storm.redis.common.mapper.RedisStoreMapper;
 import org.apache.storm.tuple.ITuple;
 
 /**
- * 定义流数据与Redis中数据的映射关系
+ * 定义tuple与Redis中数据的映射关系
  */
 public class  WordCountStoreMapper implements RedisStoreMapper {
     private RedisDataTypeDescription description;
