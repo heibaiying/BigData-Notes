@@ -43,7 +43,12 @@
 以下是包含上面三种情况的一个样例命令：
 
 ```shell
-./bin/storm jar example/storm-starter/storm-starter-topologies-*.jar org.apache.storm.starter.RollingTopWords blobstore-remote2 remote --jars "./external/storm-redis/storm-redis-1.1.0.jar,./external/storm-kafka/storm-kafka-1.1.0.jar" --artifacts "redis.clients:jedis:2.9.0,org.apache.kafka:kafka_2.10:0.8.2.2^org.slf4j:slf4j-log4j12" --artifactRepositories "jboss-repository^http://repository.jboss.com/maven2,HDPRepo^http://repo.hortonworks.com/content/groups/public/"
+./bin/storm jar example/storm-starter/storm-starter-topologies-*.jar \
+org.apache.storm.starter.RollingTopWords blobstore-remote2 remote  \
+--jars "./external/storm-redis/storm-redis-1.1.0.jar,./external/storm-kafka/storm-kafka-1.1.0.jar" \
+--artifacts "redis.clients:jedis:2.9.0,org.apache.kafka:kafka_2.10:0.8.2.2^org.slf4j:slf4j-log4j12" \
+--artifactRepositories "jboss-repository^http://repository.jboss.com/maven2, \
+HDPRepo^http://repo.hortonworks.com/content/groups/public/"
 ```
 
 
@@ -92,7 +97,8 @@ maven-assembly-plugin的使用非常简单，只需要在POM.xml中引入即可�
 ```xml
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 
+                              http://maven.apache.org/xsd/assembly-2.0.0.xsd">
     
     <id>jar-with-dependencies</id>
 
@@ -150,7 +156,8 @@ assembly.xml文件内容如下：
 ```xml
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 
+                              http://maven.apache.org/xsd/assembly-2.0.0.xsd">
     
     <id>jar-with-dependencies</id>
 
@@ -259,9 +266,9 @@ RuntimeException异常。
             <configuration>
                 <transformers>
                     <transformer
-                                 implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                       implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                     <transformer
-                                 implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                       implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                     </transformer>
                 </transformers>
             </configuration>
@@ -308,7 +315,10 @@ RuntimeException异常。
 如果你不排除storm-core，通常会抛出下面的异常：
 
 ```properties
-Caused by: java.lang.RuntimeException: java.io.IOException: Found multiple defaults.yaml resources. You're probably bundling the Storm jars with your topology jar. [jar:file:/usr/app/apache-storm-1.2.2/lib/storm-core-1.2.2.jar!/defaults.yaml, jar:file:/usr/appjar/storm-hdfs-integration-1.0.jar!/defaults.yaml]
+Caused by: java.lang.RuntimeException: java.io.IOException: Found multiple defaults.yaml resources.   
+You're probably bundling the Storm jars with your topology jar.   
+[jar:file:/usr/app/apache-storm-1.2.2/lib/storm-core-1.2.2.jar!/defaults.yaml,   
+jar:file:/usr/appjar/storm-hdfs-integration-1.0.jar!/defaults.yaml]
         at org.apache.storm.utils.Utils.findAndReadConfigFile(Utils.java:384)
         at org.apache.storm.utils.Utils.readDefaultConfig(Utils.java:428)
         at org.apache.storm.utils.Utils.readStormConfig(Utils.java:464)
