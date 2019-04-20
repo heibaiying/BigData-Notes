@@ -11,8 +11,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-BaseRichBolt抽象类">4.2 BaseRichBolt抽象类</a><br/>
 <a href="#五词频统计案例">五、词频统计案例</a><br/>
 <a href="#六提交到服务器集群运行">六、提交到服务器集群运行</a><br/>
-<a href="#七通用打包方法">七、通用打包方法</a><br/>
+<a href="#七关于项目打包的扩展说明">七、关于项目打包的扩展说明</a><br/>
 </nav>
+
 
 
 
@@ -219,6 +220,8 @@ public interface IRichBolt extends IBolt, IComponent {
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-word-count-p.png"/> </div>
 
+> 案例源码下载地址：[storm-word-count](https://github.com/heibaiying/BigData-Notes/tree/master/code/Storm/storm-word-count)
+
 ### 5.2 代码实现
 
 #### 1. 项目依赖
@@ -230,8 +233,6 @@ public interface IRichBolt extends IBolt, IComponent {
     <version>1.2.2</version>
 </dependency>
 ```
-
-
 
 #### 2. DataSourceSpout
 
@@ -467,11 +468,11 @@ storm kill ClusterWordCountApp -w 3
 
 
 
-## 七、通用打包方法
+## 七、关于项目打包的扩展说明
 
-### 1. mvn package的局限性
+### mvn package的局限性
 
-上面我们没有在POM中配置任何插件，直接使用`mvn package`进行项目打包，这对于没有使用外部依赖包的项目是可行的。但如果项目中使用了第三方JAR包，就会出现问题，因为`package`打包后的JAR中是不含有依赖包的，如果此时你提交到服务器上运行，就会出现找不到第三方依赖的异常。
+在上面的步骤中，我们没有在POM中配置任何插件，直接使用`mvn package`进行项目打包，这对于没有使用外部依赖包的项目是可行的。但如果项目中使用了第三方JAR包，就会出现问题，因为`package`打包后的JAR中是不含有依赖包的，如果此时你提交到服务器上运行，就会出现找不到第三方依赖的异常。
 
 这时候可能大家会有疑惑，在我们的项目中不是使用了`storm-core`这个依赖吗？其实上面之所以我们能运行成功，是因为在Storm的集群环境中提供了这个JAR包，在安装目录的lib目录下：
 
@@ -500,104 +501,15 @@ private String productData() {
 }
 ```
 
-此时直接使用`mvn clean package`打包上传到服务器运行，就会抛出下图异常。
-
-其实官方文档里面并没有推荐使用这种打包方法，而是网上很多词频统计的Demo使用了。所以在此说明一下：这种打包方式并不适用于实际的开发，因为实际开发中通常都是需要第三方的JAR包的。
+此时直接使用`mvn clean package`打包上传到服务器运行，就会抛出下图异常。所以在此说明一下：这种直接打包的方式并不适用于实际的开发，因为实际开发中通常都是需要第三方的JAR包的。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-package-error.png"/> </div>
 
 
 
-### 2. 官方推荐的的打包方法
+想把依赖包一并打入最后的JAR中，maven提供了两个插件来实现，分别是`maven-assembly-plugin`和`maven-shade-plugin`。鉴于本篇文章篇幅已经比较长，且关于Storm打包还有很多需要说明的地方，所以关于Storm的打包方式单独整理至下一篇文章：
 
->If you're using Maven, the [Maven Assembly Plugin](http://maven.apache.org/plugins/maven-assembly-plugin/) can do the packaging for you. Just add this to your pom.xml:
->
->```xml
->  <plugin>
->    <artifactId>maven-assembly-plugin</artifactId>
->    <configuration>
->      <descriptorRefs>  
->        <descriptorRef>jar-with-dependencies</descriptorRef>
->      </descriptorRefs>
->      <archive>
->        <manifest>
->          <mainClass>com.path.to.main.Class</mainClass>
->        </manifest>
->      </archive>
->    </configuration>
->  </plugin>
->```
->
->Then run mvn assembly:assembly to get an appropriately packaged jar. Make sure you [exclude](http://maven.apache.org/plugins/maven-assembly-plugin/examples/single/including-and-excluding-artifacts.html) the Storm jars since the cluster already has Storm on the classpath.
-
-其实就是两点：
-
-+ 使用maven-assembly-plugin进行打包，因为maven-assembly-plugin会把所有的依赖一并打包到最后的JAR中；
-+ 排除掉Storm集群环境中已经提供的Storm jars。
-
-按照官方文档的说明，修改我们的POM文件，如下：
-
-```xml
-<build>
-    <plugins>
-        <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <configuration>
-                <descriptors>
-                    <descriptor>src/main/resources/assembly.xml</descriptor>
-                </descriptors>
-                <archive>
-                    <manifest>
-                        <mainClass>com.heibaiying.wordcount.ClusterWordCountApp</mainClass>
-                    </manifest>
-                </archive>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
-```
-
-其中`assembly.xml`的文件内容如下：
-
-```xml
-<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
-    
-    <id>jar-with-dependencies</id>
-
-    <!--指明打包方式-->
-    <formats>
-        <format>jar</format>
-    </formats>
-
-    <includeBaseDirectory>false</includeBaseDirectory>
-    <dependencySets>
-        <dependencySet>
-            <outputDirectory>/</outputDirectory>
-            <useProjectArtifact>true</useProjectArtifact>
-            <unpack>true</unpack>
-            <scope>runtime</scope>
-            <!--排除storm环境中已经提供的storm-core-->
-            <excludes>
-                <exclude>org.apache.storm:storm-core</exclude>
-            </excludes>
-        </dependencySet>
-    </dependencySets>
-</assembly>
-```
-
-打包命令为：
-
-```shell
-# mvn clean assembly:assembly -Dmaven.test.skip=true
-```
-
-打包后会同时生成两个JAR包，其中后缀为`jar-with-dependencies`是含有第三方依赖的JAR包，通过压缩工具可以看到内部已经打入了依赖包。另外后缀是由`assembly.xml`中`<id>`标签指定的，你可以自定义修改。提交该JAR到集群环境即可。
-
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-jar.png"/> </div>
-
-
+[Storm三种打包方式对比分析](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm三种打包方式对比分析.md)
 
 ## 参考资料
 

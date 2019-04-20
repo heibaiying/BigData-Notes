@@ -1,8 +1,15 @@
 # Storm集成HDFS和HBase
 
+<nav>
+<a href="#一Storm集成HDFS">一、Storm集成HDFS</a><br/>
+<a href="#二Storm集成HBase">二、Storm集成HBase</a><br/>
+</nav>
+
 ## 一、Storm集成HDFS
 
 ### 1.1 项目结构
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/datasourcetohdfs.png"/> </div>
 
 > 本用例源码下载地址：[storm-hdfs-integration](https://github.com/heibaiying/BigData-Notes/tree/master/code/Storm/storm-hdfs-integration)
 
@@ -211,7 +218,7 @@ hadoop fs -tail -f /strom-hdfs/文件名
 
 
 
-![storm-hdfs-result](D:\BigData-Notes\pictures\storm-hdfs-result.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-hdfs-result.png"/> </div>
 
 
 
@@ -219,7 +226,11 @@ hadoop fs -tail -f /strom-hdfs/文件名
 
 ### 2.1 项目结构
 
-本用例源码下载地址：[storm-hbase-integration](https://github.com/heibaiying/BigData-Notes/tree/master/code/Storm/storm-hbase-integration)
+集成用例： 进行词频统计并将最后的结果存储到HBase，项目主要结构如下：
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/WordCountToHBaseApp.png"/> </div>
+
+> 本用例源码下载地址：[storm-hbase-integration](https://github.com/heibaiying/BigData-Notes/tree/master/code/Storm/storm-hbase-integration)
 
 ### 2.2 项目主要依赖
 
@@ -454,7 +465,7 @@ public class WordCountToHBaseApp {
 hbase >  scan 'WordCount'
 ```
 
-![storm-hbase-result](D:\BigData-Notes\pictures\storm-hbase-result.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-hbase-result.png"/> </div>
 
 
 
@@ -470,3 +481,9 @@ SimpleHBaseMapper mapper = new SimpleHBaseMapper()
         .withColumnFamily("cf");
 ```
 
+
+
+## 参考资料
+
+1. [Apache HDFS Integration](http://storm.apache.org/releases/2.0.0-SNAPSHOT/storm-hdfs.html)
+2. [Apache HBase Integration](http://storm.apache.org/releases/2.0.0-SNAPSHOT/storm-hbase.html)

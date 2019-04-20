@@ -1,14 +1,16 @@
 # Storm 集成 Redis 详解
 
+<nav>
+<a href="#一简介">一、简介</a><br/>
+<a href="#二集成案例">二、集成案例</a><br/>
+<a href="#三storm-redis-实现原理">三、storm-redis 实现原理</a><br/>
+<a href="#四自定义RedisBolt实现词频统计">四、自定义RedisBolt实现词频统计</a><br/>
+</nav>
+
+
 ## 一、简介
 
-storm-redis提供了Storm与Redis的集成支持，你只需要引入对应的依赖即可使用。Storm-redis使用Jedis为Redis客户端，提供了基本的Bolt实现， `RedisLookupBolt` and `RedisStoreBolt`。
-
-+ RedisLookupBolt：从Redis中查询数据；
-+ RedisStoreBolt：存储数据到Redis；
-+ RedisFilterBolt : 查询符合条件的数据；
-
-`RedisLookupBolt`和`RedisStoreBolt`都继承自`AbstractRedisBolt`抽象类，我们也可以继承自该抽象类，然后按照我们自己的的业务逻辑进行功能的拓展。
+storm-redis提供了Storm与Redis的集成支持，你只需要引入对应的依赖即可使用。
 
 ```xml
 <dependency>
@@ -19,9 +21,25 @@ storm-redis提供了Storm与Redis的集成支持，你只需要引入对应的�
 </dependency> 
 ```
 
+Storm-redis使用Jedis为Redis客户端，并提供了如下三个基本的Bolt实现：
+
++ RedisLookupBolt：从Redis中查询数据；
++ RedisStoreBolt：存储数据到Redis；
++ RedisFilterBolt : 查询符合条件的数据；
+
+`RedisLookupBolt`、`RedisStoreBolt`、`RedisFilterBolt `均继承自`AbstractRedisBolt`抽象类。我们可以通过继承该抽象类，进行功能的拓展，实现自定义RedisBolt。
+
+
+
 ## 二、集成案例
 
 ### 2.1 项目结构
+
+这里首先给出一个集成案例：进行词频统计并将最后的结果存储到Redis。项目结构如下：
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-wordcounttoredis.png"/> </div>
+
+> 用例源码下载地址：[storm-redis-integration](https://github.com/heibaiying/BigData-Notes/tree/master/code/Storm/storm-redis-integration)
 
 ### 2.2 项目依赖
 
@@ -176,7 +194,7 @@ public class CountBolt extends BaseRichBolt {
 
 ### 2.6 WordCountStoreMapper
 
-实现RedisStoreMapper，并定义定义tuple与Redis中数据的映射关系，Redis存储的是Key/Value键值对，并且支持多种数据结构，你需要指定tuple中的那个字段为key，那个字段为value，并且存储为什么数据结构。
+实现RedisStoreMapper接口，并定义tuple与Redis中数据的映射关系，Redis中存储的是Key/Value键值对，并且支持多种数据结构，你需要指定tuple中的哪个字段为key，哪个字段为value，并且存储到什么数据结构中。
 
 ```java
 /**
@@ -265,7 +283,7 @@ public class WordCountToRedisApp {
 
 启动后，查看Redis中的数据：
 
-![store-redis-manager](D:\BigData-Notes\pictures\store-redis-manager.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/store-redis-manager.png"/> </div>
 
 
 
@@ -273,11 +291,11 @@ public class WordCountToRedisApp {
 
 ### 3.1 AbstractRedisBolt
 
-`RedisLookupBolt`和`RedisStoreBolt`都继承自`AbstractRedisBolt`抽象类，和我们自定义实现Bolt一样，`AbstractRedisBolt`间接继承自`BaseRichBolt`。
+`RedisLookupBolt`、`RedisStoreBolt`、`RedisFilterBolt `均继承自`AbstractRedisBolt`抽象类，和我们自定义实现Bolt一样，`AbstractRedisBolt`间接继承自`BaseRichBolt`。
 
 
 
-![storm-abstractRedisBolt](D:\BigData-Notes\pictures\storm-abstractRedisBolt.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-abstractRedisBolt.png"/> </div>
 
 `AbstractRedisBolt`中比较重要的是prepare方法，在该方法中通过外部传入的jedis连接池配置( jedisPoolConfig/jedisClusterConfig) 创建用于管理Jedis实例的容器`JedisCommandsInstanceContainer`。
 
@@ -422,13 +440,13 @@ public class RedisStoreBolt extends AbstractRedisBolt {
 
 JedisCommands接口中定义了所有的 Redis 客户端命令，它有以下三个实现类，分别是Jedis、JedisCluster、ShardedJedis。Strom中主要使用前两种实现类，具体调用哪一个实现类来执行命令，由传入的是jedisPoolConfig还是jedisClusterConfig来决定。
 
-![storm-jedicCommands](D:\BigData-Notes\pictures\storm-jedicCommands.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-jedicCommands.png"/> </div>
 
 ### 3.4 RedisMapper 和 TupleMapper
 
 RedisMapper 和 TupleMapper 定义了 tuple 和 Redis 中的数据如何进行映射转换。
 
-![storm-Redis-Mapper](D:\BigData-Notes\pictures\storm-Redis-Mapper.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-Redis-Mapper.png"/> </div>
 
 #### 1. TupleMapper 
 
@@ -517,7 +535,9 @@ public void declareOutputFields(OutputFieldsDeclarer declarer) {
 
 ## 四、自定义RedisBolt实现词频统计
 
-自定义RedisBolt：利用Redis中哈希结构的hincrby key field命令进行词频统计。在Redis中`hincrby`的执行效果如下，如果在执行时字段不存在，则在执行操作之前将值设置为0。通过这个命令可以非常轻松的实现词频统计功能。
+### 4.1 实现原理
+
+自定义RedisBolt：主要利用Redis中哈希结构的hincrby key field命令进行词频统计。在Redis中`hincrby`的执行效果如下，如果在执行时字段不存在，则在执行操作之前将值设置为0。通过这个命令可以非常轻松的实现词频统计功能。
 
 ```shell
 redis>  HSET myhash field 5
@@ -531,7 +551,11 @@ redis>  HINCRBY myhash field -10
 redis> 
 ```
 
-### 4.1 自定义RedisBolt的代码实现
+### 4.2 项目结构
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/CustomRedisCountApp.png"/> </div>
+
+### 4.3 自定义RedisBolt的代码实现
 
 ```java
 /**
@@ -581,7 +605,7 @@ public class RedisCountStoreBolt extends AbstractRedisBolt {
 }
 ```
 
-### 4.2 CustomRedisCountApp
+### 4.4 CustomRedisCountApp
 
 ```java
 /**
@@ -623,3 +647,9 @@ public class CustomRedisCountApp {
     }
 }
 ```
+
+
+
+## 参考资料
+
+1. [Storm Redis Integration](http://storm.apache.org/releases/2.0.0-SNAPSHOT/storm-redis.html)

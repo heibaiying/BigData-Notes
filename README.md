@@ -77,10 +77,10 @@ TODO
 2. [Storm核心概念详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm核心概念详解.md)
 3. [Storm单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Storm%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
 4. [Storm编程模型详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm编程模型详解.md)
-5. Storm整合Redis
-6. Storm整合HDFS/HBase
-7. Storm整合Kafka
-8. Storm Topology的两种打包方式
+5. [Storm项目三种打包方式对比分析](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm三种打包方式对比分析.md)
+6. [Storm集成Redis详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm集成Redis详解.md)
+7. [Storm集成HDFS/HBase](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm集成HBase和HDFS.md)
+8. [Storm集成Kafka](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm集成Kakfa.md)
 
 ## 六、Flume
 
@@ -115,15 +115,18 @@ TODO
 10. [Spring/Spring Boot 整合 Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spring%2BMybtais%2BPhoenix%E6%95%B4%E5%90%88.md)
 ## 十、Kafka
 
-1. Kafka 简介及消息处理过程分析
+1. [Kafka 核心概念介绍](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Kafka核心概念介绍.md)
 2. 基于Zookeeper搭建Kafka高可用集群
-3. Kafka 副本机制以及选举原理剖析
+3. Kafka生产者详解
+4. Kafka消费者详解
+5. Kafka 副本机制以及选举原理剖析
+6. Kafka的数据可靠性
 
 ## 十一、Zookeeper
 
-1. Zookeeper 简介及原理介绍
-2. Zookeeper 集群搭建Zookeeper 
-3. 分布式锁实现方案Zookeeper  
+1. Zookeeper 简介及核心概念
+2. Zookeeper集群搭建Zookeeper 
+3. Zookeeper分布式锁实现方案
 4. 集群升级、迁移深入分析 Zookeeper  
 5. Zab协议及选举机制
 

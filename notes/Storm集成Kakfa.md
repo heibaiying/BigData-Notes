@@ -1,5 +1,12 @@
 # Storm集成Kafka
 
+<nav>
+<a href="#一整合说明">一、整合说明</a><br/>
+<a href="#二写入数据到Kafka">二、写入数据到Kafka</a><br/>
+<a href="#三从Kafka中读取数据">三、从Kafka中读取数据</a><br/>
+</nav>
+
+
 ## 一、整合说明
 
 Storm官方对Kafka的整合分为两个版本，官方说明文档分别如下：
@@ -13,7 +20,7 @@ Storm官方对Kafka的整合分为两个版本，官方说明文档分别如下�
 
 ### 2.1 项目结构
 
-
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/writetokafka.png"/> </div>
 
 ### 2.2 项目主要依赖
 
@@ -159,7 +166,7 @@ public class WritingToKafkaApp {
 
 ### 2.5 测试准备工作
 
-进行测试前需要启动Kakfa。
+进行测试前需要启动Kakfa：
 
 #### 1. 启动Kakfa
 
@@ -173,7 +180,7 @@ bin/zkServer.sh start
 bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
-启动单节点kafka：
+启动单节点kafka用于测试：
 
 ```shell
 # bin/kafka-server-start.sh config/server.properties
@@ -189,7 +196,9 @@ bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 --replication-fac
  bin/kafka-topics.sh --list --bootstrap-server hadoop001:9092
 ```
 
-#### 3. 启动一个消费者用于观察写入情况
+#### 3. 启动消费者
+
+ 启动一个消费者用于观察写入情况，启动命令如下：
 
 ```shell
 # bin/kafka-console-consumer.sh --bootstrap-server hadoop001:9092 --topic storm-topic --from-beginning
@@ -205,7 +214,7 @@ bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 --replication-fac
 
 启动后，消费者监听情况如下：
 
-![strom-kafka-consumer](D:\BigData-Notes\pictures\strom-kafka-consumer.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/strom-kafka-consumer.png"/> </div>
 
 
 
@@ -213,7 +222,7 @@ bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 --replication-fac
 
 ### 3.1 项目结构
 
-
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/readfromkafka.png"/> </div>
 
 ### 3.2  ReadingFromKafkaApp
 
@@ -302,7 +311,9 @@ public class LogConsoleBolt extends BaseRichBolt {
 
 这里从`value`字段中获取kafka输出的值数据。
 
-默认情况下，我们可以通过继承`RecordTranslator`接口定义了Kafka中Record与输出流之间的转换关系，可以在构建`KafkaSpoutConfig`的时候通过构造器或者`setRecordTranslator()`传入，并最后传递给具体的`KafkaSpout`。如果不指定的情况下，则默认使用内置的`DefaultRecordTranslator`，其源码如下，`FIELDS`中 定义了tuple中所有可用的字段：
+在开发中，我们可以通过继承`RecordTranslator`接口定义了Kafka中Record与输出流之间的映射关系，可以在构建`KafkaSpoutConfig`的时候通过构造器或者`setRecordTranslator()`方法传入，并最后传递给具体的`KafkaSpout`。
+
+默认情况下使用内置的`DefaultRecordTranslator`，其源码如下，`FIELDS`中 定义了tuple中所有可用的字段：主题，分区，偏移量，消息键，值。
 
 ```java
 public class DefaultRecordTranslator<K, V> implements RecordTranslator<K, V> {
@@ -337,8 +348,20 @@ public class DefaultRecordTranslator<K, V> implements RecordTranslator<K, V> {
 # bin/kafka-console-producer.sh --broker-list hadoop001:9092 --topic storm-topic
 ```
 
-![storm-kafka-producer](D:\BigData-Notes\pictures\storm-kafka-producer.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-kafka-producer.png"/> </div>
 
 本地运行的项目接收到从Kafka发送过来的数据：
 
-![storm-kafka-receiver](D:\BigData-Notes\pictures\storm-kafka-receiver.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-kafka-receiver.png"/> </div>
+
+
+
+<br>
+
+> 用例源码下载地址：[storm-kafka-integration](https://github.com/heibaiying/BigData-Notes/tree/master/code/Storm/storm-kafka-integration)
+
+
+
+## 参考资料
+
+1. [Storm Kafka Integration (0.10.x+)](http://storm.apache.org/releases/2.0.0-SNAPSHOT/storm-kafka-client.html)

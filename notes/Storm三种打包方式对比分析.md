@@ -1,8 +1,18 @@
-# Storm多种打包方式对比分析
+# Storm三种打包方式对比分析
+
+<nav>
+<a href="#一简介">一、简介</a><br/>
+<a href="#二mvn-package">二、mvn package</a><br/>
+<a href="#三maven-assembly-plugin插件">三、maven-assembly-plugin插件</a><br/>
+<a href="#四maven-shade-plugin插件">四、maven-shade-plugin插件</a><br/>
+<a href="#五结论">五、结论</a><br/>
+<a href="#六打包注意事项">六、打包注意事项</a><br/>
+</nav>
+
 
 ## 一、简介
 
-在将Storm Topology提交到服务器集群进行运行时，需要先将项目进行打包，本文主要对比分析各种打包方式，并将打包过程中需要注意的事项进行说明。主要打包方式有以下三种：
+在将Storm Topology提交到服务器集群进行运行时，需要先将项目进行打包。本文主要对比分析各种打包方式，并将打包过程中需要注意的事项进行说明。主要打包方式有以下三种：
 
 + 第一种：不加任何插件，直接使用mvn package打包；
 + 第二种：使用maven-assembly-plugin插件进行打包；
@@ -30,7 +40,7 @@
 + 如果第三方JAR包在远程中央仓库，可以使用`--artifacts` 指定，此时如果想要排除某些依赖，可以使用 `^` 符号；
 + 如果第三方JAR包在其他仓库，还需要使用 `--artifactRepositories`指明仓库地址，库名和地址使用 `^` 符号分隔。
 
-以下是包含上面三种情况的一个例子：
+以下是包含上面三种情况的一个样例命令：
 
 ```shell
 ./bin/storm jar example/storm-starter/storm-starter-topologies-*.jar org.apache.storm.starter.RollingTopWords blobstore-remote2 remote --jars "./external/storm-redis/storm-redis-1.1.0.jar,./external/storm-kafka/storm-kafka-1.1.0.jar" --artifacts "redis.clients:jedis:2.9.0,org.apache.kafka:kafka_2.10:0.8.2.2^org.slf4j:slf4j-log4j12" --artifactRepositories "jboss-repository^http://repository.jboss.com/maven2,HDPRepo^http://repo.hortonworks.com/content/groups/public/"
@@ -42,7 +52,7 @@
 
 ### 3.1 官方文档说明
 
-maven-assembly-plugin是官方文档中介绍的打包方法，以下表述来源于官方文档：[Running Topologies on a Production Cluster](http://storm.apache.org/releases/2.0.0-SNAPSHOT/Running-topologies-on-a-production-cluster.html)
+maven-assembly-plugin是官方文档中介绍的打包方法，来源于官方文档：[Running Topologies on a Production Cluster](http://storm.apache.org/releases/2.0.0-SNAPSHOT/Running-topologies-on-a-production-cluster.html)
 
 > If you're using Maven, the [Maven Assembly Plugin](http://maven.apache.org/plugins/maven-assembly-plugin/) can do the packaging for you. Just add this to your pom.xml:
 >
@@ -73,9 +83,9 @@ maven-assembly-plugin的使用非常简单，只需要在POM.xml中引入即可�
 
 ### 3.2 排除Storm jars
 
-这里说明一下，`jar-with-dependencies`是Maven官方内置的一种打包格式，Maven官方文档[Pre-defined Descriptor Files](http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html)中有所说明：
+`jar-with-dependencies`是Maven官方内置的一种打包格式，Maven官方文档[Pre-defined Descriptor Files](http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html)中有所说明：
 
-![jar-with-dependencies](D:\BigData-Notes\pictures\jar-with-dependencies.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/jar-with-dependencies.png"/> </div>
 
 如果你想排除某个依赖，这里以排除`storm-core`为例，你可以在`jar-with-dependencies`的XML上进行修改。
 
@@ -167,7 +177,7 @@ assembly.xml文件内容如下：
 
 >在配置文件中不仅可以排除依赖，还可以排除指定的文件，更多的配置规则可以参考官方文档：[Descriptor Format](http://maven.apache.org/plugins/maven-assembly-plugin/assembly.html#)
 
-#### 2. 打包命令
+#### 2.  打包命令
 
 采用maven-assembly-plugin进行打包时命令如下：
 
@@ -177,7 +187,7 @@ assembly.xml文件内容如下：
 
 打包后会同时生成两个JAR包，其中后缀为`jar-with-dependencies`是含有第三方依赖的JAR包，后缀是由`assembly.xml`中`<id>`标签指定的，可以自定义修改。提交该JAR到集群环境即可直接使用。
 
-![storm-jar](D:\BigData-Notes\pictures\storm-jar.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-jar.png"/> </div>
 
 
 
@@ -205,11 +215,11 @@ assembly.xml文件内容如下：
 
 RuntimeException异常。
 
-采用maven-shade-plugin有很多好处，比如你的工程依赖很多的JAR包，而被依赖的JAR又会依赖其他的JAR包，这样,当工程中依赖到不同的版本的 JAR时，并且JAR中具有相同名称的资源文件时，shade插件会尝试将所有资源文件打包在一起时，而不是和assembly一样执行覆盖操作。
+采用maven-shade-plugin打包有很多好处，比如你的工程依赖很多的JAR包，而被依赖的JAR又会依赖其他的JAR包，这样,当工程中依赖到不同的版本的 JAR时，并且JAR中具有相同名称的资源文件时，shade插件会尝试将所有资源文件打包在一起时，而不是和assembly一样执行覆盖操作。
 
 ### 4.2 配置
 
-配置示例如下：
+采用`maven-shade-plugin`进行打包时候，配置示例如下：
 
 ```xml
 <plugin>
@@ -260,9 +270,9 @@ RuntimeException异常。
 </plugin>
 ```
 
-配置说明：
+以上配置示例来源于Storm在Github上的examples，这里做一下说明：
 
-有些jar包生成时，会使用jarsigner生成文件签名（完成性校验），分为两个文件存放在META-INF目录下。
+在上面的配置中，排除了部分文件，这是因为有些JAR包生成时，会使用jarsigner生成文件签名（完成性校验），分为两个文件存放在META-INF目录下：
 
 + a signature file, with a .SF extension；
 + a signature block file, with a .DSA, .RSA, or .EC extension；
@@ -279,7 +289,7 @@ RuntimeException异常。
 
 打包后会生成两个JAR包，提交到服务器集群时使用非original开头的JAR.
 
-![storm-jar2](D:\BigData-Notes\pictures\storm-jar2.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-jar2.png"/> </div>
 
 ## 五、结论
 
@@ -291,7 +301,7 @@ RuntimeException异常。
 
 无论采用任何打包方式，都必须排除集群环境中已经提供的storm jars。这里比较典型的是storm-core，其在安装目录的lib目录下已经存在。
 
-![storm-lib](D:\BigData-Notes\pictures\storm-lib.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-lib.png"/> </div>
 
 
 
@@ -306,4 +316,5 @@ Caused by: java.lang.RuntimeException: java.io.IOException: Found multiple defau
         ... 39 more
 ```
 
-![storm-jar-complie-error](D:\BigData-Notes\pictures\storm-jar-complie-error.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-jar-complie-error.png"/> </div>
+
