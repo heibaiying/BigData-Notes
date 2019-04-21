@@ -680,7 +680,7 @@ public class HBaseUtils {
 
 在上面的代码中在类加载时候就初始化了Connection连接，并且之后的方法都是复用这个Connection，这时我们可能会考虑是否可以使用自定义连接池来获取更好的性能表现？实际上这是没有必要的。
 
-首先官方对于`Connection Pooling`做了如下表述：
+首先官方对于`Connection`做了如下表述：
 
 ```properties
 Connection Pooling For applications which require high-end multithreaded   
