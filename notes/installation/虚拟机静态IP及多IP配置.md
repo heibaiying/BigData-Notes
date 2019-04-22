@@ -46,7 +46,7 @@ ONBOOT=yes
 修改后完整配置如下：
 
 ```properties
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/virtualbox-multi-network.png"/> </div>TYPE=Ethernet
+TYPE=Ethernet
 PROXY_METHOD=none
 BROWSER_ONLY=no
 BOOTPROTO=static
@@ -102,7 +102,7 @@ ONBOOT=yes
 
 静态IP配置方法如上，这里不再赘述。除了静态IP参数外，以下三个参数还需要修改，UUID必须与`ifcfg-enp0s3`中的不一样：
 
-```shell
+```properties
 NAME=enp0s8
 UUID=03d45df1-8514-4774-9b47-fddd6b9d9fcb
 DEVICE=enp0s8
