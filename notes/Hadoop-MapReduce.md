@@ -110,6 +110,8 @@ Merge是怎样的？如“aaa”从某个map task读取过来时值是5，从另
 
 ## 四、MapReduce 词频统计案例
 
+> 源码下载地址：[hadoop-word-count](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hadoop/hadoop-word-count)
+
 ### 4.1 项目简介
 
 这里给出一个经典的案例:词频统计。统计如下样本数据中每个单词出现的次数。
@@ -132,12 +134,8 @@ HBase	Hive
 
 为方便大家开发，我在项目源码中放置了一个工具类`WordCountDataUtils`，用于产生词频统计样本文件：
 
-> 本篇文章所有源码下载地址：[hadoop-word-count](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hadoop/hadoop-word-count)
 
 ```java
-/**
- * 产生词频统计模拟数据
- */
 public class WordCountDataUtils {
 
     public static final List<String> WORD_LIST = Arrays.asList("Spark", "Hadoop", "HBase", 
@@ -231,7 +229,6 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritabl
 }
 ```
 
-**代码说明**：
 
 WordCountMapper对应下图的Mapping操作，这里WordCountMapper继承自Mapper类，这是一个泛型类，定义如下：
 
@@ -269,8 +266,6 @@ public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritab
     }
 }
 ```
-
-**代码说明**：
 
 这里的key是每个单词，这里的values是一个可迭代的数据类型，因为shuffling输出的数据实际上是下图中所示的这样的，即`key，(1,1,1,1,1,1,1,.....)`。
 
