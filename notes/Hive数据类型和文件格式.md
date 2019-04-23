@@ -19,7 +19,7 @@ Hive表中的列支持以下基本数据类型：
 | **Floating point numbers（浮点型）**    | FLOAT— 单精度浮点型 <br/>DOUBLE—双精度浮点型                 |
 | **Fixed point numbers（定点数）**       | DECIMAL—用户自定义精度定点数，比如2.4，3.68                  |
 | **String types（字符串）**              | STRING—指定字符集的字符序列<br/> VARCHAR—具有最大长度限制的字符序列 <br/>CHAR—固定长度的字符序列 |
-| **Date and time types<br/>（日期时间类型）** | TIMESTAMP —  时间戳 <br/>TIMESTAMP WITH LOCAL TIME ZONE — 时间戳，纳秒精度 <br/>DATE—日期类型 |
+| **Date and time types（日期时间类型）** | TIMESTAMP —  时间戳 <br/>TIMESTAMP WITH LOCAL TIME ZONE — 时间戳，纳秒精度<br/> DATE—日期类型 |
 | **Binary types（二进制类型）**          | BINARY—字节序列                                              |
 
 >TIMESTAMP 和 TIMESTAMP WITH LOCAL TIME ZONE 的区别：
