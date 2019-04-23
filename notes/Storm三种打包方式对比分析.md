@@ -328,3 +328,8 @@ jar:file:/usr/appjar/storm-hdfs-integration-1.0.jar!/defaults.yaml]
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-jar-complie-error.png"/> </div>
 
+
+
+## 参考资料
+
+关于maven-shade-plugin的更多配置可以参考： [maven-shade-plugin 入门指南](https://www.jianshu.com/p/7a0e20b30401)

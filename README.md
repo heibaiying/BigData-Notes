@@ -54,11 +54,18 @@
 3. [集群资源管理器——YARN](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-YARN.md)
 4. [Hadoop单机伪集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/hadoop%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
 5. [HDFS常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/HDFS常用Shell命令.md)
+6. HDFS Java API详解
 
 ## 二、Hive
 
 1. [数据仓库Hive](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive.md)
 2. [Linux环境下Hive的安装部署](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux%E7%8E%AF%E5%A2%83%E4%B8%8BHive%E7%9A%84%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2.md)
+3. Hive shell基本使用
+4. Hive 数据类型和文件格式
+5. Hive 常用 DDL操作
+6. Hive 数据查询
+7. Hive 视图和索引
+8. Hive 模式设计
 
 ## 三、Spark
 
