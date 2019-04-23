@@ -109,7 +109,7 @@ Hive会在HDFS为每个数据库上创建一个目录，数据库中的表是该
 
 通常在创建表的时候使用`STORED AS`参数指定：
 
-```shell
+```sql
 CREATE TABLE page_view(viewTime INT, userid BIGINT)
  ROW FORMAT DELIMITED
    FIELDS TERMINATED BY '\001'
