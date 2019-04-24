@@ -187,6 +187,6 @@ HDFS的设计便于从一个平台移植到另一个平台。这有助于HDFS作
 ## 参考资料
 
 1. [Apache Hadoop 2.9.2 > HDFS Architecture](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html)
-2. Tom White. hadoop权威指南 [M]. 清华大学出版社, 2017.
+2. Tom White . hadoop权威指南 [M] . 清华大学出版社 . 2017.
 3. [翻译经典 HDFS 原理讲解漫画](https://blog.csdn.net/hudiefenmu/article/details/37655491)
 
