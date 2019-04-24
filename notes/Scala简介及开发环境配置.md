@@ -61,7 +61,7 @@ Scala拥有非常先进的静态类型系统，Scala不仅拥有与Java类似的
 
 首先需要安装Scala插件，使得IDEA支持scala语言的开发。打开 IDEA，依次点击**File** => **settings**=> **plugins**选项卡，搜索Scala插件(如下图)。找到插件后进行安装，并重启IDEA使得安装生效。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-plugin.png"/> </div>
+<div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-plugin.png"/> </div>
 
 
 
@@ -69,7 +69,7 @@ Scala拥有非常先进的静态类型系统，Scala不仅拥有与Java类似的
 
 在IDEA中依次点击 **File** => **New** => **Project**选项卡，然后选择创建Scala—IDEA工程：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-newproject-scala.png"/> </div>
+<div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-newproject-scala.png"/> </div>
 
 
 
@@ -79,7 +79,7 @@ Scala拥有非常先进的静态类型系统，Scala不仅拥有与Java类似的
 
 此时看到Scala SDK为空，依次点击`Create` => `Download` ,选择所需的版本后，点击`OK`按钮进行下载，下载完成点击`Finish`进入工程。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-select.png"/> </div>
+<div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-select.png"/> </div>
 
 
 
@@ -91,13 +91,13 @@ Scala拥有非常先进的静态类型系统，Scala不仅拥有与Java类似的
 
 这里我的系统是Windows，下载msi版本的安装包后，一直点击下一步安装即可，安装完成后会自动配置好环境变量。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-other-resources.png"/> </div>
+<div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-other-resources.png"/> </div>
 
 
 
 由于安装时已经自动配置好环境变量，所以IDEA会自动选择对应版本的SDK。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-2.1.8.png"/> </div>
+<div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-2.1.8.png"/> </div>
 
 
 
@@ -105,7 +105,7 @@ Scala拥有非常先进的静态类型系统，Scala不仅拥有与Java类似的
 
 在工程 `src`目录上右击**New** => **Scala class**.创建`Hello.scala`。输入代码如下，完成后点击运行按钮，成功运行则代表搭建成功。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-hello-world.png"/> </div>
+<div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-hello-world.png"/> </div>
 
 
 
@@ -115,7 +115,7 @@ Scala拥有非常先进的静态类型系统，Scala不仅拥有与Java类似的
 
 在日常的开发中，由于对应软件（如spark）的版本切换，可能导致需要切换Scala的版本，则可以在`Project Structures`中的`Global Libraries`选项卡中进行切换。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-change.png"/> </div>
+<div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-change.png"/> </div>
 
 
 
@@ -125,7 +125,7 @@ Scala拥有非常先进的静态类型系统，Scala不仅拥有与Java类似的
 
 采用msi方式安装，程序会自动配置好环境变量。此时直接可以使用命令行工具：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-shell.png"/> </div>
+<div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-shell.png"/> </div>
 
 
 
