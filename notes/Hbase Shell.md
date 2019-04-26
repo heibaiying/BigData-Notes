@@ -15,9 +15,9 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-添加列族">3.1 添加列族</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-删除列族">3.2 删除列族</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-更改列族存储版本的限制">3.3 更改列族存储版本的限制</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-插入数据">3.3 插入数据</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-获取指定行指定行中的列族列的信息">3.4 获取指定行、指定行中的列族、列的信息</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-删除指定行指定行中的列">3.5 删除指定行、指定行中的列</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-插入数据">3.4 插入数据</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-获取指定行指定行中的列族列的信息">3.5 获取指定行、指定行中的列族、列的信息</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#36-删除指定行指定行中的列">3.6 删除指定行、指定行中的列</a><br/>
 <a href="#四查询">四、查询</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41Get查询">4.1Get查询</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-查询整表数据">4.2 查询整表数据</a><br/>
@@ -142,7 +142,7 @@ alter 'Student', {NAME => 'teacherInfo', METHOD => 'delete'}
 alter 'Student',{NAME=>'baseInfo',VERSIONS=>3}
 ```
 
-#### 3.3 插入数据
+#### 3.4 插入数据
 
  **命令格式**：put '表名', '行键','列族:列','值'
 
@@ -170,7 +170,7 @@ put 'Student', 'rowkey3','schoolInfo:localtion','New Haven'
 put 'Student', 'wrowkey4','baseInfo:name','maike-jack'
 ```
 
-#### 3.4 获取指定行、指定行中的列族、列的信息
+#### 3.5 获取指定行、指定行中的列族、列的信息
 
 ```shell
 # 获取指定行中所有列的数据信息
@@ -181,7 +181,7 @@ get 'Student','rowkey3','baseInfo'
 get 'Student','rowkey3','baseInfo:name'
 ```
 
-#### 3.5 删除指定行、指定行中的列
+#### 3.6 删除指定行、指定行中的列
 
 ```shell
 # 删除指定行
