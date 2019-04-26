@@ -19,7 +19,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-获取指定行指定行中的列族列的信息">3.4 获取指定行、指定行中的列族、列的信息</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-删除指定行指定行中的列">3.5 删除指定行、指定行中的列</a><br/>
 <a href="#四查询">四、查询</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41Get查询">4.1Get查询</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41Get查询">4.1Get查询</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-查询整表数据">4.2 查询整表数据</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-查询指定列簇的数据">4.3 查询指定列簇的数据</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#44--条件查询">4.4  条件查询</a><br/>
