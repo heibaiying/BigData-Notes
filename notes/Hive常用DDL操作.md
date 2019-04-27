@@ -59,8 +59,9 @@ DESC DATABASE  EXTENDED hive_test;
 
 ```sql
 DROP (DATABASE|SCHEMA) [IF EXISTS] database_name [RESTRICT|CASCADE];
---默认行为是RESTRICT，如果数据库中存在表则删除失败。要想删除库及其中的表，可以使用CASCADE级联删除。
 ```
+
++ 默认行为是RESTRICT，如果数据库中存在表则删除失败。要想删除库及其中的表，可以使用CASCADE级联删除。
 
 示例：
 
@@ -156,14 +157,16 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name     --�
     mgr INT,
     hiredate TIMESTAMP,
     sal DECIMAL(7,2),
-    comm DECIMAL(7,2)
-    )
+    comm DECIMAL(7,2),
+    deptno INT)
     CLUSTERED BY(empno) SORTED BY(empno ASC) INTO 4 BUCKETS  --按照员工编号散列到四个bucket中
     ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t"
     LOCATION '/hive/emp_bucket';
 ```
 
 ### 2.6 倾斜表
+
+通过指定一个或者多个列经常出现的值（严重偏斜），Hive会自动将涉及到这些值的数据拆分为单独的文件。在查询时，如果涉及到倾斜值，它就直接从独立文件中获取数据，而不是扫描所有文件，这使得性能得到提升。
 
 ```sql
   CREATE EXTERNAL TABLE emp_skewed(
@@ -175,7 +178,7 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name     --�
     sal DECIMAL(7,2),
     comm DECIMAL(7,2)
     )
-    SKEWED BY (empno) ON (66,88,100)  --指定数据倾斜
+    SKEWED BY (empno) ON (66,88,100)  --指定empno的倾斜值66,88,100
     ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t"
     LOCATION '/hive/emp_skewed';   
 ```
@@ -314,5 +317,106 @@ ALTER TABLE emp_temp ADD COLUMNS (address STRING COMMENT 'home address');
 
 
 
-### 3.4 修改分区
+## 四、清空表/删除表
+
+### 4.1 清空表
+
+语法：
+
+```sql
+-- 清空整个表或表指定分区中的数据
+TRUNCATE TABLE table_name [PARTITION (partition_column = partition_col_value, partition_column = partition_col_value, ...)];
+```
+
++ 目前只有内部表才能执行TRUNCATE操作，外部表执行时会抛出异常`Cannot truncate non-managed table XXXX`。
+
+示例：
+
+```sql
+TRUNCATE TABLE emp_mgt_ptn PARTITION (deptno=20);
+```
+
+
+
+### 4.2 删除表
+
+语法：
+
+```sql
+DROP TABLE [IF EXISTS] table_name [PURGE]; 
+```
+
++ 内部表：不仅会删除表的元数据，同时会删除HDFS上的数据；
++ 外部表：只会删除表的元数据，不会删除HDFS上的数据；
++ 删除视图引用的表时，不会给出警告（但视图已经无效了，必须由用户删除或重新创建）。
+
+示例：
+
+```sql
+`DROP TABLE [IF EXISTS] table_name [PURGE]; `
+```
+
+
+
+## 五、其他命令
+
+### 5.1 Describe
+
+查看数据库：
+
+```sql
+DESCRIBE|Desc DATABASE [EXTENDED] db_name;  --EXTENDED 是否显示额外属性
+```
+
+查看表：
+
+```sql
+DESCRIBE|Desc [EXTENDED|FORMATTED] table_name --FORMATTED 以友好的展现方式查看表详情
+```
+
+
+
+### 5.2 Show
+
+**1. 查看数据库列表**
+
+```sql
+-- 语法
+SHOW (DATABASES|SCHEMAS) [LIKE 'identifier_with_wildcards'];
+
+-- 示例：
+SHOW DATABASES like 'hive*';
+```
+
+LIKE子句允许使用正则表达式进行过滤，Show语句当中的LIKE子句只支持`*`（通配符）和`|`（条件或）两个符号。例如'employees'，'emp *'，'emp * | * ees'，所有这些都将匹配名为'employees'的数据库。
+
+**2. 查看表的列表**
+
+```sql
+-- 语法
+SHOW TABLES [IN database_name] ['identifier_with_wildcards'];
+
+-- 示例
+SHOW TABLES IN default;
+```
+
+**3. 查看视图列表**
+
+```sql
+SHOW VIEWS [IN/FROM database_name] [LIKE 'pattern_with_wildcards'];   --仅支持Hive 2.2.0 +
+```
+
+**4. 查看表的分区列表**
+
+```sql
+SHOW PARTITIONS table_name;
+```
+
+**5. 查看表/视图的创建语句**
+
+```sql
+SHOW CREATE TABLE ([db_name.]table_name|view_name);
+```
+
+
 

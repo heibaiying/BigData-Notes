@@ -1,4 +1,4 @@
-# Hive数据类型和文件格式
+# Hive基本概念讲解
 
 <nav>
 <a href="#一数据类型">一、数据类型</a><br/>
@@ -62,7 +62,7 @@ CREATE TABLE students(
 
 
 
-## 二、文件格式
+## 二、内容格式
 
 当数据存储在文本文件中，必须按照一定格式区别行和列，比如使用逗号作为分隔符的CSV文件(Comma-Separated Values)或者使用制表符作为分隔值的TSV文件(Tab-Separated Values)。但是使用这些字符作为分隔符的时候存在一个缺点，就是正常的文件内容中也可能出现逗号或者制表符。
 
@@ -134,8 +134,21 @@ CREATE TABLE page_view(viewTime INT, userid BIGINT)
 
 
 
+## 四、内部表和外部表
+
+内部表又叫做管理表(Managed/Internal Table)，创建表时不做任何指定，默认创建的就是内部表。想要创建外部表(External Table)，则需要使用External进行修饰。 内部表和外部表主要区别如下：
+
+|              | 内部表                                                       | 外部表                                                       |
+| ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 数据存储位置 | 内部表数据存储的位置由hive.metastore.warehouse.dir参数指定，默认情况下表的数据存储在HDFS的`/user/hive/warehouse/数据库名.db/表名/`  目录下 | 外部表数据的存储位置创建表时由`Location`参数指定；           |
+| 导入数据     | 在导入数据到内部表，内部表将数据移动到自己的数据仓库目录下，数据的生命周期由Hive来进行管理 | 外部表不会将数据移动到自己的数据仓库目录下，只是在元数据中存储了数据的位置 |
+| 删除表       | 删除元数据（metadata）和文件                                 | 只删除元数据（metadata）                                     |
+
+
+
 
 ## 参考文档
 
 1. [LanguageManual DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL)
 2. [LanguageManual Types](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types)
+3. [Managed vs. External Tables](https://cwiki.apache.org/confluence/display/Hive/Managed+vs.+External+Tables)
