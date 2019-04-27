@@ -189,7 +189,7 @@ alter index emp_index on emp rebuild;
 
 Hive会启动MapReduce作业去建立索引，建立好后查看索引表数据如下。三个表字段分别代表：索引列的值、该值对应的HDFS文件路径、该值在文件中的偏移量。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-index-table.png"/> </div>
+<div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-index-table.png"/> </div>
 
 ### 3.3 自动使用索引
 
