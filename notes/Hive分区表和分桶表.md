@@ -79,7 +79,7 @@ LOAD DATA LOCAL INPATH "/usr/file/emp30.txt" OVERWRITE INTO TABLE emp_partition 
 
 在HashMap中，当我们给put()方法传递键和值时，我们先对键调用hashCode()方法，返回的hashCode用于找到bucket(桶)位置，最后将键值对存储在对应桶的链表结构中，链表达到一定阈值后会转换为红黑树(JDK1.8+)。下图为HashMap的数据结构图：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HashMap-HashTable.png"/> </div>
+<div align="center"> <img width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HashMap-HashTable.png"/> </div>
 
 > 图片引用自：[HashMap vs. Hashtable](http://www.itcuties.com/java/hashmap-hashtable/)
 
@@ -113,9 +113,6 @@ LOAD DATA LOCAL INPATH "/usr/file/emp30.txt" OVERWRITE INTO TABLE emp_partition 
 ```sql
 set hive.enforce.bucketing = true; --Hive 2.x不需要这一步
 ```
-
-需要在插入分桶的时候hash, **也就是说向分桶表中插入数据的时候必然要执行一次MAPREDUCE,**
-
 在Hive 0.x and 1.x版本，必须使用设置`hive.enforce.bucketing = true`，表示强制分桶，允许程序根据表结构自动选择正确数量的Reducer和cluster by  column来进行分桶。
 
 #### 2. CTAS导入数据
