@@ -2,24 +2,8 @@
 
 <nav>
 <a href="#一视图">一、视图</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-简介">1.1 简介</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-创建视图">1.2 创建视图</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-查看视图">1.3 查看视图</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-删除视图">1.4 删除视图</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-修改视图">1.5 修改视图</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-修改视图属性">1.6 修改视图属性</a><br/>
 <a href="#二索引">二、索引</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-简介">2.1 简介</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-索引原理">2.2 索引原理</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-创建索引">2.3 创建索引</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-查看索引">2.4 查看索引</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-删除索引">2.4 删除索引</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-重建索引">2.5 重建索引</a><br/>
 <a href="#三索引案例">三、索引案例</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-创建索引">3.1 创建索引</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-重建索引">3.2 重建索引</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-自动使用索引">3.3 自动使用索引</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-查看索引">3.4 查看索引</a><br/>
 <a href="#四索引的缺陷">四、索引的缺陷</a><br/>
 </nav>
 
@@ -111,7 +95,7 @@ table_properties:
 ALTER VIEW custom_view SET TBLPROPERTIES ('create'='heibaiying','date'='2019-05-05');
 ```
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-view-properties.png"/> </div>
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-view-properties.png"/> </div>
 
 
 
@@ -205,7 +189,7 @@ alter index emp_index on emp rebuild;
 
 Hive会启动MapReduce作业去建立索引，建立好后查看索引表数据如下。三个表字段分别代表：索引列的值、该值对应的HDFS文件路径、该值在文件中的偏移量。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-index-table.png"/> </div>
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-index-table.png"/> </div>
 
 ### 3.3 自动使用索引
 
@@ -238,7 +222,7 @@ SHOW INDEX ON emp;
 - 具有自动重写的物化视图(Materialized View)可以产生与索引相似的效果（Hive 2.3.0增加了对物化视图的支持，在3.0之后正式引入）。
 - 使用列式存储文件格式（Parquet，ORC）进行存储时，这些格式支持选择性扫描，可以跳过不需要的文件或块。
 
-> 对ORC内置的索引功能感兴趣的话可以参阅这篇文章：[Hive性能优化之ORC索引–Row Group Index vs Bloom Filter Index](http://lxw1234.com/archives/2016/04/632.htm)
+> ORC内置的索引功能可以参阅这篇文章：[Hive性能优化之ORC索引–Row Group Index vs Bloom Filter Index](http://lxw1234.com/archives/2016/04/632.htm)
 
 
 
