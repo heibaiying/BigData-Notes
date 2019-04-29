@@ -33,7 +33,7 @@
 
 为了演示查询操作，这里需要预先创建两张表，并加载数据。
 
-> 这里的表结构主要参考自Oracle内置的练习表——emp表和dept表，涉及到数据文件emp.txt和dept.txt可以在本仓库的sources目录下下载。
+> 用例表结构参考自Oracle内置练习表——emp和dept，数据文件emp.txt和dept.txt可以从本仓库的resources目录下载。
 
 ### 1.1 员工表
 
