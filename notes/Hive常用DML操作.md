@@ -75,11 +75,11 @@ LOAD DATA  INPATH "hdfs://hadoop001:8020/mydir/emp.txt" OVERWRITE INTO TABLE emp
 ### 2.1 语法
 
 ```sql
-INSERT OVERWRITE TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...)
-                                   [IF NOT EXISTS]] select_statement1 FROM from_statement;
+INSERT OVERWRITE TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...) [IF NOT EXISTS]]   
+select_statement1 FROM from_statement;
 
 INSERT INTO TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...)] 
-									select_statement1 FROM from_statement;
+select_statement1 FROM from_statement;
 ```
 
 + Hive 0.13.0开始，建表时可以通过使用TBLPROPERTIES（“immutable”=“true”）来创建不可变表(immutable table) ，如果不可以变表中存在数据，则INSERT INTO失败。（注：INSERT OVERWRITE的语句不受`immutable`属性的影响）;
@@ -210,40 +210,39 @@ DELETE FROM tablename [WHERE expression]
 
 1.  首先需要更改`hive-site.xml`，添加如下配置，开启事务支持，配置完成后需要重启Hive服务。
 
-   ```xml
-   <property>
-       <name>hive.support.concurrency</name>
-       <value>true</value>
-   </property>
-   <property>
-       <name>hive.enforce.bucketing</name>
-       <value>true</value>
-   </property>
-   <property>
-       <name>hive.exec.dynamic.partition.mode</name>
-       <value>nonstrict</value>
-   </property>
-   <property>
-       <name>hive.txn.manager</name>
-       <value>org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</value>
-   </property>
-   <property>
-       <name>hive.compactor.initiator.on</name>
-       <value>true</value>
-   </property>
-   <property>
-       <name>hive.in.test</name>
-       <value>true</value>
-   </property>
-   ```
+       ```xml
+	   <property>
+	       <name>hive.support.concurrency</name>
+	       <value>true</value>
+	   </property>
+	   <property>
+	       <name>hive.enforce.bucketing</name>
+	       <value>true</value>
+	   </property>
+	   <property>
+	       <name>hive.exec.dynamic.partition.mode</name>
+	       <value>nonstrict</value>
+	   </property>
+	   <property>
+	       <name>hive.txn.manager</name>
+	       <value>org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</value>
+	   </property>
+	   <property>
+	       <name>hive.compactor.initiator.on</name>
+	       <value>true</value>
+	   </property>
+	   <property>
+	       <name>hive.in.test</name>
+	       <value>true</value>
+	   </property>
+      ```
 
 2. 创建用于测试的事务表，建表时候指定属性`transactional = true`则代表该表是事务表。需要注意的是，按照[官方文档](https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions)的说明，目前Hive中的事务表有以下限制：
       + 必须是buckets Table;
       + 仅支持ORC文件格式；
-      + 不支持LOAD DATA ...语句。
+      + 不支持LOAD DATA ...语句。  
       
       ```sql
-      -- 建表语句
       CREATE TABLE emp_ts(  
         empno int,  
         ename String
