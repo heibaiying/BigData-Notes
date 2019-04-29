@@ -75,11 +75,11 @@ LOAD DATA  INPATH "hdfs://hadoop001:8020/mydir/emp.txt" OVERWRITE INTO TABLE emp
 ### 2.1 语法
 
 ```sql
-INSERT OVERWRITE TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...)
-                                   [IF NOT EXISTS]] select_statement1 FROM from_statement;
+INSERT OVERWRITE TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...) [IF NOT EXISTS]]   
+select_statement1 FROM from_statement;
 
 INSERT INTO TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...)] 
-									select_statement1 FROM from_statement;
+select_statement1 FROM from_statement;
 ```
 
 + Hive 0.13.0开始，建表时可以通过使用TBLPROPERTIES（“immutable”=“true”）来创建不可变表(immutable table) ，如果不可以变表中存在数据，则INSERT INTO失败。（注：INSERT OVERWRITE的语句不受`immutable`属性的影响）;
@@ -279,9 +279,6 @@ DELETE FROM emp_ts WHERE empno=2;
 更新和删除数据依靠的也是MapReduce作业，执行成功后数据如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-ts-2.png"/> </div>
-
-
-
 
 
 ## 五、查询结果写出到文件系统
