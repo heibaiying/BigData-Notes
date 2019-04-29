@@ -16,7 +16,8 @@
 将文件数据加载到表时，Hive不会进行任何转换，加载操作是纯复制/移动操作，它将数据文件移动到Hive表定义的存储位置。
 
 ```shell
-LOAD DATA [LOCAL] INPATH 'filepath' [OVERWRITE] INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
+LOAD DATA [LOCAL] INPATH 'filepath' [OVERWRITE] 
+INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
 ```
 
 - Load 关键字代表从本地文件系统加载文件，省略则代表从HDFS上加载文件：
@@ -74,8 +75,11 @@ LOAD DATA  INPATH "hdfs://hadoop001:8020/mydir/emp.txt" OVERWRITE INTO TABLE emp
 ### 2.1 语法
 
 ```sql
-INSERT OVERWRITE TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...) [IF NOT EXISTS]] select_statement1 FROM from_statement;
-INSERT INTO TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...)] select_statement1 FROM from_statement;
+INSERT OVERWRITE TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...)
+                                   [IF NOT EXISTS]] select_statement1 FROM from_statement;
+
+INSERT INTO TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...)] 
+									select_statement1 FROM from_statement;
 ```
 
 + Hive 0.13.0开始，建表时可以通过使用TBLPROPERTIES（“immutable”=“true”）来创建不可变表(immutable table) ，如果不可以变表中存在数据，则INSERT INTO失败。（注：INSERT OVERWRITE的语句不受`immutable`属性的影响）;
@@ -90,7 +94,8 @@ INSERT INTO TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...)] sele
 
   ```sql
   FROM from_statement
-  INSERT OVERWRITE TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...) [IF NOT EXISTS]] select_statement1
+  INSERT OVERWRITE TABLE tablename1 
+  [PARTITION (partcol1=val1, partcol2=val2 ...) [IF NOT EXISTS]] select_statement1
   [INSERT OVERWRITE TABLE tablename2 [PARTITION ... [IF NOT EXISTS]] select_statement2]
   [INSERT INTO TABLE tablename2 [PARTITION ...] select_statement2] ...;
   ```
@@ -98,8 +103,11 @@ INSERT INTO TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...)] sele
 ### 2.2 动态插入分区
 
 ```sql
-INSERT OVERWRITE TABLE tablename PARTITION (partcol1[=val1], partcol2[=val2] ...) select_statement FROM from_statement;
-INSERT INTO TABLE tablename PARTITION (partcol1[=val1], partcol2[=val2] ...) select_statement FROM from_statement;
+INSERT OVERWRITE TABLE tablename PARTITION (partcol1[=val1], partcol2[=val2] ...) 
+select_statement FROM from_statement;
+
+INSERT INTO TABLE tablename PARTITION (partcol1[=val1], partcol2[=val2] ...) 
+select_statement FROM from_statement;
 ```
 
 在向分区表插入数据时候，分区列名是必须的，但是列值是可选的。如果给出了分区列值，我们将其称为静态分区，否则它是动态分区。动态分区列必须在SELECT语句的列中最后指定，并且与它们在PARTITION()子句中出现的顺序相同。
@@ -146,7 +154,8 @@ TRUNCATE TABLE emp_ptn;
 3. 静态分区演示：从`emp`表中查询部门编号为20的员工数据，并插入`emp_ptn`表中，语句如下：
 
 ```sql
-INSERT OVERWRITE TABLE emp_ptn PARTITION (deptno=20) SELECT empno,ename,job,mgr,hiredate,sal,comm FROM emp WHERE deptno=20;
+INSERT OVERWRITE TABLE emp_ptn PARTITION (deptno=20) 
+SELECT empno,ename,job,mgr,hiredate,sal,comm FROM emp WHERE deptno=20;
 ```
 
 ​	完成后`emp_ptn`表中数据如下：
@@ -160,7 +169,8 @@ INSERT OVERWRITE TABLE emp_ptn PARTITION (deptno=20) SELECT empno,ename,job,mgr,
 set hive.exec.dynamic.partition.mode=nonstrict;
 
 -- 动态分区   此时查询语句的最后一列为动态分区列，即deptno
-INSERT OVERWRITE TABLE emp_ptn PARTITION (deptno) SELECT empno,ename,job,mgr,hiredate,sal,comm,deptno FROM emp WHERE deptno=30;
+INSERT OVERWRITE TABLE emp_ptn PARTITION (deptno) 
+SELECT empno,ename,job,mgr,hiredate,sal,comm,deptno FROM emp WHERE deptno=30;
 ```
 
 ​	完成后`emp_ptn`表中数据如下：
@@ -172,7 +182,8 @@ INSERT OVERWRITE TABLE emp_ptn PARTITION (deptno) SELECT empno,ename,job,mgr,hir
 ## 三、使用SQL语句插入值
 
 ```sql
-INSERT INTO TABLE tablename [PARTITION (partcol1[=val1], partcol2[=val2] ...)] VALUES ( value [, value ...] )
+INSERT INTO TABLE tablename [PARTITION (partcol1[=val1], partcol2[=val2] ...)] 
+VALUES ( value [, value ...] )
 ```
 
 + 使用时必须为表中的每个列都提供值。不支持只向部分列插入值（可以为缺省值的列提供空值来消除这个弊端）；

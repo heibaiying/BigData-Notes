@@ -60,13 +60,14 @@
 
 1. [数据仓库Hive简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive.md)
 2. [Linux环境下Hive的安装部署](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux%E7%8E%AF%E5%A2%83%E4%B8%8BHive%E7%9A%84%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2.md)
-3. [Hive Shell基本使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/HiveShell基本使用.md)
-4. [Hive 核心概念讲解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive核心概念讲解.md)
-5. [Hive 分区表和分桶表](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive分区表和分桶表.md)
+3. 连接Hive的三种方式
+4. [Hive Shell基本使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/HiveShell基本使用.md)
+5. [Hive 核心概念讲解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive核心概念讲解.md)
 6. [Hive 常用DDL操作](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive常用DDL操作.md)
-7. Hive 数据查询
-8. Hive 视图和索引
-9. Hive 模式设计
+7. [Hive 分区表和分桶表](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive分区表和分桶表.md)
+8. [Hive 视图和索引](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive数据查询详解.md)
+9. [Hive常用DML操作](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive常用DML操作.md)
+10. [Hive 数据查询详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive数据查询详解.md)
 
 ## 三、Spark
 
