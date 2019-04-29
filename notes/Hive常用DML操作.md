@@ -208,72 +208,77 @@ DELETE FROM tablename [WHERE expression]
 
 ### 4.2 示例
 
-1.  首先需要更改`hive-site.xml`，添加如下配置，开启事务支持，配置完成后需要重启Hive服务。
+**1. 修改配置**
 
-   ```xml
-   <property>
-       <name>hive.support.concurrency</name>
-       <value>true</value>
-   </property>
-   <property>
-       <name>hive.enforce.bucketing</name>
-       <value>true</value>
-   </property>
-   <property>
-       <name>hive.exec.dynamic.partition.mode</name>
-       <value>nonstrict</value>
-   </property>
-   <property>
-       <name>hive.txn.manager</name>
-       <value>org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</value>
-   </property>
-   <property>
-       <name>hive.compactor.initiator.on</name>
-       <value>true</value>
-   </property>
-   <property>
-       <name>hive.in.test</name>
-       <value>true</value>
-   </property>
-   ```
+首先需要更改`hive-site.xml`，添加如下配置，开启事务支持，配置完成后需要重启Hive服务。
 
-2. 创建用于测试的事务表，建表时候指定属性`transactional = true`则代表该表是事务表。需要注意的是，按照[官方文档](https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions)的说明，目前Hive中的事务表有以下限制：
-      + 必须是buckets Table;
-      + 仅支持ORC文件格式；
-      + 不支持LOAD DATA ...语句。
-      
-      ```sql
-      -- 建表语句
-      CREATE TABLE emp_ts(  
-        empno int,  
-        ename String
-      )
-      CLUSTERED BY (empno) INTO 2 BUCKETS STORED AS ORC
-      TBLPROPERTIES ("transactional"="true");
-      ```
-3. 插入测试数据
-   
-   ```sql
-   INSERT INTO TABLE emp_ts  VALUES (1,"ming"),(2,"hong");
-   ```
+```xml
+<property>
+    <name>hive.support.concurrency</name>
+    <value>true</value>
+</property>
+<property>
+    <name>hive.enforce.bucketing</name>
+    <value>true</value>
+</property>
+<property>
+    <name>hive.exec.dynamic.partition.mode</name>
+    <value>nonstrict</value>
+</property>
+<property>
+    <name>hive.txn.manager</name>
+    <value>org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</value>
+</property>
+<property>
+    <name>hive.compactor.initiator.on</name>
+    <value>true</value>
+</property>
+<property>
+    <name>hive.in.test</name>
+    <value>true</value>
+</property>
+```
 
-   插入数据依靠的是MapReduce作业，执行成功后数据如下：
+**2. 创建测试表**
 
-   <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-ts.png"/> </div>
-   
-4. 测试更新和删除
-   
-   ```sql
-   --更新数据
-   UPDATE emp_ts SET ename = "lan"  WHERE  empno=1;
-   
-   --删除数据
-   DELETE FROM emp_ts WHERE empno=2;
-   ```
-   
-   更新和删除数据依靠的也是MapReduce作业，执行成功后数据如下：
-   
-   <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-ts-2.png"/> </div>
+创建用于测试的事务表，建表时候指定属性`transactional = true`则代表该表是事务表。需要注意的是，按照[官方文档](https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions)的说明，目前Hive中的事务表有以下限制：
+
++ 必须是buckets Table;
++ 仅支持ORC文件格式；
++ 不支持LOAD DATA ...语句。
+
+```sql
+CREATE TABLE emp_ts(  
+  empno int,  
+  ename String
+)
+CLUSTERED BY (empno) INTO 2 BUCKETS STORED AS ORC
+TBLPROPERTIES ("transactional"="true");
+```
+
+**3. 插入测试数据**
+
+```sql
+INSERT INTO TABLE emp_ts  VALUES (1,"ming"),(2,"hong");
+```
+
+插入数据依靠的是MapReduce作业，执行成功后数据如下：
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-ts.png"/> </div>
+
+**4. 测试更新和删除**
+
+```sql
+--更新数据
+UPDATE emp_ts SET ename = "lan"  WHERE  empno=1;
+
+--删除数据
+DELETE FROM emp_ts WHERE empno=2;
+```
+
+更新和删除数据依靠的也是MapReduce作业，执行成功后数据如下：
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-ts-2.png"/> </div>
 
 
 

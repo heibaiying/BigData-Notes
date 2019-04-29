@@ -1,5 +1,35 @@
 # Hive常用DDL操作
 
+<nav>
+<a href="#一Database">一、Database</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-查看数据列表">1.1 查看数据列表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-使用数据库">1.2 使用数据库</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-新建数据库">1.3 新建数据库</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-查看数据库信息">1.4 查看数据库信息</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-删除数据库">1.5 删除数据库</a><br/>
+<a href="#二创建表">二、创建表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-建表语法">2.1 建表语法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-内部表">2.2 内部表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-外部表">2.3 外部表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-分区表">2.4 分区表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-分桶表">2.5 分桶表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-倾斜表">2.6 倾斜表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#27-临时表">2.7 临时表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#28-CTAS创建表">2.8 CTAS创建表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#29-复制表结构">2.9 复制表结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#210-加载数据到表">2.10 加载数据到表</a><br/>
+<a href="#三修改表">三、修改表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-重命名表">3.1 重命名表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-修改列">3.2 修改列</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-新增列">3.3 新增列</a><br/>
+<a href="#四清空表删除表">四、清空表/删除表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-清空表">4.1 清空表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-删除表">4.2 删除表</a><br/>
+<a href="#五其他命令">五、其他命令</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51-Describe">5.1 Describe</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52-Show">5.2 Show</a><br/>
+</nav>
+
 ## 一、Database
 
 ### 1.1 查看数据列表
@@ -8,7 +38,7 @@
 show databases;
 ```
 
-![hive-show-database](D:\BigData-Notes\pictures\hive-show-database.png)
+<div align="center"> <img width='700px' src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-show-database.png"/> </div>
 
 ### 1.2 使用数据库
 
@@ -81,7 +111,10 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name     --�
     ... [constraint_specification])]  --列名 列数据类型
   [COMMENT table_comment]   --表描述
   [PARTITIONED BY (col_name data_type [COMMENT col_comment], ...)]  --分区表分区规则
-  [CLUSTERED BY (col_name, col_name, ...) [SORTED BY (col_name [ASC|DESC], ...)] INTO num_buckets BUCKETS]  --分桶表分桶规则
+  [
+    CLUSTERED BY (col_name, col_name, ...) 
+   [SORTED BY (col_name [ASC|DESC], ...)] INTO num_buckets BUCKETS
+  ]  --分桶表分桶规则
   [SKEWED BY (col_name, col_name, ...) ON ((col_value, col_value, ...), (col_value, col_value, ...), ...)  
    [STORED AS DIRECTORIES] 
   ]  --指定倾斜列和值
@@ -128,7 +161,7 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name     --�
 
 使用 `desc format  emp_external`命令可以查看表的详细信息如下：
 
-![hive-external-table](D:\BigData-Notes\pictures\hive-external-table.png)
+<div align="center"> <img width='700px' src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-external-table.png"/> </div>
 
 ### 2.4 分区表
 
@@ -240,7 +273,7 @@ CREATE TEMPORARY EXTERNAL TABLE  IF NOT EXISTS  emp_co  LIKE emp
 load data local inpath "/usr/file/emp.txt" into table emp;
 ```
 
-其中emp.txt的文件内容如下，你可以直接复制粘贴，也可以到本仓库的resources目录下载对应的文件：
+其中emp.txt的内容如下，你可以直接复制使用，也可以到本仓库的resources目录下载：
 
 ```txt
 7369	SMITH	CLERK	7902	1980-12-17 00:00:00	800.00		20
@@ -261,7 +294,7 @@ load data local inpath "/usr/file/emp.txt" into table emp;
 
 加载后可查询表中数据：
 
-![hive-select-emp](D:\BigData-Notes\pictures\hive-select-emp.png)
+<div align="center"> <img width='700px' src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-select-emp.png"/> </div>
 
 
 
@@ -325,7 +358,7 @@ ALTER TABLE emp_temp ADD COLUMNS (address STRING COMMENT 'home address');
 
 ```sql
 -- 清空整个表或表指定分区中的数据
-TRUNCATE TABLE table_name [PARTITION (partition_column = partition_col_value, partition_column = partition_col_value, ...)];
+TRUNCATE TABLE table_name [PARTITION (partition_column = partition_col_value,  ...)];
 ```
 
 + 目前只有内部表才能执行TRUNCATE操作，外部表执行时会抛出异常`Cannot truncate non-managed table XXXX`。
@@ -349,12 +382,6 @@ DROP TABLE [IF EXISTS] table_name [PURGE];
 + 内部表：不仅会删除表的元数据，同时会删除HDFS上的数据；
 + 外部表：只会删除表的元数据，不会删除HDFS上的数据；
 + 删除视图引用的表时，不会给出警告（但视图已经无效了，必须由用户删除或重新创建）。
-
-示例：
-
-```sql
-`DROP TABLE [IF EXISTS] table_name [PURGE]; `
-```
 
 
 
@@ -420,3 +447,6 @@ SHOW CREATE TABLE ([db_name.]table_name|view_name);
 
 
 
+## 参考资料
+
+[LanguageManual DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL)

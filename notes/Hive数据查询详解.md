@@ -249,7 +249,7 @@ Hive支持内连接，外连接，左外连接，右外连接，笛卡尔连接�
 
 需要特别强调：JOIN语句的关联条件必须用ON指定，不能用WHERE指定，否则就会先做笛卡尔积，再过滤，这会导致你得不到预期的结果(下面的演示会有说明)。
 
-<div align="center"> <img width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sql-join.jpg"/> </div>
+<div align="center"> <img width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sql-join.jpg"/> </div>
 
 
 
