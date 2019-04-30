@@ -158,7 +158,7 @@ HiveServer2（HS2）允许远程客户端可以使用各种编程语言向Hive�
 
 之所以要配置这一步，这是由于hadoop 2.0以后引入了一个安全伪装机制，使得hadoop不允许上层系统（例如hive）直接将实际用户传递到hadoop层，而是将实际用户传递给一个超级代理，由该代理在hadoop上执行操作，避免任意客户端随意操作hadoop。如果不配置这一步，在之后的连接中可能会抛出`AuthorizationException`异常。
 
->如果想进一步了解Hadoop的用户代理机制，可以参考这篇博客：[hadoop的用户代理机制]([https://blog.csdn.net/u012948976/article/details/49904675#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E8%A7%A3%E8%AF%BB](https://blog.csdn.net/u012948976/article/details/49904675#官方文档解读))或者官方文档[Proxy user - Superusers Acting On Behalf Of Other Users](http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/Superusers.html)
+>如果想进一步了解Hadoop的用户代理机制，可以参考这篇博客：[hadoop的用户代理机制](https://blog.csdn.net/u012948976/article/details/49904675#官方文档解读)或者官方文档[Proxy user - Superusers Acting On Behalf Of Other Users](http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/Superusers.html)
 
 
 
@@ -180,4 +180,4 @@ HiveServer2（HS2）允许远程客户端可以使用各种编程语言向Hive�
 # beeline -u jdbc:hive2://hadoop001:10000 -n root
 ```
 
-<div align="center"> <img width='700px' src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-beeline-cli.png"/> </div>
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-beeline-cli.png"/> </div>
