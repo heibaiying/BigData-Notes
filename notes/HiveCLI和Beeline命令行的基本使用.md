@@ -87,7 +87,7 @@ hive -e 'select * from emp' \
 --hiveconf mapred.reduce.tasks=4;
 ```
 
-> hive.exec.scratchdir：指定HDFS上目录的位置，用于存储不同 map/reduce 阶段的执行计划和这些阶段的中间输出结果。
+> hive.exec.scratchdir：指定HDFS上目录位置，用于存储不同map/reduce阶段的执行计划和这些阶段的中间输出结果。
 
 ### 1.6 配置文件启动
 
@@ -261,12 +261,12 @@ No rows affected (0.025 seconds)
 
 ### 3.4 配置优先级
 
-配置的优先顺序如下(后面的优先级更高)：
+配置的优先顺序如下(由低到高)：  
 `hive-site.xml` - >` hivemetastore-site.xml `- > `hiveserver2-site.xml` - >` -- hiveconf`- > `set`
 
 ### 3.5 配置参数
 
-Hive 可选的配置参数非常之多，这里就不一一罗列，在使用时查阅官方文档即可——[AdminManual Configuration](https://cwiki.apache.org/confluence/display/Hive/AdminManual+Configuration)。
+Hive可选的配置参数非常多，在用到时查阅官方文档即可[AdminManual Configuration](https://cwiki.apache.org/confluence/display/Hive/AdminManual+Configuration)
 
 
 
