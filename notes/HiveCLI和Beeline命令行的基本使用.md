@@ -38,7 +38,7 @@ usage: hive
     --hiveconf <property=value>   Use value for given property    --自定义配置
     --hivevar <key=value>         Variable subsitution to apply to hive  --自定义变量
                                   commands. e.g. --hivevar A=B
- -i <filename>                    Initialization SQL file  在进入交互模式之前运行初始化脚本
+ -i <filename>                    Initialization SQL file  --在进入交互模式之前运行初始化脚本
  -S,--silent                      Silent mode in interactive shell    --静默模式
  -v,--verbose                     Verbose mode (echo executed SQL to the  console)  --详细模式
 ```
