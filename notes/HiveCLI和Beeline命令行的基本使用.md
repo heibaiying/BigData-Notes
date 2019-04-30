@@ -135,9 +135,11 @@ hive >  select ${hivevar:j} from emp;
 
 ### 2.1 HiveServer2
 
+Hive内置了HiveServer和HiveServer2服务，两者都允许客户端使用多种编程语言进行连接，但是HiveServer不能处理多个客户端的并发请求，所以产生的HiveServer2。
+
 HiveServer2（HS2）允许远程客户端可以使用各种编程语言向Hive提交请求并检索结果，支持多客户端并发访问和身份验证。HS2是由多个服务组成的单个进程，其包括基于Thrift的Hive服务（TCP或HTTP）和用于Web UI的Jetty Web服务器。
 
- HiveServer2拥有自己的CLI(Beeline)，Beeline是一个基于SQLLine的JDBC客户端，由于HiveServer2是Hive开发的重点，所以上面介绍的Hive CLI已经不推荐使用了，官方更加推荐使用Beeline。
+ HiveServer2拥有自己的CLI(Beeline)，Beeline是一个基于SQLLine的JDBC客户端。由于HiveServer2是Hive开发维护的重点(Hive0.15后就不再支持hiveserver)，所以Hive CLI已经不推荐使用了，官方更加推荐使用Beeline。
 
 ### 2.1 Beeline
 

@@ -1,10 +1,20 @@
 # Linux环境下Hive的安装
 
-> Hive 版本 ： hive-1.1.0-cdh5.15.2.tar.gz
->
-> 系统环境：Centos 7.6
+<nav>
+<a href="#一安装Hive">一、安装Hive</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-下载并解压">1.1 下载并解压</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-配置环境变量">1.2 配置环境变量</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-修改配置">1.3 修改配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-拷贝数据库驱动">1.4 拷贝数据库驱动</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-初始化元数据库">1.5 初始化元数据库</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-启动">1.6 启动</a><br/>
+<a href="#二HiveServer2beeline">二、HiveServer2/beeline</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-修改Hadoop配置">2.1 修改Hadoop配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-启动hiveserver2">2.2 启动hiveserver2</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-使用beeline">2.3 使用beeline</a><br/>
+</nav>
 
-
+## 一、安装Hive
 
 ### 1.1 下载并解压
 
@@ -118,3 +128,56 @@ HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
 在Mysql中也能看到Hive创建的库和存放元数据信息的表
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-mysql-tables.png"/> </div>
+
+
+
+## 二、HiveServer2/beeline
+
+Hive内置了HiveServer和HiveServer2服务，两者都允许客户端使用多种编程语言进行连接，但是HiveServer不能处理多个客户端的并发请求，所以产生的HiveServer2。
+
+HiveServer2（HS2）允许远程客户端可以使用各种编程语言向Hive提交请求并检索结果，支持多客户端并发访问和身份验证。HS2是由多个服务组成的单个进程，其包括基于Thrift的Hive服务（TCP或HTTP）和用于Web UI的Jetty Web服务器。
+
+ HiveServer2拥有自己的CLI(Beeline)，Beeline是一个基于SQLLine的JDBC客户端。由于HiveServer2是Hive开发维护的重点(Hive0.15后就不再支持hiveserver)，所以Hive CLI已经不推荐使用了，官方更加推荐使用Beeline。以下主要讲解Beeline的使用配置。
+
+
+
+### 2.1 修改Hadoop配置
+
+修改 hadoop 集群的 core-site.xml 配置文件，增加如下配置，指定hadoop的root用户可以代理本机上所有的用户。
+
+```xml
+<property>
+ <name>hadoop.proxyuser.root.hosts</name>
+ <value>*</value>
+</property>
+<property>
+ <name>hadoop.proxyuser.root.groups</name>
+ <value>*</value>
+</property>
+```
+
+之所以要配置这一步，这是由于hadoop 2.0以后引入了一个安全伪装机制，使得hadoop不允许上层系统（例如hive）直接将实际用户传递到hadoop层，而是将实际用户传递给一个超级代理，由该代理在hadoop上执行操作，避免任意客户端随意操作hadoop。如果不配置这一步，在之后的连接中可能会抛出`AuthorizationException`异常。
+
+>如果想进一步了解Hadoop的用户代理机制，可以参考这篇博客：[hadoop的用户代理机制]([https://blog.csdn.net/u012948976/article/details/49904675#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E8%A7%A3%E8%AF%BB](https://blog.csdn.net/u012948976/article/details/49904675#官方文档解读))或者官方文档[Proxy user - Superusers Acting On Behalf Of Other Users](http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/Superusers.html)
+
+
+
+### 2.2 启动hiveserver2
+
+由于上面已经配置过环境变量，直接启动即可，这里可以使用后台启动：
+
+```shell
+# nohup hiveserver2 &
+```
+
+
+
+### 2.3 使用beeline
+
+可以使用以下命令进入beeline交互式命令行，出现`Connected`则代表连接成功。
+
+```shell
+# beeline -u jdbc:hive2://hadoop001:10000 -n root
+```
+
+<div align="center"> <img width='700px' src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-beeline-cli.png"/> </div>
