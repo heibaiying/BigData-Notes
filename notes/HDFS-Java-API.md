@@ -1,5 +1,6 @@
 # HDFS Java API
-<nav>
+
+<nav>
 <a href="#一-简介">一、 简介</a><br/>
 <a href="#二API的使用">二、API的使用</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-FileSystem">2.1 FileSystem</a><br/>
@@ -382,6 +383,8 @@ public void getFileBlockLocations() throws Exception {
 
 这里我上传的文件比较小，只有57M(小于128M)，且程序中设置了副本系数为1，所有只有一个块信息，如果文件很大，则这里会输出文件所有块的信息。
 
+<br/>
 
+<br/>
 
 **以上所有测试用例源码可以从本仓库进行下载**：[HDFS Java API](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hadoop/hdfs-java-api)
