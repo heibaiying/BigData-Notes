@@ -70,7 +70,7 @@ public class HdfsUtils {
      */
     public void createAndWrite(String path, String context) throws Exception {
         FSDataOutputStream out = fileSystem.create(new Path(path));
-        out.writeUTF(context);
+        out.write(context.getBytes());
         out.flush();
         out.close();
     }
