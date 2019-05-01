@@ -29,6 +29,7 @@ public class HdfsTest {
     public void prepare() {
         try {
             Configuration configuration = new Configuration();
+            // 这里我启动的是单节点的Hadoop,副本系数可以设置为1,不设置的话默认值为3
             configuration.set("dfs.replication", "1");
             fileSystem = FileSystem.get(new URI(HDFS_PATH), configuration, HDFS_USER);
         } catch (IOException e) {
@@ -42,7 +43,7 @@ public class HdfsTest {
 
 
     /**
-     * 创建目录,支持递创建
+     * 创建目录,支持递归创建
      */
     @Test
     public void mkDir() throws Exception {
@@ -114,7 +115,11 @@ public class HdfsTest {
      */
     @Test
     public void delete() throws Exception {
-        //第二个参数代表是否递归参数，如果path是一个目录且设置了递归删除, 删除该目录，否则抛出异常。
+        /*
+         *  第二个参数代表是否递归删除
+         *    +  如果path是一个目录且递归删除为true, 则删除该目录及其中所有文件;
+         *    +  如果path是一个目录但递归删除为false,则会则抛出异常。
+         */
         boolean result = fileSystem.delete(new Path("/hdfs-api/test/b.txt"), true);
         System.out.println(result);
     }
@@ -175,7 +180,7 @@ public class HdfsTest {
 
 
     /**
-     * 查看目标文件夹下的所有文件信息
+     * 查看指定目录下所有文件的信息
      */
     @Test
     public void listFiles() throws Exception {
@@ -188,7 +193,7 @@ public class HdfsTest {
 
 
     /**
-     * 递归查看目标文件夹下的所有文件
+     * 递归查看指定目录下所有文件的信息
      */
     @Test
     public void listFilesRecursive() throws Exception {
@@ -223,7 +228,7 @@ public class HdfsTest {
 
 
     /**
-     * 把输入流转换为指定字符
+     * 把输入流转换为指定编码的字符
      *
      * @param inputStream 输入流
      * @param encode      指定编码类型
