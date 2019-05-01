@@ -387,4 +387,4 @@ public void getFileBlockLocations() throws Exception {
 
 <br/>
 
-**以上所有测试用例源码可以从本仓库进行下载**：[HDFS Java API](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hadoop/hdfs-java-api)
+**以上所有测试用例可以从本仓库进行下载**：[HDFS Java API](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hadoop/hdfs-java-api)
