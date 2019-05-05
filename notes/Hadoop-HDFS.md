@@ -19,8 +19,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#33--大文件支持">3.3  大文件支持</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-简单一致性模型">3.3 简单一致性模型</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-跨平台移植性">3.4 跨平台移植性</a><br/>
-<a href="#四HDFS-shell">四、HDFS shell</a><br/>
-<a href="#五HDFS-API">五、HDFS API</a><br/>
 <a href="#附图解HDFS存储原理">附：图解HDFS存储原理</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-HDFS写数据原理">1. HDFS写数据原理</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-HDFS读数据原理">2. HDFS读数据原理</a><br/>
@@ -127,14 +125,6 @@ HDFS更适合于一次写入多次读取（write-once-read-many）的访问模�
 ### 3.4 跨平台移植性
 
 HDFS的设计便于从一个平台移植到另一个平台。这有助于HDFS作为大数据首选存储方案。
-
-
-
-## 四、HDFS shell
-
-
-
-## 五、HDFS API
 
 
 
