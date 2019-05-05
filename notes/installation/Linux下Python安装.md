@@ -6,7 +6,7 @@
 
 ### 1.环境依赖
 
-Python3.x的安装需要需要这四个依赖：gcc， zlib, zlib-devel, openssl-devel，这四个软件需要先进行安装
+Python3.x的安装需要这四个依赖：gcc， zlib, zlib-devel, openssl-devel，这四个软件需要先进行安装
 
 ```shell
 yum install gcc -y
