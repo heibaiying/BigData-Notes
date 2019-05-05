@@ -72,7 +72,7 @@ HDFS采用机架感知副本放置策略，对于常见情况，当复制因子�
 
 在编写器位于datanode上时，将一个副本放在本地计算机上，否则放在随机datanode上；在另一个（远程）机架上的节点上放置另一个副本，最后一个在同一个远程机架中的另一个节点上。此策略可以减少机架间写入流量，从而提高写入性能。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hdfs-机架.png"/> </div>
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hdfs-机架.png"/> </div>
 
 如果复制因子大于3，则随机确定第4个和以下副本的放置，同时保持每个机架的副本数量低于上限，上限值通常为`（复制系数 - 1）/机架数量 + 2`，但是不允许同一个dataNode具有同一块的多个副本。
 
