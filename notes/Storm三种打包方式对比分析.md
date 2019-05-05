@@ -84,7 +84,7 @@ maven-assembly-plugin是官方文档中介绍的打包方法，来源于官方�
 - 使用maven-assembly-plugin进行打包，因为maven-assembly-plugin会把所有的依赖一并打包到最后的JAR中；
 - 排除掉Storm集群环境中已经提供的Storm jars。
 
-maven-assembly-plugin的使用非常简单，只需要在POM.xml中引入即可，并且在\<descriptorRef>标签指定打包格式为`jar-with-dependencies`。那么就剩下一个问题：如何排除Storm jars ？
+maven-assembly-plugin的使用非常简单，只需要在POM.xml中引入即可，并且在\<descriptorRef>标签指定打包格式为`jar-with-dependencies`。此时还有一个问题：如何排除不需要的JAR包(如：Storm jars)？
 
 ### 3.2 排除Storm jars
 
@@ -218,9 +218,7 @@ assembly.xml文件内容如下：
 >
 >If you are using maven to create your topology jar, you should use the following `maven-shade-plugin` configuration to create your topology jar。
 
-这里第一句就说的比较清晰，在集成HDFS时候，你必须使用maven-shade-plugin来代替maven-assembly-plugin，否则会抛出
-
-RuntimeException异常。
+这里第一句就说的比较清晰，在集成HDFS时候，你必须使用maven-shade-plugin来代替maven-assembly-plugin，否则会抛出RuntimeException异常。
 
 采用maven-shade-plugin打包有很多好处，比如你的工程依赖很多的JAR包，而被依赖的JAR又会依赖其他的JAR包，这样,当工程中依赖到不同的版本的 JAR时，并且JAR中具有相同名称的资源文件时，shade插件会尝试将所有资源文件打包在一起时，而不是和assembly一样执行覆盖操作。
 
