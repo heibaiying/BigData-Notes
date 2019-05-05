@@ -140,3 +140,5 @@ TODO
 
 ## 十二、Scala
 
+1. [Scala简介及开发环境配置](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala简介及开发环境配置.md)
+2. 
