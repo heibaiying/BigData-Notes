@@ -145,3 +145,4 @@ TODO
 3. [Scala数组](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala数组相关操作.md)
 4. [映射和元组](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala映射和元组.md)
 5. [Scala集合](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala集合.md)
+6. [流程控制语句](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala流程控制语句.md)
