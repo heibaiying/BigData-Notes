@@ -1,31 +1,39 @@
 # Scala映射和元组
 
+<nav>
+<a href="#一映射Map">一、映射(Map)</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-构造映射">1.1 构造映射</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-获取值">1.2 获取值</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-新增修改删除值">1.3 新增/修改/删除值</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-遍历映射">1.4 遍历映射</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-产生新映射">1.5 产生新映射</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-有序映射">1.6 有序映射</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#17-其他方法">1.7 其他方法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#18-与Java互操作">1.8 与Java互操作</a><br/>
+<a href="#二元组Tuple">二、元组(Tuple)</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--模式匹配">2.1  模式匹配</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-Zip方法">2.2 Zip方法</a><br/>
+</nav>
+
 ## 一、映射(Map)
 
 ### 1.1 构造映射
 
 ```scala
-scala> import scala.collection.immutable.HashMap
-import scala.collection.immutable.HashMap
-
 // 初始化一个空map
-scala> val scores01 = new HashMap[String, Int]
-scores01: scala.collection.immutable.HashMap[String,Int] = Map()
+val scores01 = new HashMap[String, Int]
 
 // 从指定的值初始化映射（方式一）
-scala>  val scores02 = Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
-scores02: scala.collection.immutable.Map[String,Int] = Map(hadoop -> 10, spark -> 20, storm -> 30)
+val scores02 = Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
 
 // 从指定的值初始化映射（方式二）
-scala>  val scores03 = Map(("hadoop", 10), ("spark", 20), ("storm", 30))
-scores03: scala.collection.immutable.Map[String,Int] = Map(hadoop -> 10, spark -> 20, storm -> 30)
+val scores03 = Map(("hadoop", 10), ("spark", 20), ("storm", 30))
 ```
 
 采用上面方式得到的都是不可变(immutable)映射，想要得到可变映射，则用：
 
 ```scala
-scala> val scores04 = scala.collection.mutable.Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
-scores04: scala.collection.mutable.Map[String,Int] = Map(spark -> 20, hadoop -> 10, storm -> 30)
+val scores04 = scala.collection.mutable.Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
 ```
 
 ### 1.2 获取值
@@ -58,10 +66,10 @@ object ScalaApp extends App {
   // 2.如果key不存在则新增
   scores("flink") = 40
 
-  // 3.可以通过+=来进行多个更新或新增操作
+  // 3.可以通过 += 来进行多个更新或新增操作
   scores += ("spark" -> 200, "hive" -> 50)
 
-  // 4.可以通过-= 来移除某个键和值
+  // 4.可以通过 -= 来移除某个键和值
   scores -= "storm"
 
   for (elem <- scores) {println(elem)}

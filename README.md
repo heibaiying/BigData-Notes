@@ -141,4 +141,7 @@ TODO
 ## 十二、Scala
 
 1. [Scala简介及开发环境配置](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala简介及开发环境配置.md)
-2. 
+2. [基本数据类型和运算符](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala基本数据类型和运算符.md)
+3. [Scala数组](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala数组相关操作.md)
+4. [映射和元组](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala映射和元组.md)
+5. [Scala集合](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala集合.md)
