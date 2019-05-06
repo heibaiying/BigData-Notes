@@ -271,4 +271,4 @@ res6: Boolean = true
 
 ## 参考资料
 
-1. Martin Odersky(著)，高宇翔(译) . Scala编程(第3版)[M] . 电子工业出版社 . 2018-1-1 
+1. Martin Odersky . Scala编程(第3版)[M] . 电子工业出版社 . 2018-1-1 
