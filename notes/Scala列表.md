@@ -141,7 +141,7 @@ res5: (List[String], List[String]) = (List(hadoop, spark),List(storm))
 
 ### 5.4 flatten
 
-flatten接收一个**由列表组成的列表**，并将其进行扁平化操作，返回单个列表。
+flatten接收一个由列表组成的列表，并将其进行扁平化操作，返回单个列表。
 
 ```scala
 scala>  List(List(1, 2), List(3), List(), List(4, 5)).flatten
@@ -201,8 +201,6 @@ res11: String = {hadoop,spark,storm}
 
 ### 5.7 iterator & toArray & copyToArray
 
-#### 1. 迭代器iterator
-
 iterator 方法返回的是迭代器，这和其他语言的使用是一样的。
 
 ```scala
@@ -219,7 +217,7 @@ object ScalaApp extends App {
 }
 ```
 
-#### 2. 列表与数组的互相转换
+toArray和toList用于List和数组之间的互相转换。
 
 ```scala
 scala> val array = list.toArray
