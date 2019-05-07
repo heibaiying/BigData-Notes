@@ -227,8 +227,6 @@ scala> array.toList
 res13: List[String] = List(hadoop, spark, storm)
 ```
 
-#### 3. copyToArray
-
 copyToArray将List中的元素拷贝到数组中指定位置。
 
 ```scala
