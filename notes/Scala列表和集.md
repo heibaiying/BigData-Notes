@@ -1,4 +1,4 @@
-# 列表(List)
+# List & Set
 
 <nav>
 <a href="#一List字面量">一、List字面量</a><br/>
@@ -9,7 +9,11 @@
 <a href="#六列表的高级操作">六、列表的高级操作</a><br/>
 <a href="#七List对象的方法">七、List对象的方法</a><br/>
 <a href="#八处理多个List">八、处理多个List</a><br/>
+<a href="#九缓冲列表ListBuffer">九、缓冲列表ListBuffer</a><br/>
+<a href="#十集Set">十、集(Set)</a><br/>
 </nav>
+
+
 
 ## 一、List字面量
 
@@ -431,6 +435,100 @@ res44: Boolean = true
 ```
 
 
+
+## 九、缓冲列表ListBuffer
+
+上面介绍的List，由于其底层实现是链表，这意味着能快速访问List头部元素，但对尾部元素的访问则比较低效，这时候可以采用`ListBuffer`，ListBuffer提供了在常量时间内往头部和尾部追加元素。
+
+```scala
+object ScalaApp extends App {
+
+  val buffer = new ListBuffer[Int]
+  // 1.在尾部追加元素
+  buffer += 1
+  buffer += 2
+  // 2.在头部追加元素
+  3 +=: buffer
+  // 3. ListBuffer转List
+  val list: List[Int] = buffer.toList
+  println(list)
+}
+```
+
+
+
+## 十、集(Set)
+
+Set是不重复元素的集合。分为可变Set和不可变Set。
+
+### 10.1 可变Set
+
+```scala
+object ScalaApp extends App {
+
+  // 可变Set
+  val mutableSet = new collection.mutable.HashSet[Int]
+
+  // 1.添加元素
+  mutableSet.add(1)
+  mutableSet.add(2)
+  mutableSet.add(3)
+  mutableSet.add(3)
+  mutableSet.add(4)
+
+  // 2.移除元素
+  mutableSet.remove(2)
+  
+  // 3.调用mkString方法 输出1,3,4
+  println(mutableSet.mkString(","))
+
+  // 4. 获取Set中最小元素
+  println(mutableSet.min)
+
+  // 5. 获取Set中最大元素
+  println(mutableSet.max)
+
+}
+```
+
+### 10.2 不可变Set
+
+不可变Set没有add方法，可以使用`+`添加元素，但是此时会返回一个新的不可变Set，原来的Set不变。
+
+```scala
+object ScalaApp extends App {
+  
+  // 不可变Set
+  val immutableSet = new collection.immutable.HashSet[Int]
+
+  val ints: HashSet[Int] = immutableSet+1
+
+  println(ints)
+
+}
+
+// 输出 Set(1)
+```
+
+### 10.3 Set间操作
+
+多个Set之间可以进行求交集或者合集等操作。
+
+```scala
+object ScalaApp extends App {
+
+  // 声明有序Set
+  val mutableSet = collection.mutable.SortedSet(1, 2, 3, 4, 5)
+  val immutableSet = collection.immutable.SortedSet(3, 4, 5, 6, 7)
+  
+  // 两个Set的合集  输出：TreeSet(1, 2, 3, 4, 5, 6, 7)
+  println(mutableSet ++ immutableSet)
+
+  // 两个Set的交集  输出：TreeSet(3, 4, 5)
+  println(mutableSet intersect immutableSet)
+
+}
+```
 
 
 

@@ -143,10 +143,9 @@ TODO
 1. [Scala简介及开发环境配置](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala简介及开发环境配置.md)
 2. [基本数据类型和运算符](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala基本数据类型和运算符.md)
 3. [流程控制语句](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala流程控制语句.md)
-4. [数组Array](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala数组.md)
-5. [集合综述](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala集合.md)
-6. [常用集合类型之——List](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala列表.md)
-7. [常用集合类型之——Map & Tuple](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala映射和元组.md)
-8. 其他常用集合类型
-9. 类和对象
-10. 函数和闭包
+4. [数组——Array](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala数组.md)
+5. [常用集合类型之——List & Set](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala列表和集.md)
+6. [常用集合类型之——Map & Tuple](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala映射和元组.md)
+7. 集合综述与总结
+8. 类和对象
+9. 函数和闭包
