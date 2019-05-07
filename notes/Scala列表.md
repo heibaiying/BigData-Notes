@@ -41,7 +41,7 @@ res1: List[Nothing] = List()
 
 ## 三、构建List
 
-所有List都由两个基本单元构成：`Nil` 和` ::`(读作"cons")。即列表要么是空列表(Nil)，要么是由一个head加上一个tail组成，而tail又是一个List。我们在上面使用的`List("hadoop", "spark", "storm")`最终也是被解释为` "hadoop"::"spark":: "storm"::Nil`。
+所有List都由两个基本单元构成：`Nil` 和`::`(读作"cons")。即列表要么是空列表(Nil)，要么是由一个head加上一个tail组成，而tail又是一个List。我们在上面使用的`List("hadoop", "spark", "storm")`最终也是被解释为` "hadoop"::"spark":: "storm"::Nil`。
 
 ```scala
 scala>  val list01 = "hadoop"::"spark":: "storm"::Nil
@@ -309,7 +309,7 @@ scala> List(1, 2, 3, -4, 5) takeWhile (_ > 0)
 res23: List[Int] = List(1, 2, 3)
 ```
 
-takeWhile遍历元素，直到遇到第一个不符合条件的值则结束遍历，返回没有遍历到的值。
+dropWhile遍历元素，直到遇到第一个不符合条件的值则结束遍历，返回未遍历到的值。
 
 ```scala
 // 第一个值就不满足条件,所以返回列表中所有的值
@@ -321,7 +321,7 @@ scala> List(1, 2, 3, -4, 5) dropWhile (_ < 3)
 res26: List[Int] = List(3, -4, 5)
 ```
 
-takeWhile遍历元素，直到遇到第一个不符合条件的值则结束遍历，将遍历到的值和为遍历到的值分别放入两个List中返回，返回类型是tuple(元组)。
+span遍历元素，直到遇到第一个不符合条件的值则结束遍历，将遍历到的值和未遍历到的值分别放入两个List中返回，返回类型是tuple(元组)。
 
 ```scala
 scala> List(1, 2, 3, -4, 5) span (_ > 0)
