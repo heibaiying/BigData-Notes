@@ -441,6 +441,8 @@ res44: Boolean = true
 上面介绍的List，由于其底层实现是链表，这意味着能快速访问List头部元素，但对尾部元素的访问则比较低效，这时候可以采用`ListBuffer`，ListBuffer提供了在常量时间内往头部和尾部追加元素。
 
 ```scala
+import scala.collection.mutable.ListBuffer
+
 object ScalaApp extends App {
 
   val buffer = new ListBuffer[Int]
@@ -453,6 +455,8 @@ object ScalaApp extends App {
   val list: List[Int] = buffer.toList
   println(list)
 }
+
+//输出：List(3, 1, 2)
 ```
 
 
