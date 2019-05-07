@@ -11,7 +11,10 @@
 
 ## 一、定长数组
 
-在Scala中，如果你需要一个长度不变的数组，可以用Array。
+在Scala中，如果你需要一个长度不变的数组，可以使用Array。同时需要注意以下两点：
+
+- 在scala中使用`(index)`而不是`[index]`来访问数组中的元素，因为访问元素，对于Scala来说是方法调用，`(index)`相当于执行了`.apply(index)`方法。
+- scala中的数组与Java中的是等价的，`Array[Int]()`在虚拟机层面就等价于Java的`int[]`。
 
 ```scala
 // 10个整数的数组，所有元素初始化为0
@@ -31,16 +34,9 @@ scala> a(0)
 res3: String = hello
 ```
 
-这里需要注意以下两点：
-
-+ 在scala中使用`(index)`而不是`[index]`来访问数组中的元素，因为访问元素，对于Scala来说是方法调用，`(index)`相当于执行了`.apply(index)`方法。
-+ scala中的数组与Java中的是等价的，`Array[Int]()`在虚拟机层面就等价于Java的`int[]`。
-
-
-
 ## 二、变长数组
 
-在scala中，通过ArrayBuffer实现变长数组(又称缓冲数组)，相当于Java中的ArrayList。变长数组的构建方式及常用操作如下：
+在scala中通过ArrayBuffer实现变长数组(又称缓冲数组)。在构建ArrayBuffer时必须给出类型参数，但不必指定长度，因为ArrayBuffer会在需要的时候自动扩容和缩容。变长数组的构建方式及常用操作如下：
 
 ```java
 import scala.collection.mutable.ArrayBuffer
@@ -75,7 +71,7 @@ object ScalaApp {
 }
 ```
 
-这里需要说明的是：由于scala的变长数组是使用java的集合来实现的，而Java集合的底层实现是链表，这意味使用`+= `在末尾插入元素是一个高效的操作，因为其时间复杂度是O(1)。而使用insert随机插入元素的时间复杂度是O(n)，因为在其插入位置之后的所有元素都要进行对应地后移，所以在`ArrayBuffer`中随机插入元素是一个低效的操作。
+这里需要说明的是：使用`+= `在末尾插入元素是一个高效的操作，其时间复杂度是O(1)。而使用insert随机插入元素的时间复杂度是O(n)，因为在其插入位置之后的所有元素都要进行对应地后移，所以在`ArrayBuffer`中随机插入元素是一个低效的操作。
 
 ## 三、数组遍历
 
@@ -138,7 +134,7 @@ object ScalaApp extends App {
 
 ## 五、多维数组
 
-和Java中一样，多维数组由单位数组组成。
+和Java中一样，多维数组由单维数组组成。
 
 ```scala
 object ScalaApp extends App {

@@ -1,36 +1,38 @@
-# Scala映射和元组
+# Map & Tuple
 
 <nav>
 <a href="#一映射Map">一、映射(Map)</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-构造映射">1.1 构造映射</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-构造Map">1.1 构造Map</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-获取值">1.2 获取值</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-新增修改删除值">1.3 新增/修改/删除值</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-遍历映射">1.4 遍历映射</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-产生新映射">1.5 产生新映射</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-有序映射">1.6 有序映射</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#17-其他方法">1.7 其他方法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-遍历Map">1.4 遍历Map</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-yield关键字">1.5 yield关键字</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-其他Map结构">1.6 其他Map结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#17-可选方法">1.7 可选方法</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#18-与Java互操作">1.8 与Java互操作</a><br/>
 <a href="#二元组Tuple">二、元组(Tuple)</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--模式匹配">2.1  模式匹配</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-Zip方法">2.2 Zip方法</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-zip方法">2.2 zip方法</a><br/>
 </nav>
+
+
 
 ## 一、映射(Map)
 
-### 1.1 构造映射
+### 1.1 构造Map
 
 ```scala
 // 初始化一个空map
 val scores01 = new HashMap[String, Int]
 
-// 从指定的值初始化映射（方式一）
+// 从指定的值初始化Map（方式一）
 val scores02 = Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
 
-// 从指定的值初始化映射（方式二）
+// 从指定的值初始化Map（方式二）
 val scores03 = Map(("hadoop", 10), ("spark", 20), ("storm", 30))
 ```
 
-采用上面方式得到的都是不可变(immutable)映射，想要得到可变映射，则用：
+采用上面方式得到的都是不可变Map(immutable map)，想要得到可变Map(mutable map)，则需要使用：
 
 ```scala
 val scores04 = scala.collection.mutable.Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
@@ -53,7 +55,7 @@ object ScalaApp extends App {
 
 ### 1.3 新增/修改/删除值
 
-可变映射允许进行新增、修改、删除等操作。
+可变Map允许进行新增、修改、删除等操作。
 
 ```scala
 object ScalaApp extends App {
@@ -82,7 +84,7 @@ object ScalaApp extends App {
 (hive,50)
 ```
 
-不可变映射不允许进行新增、修改、删除等操作，但是允许由不可变映射产生新的映射。
+不可变Map不允许进行新增、修改、删除等操作，但是允许由不可变Map产生新的Map。
 
 ```scala
 object ScalaApp extends App {
@@ -102,7 +104,7 @@ object ScalaApp extends App {
 (hive,50)
 ```
 
-### 1.4 遍历映射
+### 1.4 遍历Map
 
 ```java
 object ScalaApp extends App {
@@ -121,9 +123,9 @@ object ScalaApp extends App {
 }
 ```
 
-### 1.5 产生新映射
+### 1.5 yield关键字
 
-可以使用`yield`关键字从现有映射产生新的映射。
+可以使用`yield`关键字从现有Map产生新的Map。
 
 ```scala
 object ScalaApp extends App {
@@ -151,7 +153,7 @@ object ScalaApp extends App {
 (30,storm)
 ```
 
-### 1.6 有序映射
+### 1.6 其他Map结构
 
 在使用Map时候，如果不指定，默认使用的是HashMap，如果想要使用`TreeMap`或者`LinkedHashMap`，则需要显式的指定。
 
@@ -177,7 +179,7 @@ object ScalaApp extends App {
 (C,30)
 ```
 
-### 1.7 其他方法
+### 1.7 可选方法
 
 ```scala
 object ScalaApp extends App {
@@ -229,7 +231,7 @@ tuple: (Int, Float, String) = (1,3.24,scala)
 
 ### 2.1  模式匹配
 
-可以通过模式匹配来进行获取元组中的值并赋予对应的变量：
+可以通过模式匹配来获取元组中的值并赋予对应的变量：
 
 ```scala
 scala> val (a,b,c)=tuple
@@ -245,7 +247,7 @@ scala> val (a,_,_)=tuple
 a: Int = 1
 ```
 
-### 2.2 Zip方法
+### 2.2 zip方法
 
 ```scala
 object ScalaApp extends App {
@@ -255,7 +257,7 @@ object ScalaApp extends App {
     
   // 1.zip方法得到的是多个tuple组成的数组
   val tuples: Array[(String, Int)] = array01.zip(array02)
-  // 2.也可以在zip后调用toMap方法转换为映射
+  // 2.也可以在zip后调用toMap方法转换为Map
   val map: Map[String, Int] = array01.zip(array02).toMap
     
   for (elem <- tuples) { println(elem) }

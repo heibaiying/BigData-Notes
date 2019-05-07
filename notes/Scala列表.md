@@ -8,9 +8,8 @@
 <a href="#五列表的基本操作">五、列表的基本操作</a><br/>
 <a href="#六列表的高级操作">六、列表的高级操作</a><br/>
 <a href="#七List对象的方法">七、List对象的方法</a><br/>
-<a href="#八处理多个列表">八、处理多个列表</a><br/>
+<a href="#八处理多个List">八、处理多个List</a><br/>
 </nav>
-
 
 ## 一、List字面量
 
@@ -413,7 +412,7 @@ res41: List[Nothing] = List()
 
 
 
-## 八、处理多个列表
+## 八、处理多个List
 
 当多个List被放入同一个tuple中时候，可以通过zipped对多个List进行关联处理。
 
