@@ -64,7 +64,7 @@ object Person {
 
 ### 2.1 成员变量可见性
 
-Scala中成员变量的可见性默认都是public，但是为了保证其不被外部干扰，建议声明为private，并通过getter和setter方法进行访问。
+Scala中成员变量的可见性默认都是public，如果想要保证其不被外部干扰，可以声明为private，并通过getter和setter方法进行访问。
 
 ### 2.2 getter和setter属性
 
