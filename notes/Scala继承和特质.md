@@ -20,7 +20,7 @@
 
 ### 1.1 Scala中的继承结构
 
-scala中继承关系如下图：
+Scala中继承关系如下图：
 
 + Any是整个继承关系的根节点；
 + AnyRef包含Scala Classes和Java Classes，等价于Java中的java.lang.Object；
@@ -32,29 +32,23 @@ scala中继承关系如下图：
 
 ### 1.2 extends & override
 
-Scala的集成机制和Java有很多相似之处，比如都使用`extends `关键字表示继承，都使用`override`关键字表示重写父类的方法或成员变量。下面给出一个Scala继承的示例：
+Scala的集成机制和Java有很多相似之处，比如都使用`extends`关键字表示继承，都使用`override`关键字表示重写父类的方法或成员变量。下面给出一个Scala继承的示例：
 
 ```scala
 //父类
 class Person {
 
-
   var name = ""
-
   // 1.不加任何修饰词,默认为public,能被子类和外部访问
   var age = 0
-
   // 2.使用protected修饰的变量能子类访问，但是不能被外部访问
   protected var birthday = ""
-
   // 3.使用private修饰的变量不能被子类和外部访问
   private var sex = ""
-
-
+    
   def setSex(sex: String): Unit = {
     this.sex = sex
   }
-
   // 4.重写父类的方法建议使用override关键字修饰
   override def toString: String = name + ":" + age + ":" + birthday + ":" + sex
 
@@ -131,7 +125,7 @@ object ScalaApp extends App {
 
 ### 1.5 构造顺序和提前定义
 
-#### 1. 构造顺序
+#### **1. 构造顺序**
 
 在Scala中还有一个需要注意的问题，如果你在子类中重写父类的val变量，并且超类的构造器中使用了该变量，那么可能会产生不可预期的错误。下面给出一个示例：
 
@@ -165,10 +159,10 @@ object ScalaApp extends App {
 ()
 ```
 
-实际上array被初始化为Array(0)，原因在于父类的构造器的执行先于子类的构造器，这里给出实际的执行步骤：
+可以看到array被初始化为Array(0)，主要原因在于父类构造器的执行顺序先于子类构造器，这里给出实际的执行步骤：
 
 1. 父类的构造器被调用，执行`new Array[Int](range)`语句;
-2. 这里想要得到range的值，会去调用子类range()方法，因为`override val `重写变量的同时也重写了其get方法；
+2. 这里想要得到range的值，会去调用子类range()方法，因为`override val`重写变量的同时也重写了其get方法；
 3. 调用子类的range()方法，自然也是返回子类的range值，但是由于子类的构造器还没有执行，这也就意味着对range赋值的`range = 2`语句还没有被执行，所以自然返回range的默认值，也就是0。
 
 这里可能比较疑惑的是为什么`val range = 2`没有被执行，却能使用range变量，这里因为在虚拟机层面，是先对成员变量先分配存储空间并赋给默认值，之后才赋予给定的值。想要证明这一点其实也比较简单，代码如下:
@@ -188,7 +182,7 @@ object Person {
 }
 ```
 
-#### 2. 提前定义
+#### **2. 提前定义**
 
 想要解决上面的问题，有以下几种方法：
 
@@ -215,6 +209,8 @@ class Employee extends {
 但是这种语法也有其限制：你只能在上面代码块中重写已有的变量，而不能定义新的变量和方法，定义新的变量和方法只能写在下面代码块中。
 
 >**注意事项**：不仅是类的继承存在这个问题，后文介绍的特质(trait)的继承也存在这个问题，也同样可以通过提前定义来解决。即便可以通过多种方法解决该问题，但还是建议合理设计继承以规避此类问题。
+
+<br/>
 
 ## 二、抽象类
 
@@ -252,7 +248,7 @@ class Employee extends Person {
 
 ```
 
-
+<br/>
 
 ## 三、特质
 
@@ -381,7 +377,7 @@ object ScalaApp extends App {
 }
 ```
 
-这里前面两个输出比较明显，因为只指明了一个具体的`trait  `，这里需要说明的是第三个输出，**因为trait的调用是由右到左开始生效的**，所以这里打印出`Error:scala`。
+这里前面两个输出比较明显，因为只指明了一个具体的`trait`，这里需要说明的是第三个输出，**因为trait的调用是由右到左开始生效的**，所以这里打印出`Error:scala`。
 
 ### 3.4 特质构造顺序
 
@@ -399,7 +395,7 @@ class Employee extends Person with InfoLogger with ErrorLogger {...}
    + ErrorLogger构造器执行;
 3. 所有超类和特质构造完毕，子类才会被构造。
 
-
+<br/>
 
 ## 参考资料
 
