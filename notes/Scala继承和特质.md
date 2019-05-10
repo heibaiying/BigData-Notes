@@ -1,5 +1,21 @@
 # 继承和特质
 
+<nav>
+<a href="#一继承">一、继承</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-Scala中的继承结构">1.1 Scala中的继承结构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-extends--override">1.2 extends & override</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-调用超类构造器">1.3 调用超类构造器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-类型检查和转换">1.4 类型检查和转换</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-构造顺序和提前定义">1.5 构造顺序和提前定义</a><br/>
+<a href="#二抽象类">二、抽象类</a><br/>
+<a href="#三特质">三、特质</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-trait--with">3.1 trait & with</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-特质中的字段">3.2 特质中的字段</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-带有特质的对象">3.3 带有特质的对象</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-特质构造顺序">3.4 特质构造顺序</a><br/>
+</nav>
+
+
 ## 一、继承
 
 ### 1.1 Scala中的继承结构
@@ -12,7 +28,7 @@ scala中继承关系如下图：
 + Null是所有引用类型的子类型，唯一实例是null，可以将null赋值给除了值类型外的所有类型的变量;
 + Nothing是所有类型的子类型。
 
-![scala继承层次](D:\BigData-Notes\pictures\scala继承层次.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala继承层次.png"/> </div>
 
 ### 1.2 extends & override
 
@@ -188,11 +204,17 @@ lazy val array: Array[Int] = new Array[Int](range)
 
 ```scala
 class Employee extends {
+  //这里不能定义其他方法
   override val range = 2
-} with Person
+} with Person {
+  // 定义其他变量或者方法
+  def pr(): Unit = {println("Employee")}
+}
 ```
 
-但是这种语法也有缺陷，就是你只能在代码块中重写已有的变量，而不能定义新的变量和方法，这时候你想要拓展新的方法就只能再继承Employee，这样你的继承链就过于繁杂。所以最好的办法就是合理设计父类以规避上面的问题。
+但是这种语法也有其限制：你只能在上面代码块中重写已有的变量，而不能定义新的变量和方法，定义新的变量和方法只能写在下面代码块中。
+
+>**注意事项**：不仅是类的继承存在这个问题，后文介绍的特质(trait)的继承也存在这个问题，也同样可以通过提前定义来解决。即便可以通过多种方法解决该问题，但还是建议合理设计继承以规避此类问题。
 
 ## 二、抽象类
 
@@ -230,5 +252,171 @@ class Employee extends Person {
 
 ```
 
+
+
 ## 三、特质
+
+### 3.1 trait & with
+
+Scala中没有interface这个关键字，想要实现类似的功能，可以使用特质(trait)。trait等价于Java 8中的接口，因为trait中既能定义抽象方法，也能定义具体方法，这和Java 8中的接口是类似的。
+
+```scala
+// 1.特质使用trait关键字修饰
+trait Logger {
+
+  // 2.定义抽象方法
+  def log(msg: String)
+
+  // 3.定义具体方法
+  def logInfo(msg: String): Unit = {
+    println("INFO:" + msg)
+  }
+}
+```
+
+想要使用特质，需要使用`extends`关键字,而不是`implements`关键字，如果想要添加多个特质，可以使用`with`关键字。
+
+```scala
+// 1.使用extends关键字,而不是implements,如果想要添加多个特质，可以使用with关键字
+class ConsoleLogger extends Logger with Serializable with Cloneable {
+
+  // 2. 实现特质中的抽象方法
+  def log(msg: String): Unit = {
+    println("CONSOLE:" + msg)
+  }
+}
+```
+
+### 3.2 特质中的字段
+
+和方法一样，特质中的字段可以是抽象的，也可以是具体的：
+
++ 如果是抽象字段，则混入特质的类需要重写覆盖该字段；
++ 如果是具体字段，则混入特质的类获得该字段，但是并非是通过继承关系得到，而是在编译时候，简单将该字段加入到子类。
+
+```scala
+trait Logger {
+  // 抽象字段
+  var LogLevel:String
+  // 具体字段
+  var LogType = "FILE"
+}
+```
+
+覆盖抽象字段：
+
+```scala
+class InfoLogger extends Logger {
+  // 覆盖抽象字段
+  override var LogLevel: String = "INFO"
+}
+```
+
+### 3.3 带有特质的对象
+
+Scala支持在类定义的时混入`父类trait`，而在类实例化为具体对象的时候指明其实际使用的`子类trait`。下面给出一个示例：
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala带有特质的对象.png"/> </div>
+
+trait Logger：
+
+```scala
+// 父类
+trait Logger {
+  // 定义空方法 日志打印
+  def log(msg: String) {}
+}
+```
+
+trait ErrorLogger：
+
+```scala
+// 错误日志打印，继承自Logger
+trait ErrorLogger extends Logger {
+  // 覆盖空方法
+  override def log(msg: String): Unit = {
+    println("Error:" + msg)
+  }
+}
+```
+
+trait InfoLogger：
+
+```scala
+// 通知日志打印，继承自Logger
+trait InfoLogger extends Logger {
+
+  // 覆盖空方法
+  override def log(msg: String): Unit = {
+    println("INFO:" + msg)
+  }
+}
+```
+
+具体的使用类：
+
+```scala
+// 混入trait Logger
+class Person extends Logger {
+  // 调用定义的抽象方法
+  def printDetail(detail: String): Unit = {
+    log(detail)
+  }
+}
+```
+
+这里通过main方法来测试：
+
+```scala
+object ScalaApp extends App {
+
+  // 使用with指明需要具体使用的trait  
+  val person01 = new Person with InfoLogger
+  val person02 = new Person with ErrorLogger
+  val person03 = new  Person with InfoLogger with ErrorLogger
+  person01.log("scala")  //输出 INFO:scala
+  person02.log("scala")  //输出 Error:scala
+  person03.log("scala")  //输出 Error:scala
+
+}
+```
+
+这里前面两个输出比较明显，因为只指明了一个具体的`trait  `，这里需要说明的是第三个输出，**因为trait的调用是由右到左开始生效的**，所以这里打印出`Error:scala`。
+
+### 3.4 特质构造顺序
+
+`trait`有默认的无参构造器，但是不支持有参构造器。一个类混入多个特质后初始化顺序应该如下：
+
+```scala
+// 示例
+class Employee extends Person with InfoLogger with ErrorLogger {...}
+```
+
+1. 超类首先被构造(Person构造器执行)；
+2. 特质的构造器在超类构造器之前，在类构造器之后；特质由左到右被构造；每个特质中，父特质首先被构造；
+   + Logger构造器执行(Logger是InfoLogger的父类)；
+   + InfoLogger构造器执行；
+   + ErrorLogger构造器执行;
+3. 所有超类和特质构造完毕，子类才会被构造。
+
+
+
+## 参考资料
+
+1. Martin Odersky . Scala编程(第3版)[M] . 电子工业出版社 . 2018-1-1  
+2. 凯.S.霍斯特曼  . 快学Scala(第2版)[M] . 电子工业出版社 . 2017-7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

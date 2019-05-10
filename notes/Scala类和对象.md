@@ -1,5 +1,20 @@
 # 类和对象
 
+<nav>
+<a href="#一初识类和对象">一、初识类和对象</a><br/>
+<a href="#二类">二、类</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-成员变量可见性">2.1 成员变量可见性</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-getter和setter属性">2.2 getter和setter属性</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-BeanProperty">2.3 @BeanProperty</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-主构造器">2.4 主构造器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-辅助构造器">2.5 辅助构造器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-方法传参不可变">2.6 方法传参不可变</a><br/>
+<a href="#三对象">三、对象</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-工具类单例全局静态常量拓展特质">3.1 工具类&单例&全局静态常量&拓展特质</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-伴生对象">3.2 伴生对象</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-实现枚举类">3.3 实现枚举类</a><br/>
+</nav>
+
 ## 一、初识类和对象
 
 Scala中的类与Java中的类具有非常多的相似性，这里为了有个直观上的印象，首先给出一个类的示例。
@@ -336,22 +351,57 @@ object Person {
 
 ### 3.3 实现枚举类
 
+Scala中没有直接提供枚举类，需要通过扩展`Enumeration`，并调用其中的Value方法对所有枚举值进行初始化来实现。
+
 ```scala
 object Color extends Enumeration {
 
-  //类型别名，在使用import语句的时候比较方便
-  type WeekDay = Value
-  val YELLOW = Value(1, "yellow")
-  val BLUE = Value(2, "blue")
-  val RED = Value(3, "red")
-  val GREEN = Value(4, "green")
+  // 1.类型别名,建议声明,在import时有用
+  type Color = Value
 
-}
-
-object enumApp extends App {
-  println(Color.YELLOW.toString == "yellow")
+  // 2.调用Value方法
+  val GREEN = Value
+  // 3.只传入id
+  val RED = Value(3)
+  // 4.只传入值
+  val BULE = Value("blue")
+  // 5.传入id和值
+  val YELLOW = Value(5, "yellow")
+  // 6. 不传入id时,id为上一个声明变量的id+1,值默认和变量名相同
+  val PINK = Value
+ 
 }
 ```
 
+使用枚举类：
 
+```scala
+object ScalaApp extends App {
+
+  // 1.使用枚举类型,这种情况下需要导入枚举类，在枚举类中定义的类型别名就有用了
+  def printColor(color: Color): Unit = {
+    println(color.toString)
+  }
+
+  // 2.判断传入值和枚举值是否相等
+  println(Color.YELLOW.toString == "yellow")
+  // 3.遍历枚举类和值
+  for (c <- Color.values) println(c.id + ":" + c.toString)
+}
+
+//输出
+true
+0:GREEN
+3:RED
+4:blue
+5:yellow
+6:PINK
+```
+
+
+
+## 参考资料
+
+1. Martin Odersky . Scala编程(第3版)[M] . 电子工业出版社 . 2018-1-1  
+2. 凯.S.霍斯特曼  . 快学Scala(第2版)[M] . 电子工业出版社 . 2017-7
 
