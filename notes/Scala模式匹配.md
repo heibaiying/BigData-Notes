@@ -121,22 +121,17 @@ def unapplySeq[T](x : scala.Array[T]) : scala.Option[scala.IndexedSeq[T]] = { /*
 
 ```scala
 //声明一个抽象类
-abstract class Person{
-}
+abstract class Person{}
 ```
 
 ```scala
 // 样例类Employee
-case class Employee(name: String, age: Int, salary: Double) extends Person {
-
-}
+case class Employee(name: String, age: Int, salary: Double) extends Person {}
 ```
 
 ```scala
 // 样例类Student
-case class Student(name: String, age: Int) extends Person {
-
-}
+case class Student(name: String, age: Int) extends Person {}
 ```
 
 当你声明样例类后，编译器自动进行以下配置：
