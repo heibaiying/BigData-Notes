@@ -71,17 +71,19 @@ object ScalaApp extends App {
 }
 ```
 
-匿名函数：
+在Scala中你不必给每一个函数都命名，如`(x: Int) => 3 * x`就是一个匿名函数：
 
 ```scala
 object ScalaApp extends App {
-  // 1.将匿名函数赋值给变量fun
+  // 1.匿名函数
+  (x: Int) => 3 * x
+  // 2.具名函数
   val fun = (x: Int) => 3 * x
-  // 2.直接使用匿名函数
+  // 3.直接使用匿名函数
   val array01 = Array(1, 2, 3).map((x: Int) => 3 * x)  
-  // 3.使用占位符简写匿名函数
+  // 4.使用占位符简写匿名函数
   val array02 = Array(1, 2, 3).map(_ * 3)
-  // 4.使用匿名函数变量
+  // 5.使用具名函数
   val array03 = Array(1, 2, 3).map(fun)
   
 }
@@ -91,7 +93,7 @@ object ScalaApp extends App {
 
 #### 1. 可变长度参数列表
 
-在java中如果你想要传递可变长度的参数列表，则需要使用`String ...args`这种语法，Scala中等效的语法为`args: String*`。
+在Java中如果你想要传递可变长度的参数列表，则需要使用`String ...args`这种语法，Scala中等效的语法为`args: String*`。
 
 ```scala
 object ScalaApp extends App {

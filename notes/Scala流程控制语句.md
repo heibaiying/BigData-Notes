@@ -1,5 +1,6 @@
 # 流程控制语句
-<nav>
+
+<nav>
 <a href="#一条件表达式if">一、条件表达式if</a><br/>
 <a href="#二块表达式">二、块表达式</a><br/>
 <a href="#三循环表达式while">三、循环表达式while</a><br/>
@@ -161,7 +162,7 @@ object ScalaApp extends App {
 
 但是与Java中的switch有以下三点不同：
 
-+ Scala中的case语句支持任何常量、字符串；而Java中case语句仅支持整型、枚举和字符串常量；
++ Scala中的case语句支持任何类型；而Java中case语句仅支持整型、枚举和字符串常量；
 + Scala中每个分支语句后面不需要写break，因为在case语句中break是隐含的，默认就有；
 + 在Scala中match语句是有返回值的，而Java中switch语句是没有返回值的。如下：
 
