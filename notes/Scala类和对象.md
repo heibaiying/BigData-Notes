@@ -178,7 +178,7 @@ object Person {
 + 写在主构造器中的代码块会在类初始化的时候被执行，功能类似于Java的静态代码块`static{}`
 
 ```scala
-class Person(name: String, age: Int) {
+class Person(val name: String, val age: Int) {
 
   println("功能类似于Java的静态代码块static{}")
 
@@ -210,7 +210,7 @@ heibaiying:20
 + 每个辅助构造器必须以主构造器或其他的辅助构造器的调用开始。
 
 ```scala
-class Person(name: String, age: Int) {
+class Person(val name: String, val age: Int) {
 
   private var birthday = ""
 
