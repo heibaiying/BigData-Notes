@@ -40,7 +40,7 @@ object Thor extends App {
 输出： 普通人举起雷神之锤
 ```
 
-<br/>
+
 
 ### 1.2 隐式转换规则
 
@@ -117,7 +117,7 @@ A2B
 This is Class B
 ```
 
-<br/>
+
 
 ### 1.3 引入隐式转换
 
@@ -230,7 +230,7 @@ formatted("this is context")
 
 上面代码无法通过编译，出现错误提示`ambiguous implicit values`，即隐式值存在冲突。
 
-<br/>
+
 
 ### 2.2 引入隐式参数
 
@@ -283,7 +283,7 @@ object ScalaApp extends App {
 }
 ```
 
-<br/>
+
 
 ### 2.3 利用隐式参数进行隐式转换
 
