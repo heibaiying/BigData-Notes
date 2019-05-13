@@ -217,7 +217,8 @@ def formatted( context: String,  implicit deli: Delimiters): Unit = {
 上面第一种写法编译的时候会出现下面所示`error`信息,从中也可以看出`implicit`是作用于参数列表中每个参数的，这显然不是我们想要到达的效果，所以上面的写法采用了柯里化。
 
 ```
-not enough arguments for method formatted: (implicit context: String, implicit deli: com.heibaiying.Delimiters)
+not enough arguments for method formatted: 
+(implicit context: String, implicit deli: com.heibaiying.Delimiters)
 ```
 
 2.第二个问题和隐式函数一样，隐式默认值不能存在二义性，否则无法通过编译，示例如下：
