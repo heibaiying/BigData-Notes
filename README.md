@@ -70,10 +70,28 @@
 
 ## 三、Spark
 
+**Spark Core :**
+
 1. Spark简介
 2. [Spark单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Spark%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
-3. RDD详解
-4. Spark Transformation 和 Action
+3. 弹性式数据集RDD
+4. Spark命令行的基本使用
+5. RDD常用算子之——Transformation Action
+6. RDD常用算子之——Action
+7. Spark广播变量与累加器
+
+**Spark SQL :**
+
+1. DataFrame和DateSet
+2. Spark SQL之常用SQL语句
+3. External Data Source
+
+**Spark Streaming ：**
+
+1. Spark Streaming简介
+2. DStream常用函数
+3. Spark Streaming 整合 flume
+4. Spark Streaming 整合 kafka
 
 ## 四、Flink
 
