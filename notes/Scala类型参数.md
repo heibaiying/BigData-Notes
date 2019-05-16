@@ -9,13 +9,16 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-视图界定">2.2 视图界定 </a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-类型约束">2.3 类型约束</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-上下文界定">2.4 上下文界定</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-类型下界限定">2.5 类型下界限定</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-多重界定">2.6 多重界定</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-ClassTag上下文界定">2.5 ClassTag上下文界定</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-类型下界限定">2.6 类型下界限定</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#27-多重界定">2.7 多重界定</a><br/>
 <a href="#三Ordering--Ordered">三、Ordering & Ordered</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-Comparable">3.1 Comparable</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-Comparator">3.2 Comparator</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-上下文界定的优点">3.3 上下文界定的优点</a><br/>
+<a href="#四通配符">四、通配符</a><br/>
 </nav>
+
 
 ## 一、泛型
 
@@ -208,7 +211,31 @@ object ScalaApp extends App {
 }
 ```
 
-### 2.5 类型下界限定
+### 2.5 ClassTag上下文界定
+
+这里先看一个例子：下面这段代码，没有任何语法错误，但是在运行时会抛出异常：`Error: cannot find class tag for element type T`, 这是由于Scala和Java一样，都存在类型擦除，即**泛型信息只存在于代码编译阶段，在进入 JVM 之前，与泛型相关的信息会被擦除掉**。对于下面的代码，在运行阶段创建Array时，你必须明确指明其类型，但是此时泛型信息已经被擦除，导致出现找不到类型的异常。
+
+```scala
+object ScalaApp extends App {
+  def makePair[T](first: T, second: T) = {
+    // 创建以一个数组 并赋值
+    val r = new Array[T](2); r(0) = first; r(1) = second; r
+  }
+}
+```
+
+Scala针对这个问题，提供了ClassTag上下文界定，即把泛型的信息存储在ClassTag中，这样在运行阶段需要时，只需要从中进行获取即可。其语法为`T : ClassTag`，示例如下：
+
+```scala
+import scala.reflect._
+object ScalaApp extends App {
+  def makePair[T : ClassTag](first: T, second: T) = {
+    val r = new Array[T](2); r(0) = first; r(1) = second; r
+  }
+}
+```
+
+### 2.6 类型下界限定
 
 2.1小节介绍了类型上界的限定，Scala同时也支持下界的限定，语法为：`U >: T`，即U必须是类型T的超类或本身。
 
@@ -253,7 +280,7 @@ object ScalaApp extends App {
 }
 ```
 
-### 2.6 多重界定
+### 2.7 多重界定
 
 + 类型变量可以同时有上界和下界。 写法为 ：`T > : Lower <: Upper`；
 
@@ -392,6 +419,45 @@ implicit val ImpPersonOrdering = new PersonOrdering
 println(pair.smaller) 
 implicit val ImpPersonOrdering2 = new PersonOrdering
 println(pair.smaller)
+```
+
+
+
+## 四、通配符
+
+在实际编码中，通常需要把泛型限定在某个范围内，比如限定为某个类及其子类。因此Scala和Java一样引入了通配符这个概念，用于限定泛型的范围。不同的是Java使用`?`表示通配符，Scala使用`_`表示通配符。
+
+```scala
+class Ceo(val name: String) {
+  override def toString: String = name
+}
+
+class Manager(name: String) extends Ceo(name)
+
+class Employee(name: String) extends Manager(name)
+
+class Pair[T](val first: T, val second: T) {
+  override def toString: String = "first:" + first + ", second: " + second
+}
+
+object ScalaApp extends App {
+  // 限定部门经理及以下的人才可以组队
+  def makePair(p: Pair[_ <: Manager]): Unit = {println(p)}
+  makePair(new Pair(new Employee("heibai"), new Manager("ying")))
+}
+```
+
+目前Scala中的通配符在某些复杂情况下还不完善，如下面的语句在Scala 2.12 中并不能通过编译：
+
+```scala
+def min[T <: Comparable[_ >: T]](p: Pair[T]) ={}
+```
+
+可以使用以下语法代替：
+
+```scala
+type SuperComparable[T] = Comparable[_ >: T]
+def min[T <: SuperComparable[T]](p: Pair[T]) = {}
 ```
 
 
