@@ -179,7 +179,7 @@ Spark会自动监视每个节点上的缓存使用情况，并按照最近最少
 
 Spark中，一个任务对应一个分区，通常不会跨分区操作数据。但如果遇到reduceByKey等操作，Spark必须从所有分区读取数据，并查找所有键的所有值，然后汇总在一起以计算每个键的最终结果 ，这称为shuffle。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-reducebykey.png"/> </div>
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-reducebykey.png"/> </div>
 
 
 
@@ -206,7 +206,7 @@ RDD和它的父RDD(s)之间的依赖关系分为两种不同的类型：
 
 如下图：每一个方框表示一个 RDD，带有颜色的矩形表示分区
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-窄依赖和宽依赖.png"/> </div>
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-窄依赖和宽依赖.png"/> </div>
 
 
 
@@ -226,7 +226,7 @@ RDD(s)及其之间的依赖关系组成了DAG(有向无环图)，DAG定义了这
 + 对于窄依赖，由于分区的依赖关系是确定的，其转换操作可以在同一个线程执行，所以可以划分到同一个执行阶段；
 + 对于宽依赖，由于Shuffle的存在，只能在父RDD(s)被Shuffle处理完成后，才能开始接下来的计算，因此遇到宽依赖就需要重新划分阶段。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-DAG.png"/> </div>
+<div align="center"> <img width="600px" height="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-DAG.png"/> </div>
 
 
 
