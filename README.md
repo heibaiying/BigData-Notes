@@ -74,11 +74,11 @@
 
 1. Spark简介
 2. [Spark单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Spark%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
-3. 弹性式数据集RDD
-4. Spark命令行的基本使用
-5. RDD常用算子之——Transformation Action
-6. RDD常用算子之——Action
-7. Spark广播变量与累加器
+3. Spark命令行的基本使用
+4. [弹性式数据集RDD](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark-RDD.md)
+5. [RDD常用算子详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark-Transformation和Action.md)
+6. Spark运行模式
+7. [Spark累加器与广播变量](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark累加器与广播变量.md)
 
 **Spark SQL :**
 
