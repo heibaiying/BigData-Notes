@@ -43,7 +43,7 @@ DataFrame是一个由具名列组成的数据集。它在概念上等同于关�
 
 | 语言   | 主要抽象                                     |
 | ------ | -------------------------------------------- |
-| Scala  | Dataset[T] & DataFrame (Dataset[Row] 的别名) |
+| Scala  | Dataset[T] & DataFrame (Dataset[Row] 的别名)                                                               |
 | Java   | Dataset[T]                                   |
 | Python | DataFrame                                    |
 | R      | DataFrame                                    |
