@@ -10,6 +10,7 @@
 
     <properties>
         <scala.version>2.12</scala.version>
+        <spark.version>2.4.0</spark.version>
     </properties>
 
     <build>
@@ -31,8 +32,14 @@
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_${scala.version}</artifactId>
-            <version>2.4.0</version>
+            <version>${spark.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_${scala.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+
         <!--单元测试依赖包-->
         <dependency>
             <groupId>junit</groupId>
