@@ -55,13 +55,13 @@ Spark Streaming是Spark的一个子模块，用于快速构建可扩展，高吞
 + 能够和Spark其他模块无缝集成，将流处理与批处理完美结合；
 + Spark Streaming可以从HDFS，Flume，Kafka，Twitter和ZeroMQ读取数据，也支持自定义数据源。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-arch.png"/> </div>
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-arch.png"/> </div>
 
 ### 2.2 DStream
 
 Spark Streaming提供称为离散流(DStream)的高级抽象，用于表示连续的数据流。 DStream可以从来自Kafka，Flume和Kinesis等数据源的输入数据流创建，也可以由其他DStream转化而来。**在内部，DStream表示为一系列RDD**。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-flow.png"/> </div>
+<div align="center"> <img width="600px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-flow.png"/> </div>
 
 
 
