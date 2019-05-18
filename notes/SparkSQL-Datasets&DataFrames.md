@@ -72,7 +72,7 @@ Dataset是分布式的数据集合，在Spark 1.6版本被引入。它集成了R
 
 
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-unifed.png"/> </div>
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-unifed.png"/> </div>
 
 ### 2.4 静态类型与运行时类型安全
 
@@ -84,7 +84,7 @@ Dataset是分布式的数据集合，在Spark 1.6版本被引入。它集成了R
 
 以上这些最终都被解释成关于类型安全图谱，对应开发中的语法和分析错误。在图谱中，Dataset最严格，但对于开发者来说效率最高。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-运行安全.png"/> </div>
+<div align="center"> <img  width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-运行安全.png"/> </div>
 
 上面的描述可能并没有那么直观，下面的给出一个IDEA中代码编译的示例：
 
@@ -116,7 +116,7 @@ val dataSet: Dataset[Person] = spark.read.json("people.json").as[Person]
 + 相比于DataFrame而言，DataSet是强类型的(Typed)，有着更为严格的静态类型检查；
 + DataSets、DataFrames、SQL的底层都依赖了RDDs API，并对外提供结构化的访问接口。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-structure-api.png"/> </div>
+<div align="center"> <img  width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-structure-api.png"/> </div>
 
 
 
