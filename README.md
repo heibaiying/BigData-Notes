@@ -82,16 +82,16 @@
 
 **Spark SQL :**
 
-1. DataFrame和DateSet
+1. [Spark SQL之 DateFrame 和 DataSet](https://github.com/heibaiying/BigData-Notes/blob/master/notes/SparkSQL-Dataset&DataFrame.md)
 2. Spark SQL之常用SQL语句
 3. External Data Source
 
 **Spark Streaming ：**
 
-1. Spark Streaming简介
-2. DStream常用函数
-3. Spark Streaming 整合 flume
-4. Spark Streaming 整合 kafka
+1. [Spark Streaming简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark-Streaming与流处理.md)
+2. DStream常用操作详解
+3. Spark Streaming 整合 Flume
+4. Spark Streaming 整合 Kafka
 
 ## 四、Flink
 
