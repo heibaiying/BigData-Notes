@@ -1,5 +1,6 @@
 # Spark 累加器与广播变量
-<nav>
+
+<nav>
 <a href="#一简介">一、简介</a><br/>
 <a href="#二累加器">二、累加器</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-理解闭包">2.1 理解闭包</a><br/>
@@ -9,7 +10,7 @@
 
 ## 一、简介
 
-在Spark中，提供了两种类型的共享变量：累加器(accumulator)与广播变量(broadcast variable)。
+在Spark中，提供了两种类型的共享变量：累加器(accumulator)与广播变量(broadcast variable)：
 
 + 累加器：用来对信息进行聚合，主要用于累计计数等场景；
 + 广播变量：主要用于在节点间高效分发大对象。
