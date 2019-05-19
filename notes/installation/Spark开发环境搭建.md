@@ -177,7 +177,7 @@ Spark是基于Scala语言进行开发的，分别提供了基于Scala、Java、P
 
 ### 2.6 切换Scala版本
 
-在日常的开发中，由于对应Spark的版本切换，可能导致需要切换Scala的版本，则可以在`Project Structures`中的`Global Libraries`选项卡中进行切换。
+在日常的开发中，由于Spark版本的切换，可能导致需要切换Scala版本，此时可以在`Project Structures`中的`Global Libraries`选项卡进行切换。
 
 <div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-change.png"/> </div>
 
