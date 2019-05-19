@@ -1,5 +1,6 @@
 # Spark简介
-<nav>
+
+<nav>
 <a href="#一简介">一、简介</a><br/>
 <a href="#二特点">二、特点</a><br/>
 <a href="#三集群架构">三、集群架构</a><br/>
@@ -31,7 +32,7 @@ Spark于2009年诞生于加州大学伯克利分校AMPLab。2013年，该项目�
 
 + 多数据源支持：支持访问HDFS，Alluxio，Cassandra，HBase，Hive以及数百个其他数据源中的数据。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/future-of-spark.png"/> </div>
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/future-of-spark.png"/> </div>
 
 ## 三、集群架构
 
@@ -56,7 +57,7 @@ Spark于2009年诞生于加州大学伯克利分校AMPLab。2013年，该项目�
 
 Spark基于Spark Core扩展了四个核心组件，分别用于满足不同领域的计算需求。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-stack.png"/> </div>
+<div align="center"> <img  width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-stack.png"/> </div>
 
 ### 3.1 Spark  SQL
 
