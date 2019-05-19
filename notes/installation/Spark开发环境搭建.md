@@ -1,5 +1,23 @@
 # Spark开发环境搭建
 
+<nav>
+<a href="#一安装Spark">一、安装Spark</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-下载安装包">1.1 下载安装包</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-解压安装包">1.2 解压安装包</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-配置环境变量">1.3 配置环境变量</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-Local模式">1.4 Local模式</a><br/>
+<a href="#二词频统计案例">二、词频统计案例</a><br/>
+<a href="#三Scala开发环境配置">三、Scala开发环境配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-前置条件">2.1 前置条件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-安装Scala插件">2.2 安装Scala插件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-创建Scala项目">2.3 创建Scala项目</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-下载Scala-SDK">2.4 下载Scala SDK</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-创建Hello-World">2.5 创建Hello World</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-切换Scala版本">2.6 切换Scala版本</a><br/>
+<a href="#"></a><br/>
+</nav>
+
+
 ## 一、安装Spark
 
 ### 1.1 下载安装包
@@ -52,7 +70,7 @@ spark-shell --master local[2]
 - local[k]：启动k个工作线程；
 - local[*]：启动跟cpu数目相同的工作线程数。
 
-![spark-shell-local](D:\BigData-Notes\pictures\spark-shell-local.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-shell-local.png"/> </div>
 
 采用这种模式创建后，你会进入Scala交互式命令行，并且程序已经自动创建了SparkContext，即Spark的应用上下文，等效于执行了下面的Scala代码：
 
@@ -170,6 +188,4 @@ Spark是基于Scala语言进行开发的，分别提供了基于Scala、Java、P
 
 
 
-
-## 
 
