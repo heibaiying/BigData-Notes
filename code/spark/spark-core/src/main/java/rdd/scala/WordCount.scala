@@ -1,4 +1,4 @@
-package com.heibaiying.spark.rdd
+package rdd.scala
 
 import org.apache.spark.{SparkConf, SparkContext}
 

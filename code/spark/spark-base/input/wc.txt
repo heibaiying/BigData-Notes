@@ -1,2 +1,0 @@
-hadoop,mapreduce,hadoop
-spark,spark

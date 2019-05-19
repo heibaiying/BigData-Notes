@@ -72,13 +72,12 @@
 
 **Spark Core :**
 
-1. Spark简介
-2. [Spark单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Spark%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA.md)
-3. Spark命令行的基本使用
+1. [Spark简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark简介.md)
+2. [Spark开发环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Spark开发环境搭建.md)
 4. [弹性式数据集RDD](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark-RDD.md)
 5. [RDD常用算子详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark-Transformation和Action.md)
-6. Spark运行模式
-7. [Spark累加器与广播变量](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark累加器与广播变量.md)
+5. [Spark运行模式与作业提交](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark部署模式与作业提交.md)
+6. [Spark累加器与广播变量](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark累加器与广播变量.md)
 
 **Spark SQL :**
 
@@ -172,4 +171,10 @@ TODO
 12. [类型参数](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala类型参数.md)
 13. [隐式转换和隐式参数](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala隐式转换和隐式参数.md)
 
-    
+
+
+
+## 十三、公共基础知识
+
+1. 大数据应用打包方式
+2. 大数据常用文件格式
