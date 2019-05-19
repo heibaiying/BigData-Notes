@@ -12,7 +12,7 @@
 
 ### 1.1  spark-submit
 
-Spark所有模式均通过使用` spark-submit`提交作业，其命令格式如下：
+Spark所有模式均通过使用`spark-submit`提交作业，其命令格式如下：
 
 ```shell
 ./bin/spark-submit \
@@ -174,6 +174,7 @@ check your cluster UI to ensure that workers are registered and have sufficient 
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-内存不足.png"/> </div>
 
+<br/>
 关于Master和Woker节点的所有可选配置如下，可以在`spark-env.sh`进行对应的配置：
 
 | Environment Variable（环境变量） | Meaning（含义）                                              |
