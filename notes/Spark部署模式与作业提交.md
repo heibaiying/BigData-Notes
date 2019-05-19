@@ -172,10 +172,9 @@ check your cluster UI to ensure that workers are registered and have sufficient 
 
 这时候可以查看Web UI，我这里是内存空间不足：提交命令中要求作业的`executor-memory`是2G，但是实际的工作节点的`Memory`只有1G，这时候你可以修改`--executor-memory`，也可以修改 Woker 的`Memory`，其默认值为主机所有可用内存值减去1G。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-内存不足.png"/> </div>
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-内存不足.png"/> </div>   
 
-<br/>
-关于Master和Woker节点的所有可选配置如下，可以在`spark-env.sh`进行对应的配置：
+关于Master和Woker节点的所有可选配置如下，可以在`spark-env.sh`中进行对应的配置：    
 
 | Environment Variable（环境变量） | Meaning（含义）                                              |
 | -------------------------------- | ------------------------------------------------------------ |
