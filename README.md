@@ -176,5 +176,5 @@ TODO
 
 ## 十三、公共基础知识
 
-1. 大数据应用打包方式
+1. [大数据应用常用打包方式](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据应用常用打包方式.md)
 2. 大数据常用文件格式
