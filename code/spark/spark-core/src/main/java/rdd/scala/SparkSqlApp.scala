@@ -1,65 +1,54 @@
 package rdd.scala
 
-import org.apache.spark.sql.expressions.Aggregator
-import org.apache.spark.sql.{Encoder, Encoders, SparkSession, functions}
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
 
-// 1.定义员工类,对于可能存在null值的字段需要使用Option进行包装
-case class Emp(ename: String, comm: scala.Option[Double], deptno: Long, empno: Long,
-               hiredate: String, job: String, mgr: scala.Option[Long], sal: Double)
-
-// 2.定义聚合操作的中间输出类型
-case class SumAndCount(var sum: Double, var count: Long)
-
-/* 3.自定义聚合函数
- * @IN  聚合操作的输入类型
- * @BUF reduction操作输出值的类型
- * @OUT 聚合操作的输出类型
- */
-object MyAverage extends Aggregator[Emp, SumAndCount, Double] {
-
-
-  // 4.用于聚合操作的的初始零值
-  override def zero: SumAndCount = SumAndCount(0, 0)
-
-
-  // 5.同一分区中的reduce操作
-  override def reduce(avg: SumAndCount, emp: Emp): SumAndCount = {
-    avg.sum += emp.sal
-    avg.count += 1
-    avg
-  }
-
-  // 6.不同分区中的merge操作
-  override def merge(avg1: SumAndCount, avg2: SumAndCount): SumAndCount = {
-    avg1.sum += avg2.sum
-    avg1.count += avg2.count
-    avg1
-  }
-
-  // 7.定义最终的输出类型
-  override def finish(reduction: SumAndCount): Double = reduction.sum / reduction.count
-
-  // 8.中间类型的编码转换
-  override def bufferEncoder: Encoder[SumAndCount] = Encoders.product
-
-  // 9.输出类型的编码转换
-  override def outputEncoder: Encoder[Double] = Encoders.scalaDouble
-}
 
 object SparkSqlApp {
 
   // 测试方法
   def main(args: Array[String]): Unit = {
 
-    val spark = SparkSession.builder().appName("Spark-SQL").master("local[2]").getOrCreate()
-    import spark.implicits._
-    val ds = spark.read.json("file/emp.json").as[Emp]
+    val spark = SparkSession.builder().appName("aggregations").master("local[2]").getOrCreate()
+    val empDF = spark.read.json("/usr/file/json/emp.json")
+    empDF.createOrReplaceTempView("emp")
+    empDF.show()
 
-    // 10.使用内置avg()函数和自定义函数分别进行计算，验证自定义函数是否正确
-    val myAvg = ds.select(MyAverage.toColumn.name("average_sal")).first()
-    val avg = ds.select(functions.avg(ds.col("sal"))).first().get(0)
+    empDF.select(count("ename")).show()
+    empDF.select(countDistinct("deptno")).show()
+    empDF.select(approx_count_distinct("ename", 0.1)).show()
+    empDF.select(first("ename"), last("job")).show()
+    empDF.select(min("sal"), max("sal")).show()
+    empDF.select(sum("sal")).show()
+    empDF.select(sumDistinct("sal")).show()
+    empDF.select(avg("sal")).show()
 
-    println("自定义average函数 : " + myAvg)
-    println("内置的average函数 : " + avg)
+
+    // 总体方差 均方差 总体标准差 样本标准差
+    empDF.select(var_pop("sal"), var_samp("sal"), stddev_pop("sal"), stddev_samp("sal")).show()
+
+
+    // 偏度和峰度
+    empDF.select(skewness("sal"), kurtosis("sal")).show()
+
+    // 计算两列的 皮尔逊相关系数 样本协方差 总体协方差
+    empDF.select(corr("empno", "sal"), covar_samp("empno", "sal"),
+      covar_pop("empno", "sal")).show()
+
+    empDF.agg(collect_set("job"), collect_list("ename")).show()
+
+
+    empDF.groupBy("deptno", "job").count().show()
+    spark.sql("SELECT deptno, job, count(*) FROM emp GROUP BY deptno, job").show()
+
+    empDF.groupBy("deptno").agg(count("ename").alias("人数"), sum("sal").alias("总工资")).show()
+    spark.sql("SELECT deptno, count(ename) ,sum(sal) FROM emp GROUP BY deptno").show()
+
+
+    empDF.groupBy("deptno").agg("ename"->"count","sal"->"sum").show()
+
+
+
+
   }
 }

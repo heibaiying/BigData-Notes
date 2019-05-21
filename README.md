@@ -74,20 +74,22 @@
 
 1. [Spark简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark简介.md)
 2. [Spark开发环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Spark开发环境搭建.md)
-4. [弹性式数据集RDD](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark-RDD.md)
-5. [RDD常用算子详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark-Transformation和Action.md)
+4. [弹性式数据集RDD](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_RDD.md)
+5. [RDD常用算子详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Transformation和Action算子.md)
 5. [Spark运行模式与作业提交](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark部署模式与作业提交.md)
 6. [Spark累加器与广播变量](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark累加器与广播变量.md)
 
 **Spark SQL :**
 
-1. [Spark SQL之 DateFrame 和 DataSet](https://github.com/heibaiying/BigData-Notes/blob/master/notes/SparkSQL-Dataset&DataFrame.md)
-2. Spark SQL之常用SQL语句
-3. External Data Source
+1. [DateFrames 和 DataSets ](https://github.com/heibaiying/BigData-Notes/blob/master/notes/SparkSQL_Dataset和DataFrame简介.md)
+2. [Structured API的基本使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Structured_API的基本使用.md)
+3. 外部数据源
+4. [Spark SQL常用聚合函数](https://github.com/heibaiying/BigData-Notes/blob/master/notes/SparkSQL常用聚合函数.md)
+5. 联结操作
 
 **Spark Streaming ：**
 
-1. [Spark Streaming简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark-Streaming与流处理.md)
+1. [Spark Streaming简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Streaming与流处理.md)
 2. DStream常用操作详解
 3. Spark Streaming 整合 Flume
 4. Spark Streaming 整合 Kafka
