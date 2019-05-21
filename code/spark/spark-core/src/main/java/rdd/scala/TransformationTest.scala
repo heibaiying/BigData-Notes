@@ -67,7 +67,7 @@ class TransformationTest {
   @Test
   def sample(): Unit = {
     val list = List(1, 2, 3, 4, 5, 6)
-    sc.parallelize(list).sample(withReplacement = false, 0.5).foreach(println)
+    sc.parallelize(list).sample(withReplacement = false, fraction = 0.5).foreach(println)
   }
 
 
