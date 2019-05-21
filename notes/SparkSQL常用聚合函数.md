@@ -1,5 +1,25 @@
 # 聚合函数Aggregations
 
+<nav>
+<a href="#一简单聚合">一、简单聚合</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-数据准备">1.1 数据准备</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-count">1.2 count</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-countDistinct">1.3 countDistinct</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-approx_count_distinct">1.4 approx_count_distinct </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-first--last">1.5 first & last </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-min--max">1.6 min & max</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#17-sum--sumDistinct">1.7 sum & sumDistinct</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#18-avg">1.8 avg</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#19-数学函数">1.9 数学函数</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#110-聚合数据到集合">1.10 聚合数据到集合</a><br/>
+<a href="#二分组聚合">二、分组聚合</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-简单分组">2.1 简单分组</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-分组聚合">2.2 分组聚合</a><br/>
+<a href="#三自定义聚合函数">三、自定义聚合函数</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-有类型的自定义函数">3.1 有类型的自定义函数</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-无类型的自定义聚合函数">3.2 无类型的自定义聚合函数</a><br/>
+</nav>
+
 ## 一、简单聚合
 
 ### 1.1 数据准备
@@ -225,7 +245,7 @@ object SparkSqlApp {
 
 自定义聚合函数需要实现的方法比较多，这里以绘图的方式来演示其执行流程，以及每个方法的作用：
 
-![spark-sql-自定义函数](D:\BigData-Notes\pictures\spark-sql-自定义函数.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-sql-自定义函数.png"/> </div>
 
 
 

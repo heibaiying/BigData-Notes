@@ -1,5 +1,14 @@
 # Structured API基本使用
 
+<nav>
+<a href="#一创建DataFrames">一、创建DataFrames</a><br/>
+<a href="#二DataFrames基本操作">二、DataFrames基本操作</a><br/>
+<a href="#三创建Datasets">三、创建Datasets</a><br/>
+<a href="#四DataFrames与Datasets互相转换">四、DataFrames与Datasets互相转换</a><br/>
+<a href="#五RDDs转换为DataFramesDatasets">五、RDDs转换为DataFrames\Datasets</a><br/>
+</nav>
+
+
 ## 一、创建DataFrames
 
 Spark中所有功能的入口点是`SparkSession`，可以使用`SparkSession.builder()`创建。创建后应用程序就可以从现有RDD，Hive表或Spark数据源创建DataFrame。如下所示：
@@ -15,7 +24,7 @@ import spark.implicits._
 
 这里可以启动`spark-shell`进行测试，需要注意的是`spark-shell`启动后会自动创建一个名为`spark`的`SparkSession`，在命令行中可以直接引用即可：
 
-![spark-sql-shell](D:\BigData-Notes\pictures\spark-sql-shell.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-sql-shell.png"/> </div>
 
 ## 二、DataFrames基本操作
 
@@ -26,7 +35,7 @@ import spark.implicits._
 df.printSchema()
 ```
 
-![spark-scheme](D:\BigData-Notes\pictures\spark-scheme.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-scheme.png"/> </div>
 
 ### 2.2 使用DataFrame API进行基本查询
 

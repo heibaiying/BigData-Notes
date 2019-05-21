@@ -1,4 +1,18 @@
 # 基于Zookeeper搭建Kafka高可用集群
+<nav>
+<a href="#一Zookeeper集群搭建">一、Zookeeper集群搭建</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-下载--解压">1.1 下载 & 解压</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-修改配置">1.2 修改配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-标识节点">1.3 标识节点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-启动集群">1.4 启动集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-集群验证">1.5 集群验证</a><br/>
+<a href="#二Kafka集群搭建">二、Kafka集群搭建</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-下载解压">2.1 下载解压</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-拷贝配置文件">2.2 拷贝配置文件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-修改配置">2.3 修改配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-启动集群">2.4 启动集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-创建测试主题">2.5 创建测试主题</a><br/>
+</nav>
 
 ## 一、Zookeeper集群搭建
 
@@ -210,7 +224,7 @@ bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 --replication-fac
 bin/kafka-topics.sh --describe --bootstrap-server hadoop001:9092 --topic my-replicated-topic
 ```
 
-![kafka-cluster-shell](D:\BigData-Notes\pictures\kafka-cluster-shell.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-cluster-shell.png"/> </div>
 
 你也可以创建一个消费者和生产者进行连通测试：
 
