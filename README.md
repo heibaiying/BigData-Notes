@@ -143,7 +143,7 @@ TODO
 ## 十、Kafka
 
 1. [Kafka 核心概念介绍](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Kafka核心概念介绍.md)
-2. 基于Zookeeper搭建Kafka高可用集群
+2. [基于Zookeeper搭建Kafka高可用集群](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/基于Zookeeper搭建Kafka高可用集群.md)
 3. Kafka生产者详解
 4. Kafka消费者详解
 5. Kafka 副本机制以及选举原理剖析
@@ -152,7 +152,7 @@ TODO
 ## 十一、Zookeeper
 
 1. Zookeeper 简介及核心概念
-2. Zookeeper集群搭建Zookeeper 
+2. [Zookeeper单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper单机环境和集群环境搭建.md) 
 3. Zookeeper分布式锁实现方案
 4. 集群升级、迁移深入分析 Zookeeper  
 5. Zab协议及选举机制

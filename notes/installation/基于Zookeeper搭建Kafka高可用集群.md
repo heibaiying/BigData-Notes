@@ -1,6 +1,130 @@
 # 基于Zookeeper搭建Kafka高可用集群
 
-## 一、Zookeeper集群搭建
+## 一、集群环境搭建
+
+为保证集群高可用，Zookeeper集群的节点数最好是奇数，最少有三个节点，所以这里搭建一个三个节点的集群。
+
+### 1.1 下载 & 解压
+
+下载对应版本Zookeeper，这里我下载的版本`3.4.14`。官方下载地址：https://archive.apache.org/dist/zookeeper/
+
+```shell
+# 下载
+wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz
+# 解压
+tar -zxvf zookeeper-3.4.14.tar.gz
+```
+
+### 1.2 修改配置
+
+拷贝三份zookeeper安装包。分别进入安装目录的`conf`目录，拷贝配置样本`zoo_sample.cfg `为`zoo.cfg`并进行修改，修改后三份配置文件内容分别如下：
+
+zookeeper01配置：
+
+```shell
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/usr/local/zookeeper-cluster/data/01
+dataLogDir=/usr/local/zookeeper-cluster/log/01
+clientPort=2181
+
+# server.1 这个1是服务器的标识，可以是任意有效数字，标识这是第几个服务器节点，这个标识要写到dataDir目录下面myid文件里
+# 指名集群间通讯端口和选举端口
+server.1=127.0.0.1:2287:3387
+server.2=127.0.0.1:2288:3388
+server.3=127.0.0.1:2289:3389
+```
+
+> 如果是多台服务器，则集群中每个节点通讯端口和选举端口可相同，IP地址修改为每个节点所在主机IP即可。
+
+zookeeper02配置，与zookeeper01相比，只有`dataLogDir`和`dataLogDir`不同：
+
+```shell
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/usr/local/zookeeper-cluster/data/02
+dataLogDir=/usr/local/zookeeper-cluster/log/02
+clientPort=2182
+
+server.1=127.0.0.1:2287:3387
+server.2=127.0.0.1:2288:3388
+server.3=127.0.0.1:2289:3389
+```
+
+zookeeper03配置，与zookeeper01，02相比，也只有`dataLogDir`和`dataLogDir`不同：
+
+```shell
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/usr/local/zookeeper-cluster/data/03
+dataLogDir=/usr/local/zookeeper-cluster/log/03
+clientPort=2183
+
+server.1=127.0.0.1:2287:3387
+server.2=127.0.0.1:2288:3388
+server.3=127.0.0.1:2289:3389
+```
+
+> 配置参数说明：
+>
+> - **tickTime**：用于计算的基础时间单元。比如session超时：N*tickTime；
+> - **initLimit**：用于集群，允许从节点连接并同步到 master节点的初始化连接时间，以tickTime的倍数来表示；
+> - **syncLimit**：用于集群， master主节点与从节点之间发送消息，请求和应答时间长度（心跳机制）；
+> - **dataDir**：数据存储位置；
+> - **dataLogDir**：日志目录；
+> - **clientPort**：用于客户端连接的端口，默认2181
+
+
+
+### 1.3 标识节点
+
+分别在三个节点的数据存储目录下新建`myid`文件,并写入对应的节点标识。Zookeeper集群通过`myid`文件识别集群节点，并通过上文配置的节点通信端口和选举端口来进行节点通信，选举出leader节点。
+
+创建存储目录：
+
+```shell
+# dataDir
+mkdir -vp  /usr/local/zookeeper-cluster/data/01
+# dataDir
+mkdir -vp  /usr/local/zookeeper-cluster/data/02
+# dataDir
+mkdir -vp  /usr/local/zookeeper-cluster/data/03
+```
+
+创建并写入节点标识到`myid`文件：
+
+```shell
+#server1
+echo "1" > /usr/local/zookeeper-cluster/data/01/myid
+#server2
+echo "2" > /usr/local/zookeeper-cluster/data/02/myid
+#server3
+echo "3" > /usr/local/zookeeper-cluster/data/03/myid
+```
+
+### 1.4 启动集群
+
+分别启动三个节点：
+
+```shell
+# 启动节点1
+/usr/app/zookeeper-cluster/zookeeper01/bin/zkServer.sh start
+# 启动节点2
+/usr/app/zookeeper-cluster/zookeeper02/bin/zkServer.sh start
+# 启动节点3
+/usr/app/zookeeper-cluster/zookeeper03/bin/zkServer.sh start
+```
+
+### 1.5 集群验证
+
+使用jps查看进程，并且使用`zkServer.sh status`查看集群各个节点状态。如图三个节点进程均启动成功，并且两个节点为follower节点，一个节点为leader节点。
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-cluster.png"/> </div>
+
+
 
 ## 二、Kafka集群搭建
 
@@ -11,14 +135,11 @@ Kafka安装包官方下载地址：http://kafka.apache.org/downloads ，本用�
 ```shell
 # 下载
 wget https://www-eu.apache.org/dist/kafka/2.2.0/kafka_2.12-2.2.0.tgz
-```
-
-这里说明一下kafka安装包的命名规则：以`kafka_2.12-2.2.0.tgz`为例，前面的2.12代表Scala的版本号（Kafka是采用Scala语言开发的），后面的2.2.0代表Kafka的版本号。
-
-```shell
 # 解压
 tar -xzf kafka_2.12-2.2.0.tgz
 ```
+
+>这里j解释一下kafka安装包的命名规则：以`kafka_2.12-2.2.0.tgz`为例，前面的2.12代表Scala的版本号（Kafka采用Scala语言进行开发），后面的2.2.0则代表Kafka的版本号。
 
 ### 2.2 拷贝配置文件
 
@@ -67,25 +188,12 @@ zookeeper.connect=hadoop001:2181,hadoop001:2182,hadoop001:2183
 
 ### 2.4 启动集群
 
-分别指定不同配置文件，启动三个Kafka节点：
+分别指定不同配置文件，启动三个Kafka节点。启动后可以使用jps查看进程，此时应该有三个zookeeper进程和三个kafka进程。
 
 ```shell
 bin/kafka-server-start.sh config/server-1.properties
 bin/kafka-server-start.sh config/server-2.properties
 bin/kafka-server-start.sh config/server-3.properties
-```
-
-启动后使用jps查看进程，此时应该有三个zookeeper进程和三个kafka进程：
-
-```shell
-[root@hadoop001 kafka_2.12-2.2.0]# jps
-14288 QuorumPeerMain
-18385 Jps
-16228 Kafka
-17653 Kafka
-14374 QuorumPeerMain
-16826 Kafka
-14446 QuorumPeerMain
 ```
 
 ### 2.5 创建测试主题
@@ -96,7 +204,7 @@ bin/kafka-server-start.sh config/server-3.properties
 bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 --replication-factor 3 --partitions 1 --topic my-replicated-topic
 ```
 
-查看主题信息：
+创建后可以使用以下命令查看创建的主题信息：
 
 ```shell
 bin/kafka-topics.sh --describe --bootstrap-server hadoop001:9092 --topic my-replicated-topic
@@ -104,7 +212,7 @@ bin/kafka-topics.sh --describe --bootstrap-server hadoop001:9092 --topic my-repl
 
 ![kafka-cluster-shell](D:\BigData-Notes\pictures\kafka-cluster-shell.png)
 
-还可以进一步创建一个消费者和一个生产者进行测试：
+你也可以创建一个消费者和生产者进行连通测试：
 
 ```shell
 # 创建生产者

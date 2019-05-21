@@ -127,13 +127,9 @@ zkServer.sh start
 
 为保证集群高可用，Zookeeper集群的节点数最好是奇数，最少有三个节点，所以这里演示搭建一个三个节点的集群。
 
-> 以下演示为单机上搭建集群，对于Zookeeper，多机集群搭建步骤和单机一致。
-
 ### 2.1 修改配置
 
-拷贝三份zookeeper安装包，分别修改其配置文件`zoo.cfg`，主要是修改`dataDir`、`dataLogDir`以及配置集群信息。
-
-如果是多台服务器，则集群中每个节点通讯端口和选举端口可相同，IP地址修改为每个节点所在主机IP即可。
+拷贝三份zookeeper安装包，分别修改其配置文件`zoo.cfg`，主要是修改`dataDir`、`dataLogDir`以及配置集群信息。修改后三份配置文件的内容分别如下：
 
 zookeeper01配置：
 
@@ -152,6 +148,8 @@ server.2=127.0.0.1:2288:3388
 server.3=127.0.0.1:2289:3389
 ```
 
+> 如果是多台服务器，则集群中每个节点通讯端口和选举端口可相同，IP地址修改为每个节点所在主机IP即可。
+
 zookeeper02配置，与zookeeper01相比，只有`dataLogDir`和`dataLogDir`不同：
 
 ```shell
@@ -167,7 +165,7 @@ server.2=127.0.0.1:2288:3388
 server.3=127.0.0.1:2289:3389
 ```
 
-zookeeper03配置，与zookeeper01，02相比，只有`dataLogDir`和`dataLogDir`不同：
+zookeeper03配置，与zookeeper01，02相比，也只有`dataLogDir`和`dataLogDir`不同：
 
 ```shell
 tickTime=2000
@@ -186,9 +184,7 @@ server.3=127.0.0.1:2289:3389
 
 ### 2.2 标识节点
 
-分别在三个节点的数据存储目录下新建`myid`文件,并写入对应的节点标识。
-
-Zookeeper集群通过`myid`文件识别集群节点，并通过上文配置的节点通信端口和选举端口来进行节点通信，并选举出leader节点，从而搭建出集群。
+分别在三个节点的数据存储目录下新建`myid`文件,并写入对应的节点标识。Zookeeper集群通过`myid`文件识别集群节点，并通过上文配置的节点通信端口和选举端口来进行节点通信，选举出leader节点。
 
 创建存储目录：
 
