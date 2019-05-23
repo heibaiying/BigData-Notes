@@ -113,6 +113,8 @@ val deptDF = spark.createDataFrame(rowRDD, schema)
 deptDF.show()
 ```
 
+<br/>
+
 ### 1.4  DataFrames与Datasets互相转换
 
 Spark提供了非常简单的转换方法用于DataFrames与Datasets互相转换，示例如下：
@@ -168,7 +170,7 @@ df.withColumnRenamed("comm", "common").show()
 
 需要说明的是新增，删除，重命名列都会产生新的DataFrame，原来的DataFrame不会被改变。
 
-
+<br/>
 
 ## 三、使用Structured API进行基本查询
 
@@ -192,7 +194,7 @@ df.select("deptno").distinct().show()
 df.groupBy("deptno").count().show()
 ```
 
-
+<br/>
 
 ## 四、使用Spark SQL进行基本查询
 
