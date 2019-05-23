@@ -1,94 +1,39 @@
 # Structured API基本使用
 
 <nav>
-<a href="#一创建DataFrames">一、创建DataFrames</a><br/>
-<a href="#二DataFrames基本操作">二、DataFrames基本操作</a><br/>
-<a href="#三创建Datasets">三、创建Datasets</a><br/>
-<a href="#四DataFrames与Datasets互相转换">四、DataFrames与Datasets互相转换</a><br/>
-<a href="#五RDDs转换为DataFramesDatasets">五、RDDs转换为DataFrames\Datasets</a><br/>
+<a href="#一创建DataFrame和Dataset">一、创建DataFrame和Dataset</a><br/>
+<a href="#二Columns列操作">二、Columns列操作</a><br/>
+<a href="#三使用Structured-API进行基本查询">三、使用Structured API进行基本查询</a><br/>
+<a href="#四使用Spark-SQL进行基本查询">四、使用Spark SQL进行基本查询</a><br/>
 </nav>
 
 
-## 一、创建DataFrames
+## 一、创建DataFrame和Dataset
+
+### 1.1 创建DataFrame
 
 Spark中所有功能的入口点是`SparkSession`，可以使用`SparkSession.builder()`创建。创建后应用程序就可以从现有RDD，Hive表或Spark数据源创建DataFrame。如下所示：
 
 ```scala
 val spark = SparkSession.builder().appName("Spark-SQL").master("local[2]").getOrCreate()
-val df = spark.read.json("/usr/file/emp.json")
+val df = spark.read.json("/usr/file/json/emp.json")
 df.show()
 
 // 建议在进行spark SQL编程前导入下面的隐式转换，因为DataFrames和dataSets中很多操作都依赖了隐式转换
 import spark.implicits._
 ```
 
-这里可以启动`spark-shell`进行测试，需要注意的是`spark-shell`启动后会自动创建一个名为`spark`的`SparkSession`，在命令行中可以直接引用即可：
+可以使用`spark-shell`进行测试，需要注意的是`spark-shell`启动后会自动创建一个名为`spark`的`SparkSession`，在命令行中可以直接引用即可：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-sql-shell.png"/> </div>
 
-## 二、DataFrames基本操作
+<br/>
 
-### 2.1 printSchema
+### 1.2 创建Dataset
 
-```scala
-// 以树形结构打印dataframe的schema信息 
-df.printSchema()
-```
+Spark支持由内部数据集和外部数据集来创建DataSets，其创建方式分别如下：
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-scheme.png"/> </div>
-
-### 2.2 使用DataFrame API进行基本查询
-
-```scala
-// 查询员工姓名及工作
-df.select($"ename", $"job").show()
-
-// 查询工资大于2000的员工信息
-df.filter($"sal" > 2000).show()
-
-// 分组统计部门人数
-df.groupBy("deptno").count().show()
-```
-
-### 2.3 使用SQL进行基本查询
-
-```scala
-// 首先需要将DataFrame注册为临时视图
-df.createOrReplaceTempView("emp")
-
-// 查询员工姓名及工作
-spark.sql("SELECT ename,job FROM emp").show()
-
-// 查询工资大于2000的员工信息
-spark.sql("SELECT * FROM emp where sal > 2000").show()
-
-// 分组统计部门人数
-spark.sql("SELECT deptno,count(ename) FROM emp group by deptno").show()
-```
-
-### 2.4 全局临时视图
-
-上面使用`createOrReplaceTempView`创建的是会话临时视图，它的生命周期仅限于会话范围，会随会话的结束而结束。
-
-你也可以使用`createGlobalTempView`创建全局临时视图，全局临时视图可以在所有会话之间共享，并直到整个Spark应用程序终止才会消失。全局临时视图被定义在内置的`global_temp`数据库下，需要使用限定名称进行引用，如`SELECT * FROM global_temp.view1`。
-
-```scala
-// 注册为全局临时视图
-df.createGlobalTempView("gemp")
-
-// 查询员工姓名及工作，使用限定名称进行引用
-spark.sql("SELECT ename,job FROM global_temp.gemp").show()
-
-// 查询工资大于2000的员工信息，使用限定名称进行引用
-spark.sql("SELECT * FROM global_temp.gemp where sal > 2000").show()
-
-// 分组统计部门人数，使用限定名称进行引用
-spark.sql("SELECT deptno,count(ename) FROM global_temp.gemp  group by deptno").show()
-```
-
-## 三、创建Datasets
-
-### 3.1 由外部数据集创建
+####  1. 由外部数据集创建
 
 ```scala
 // 1.需要导入隐式转换
@@ -103,7 +48,7 @@ val ds = spark.read.json("/usr/file/emp.json").as[Emp]
 ds.show()
 ```
 
-### 3.2 由内部数据集创建
+#### 2. 由内部数据集创建
 
 ```scala
 // 1.需要导入隐式转换
@@ -120,29 +65,13 @@ val caseClassDS = Seq(Emp("ALLEN", 300.0, 30, 7499, "1981-02-20 00:00:00", "SALE
 caseClassDS.show()
 ```
 
+<br/>
 
-
-## 四、DataFrames与Datasets互相转换
-
-Spark提供了非常简单的转换方法用于DataFrames与Datasets互相转换，示例如下：
-
-```shell
-# DataFrames转Datasets
-scala> df.as[Emp]
-res1: org.apache.spark.sql.Dataset[Emp] = [COMM: double, DEPTNO: bigint ... 6 more fields]
-
-# Datasets转DataFrames
-scala> ds.toDF()
-res2: org.apache.spark.sql.DataFrame = [COMM: double, DEPTNO: bigint ... 6 more fields]
-```
-
-
-
-## 五、RDDs转换为DataFrames\Datasets
+### 1.3 由RDD创建DataFrame
 
 Spark支持两种方式把RDD转换为DataFrames，分别是使用反射推断和指定schema转换。
 
-### 5.1 使用反射推断
+#### 1. 使用反射推断
 
 ```scala
 // 1.导入隐式转换
@@ -159,7 +88,7 @@ val rddToDS = spark.sparkContext
   .toDS()  // 如果调用toDF()则转换为dataFrame 
 ```
 
-### 5.2 以编程方式指定Schema
+#### 2. 以编程方式指定Schema
 
 ```scala
 import org.apache.spark.sql.Row
@@ -182,6 +111,128 @@ val rowRDD = deptRDD.map(_.split("\t")).map(line => Row(line(0).toLong, line(1),
 // 4.将RDD转换为dataFrame
 val deptDF = spark.createDataFrame(rowRDD, schema)
 deptDF.show()
+```
+
+### 1.4  DataFrames与Datasets互相转换
+
+Spark提供了非常简单的转换方法用于DataFrames与Datasets互相转换，示例如下：
+
+```shell
+# DataFrames转Datasets
+scala> df.as[Emp]
+res1: org.apache.spark.sql.Dataset[Emp] = [COMM: double, DEPTNO: bigint ... 6 more fields]
+
+# Datasets转DataFrames
+scala> ds.toDF()
+res2: org.apache.spark.sql.DataFrame = [COMM: double, DEPTNO: bigint ... 6 more fields]
+```
+
+<br/>
+
+## 二、Columns列操作
+
+### 2.1 引用列
+
+Spark支持多种方法来构造和引用列，最简单的是使用 `col() `或 `column() `函数。
+
+```scala
+col("colName")
+column("colName")
+
+// 对于Scala语言而言，还可以使用$"myColumn"和'myColumn这两种语法糖进行引用。
+df.select($"ename", $"job").show()
+df.select('ename, 'job).show()
+```
+
+### 2.2 新增列
+
+```scala
+// 基于已有列值新增列
+df.withColumn("upSal",$"sal"+1000)
+// 基于固定值新增列
+df.withColumn("intCol",lit(1000))
+```
+
+### 2.3 删除列
+
+```scala
+// 支持删除多个列
+df.drop("comm","job").show()
+```
+
+### 2.4 重命名列
+
+```scala
+df.withColumnRenamed("comm", "common").show()
+```
+
+需要说明的是新增，删除，重命名列都会产生新的DataFrame，原来的DataFrame不会被改变。
+
+
+
+## 三、使用Structured API进行基本查询
+
+```scala
+// 1.查询员工姓名及工作
+df.select($"ename", $"job").show()
+
+// 2.filter 查询工资大于2000的员工信息
+df.filter($"sal" > 2000).show()
+
+// 3.orderBy 按照部门编号降序，工资升序进行查询
+df.orderBy(desc("deptno"), asc("sal")).show()
+
+// 4.limit 查询工资最高的3名员工的信息
+df.orderBy(desc("sal")).limit(3).show()
+
+// 5.distinct 查询所有部门编号
+df.select("deptno").distinct().show()
+
+// 6.groupBy 分组统计部门人数
+df.groupBy("deptno").count().show()
+```
+
+
+
+## 四、使用Spark SQL进行基本查询
+
+### 4.1 Spark  SQL基本使用
+
+```scala
+// 1.首先需要将DataFrame注册为临时视图
+df.createOrReplaceTempView("emp")
+
+// 2.查询员工姓名及工作
+spark.sql("SELECT ename,job FROM emp").show()
+
+// 3.查询工资大于2000的员工信息
+spark.sql("SELECT * FROM emp where sal > 2000").show()
+
+// 4.orderBy 按照部门编号降序，工资升序进行查询
+spark.sql("SELECT * FROM emp ORDER BY deptno DESC,sal ASC").show()
+
+// 5.limit  查询工资最高的3名员工的信息
+spark.sql("SELECT * FROM emp ORDER BY sal DESC LIMIT 3").show()
+
+// 6.distinct 查询所有部门编号
+spark.sql("SELECT DISTINCT(deptno) FROM emp").show()
+
+// 7.分组统计部门人数
+spark.sql("SELECT deptno,count(ename) FROM emp group by deptno").show()
+```
+
+### 4.2 全局临时视图
+
+上面使用`createOrReplaceTempView`创建的是会话临时视图，它的生命周期仅限于会话范围，会随会话的结束而结束。
+
+你也可以使用`createGlobalTempView`创建全局临时视图，全局临时视图可以在所有会话之间共享，并直到整个Spark应用程序终止才会消失。全局临时视图被定义在内置的`global_temp`数据库下，需要使用限定名称进行引用，如`SELECT * FROM global_temp.view1`。
+
+```scala
+// 注册为全局临时视图
+df.createGlobalTempView("gemp")
+
+// 使用限定名称进行引用
+spark.sql("SELECT ename,job FROM global_temp.gemp").show()
 ```
 
 
