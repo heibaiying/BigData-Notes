@@ -98,6 +98,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--打包.scala文件需要配置此插件-->
             <plugin>
                 <groupId>org.scala-tools</groupId>
                 <artifactId>maven-scala-plugin</artifactId>
