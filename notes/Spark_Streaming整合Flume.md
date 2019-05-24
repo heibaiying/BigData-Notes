@@ -116,7 +116,6 @@ object PushBasedWordCount {
 这里我采用的是第三种方式：使用`maven-shade-plugin`插件进行`ALL IN ONE`打包，把所有依赖的Jar一并打入最终包中。需要注意的是`spark-streaming`包在Spark安装目录的`jars`目录中已经提供，所以不需要打入。插件配置如下：
 
 > 关于大数据应用常用打包方式单独整理至：[大数据应用常用打包方式](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据应用常用打包方式.md)
->
 > 本项目完整源码见：[spark-streaming-flume](https://github.com/heibaiying/BigData-Notes/tree/master/code/spark/spark-streaming-flume)
 
 ```xml
@@ -169,8 +168,8 @@ object PushBasedWordCount {
                     </goals>
                     <configuration>
                         <transformers>
-                            <transformer                       implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                            <transformer                   implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                             </transformer>
                         </transformers>
                     </configuration>
