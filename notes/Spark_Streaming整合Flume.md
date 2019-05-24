@@ -169,10 +169,10 @@ object PushBasedWordCount {
                     </goals>
                     <configuration>
                         <transformers>
-                            <transformer implementation=
-                                         "org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                            <transformer implementation=
-                                         "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <transformer 
+                              implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                            <transformer 
+                              implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                             </transformer>
                         </transformers>
                     </configuration>
