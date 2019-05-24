@@ -83,7 +83,7 @@
 
 1. [DateFrames 和 DataSets ](https://github.com/heibaiying/BigData-Notes/blob/master/notes/SparkSQL_Dataset和DataFrame简介.md)
 2. [Structured API的基本使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Structured_API的基本使用.md)
-3. [Spark SQL数据源]
+3. [Spark SQL外部数据源](https://github.com/heibaiying/BigData-Notes/blob/master/notes/SparkSQL外部数据源.md)
 4. [Spark SQL常用聚合函数](https://github.com/heibaiying/BigData-Notes/blob/master/notes/SparkSQL常用聚合函数.md)
 5. [Spark SQL JOIN 操作](https://github.com/heibaiying/BigData-Notes/blob/master/notes/SparkSQL联结操作.md)
 
