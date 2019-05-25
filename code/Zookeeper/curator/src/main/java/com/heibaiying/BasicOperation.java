@@ -16,7 +16,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -178,7 +177,7 @@ public class BasicOperation {
 
         List<ChildData> childDataList = childrenCache.getCurrentData();
         System.out.println("当前数据节点的子节点列表：");
-        childDataList.forEach(x->System.out.println(x.getPath()));
+        childDataList.forEach(x -> System.out.println(x.getPath()));
 
         childrenCache.getListenable().addListener(new PathChildrenCacheListener() {
 

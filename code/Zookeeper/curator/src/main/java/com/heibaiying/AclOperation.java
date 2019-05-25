@@ -86,7 +86,7 @@ public class AclOperation {
     public void getAcl() throws Exception {
         List<ACL> aclList = client.getACL().forPath(nodePath);
         ACL acl = aclList.get(0);
-        System.out.println(acl.getId().getId()+"是否有删读权限:" + (acl.getPerms() == (Perms.READ | Perms.DELETE)));
+        System.out.println(acl.getId().getId() + "是否有删读权限:" + (acl.getPerms() == (Perms.READ | Perms.DELETE)));
     }
 
 
