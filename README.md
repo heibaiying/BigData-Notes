@@ -151,11 +151,11 @@ TODO
 
 ## 十一、Zookeeper
 
-1. Zookeeper 简介及核心概念
+1. [Zookeeper 简介及核心概念](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Zookeeper简介及核心概念.md)
 2. [Zookeeper单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper单机环境和集群环境搭建.md) 
-3. Zookeeper分布式锁实现方案
-4. 集群升级、迁移深入分析 Zookeeper  
-5. Zab协议及选举机制
+3. [Zookeeper常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Zookeeper常用Shell命令.md)
+4. [Zookeeper Java 客户端——Apache Curator](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Zookeeper_Java客户端Curator.md)
+5. [Zookeeper  ACL权限控制](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Zookeeper_ACL权限控制.md)
 
 ## 十二、Scala
 
@@ -176,7 +176,6 @@ TODO
 
 
 
-## 十三、公共基础知识
+## 十三、公共内容
 
 1. [大数据应用常用打包方式](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据应用常用打包方式.md)
-2. 大数据常用文件格式

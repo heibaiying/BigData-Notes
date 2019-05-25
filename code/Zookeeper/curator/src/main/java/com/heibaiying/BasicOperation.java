@@ -113,7 +113,7 @@ public class BasicOperation {
 
 
     /**
-     * 判断子节点是否存在
+     * 判断节点是否存在
      */
     @Test
     public void existNode() throws Exception {
@@ -160,7 +160,7 @@ public class BasicOperation {
 
 
     /**
-     * 针对子节点注册监听
+     * 监听子节点的操作
      */
     @Test
     public void permanentChildrenNodesWatch() throws Exception {
@@ -181,7 +181,7 @@ public class BasicOperation {
 
         childrenCache.getListenable().addListener(new PathChildrenCacheListener() {
 
-            public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
+            public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) {
                 switch (event.getType()) {
                     case INITIALIZED:
                         System.out.println("childrenCache初始化完成");

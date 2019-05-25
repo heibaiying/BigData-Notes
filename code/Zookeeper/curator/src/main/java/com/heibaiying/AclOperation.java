@@ -33,7 +33,7 @@ public class AclOperation {
     public void prepare() {
         RetryPolicy retryPolicy = new RetryNTimes(3, 5000);
         client = CuratorFrameworkFactory.builder()
-                .authorization("digest", "heibai:123456".getBytes())
+                .authorization("digest", "heibai:123456".getBytes()) //等价于addauth命令
                 .connectString(zkServerPath)
                 .sessionTimeoutMs(10000).retryPolicy(retryPolicy)
                 .namespace("workspace").build();
