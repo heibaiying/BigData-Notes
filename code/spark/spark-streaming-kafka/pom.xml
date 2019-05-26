@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.heibaiying</groupId>
+    <artifactId>spark-streaming-kafka</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <scala.version>2.12</scala.version>
+        <spark.version>2.4.0</spark.version>
+    </properties>
+
+    <dependencies>
+        <!-- Spark Streaming-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_${scala.version}</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+        <!-- Spark Streaming整合Kafka依赖-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming-kafka-0-10_${scala.version}</artifactId>
+            <version>2.4.3</version>
+        </dependency>
+        <!--如果出现异常:Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 10582
+         则是因为paranamer版本问题，添加下面的依赖包-->
+        <dependency>
+            <groupId>com.thoughtworks.paranamer</groupId>
+            <artifactId>paranamer</artifactId>
+            <version>2.8</version>
+        </dependency>
+    </dependencies>
+
+
+</project>
