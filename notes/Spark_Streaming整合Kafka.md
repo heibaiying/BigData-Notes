@@ -26,7 +26,7 @@ Spark针对Kafka的不同版本，提供了两套整合方案：`spark-streaming
 | Direct DStream                           | Yes                                                          | Yes                                                          |
 | SSL / TLS Support                        | No                                                           | Yes                                                          |
 | Offset Commit API(偏移量提交)            | No                                                           | Yes                                                          |
-| Dynamic Topic Subscription(动态主题订阅) | No                                                           | Yes                                                          |
+| Dynamic Topic Subscription<br/>(动态主题订阅) | No                                                           | Yes                                                          |
 
 本文使用的Kafka版本为`kafka_2.12-2.2.0`，故采用第二种方式进行整合。
 
@@ -48,7 +48,8 @@ Spark针对Kafka的不同版本，提供了两套整合方案：`spark-streaming
         <artifactId>spark-streaming-kafka-0-10_${scala.version}</artifactId>
         <version>2.4.3</version>
     </dependency>
-    <!--本地测试时如果出现异常:Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 10582       则是因为paranamer版本问题，可以添加下面的依赖包进行解决-->
+    <!--本地测试时如果出现异常:Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 10582    
+    则是因为paranamer版本问题，可以添加下面的依赖包进行解决-->
     <dependency>
         <groupId>com.thoughtworks.paranamer</groupId>
         <artifactId>paranamer</artifactId>
