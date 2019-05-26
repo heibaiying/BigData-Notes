@@ -1,5 +1,22 @@
 # Zookeeper常用Shell命令
 
+<nav>
+<a href="#一节点增删改查">一、节点增删改查</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-启动服务和连接服务">1.1 启动服务和连接服务</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-help命令">1.2 help命令</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-查看节点列表">1.3 查看节点列表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-新增节点">1.4 新增节点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-查看节点">1.5 查看节点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-更新节点">1.6 更新节点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#17-删除节点">1.7 删除节点</a><br/>
+<a href="#二监听器">二、监听器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-get-path-[watch]">2.1 get path [watch]</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-stat-path-[watch]">2.2 stat path [watch]</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-lsls2-path--[watch]">2.3 ls\ls2 path  [watch]</a><br/>
+<a href="#三-zookeeper-四字命令">三、 zookeeper 四字命令</a><br/>
+</nav>
+
+
 ## 一、节点增删改查
 
 ### 1.1 启动服务和连接服务

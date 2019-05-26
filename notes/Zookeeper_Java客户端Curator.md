@@ -1,4 +1,22 @@
 # Zookeeper Java 客户端 ——Apache Curator
+<nav>
+<a href="#一基本依赖">一、基本依赖</a><br/>
+<a href="#二客户端相关操作">二、客户端相关操作</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-创建客户端实例">2.1 创建客户端实例</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-重试策略">2.2 重试策略</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-判断服务状态">2.3 判断服务状态</a><br/>
+<a href="#三节点增删改查">三、节点增删改查</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-创建节点">3.1 创建节点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-获取节点信息">2.2 获取节点信息</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-获取子节点列表">2.3 获取子节点列表</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-更新节点">2.4 更新节点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-删除节点">2.5 删除节点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-判断节点是否存在">2.6 判断节点是否存在</a><br/>
+<a href="#三监听事件">三、监听事件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-创建一次性监听">3.1 创建一次性监听</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-创建永久监听">3.2 创建永久监听</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-监听子节点">3.3 监听子节点</a><br/>
+</nav>
 
 ## 一、基本依赖
 
@@ -71,7 +89,7 @@ public class BasicOperation {
 
 在连接Zookeeper服务时候，Curator提供了多种重试策略以满足各种需求，所有重试策略继承自`RetryPolicy`接口，如下图：
 
-![curator-retry-policy](D:\BigData-Notes\pictures\curator-retry-policy.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/curator-retry-policy.png"/> </div>
 
 而这些重试策略类又分为两大类别：
 

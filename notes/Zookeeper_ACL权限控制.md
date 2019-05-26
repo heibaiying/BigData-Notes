@@ -1,5 +1,23 @@
 # Zookeeper ACL
 
+<nav>
+<a href="#一前言">一、前言</a><br/>
+<a href="#二使用Shell进行权限管理">二、使用Shell进行权限管理</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-设置与查看权限">2.1 设置与查看权限</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-权限组成">2.2 权限组成</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-添加认证信息">2.3 添加认证信息</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-权限设置示例">2.4 权限设置示例</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-world模式">1. world模式</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-auth模式">2. auth模式</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-digest模式">3. digest模式</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-ip模式">4. ip模式</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5-super模式">5. super模式</a><br/>
+<a href="#三使用Java客户端进行权限管理">三、使用Java客户端进行权限管理</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-主要依赖">3.1 主要依赖</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-权限管理API">3.2 权限管理API</a><br/>
+</nav>
+
+
 ## 一、前言
 
 为了避免存储在Zookeeper上的数据被其他程序或者人为误修改，Zookeeper提供了ACL(Access Control Lists)进行权限控制。只有拥有对应权限的用户才可以对节点进行增删改查等操作。下文分别介绍使用原生的Shell命令和Apache Curator客户端进行权限设置。
@@ -127,7 +145,7 @@ Authentication is not valid : /hive  # 当前主机已经不能访问
 "-Dzookeeper.DigestAuthenticationProvider.superDigest=heibai:sCxtVJ1gPG8UW/jzFHR0A1ZKY5s=" 
 ```
 
-![zookeeper-super](D:\BigData-Notes\pictures\zookeeper-super.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-super.png"/> </div>
 
 修改完成后需要使用`zkServer.sh restart`重启服务，此时再次访问限制IP的节点：
 

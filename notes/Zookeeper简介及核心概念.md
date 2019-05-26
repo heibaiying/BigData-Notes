@@ -1,5 +1,27 @@
 # Zookeeper简介及核心概念
 
+<nav>
+<a href="#一Zookeeper简介">一、Zookeeper简介</a><br/>
+<a href="#二Zookeeper设计目标">二、Zookeeper设计目标</a><br/>
+<a href="#三核心概念">三、核心概念</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-集群角色">3.1 集群角色</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-会话">3.2 会话</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-数据节点">3.3 数据节点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-节点信息">3.4 节点信息</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-Wather">3.5 Wather</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#36-ACL">3.6 ACL</a><br/>
+<a href="#四ZAB协议">四、ZAB协议</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-ZAB协议与数据一致性">4.1 ZAB协议与数据一致性</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42--ZAB协议的内容">4.2  ZAB协议的内容</a><br/>
+<a href="#五Zookeeper的典型应用场景">五、Zookeeper的典型应用场景</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#51数据的发布订阅">5.1数据的发布/订阅</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#52-命名服务">5.2 命名服务</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#53-Master选举">5.3 Master选举</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#54-分布式锁">5.4 分布式锁</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#55-集群管理">5.5 集群管理</a><br/>
+</nav>
+
+
 ## 一、Zookeeper简介
 
 Zookeeper是一个开源的分布式协调服务，由雅虎创建，是Google Chubby的开源实现。Zookeeper可以用于实现分布式系统中常见的发布/订阅、负载均衡、命令服务、分布式协调/通知、集群管理、Master选举、分布式锁和分布式队列等功能。Zookeeeper可以保证如下的分布式一致性特性：
@@ -20,13 +42,13 @@ Zookeeper致力于为那些高吞吐的大型分布式系统提供一个高性�
 
 Zookeeper通过树形结构来存储数据，它由一系列被称为ZNode的数据节点组成，类似于常见的文件系统。不过和常见的文件系统不同，Zookeeper将数据全量存储在内存中，以此来实现高吞吐，减少访问延迟。
 
-![zookeeper-zknamespace](D:\BigData-Notes\pictures\zookeeper-zknamespace.jpg)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-zknamespace.jpg"/> </div>
 
 ### 2.2 目标二：构建集群
 
 可以由一组Zookeeper服务构成Zookeeper服务集群，集群中每台机器都会单独在内存中维护自身的状态，并且每台机器之间都保持着通讯，只要集群中有半数机器能够正常工作，那么整个集群就可以正常提供服务。
 
-![zookeeper-zkservice](D:\BigData-Notes\pictures\zookeeper-zkservice.jpg)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-zkservice.jpg"/> </div>
 
 ### 2.3 目标三：顺序访问
 
@@ -105,7 +127,7 @@ ZAB协议是Zookeeper专门设计的一种支持崩溃恢复的原子广播协�
 
 Zookeeper使用一个单一的主进程来接收并处理客户端的所有事务请求，并采用原子广播协议将数据的状态变更以事务Proposal的形式广播到所有的副本进程上去。如下图：
 
-![zookeeper-zkcomponents](D:\BigData-Notes\pictures\zookeeper-zkcomponents.jpg)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-zkcomponents.jpg"/> </div>
 
 具体流程如下：
 
@@ -125,7 +147,7 @@ ZAB协议的消息广播过程使用的是原子广播协议。在整个消息�
 
 Leader服务会为每一个Follower服务器分配一个单独的队列，然后将事务Proposal依次放入队列中，并根据FIFO(先进先出)的策略进行消息发送。Follower服务在接收到Proposal后，会将其以事务日志的形式写入本地磁盘中，并在写入成功后反馈给Leader一个Ack响应。当Leader接收到超过半数Follower的Ack响应后，就会广播一个Commit消息给所有的Follower以通知其进行事务提交，之后Leader自身也会完成对事务的提交。而每一个Follower则在接收到Commit消息后，完成事务的提交。
 
-![zookeeper-brocast](D:\BigData-Notes\pictures\zookeeper-brocast.jpg)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-brocast.jpg"/> </div>
 
 
 
