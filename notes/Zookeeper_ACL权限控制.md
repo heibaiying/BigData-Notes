@@ -2,7 +2,7 @@
 
 ## 一、前言
 
-为了避免存储在Zookeeper上的数据被其他程序或者人为误修改，Zookeeper提供了ACL(Access Control)进行权限控制。只有拥有对应权限的用户才可以对节点进行增删改查等操作。下文分别介绍使用原生的Shell命令和Apache Curator客户端进行权限设置。
+为了避免存储在Zookeeper上的数据被其他程序或者人为误修改，Zookeeper提供了ACL(Access Control Lists)进行权限控制。只有拥有对应权限的用户才可以对节点进行增删改查等操作。下文分别介绍使用原生的Shell命令和Apache Curator客户端进行权限设置。
 
 ## 二、使用Shell进行权限管理
 
