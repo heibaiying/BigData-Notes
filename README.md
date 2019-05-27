@@ -89,8 +89,8 @@
 
 **Spark Streaming ：**
 
-1. [Spark Streaming简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Streaming与流处理.md)
-2. DStream常用操作详解
+1. [Spark Streaming 简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Streaming与流处理.md)
+2. [Spark Streaming 基本操作](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Streaming基本操作.md)
 3. [Spark Streaming 整合 Flume](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Streaming整合Flume.md)
 4. [Spark Streaming 整合 Kafka](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Streaming整合Kafka.md)
 
