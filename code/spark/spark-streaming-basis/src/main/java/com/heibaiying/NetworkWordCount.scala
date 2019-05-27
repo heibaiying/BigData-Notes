@@ -16,7 +16,7 @@ object NetworkWordCount {
     val ssc = new StreamingContext(sparkConf, Seconds(5))
 
     /*创建文本输入流,并进行词频统计*/
-    val lines = ssc.socketTextStream("192.168.200.229", 9999)
+    val lines = ssc.socketTextStream("hadoop001", 9999)
     lines.flatMap(_.split(" ")).map(x => (x, 1)).reduceByKey(_ + _).print()
 
     /*启动服务*/
