@@ -15,28 +15,28 @@
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop.jpg"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive.jpg"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark.jpg"></th>
-       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink.png"></th>
        <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm.png"></th>
+         <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink.png"></th>
+         <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase.png"></th>
+      <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka.png"></th>
+      <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper.jpg"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop.png"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban.png"></th>
-      <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase.png"></th>
-      <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka.png"></th>
-      <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper.jpg"></th>
       <th><img width="50px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala.jpg"></th>
     </tr>
     <tr>
       <td align="center"><a href="#一hadoop">Hadoop</a></td>
       <td align="center"><a href="#二hive">Hive</a></td>
       <td align="center"><a href="#三spark">Spark</a></td>
-      <td align="center"><a href="#四flink">Flink</a></td>
-      <td align="center"><a href="#五storm">Storm</a></td>
-      <td align="center"><a href="#六flume">Flume</a></td>
-      <td align="center"><a href="#七sqoop">Sqoop</a></td>
-      <td align="center"><a href="#八azkaban">Azkaban</a></td>
-      <td align="center"><a href="#九hbase">HBase</a></td>
-      <td align="center"><a href="#十kafka">Kafka</a></td>
-      <td align="center"><a href="#十一zookeeper">Zookeeper</a></td>
+      <td align="center"><a href="#四storm">Storm</a></td>
+      <td align="center"><a href="#五flink">Flink</a></td>
+      <td align="center"><a href="#六hbase">HBase</a></td>
+      <td align="center"><a href="#七kafka">Kafka</a></td>
+      <td align="center"><a href="#八zookeeper">Zookeeper</a></td>
+      <td align="center"><a href="#九flume">Flume</a></td>
+      <td align="center"><a href="#十sqoop">Sqoop</a></td>
+      <td align="center"><a href="#十一azkaban">Azkaban</a></td>
       <td align="center"><a href="#十二scala">Scala</a></td>
     </tr>
   </table>
