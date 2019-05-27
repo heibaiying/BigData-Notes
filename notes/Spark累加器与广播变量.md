@@ -52,7 +52,7 @@ val addMore = (x: Int) => x + more
 
 **2. Spark中的闭包**
 
-在实际计算时，Spark会将对RDD操作分解为Task，Task运行在Worker Noode上。在执行之前，Spark会对任务进行闭包，如果闭包内涉及到自由变量，则程序会进行拷贝，并将副本变量放在闭包中，之后闭包被序列化并发送给每个执行者。因此，当在foreach函数中引用`counter`时，它将不再是Driver节点上的`counter`，而是闭包中的副本`counter`，默认情况下，副本`counter`更新后的值不会回传到Driver，所以计数器的最终值仍然为零。
+在实际计算时，Spark会将对RDD操作分解为Task，Task运行在Worker Node上。在执行之前，Spark会对任务进行闭包，如果闭包内涉及到自由变量，则程序会进行拷贝，并将副本变量放在闭包中，之后闭包被序列化并发送给每个执行者。因此，当在foreach函数中引用`counter`时，它将不再是Driver节点上的`counter`，而是闭包中的副本`counter`，默认情况下，副本`counter`更新后的值不会回传到Driver，所以计数器的最终值仍然为零。
 
 需要注意的是：在Local模式下，**有可能**执行foreach的Worker Node与Diver处在相同的JVM，并引用相同的原始`counter`，这时候更新可能是正确的，但是在集群模式下却不行。所以在遇到此类问题时应优先使用累加器。
 

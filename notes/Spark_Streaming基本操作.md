@@ -166,6 +166,8 @@ Deleting hdfs://hadoop001:8020/spark-streaming/checkpoint-1558945265000
 
 ## 三、输出操作
 
+### 3.1 输出API
+
 | Output Operation                            | Meaning                                                      |
 | :------------------------------------------ | :----------------------------------------------------------- |
 | **print**()                                 | 在运行流应用程序的driver节点上打印DStream中每个批次的前十个元素。用于开发调试。 |
@@ -175,8 +177,135 @@ Deleting hdfs://hadoop001:8020/spark-streaming/checkpoint-1558945265000
 | **foreachRDD**(*func*)                      | 最通用的输出方式，它将函数func应用于从流生成的每个RDD。此函数应将每个RDD中的数据推送到外部系统，例如将RDD保存到文件，或通过网络将其写入数据库。 |
 
 
+### 3.1 foreachRDD
+
+这里我们使用Redis作为客户端，对文章开头示例程序进行改变，把每一次词频统计的结果写入到Redis,利用Redis的`HINCRBY`命令来进行总次数的统计。相关依赖和实现代码如下：
+
+```xml
+<dependency>
+    <groupId>redis.clients</groupId>
+    <artifactId>jedis</artifactId>
+    <version>2.9.0</version>
+</dependency>
+```
+
+实现代码如下:
+
+```scala
+import org.apache.spark.SparkConf
+import org.apache.spark.streaming.dstream.DStream
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+import redis.clients.jedis.Jedis
+
+object NetworkWordCountToRedis {
+  
+    def main(args: Array[String]) {
+
+    val sparkConf = new SparkConf().setAppName("NetworkWordCountToRedis").setMaster("local[2]")
+    val ssc = new StreamingContext(sparkConf, Seconds(5))
+
+    /*创建文本输入流,并进行词频统计*/
+    val lines = ssc.socketTextStream("hadoop001", 9999)
+    val pairs: DStream[(String, Int)] = lines.flatMap(_.split(" "))
+      									.map(x => (x, 1)).reduceByKey(_ + _)
+    pairs.foreachRDD { rdd =>
+      rdd.foreachPartition { partitionOfRecords =>
+        var jedis: Jedis = null
+        try {
+          jedis = JedisPoolUtil.getConnection
+          partitionOfRecords.foreach(record => jedis.hincrBy("wordCount", record._1, record._2))
+        } catch {
+          case ex: Exception =>
+            ex.printStackTrace()
+        } finally {
+          if (jedis != null) jedis.close()
+        }
+      }
+    }
+
+    ssc.start()
+    ssc.awaitTermination()
+  }
+}
+
+```
+
+其中`JedisPoolUtil`的代码如下：
+
+```java
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+
+public class JedisPoolUtil {
+
+    /* 声明为volatile防止指令重排序 */
+    private static volatile JedisPool jedisPool = null;
+    private static final String HOST = "localhost";
+    private static final int PORT = 6379;
+
+    /* 双重检查锁实现懒汉式单例 */
+    public static Jedis getConnection() {
+        if (jedisPool == null) {
+            synchronized (JedisPoolUtil.class) {
+                if (jedisPool == null) {
+                    JedisPoolConfig config = new JedisPoolConfig();
+                    config.setMaxTotal(30);
+                    config.setMaxIdle(10);
+                    jedisPool = new JedisPool(config, HOST, PORT);
+                }
+            }
+        }
+        return jedisPool.getResource();
+    }
+}
+```
+
+### 3.3 代码说明
+
+这里将上面输出操作的代码单独抽取出来，并去除异常判断的部分，精简后的代码如下：
+
+```scala
+pairs.foreachRDD { rdd =>
+  rdd.foreachPartition { partitionOfRecords =>
+    val jedis = JedisPoolUtil.getConnection
+    partitionOfRecords.foreach(record => jedis.hincrBy("wordCount", record._1, record._2))
+    jedis.close()
+  }
+}
+```
+
+这里可以看到一共使用了三次循环，分别是循环RDD，循环分区，循环每条记录，上面我们的代码是在循环分区的时候获取连接，也就是为每一个分区获取一个连接。但是这里大家可能会有疑问：为什么不在循环RDD的时候，为每一个RDD获取一个连接，这样所需要的连接数更少。实际上这是不可以的，如果按照这种情况进行改写，如下：
+
+```scala
+pairs.foreachRDD { rdd =>
+    val jedis = JedisPoolUtil.getConnection
+    rdd.foreachPartition { partitionOfRecords =>
+        partitionOfRecords.foreach(record => jedis.hincrBy("wordCount", record._1, record._2))
+    }
+    jedis.close()
+}
+```
+
+此时在执行时候就会抛出`Caused by: java.io.NotSerializableException: redis.clients.jedis.Jedis`，这是因为
+
+第二个需要注意的是ConnectionPool最好是一个静态，惰性初始化连接池 。这是因为Spark的转换操作本生就是惰性的，且没有数据流时是不会触发写出操作，故出于性能考虑，连接池应该是惰性静态的，所以上面`JedisPool`在初始化时采用了懒汉式单例进行初始化。
 
 
+
+### 3.3 启动测试
+
+```shell
+[root@hadoop001 ~]#  nc -lk 9999
+hello world hello spark hive hive hadoop
+storm storm flink azkaban
+hello world hello spark hive hive hadoop
+storm storm flink azkaban
+```
+
+使用Redis Manager查看写入结果(如下图),可以看到与使用`updateStateByKey`算子得到的计算结果相同。
+
+![spark-streaming-word-count-v2](D:\BigData-Notes\pictures\spark-streaming-word-count-v3.png)  
 
 
 
