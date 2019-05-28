@@ -127,7 +127,7 @@ TODO
 1. [Kafka 核心概念介绍](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Kafka核心概念介绍.md)
 2. [基于Zookeeper搭建Kafka高可用集群](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/基于Zookeeper搭建Kafka高可用集群.md)
 3. [Kafka生产者详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Kafka生产者详解.md)
-4. [Kafka消费者详解]((https://github.com/heibaiying/BigData-Notes/blob/master/notes/Kafka消费者详解.md))
+4. [Kafka消费者详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Kafka消费者详解.md)
 5. Kafka 副本机制以及选举原理剖析
 6. Kafka的数据可靠性
 
