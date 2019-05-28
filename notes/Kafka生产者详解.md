@@ -326,7 +326,7 @@ acks 参数指定了必须要有多少个分区副本收到消息，生产者才
 
 指定了生产者在收到服务器响应之前可以发送多少个消息。它的值越高，就会占用越多的内存，不过也会提升吞吐量，把它设置为1可以保证消息是按照发送的顺序写入服务器，即使发生了重试。
 
-### 9. timeout.ms, request.timeout.ms和metadata.fetch.timeout.ms
+### 9. timeout.ms, request.timeout.ms & metadata.fetch.timeout.ms
 
 - timeout.ms 指定了borker等待同步副本返回消息的确认时间；
 - request.timeout.ms 指定了生产者在发送数据时等待服务器返回响应的时间；
@@ -340,7 +340,7 @@ acks 参数指定了必须要有多少个分区副本收到消息，生产者才
 
 该参数用于控制生产者发送的请求大小。它可以指发送的单个消息的最大值，也可以指单个请求里所有消息总的大小。例如，假设这个值为1000K ，那么可以发送的单个最大消息为1000K ，或者生产者可以在单个请求里发送一个批次，该批次包含了 1000 个消息，每个消息大小为1K。 
 
-### 12. receive.buffer.bytes 和 send.buffer.byte
+### 12. receive.buffer.bytes & send.buffer.byte
 
 这两个参数分别指定TCP socket 接收和发送数据包缓冲区的大小，-1代表使用操作系统的默认值。
 
