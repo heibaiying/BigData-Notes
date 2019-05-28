@@ -25,6 +25,7 @@ public class StandaloneConsumer {
         Properties props = new Properties();
         props.put("bootstrap.servers", "hadoop001:9092");
         props.put("group.id", group);
+        props.put("enable.auto.commit", false);
         props.put("key.deserializer", "org.apache.kafka.common.serialization.IntegerDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         KafkaConsumer<Integer, String> consumer = new KafkaConsumer<>(props);

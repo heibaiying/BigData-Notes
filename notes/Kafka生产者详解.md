@@ -37,7 +37,7 @@
 
 ### 2.2 创建生产者
 
-创建Kafka时，以下三个属性是必须指定的：
+创建Kafka生产者时，以下三个属性是必须指定的：
 
 + **bootstrap.servers** ：指定broker的地址清单，清单里不需要包含所有的broker地址，生产者会从给定的broker里查找broker的信息。不过建议至少要提供两个broker的信息作为容错；
 
@@ -72,6 +72,8 @@ public class SimpleProducer {
     }
 }
 ```
+
+> 本片文章的所有示例代码可以从Github上进行下载：[kafka-basis](https://github.com/heibaiying/BigData-Notes/tree/master/code/Kafka/kafka-basis)
 
 ### 2.3 测试
 

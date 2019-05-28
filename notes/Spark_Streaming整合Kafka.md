@@ -195,7 +195,7 @@ broker返回给消费者数据的等待时间。
 
 #### 8. max.poll.records
 
-单次调用call()方法能够返回的记录数量。
+单次调用poll()方法能够返回的记录数量。
 
 #### 9. receive.buffer.bytes 和 send.buffer.byte
 

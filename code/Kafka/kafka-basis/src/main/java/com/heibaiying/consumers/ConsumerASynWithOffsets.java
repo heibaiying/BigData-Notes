@@ -24,6 +24,7 @@ public class ConsumerASynWithOffsets {
         Properties props = new Properties();
         props.put("bootstrap.servers", "hadoop001:9092");
         props.put("group.id", group);
+        props.put("enable.auto.commit", false);
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);

@@ -15,6 +15,7 @@ public class RebalanceListener {
         Properties props = new Properties();
         props.put("bootstrap.servers", "hadoop001:9092");
         props.put("group.id", group);
+        props.put("enable.auto.commit", false);
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
@@ -27,7 +28,7 @@ public class RebalanceListener {
             @Override
             public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
                 System.out.println("再均衡即将触发");
-                // 提交当前偏移量
+                // 提交已经处理的偏移量
                 consumer.commitSync(offsets);
             }
 
