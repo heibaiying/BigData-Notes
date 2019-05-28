@@ -1,11 +1,13 @@
-package com.heibaiying.producers.utils;
+package com.heibaiying.producers.partitioners;
 
 import org.apache.kafka.clients.producer.Partitioner;
 import org.apache.kafka.common.Cluster;
 
 import java.util.Map;
 
-
+/**
+ * 自定义分区器
+ */
 public class CustomPartitioner implements Partitioner {
 
     private int passLine;
