@@ -1,5 +1,6 @@
 # 基于Zookeeper搭建Kafka高可用集群
-<nav>
+
+<nav>
 <a href="#一Zookeeper集群搭建">一、Zookeeper集群搭建</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-下载--解压">1.1 下载 & 解压</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-修改配置">1.2 修改配置</a><br/>
@@ -176,7 +177,7 @@ server-1.properties：
 broker.id=0
 # 监听地址
 listeners=PLAINTEXT://hadoop001:9092
-# 日志文件存放位置 
+# 数据的存储位置
 log.dirs=/usr/local/kafka-logs/00
 # Zookeeper连接地址
 zookeeper.connect=hadoop001:2181,hadoop001:2182,hadoop001:2183
@@ -199,6 +200,8 @@ listeners=PLAINTEXT://hadoop001:9094
 log.dirs=/usr/local/kafka-logs/02
 zookeeper.connect=hadoop001:2181,hadoop001:2182,hadoop001:2183
 ```
+
+针对上面配置，需要特别说明的是`log.dirs`指的是数据日志的存储位置，确切的说，就是分区数据的存储位置，而不是程序运行日志的位置。程序运行日志的位置是通过同一目录下的`log4j.properties`进行配置的。
 
 ### 2.4 启动集群
 
@@ -226,15 +229,9 @@ bin/kafka-topics.sh --describe --bootstrap-server hadoop001:9092 --topic my-repl
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-cluster-shell.png"/> </div>
 
-你也可以创建一个消费者和生产者进行连通测试：
 
-```shell
-# 创建生产者
-bin/kafka-console-producer.sh --broker-list hadoop001:9093 --topic my-replicated-topic
-```
 
-```shell
-# 创建消费者
-bin/kafka-console-consumer.sh --bootstrap-server hadoop001:9094 --from-beginning --topic my-replicated-topic
-```
+可以看到分区0的有0,1,2三个副本，且三个副本都是可用副本，都在ISR(in-sync Replica 同步副本)列表中，其中1为首领副本，此时代表集群已经搭建成功。
+
+
 

@@ -1,4 +1,4 @@
-# Kafka核心概念介绍
+# Kafka简介
 
 <nav>
 <a href="#一Kafka简介">一、Kafka简介</a><br/>
@@ -10,7 +10,7 @@
 </nav>
 
 
-## 一、Kafka简介
+## 一、简介
 
 ApacheKafka是一个分布式的流处理平台。它具有以下特点：
 
@@ -20,7 +20,7 @@ ApacheKafka是一个分布式的流处理平台。它具有以下特点：
 + 高吞吐率，单broker可以轻松处理数千个分区以及每秒百万级的消息量；
 + 能保证消息的可靠性投递。
 
-## 二、Kafka核心概念
+## 二、基本概念
 
 ### 2.1 Messages And Batches
 

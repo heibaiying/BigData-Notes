@@ -73,7 +73,7 @@ public class SimpleProducer {
 }
 ```
 
-> 本片文章的所有示例代码可以从Github上进行下载：[kafka-basis](https://github.com/heibaiying/BigData-Notes/tree/master/code/Kafka/kafka-basis)
+> 本篇文章的所有示例代码可以从Github上进行下载：[kafka-basis](https://github.com/heibaiying/BigData-Notes/tree/master/code/Kafka/kafka-basis)
 
 ### 2.3 测试
 
@@ -121,6 +121,17 @@ bin/kafka-topics.sh --create \
 此时可以看到消费者控制台，输出如下，这里`kafka-console-consumer`只会打印出值信息，不会打印出键信息。
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-simple-producer.png"/> </div>
+
+
+
+### 2.4 可能出现的问题
+
+在这里可能出现的一个问题是：即使你在程序中配置的服务器地址是完全正确的，但是生产者程序在启动后，却一直处于等待状态，然后抛出连接超时的异常。这通常出现在你使用默认配置启动Kafka的情况下，这时候只需要对`server.properties`中`listeners`配置进行如下修改即可：
+
+```shell
+# hadoop001 为我启动kafka服务的主机名，你可以换成自己的主机名或者ip地址
+listeners=PLAINTEXT://hadoop001:9092
+```
 
 
 
@@ -296,7 +307,7 @@ score:5, partition=0,
 
 acks 参数指定了必须要有多少个分区副本收到消息，生产者才会认为消息写入是成功的：
 
-- acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应；
+- acks=0 ： 消息发送出去就认为已经成功了，不会等待任何来自服务器的响应；
 - acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应；
 - acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
 
