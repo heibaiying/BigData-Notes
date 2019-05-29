@@ -132,7 +132,8 @@ public long transferFrom(FileChannel fileChannel, long position, long count) thr
 基于以上原因，如果你在一个单节点上创建一个3副本的主题，通常会抛出下面的异常：
 
 ```properties
-Error while executing topic command : org.apache.kafka.common.errors.InvalidReplicationFactor         Exception: Replication factor: 3 larger than available brokers: 1.
+Error while executing topic command : org.apache.kafka.common.errors.InvalidReplicationFactor   
+Exception: Replication factor: 3 larger than available brokers: 1.
 ```
 
 ### 4.2 分区数据保留规则
