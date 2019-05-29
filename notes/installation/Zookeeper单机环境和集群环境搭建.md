@@ -125,105 +125,63 @@ zkServer.sh start
 
 ## 二、集群环境搭建
 
-为保证集群高可用，Zookeeper集群的节点数最好是奇数，最少有三个节点，所以这里演示搭建一个三个节点的集群。
+为保证集群高可用，Zookeeper集群的节点数最好是奇数，最少有三个节点，所以这里演示搭建一个三个节点的集群。这里我使用三台主机进行搭建，主机名分别为hadoop001，hadoop002，hadoop003。
 
 ### 2.1 修改配置
 
-拷贝三份zookeeper安装包，分别修改其配置文件`zoo.cfg`，主要是修改`dataDir`、`dataLogDir`以及配置集群信息。修改后三份配置文件的内容分别如下：
-
-zookeeper01配置：
+解压一份zookeeper安装包，修改其配置文件`zoo.cfg`，内容如下。之后使用scp命令将安装包分发到三台服务器上：
 
 ```shell
 tickTime=2000
 initLimit=10
 syncLimit=5
-dataDir=/usr/local/zookeeper-cluster/data/01
-dataLogDir=/usr/local/zookeeper-cluster/log/01
+dataDir=/usr/local/zookeeper-cluster/data/
+dataLogDir=/usr/local/zookeeper-cluster/log/
 clientPort=2181
 
 # server.1 这个1是服务器的标识，可以是任意有效数字，标识这是第几个服务器节点，这个标识要写到dataDir目录下面myid文件里
 # 指名集群间通讯端口和选举端口
-server.1=127.0.0.1:2287:3387
-server.2=127.0.0.1:2288:3388
-server.3=127.0.0.1:2289:3389
+server.1=hadoop001:2287:3387
+server.2=hadoop002:2287:3387
+server.3=hadoop003:2287:3387
 ```
-
-> 如果是多台服务器，则集群中每个节点通讯端口和选举端口可相同，IP地址修改为每个节点所在主机IP即可。
-
-zookeeper02配置，与zookeeper01相比，只有`dataLogDir`和`dataLogDir`不同：
-
-```shell
-tickTime=2000
-initLimit=10
-syncLimit=5
-dataDir=/usr/local/zookeeper-cluster/data/02
-dataLogDir=/usr/local/zookeeper-cluster/log/02
-clientPort=2182
-
-server.1=127.0.0.1:2287:3387
-server.2=127.0.0.1:2288:3388
-server.3=127.0.0.1:2289:3389
-```
-
-zookeeper03配置，与zookeeper01，02相比，也只有`dataLogDir`和`dataLogDir`不同：
-
-```shell
-tickTime=2000
-initLimit=10
-syncLimit=5
-dataDir=/usr/local/zookeeper-cluster/data/03
-dataLogDir=/usr/local/zookeeper-cluster/log/03
-clientPort=2183
-
-server.1=127.0.0.1:2287:3387
-server.2=127.0.0.1:2288:3388
-server.3=127.0.0.1:2289:3389
-```
-
-> 为节省篇幅，以上配置文件均略去英文注释
 
 ### 2.2 标识节点
 
-分别在三个节点的数据存储目录下新建`myid`文件,并写入对应的节点标识。Zookeeper集群通过`myid`文件识别集群节点，并通过上文配置的节点通信端口和选举端口来进行节点通信，选举出leader节点。
+分别在三台主机的`dataDir`目录下新建`myid`文件,并写入对应的节点标识。Zookeeper集群通过`myid`文件识别集群节点，并通过上文配置的节点通信端口和选举端口来进行节点通信，选举出leader节点。
 
 创建存储目录：
 
 ```shell
-# dataDir
-mkdir -vp  /usr/local/zookeeper-cluster/data/01
-# dataDir
-mkdir -vp  /usr/local/zookeeper-cluster/data/02
-# dataDir
-mkdir -vp  /usr/local/zookeeper-cluster/data/03
+# 三台主机均执行该命令
+mkdir -vp  /usr/local/zookeeper-cluster/data/
 ```
 
 创建并写入节点标识到`myid`文件：
 
 ```shell
-#server1
-echo "1" > /usr/local/zookeeper-cluster/data/01/myid
-#server2
-echo "2" > /usr/local/zookeeper-cluster/data/02/myid
-#server3
-echo "3" > /usr/local/zookeeper-cluster/data/03/myid
+# hadoop001主机
+echo "1" > /usr/local/zookeeper-cluster/data/myid
+# hadoop002主机
+echo "2" > /usr/local/zookeeper-cluster/data/myid
+# hadoop003主机
+echo "3" > /usr/local/zookeeper-cluster/data/myid
 ```
 
 ### 2.3 启动集群
 
-分别启动三个节点：
+分别在三台主机上，执行如下命令启动服务：
 
 ```shell
-# 启动节点1
-/usr/app/zookeeper-cluster/zookeeper01/bin/zkServer.sh start
-# 启动节点2
-/usr/app/zookeeper-cluster/zookeeper02/bin/zkServer.sh start
-# 启动节点3
-/usr/app/zookeeper-cluster/zookeeper03/bin/zkServer.sh start
+/usr/app/zookeeper-cluster/zookeeper/bin/zkServer.sh start
 ```
 
 ### 2.4 集群验证
 
-使用jps查看进程，并且使用`zkServer.sh status`查看集群各个节点状态。如图三个节点进程均启动成功，并且两个节点为follower节点，一个节点为leader节点。
+启动后使用`zkServer.sh status`查看集群各个节点状态。如图所示：三个节点进程均启动成功，并且hadoop002为leader节点，hadoop001和hadoop003为follower节点。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-cluster.png"/> </div>
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-hadoop001.png"/> </div>
 
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-hadoop002.png"/> </div>
+
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-hadoop003.png"/> </div>
