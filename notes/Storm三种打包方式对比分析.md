@@ -77,16 +77,40 @@ maven-assembly-plugin是官方文档中介绍的打包方法，来源于官方�
 >
 > Then run mvn assembly:assembly to get an appropriately packaged jar. Make sure you [exclude](http://maven.apache.org/plugins/maven-assembly-plugin/examples/single/including-and-excluding-artifacts.html) the Storm jars since the cluster already has Storm on the classpath.
 
-官方文档说明了以下两点：
+官方文档主要说明了以下几点：
 
-- maven-assembly-plugin会把所有的依赖一并打包到最后的JAR中；
-- 需要排除掉Storm集群环境中已经提供的Storm jars。
+- 使用maven-assembly-plugin可以把所有的依赖一并打入到最后的JAR中；
+- 需要排除掉Storm集群环境中已经提供的Storm jars；
+- 通过`  <mainClass>`标签指定主入口类；
+- 通过`<descriptorRef>`标签指定打包相关配置。
 
-所以采用maven-assembly-plugin进行打包时，配置应该如下：
+`jar-with-dependencies`是Maven[预定义](http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html#jar-with-dependencies)的一种最基本的打包配置，其XML文件如下：
 
-### 1. 基本配置
+```xml
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+    <id>jar-with-dependencies</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <useProjectArtifact>true</useProjectArtifact>
+            <unpack>true</unpack>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+</assembly>
+```
 
-在POM.xml中引入插件，并指定打包格式的配置文件`assembly.xml`(名称可自定义)：
+我们可以通过对该配置文件进行拓展，从而实现更多的功能，比如排除指定的JAR等。使用示例如下：
+
+### 1. 引入插件
+
+在POM.xml中引入插件，并指定打包格式的配置文件为`assembly.xml`(名称可自定义)：
 
 ```xml
 <build>
@@ -108,7 +132,7 @@ maven-assembly-plugin是官方文档中介绍的打包方法，来源于官方�
 </build>
 ```
 
-assembly.xml文件内容如下：
+`assembly.xml`拓展自`jar-with-dependencies.xml`，使用了`<excludes>`标签排除Storm jars，具体内容如下：
 
 ```xml
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
@@ -232,7 +256,7 @@ assembly.xml文件内容如下：
 </plugin>
 ```
 
-以上配置示例来源于Storm在Github上的examples，这里做一下说明：
+以上配置示例来源于Storm Github，这里做一下说明：
 
 在上面的配置中，排除了部分文件，这是因为有些JAR包生成时，会使用jarsigner生成文件签名（完成性校验），分为两个文件存放在META-INF目录下：
 

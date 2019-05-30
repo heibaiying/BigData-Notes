@@ -97,12 +97,13 @@
 
 1. [Storm和流处理简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm和流处理简介.md)
 2. [Storm核心概念详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm核心概念详解.md)
-3. [Storm单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Storm单机版本环境搭建.md)
-4. [Storm编程模型详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm编程模型详解.md)
-5. [Storm项目三种打包方式对比分析](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm三种打包方式对比分析.md)
-6. [Storm集成Redis详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm集成Redis详解.md)
-7. [Storm集成HDFS/HBase](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm集成HBase和HDFS.md)
-8. [Storm集成Kafka](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm集成Kakfa.md)
+3. [Storm单机环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Storm单机环境搭建.md)
+4. [Storm集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Storm集群环境搭建.md)
+5. [Storm编程模型详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm编程模型详解.md)
+6. [Storm项目三种打包方式对比分析](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm三种打包方式对比分析.md)
+7. [Storm集成Redis详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm集成Redis详解.md)
+8. [Storm集成HDFS/HBase](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm集成HBase和HDFS.md)
+9. [Storm集成Kafka](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm集成Kakfa.md)
 
 ## 五、Flink
 
