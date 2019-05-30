@@ -218,9 +218,7 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name     --�
 
 ### 2.7 临时表
 
-临时表仅对当前session可见。数据将存储在用户的暂存目录中，并在会话结束时删除。如果临时表与永久表表名相同，则对该表名的任何引用都将解析为临时表，而不是永久表。临时表具有以下限制：
-
-如果使用数据库中已存在的永久表的数据库/表名创建临时表，则在该会话中，对该表的任何引用都将解析为临时表，而不是永久表。如果不删除临时表或将其重命名为非冲突名称，用户将无法访问该会话中的原始表。
+临时表仅对当前session可见，临时表的数据将存储在用户的暂存目录中，并在会话结束后删除。如果临时表与永久表表名相同，则对该表名的任何引用都将解析为临时表，而不是永久表。临时表还具有以下两个限制：
 
 + 不支持分区列；
 + 不支持创建索引。
@@ -266,14 +264,14 @@ CREATE TEMPORARY EXTERNAL TABLE  IF NOT EXISTS  emp_co  LIKE emp
 
 ### 2.10 加载数据到表
 
-加载数据到表中属于DML操作，不属于本小节讲解的DDL操作，这里为了方便大家测试，所以先简单介绍一下加载本地数据到表中：
+加载数据到表中属于DML操作，这里为了方便大家测试，先简单介绍一下加载本地数据到表中：
 
 ```sql
 -- 加载数据到emp表中
 load data local inpath "/usr/file/emp.txt" into table emp;
 ```
 
-其中emp.txt的内容如下，你可以直接复制使用，也可以到本仓库的resources目录下载：
+其中emp.txt的内容如下，你可以直接复制使用，也可以到本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录下载：
 
 ```txt
 7369	SMITH	CLERK	7902	1980-12-17 00:00:00	800.00		20
@@ -415,7 +413,7 @@ SHOW (DATABASES|SCHEMAS) [LIKE 'identifier_with_wildcards'];
 SHOW DATABASES like 'hive*';
 ```
 
-LIKE子句允许使用正则表达式进行过滤，Show语句当中的LIKE子句只支持`*`（通配符）和`|`（条件或）两个符号。例如'employees'，'emp *'，'emp * | * ees'，所有这些都将匹配名为'employees'的数据库。
+LIKE子句允许使用正则表达式进行过滤，但是SHOW语句当中的LIKE子句只支持`*`（通配符）和`|`（条件或）两个符号。例如`employees`，`emp *`，`emp * | * ees`，所有这些都将匹配名为`employees`的数据库。
 
 **2. 查看表的列表**
 
