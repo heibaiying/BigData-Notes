@@ -111,7 +111,7 @@ nohup sh storm ui &
 nohup sh storm logviewer &
 ```
 
-**hadoop002  &  hadoop003 ： **
+**hadoop002  &  hadoop003 ：**
 
 hadoop002和hadoop003都只需要启动supervisor服务和logviewer服务：
 
