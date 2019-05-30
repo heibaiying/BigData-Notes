@@ -37,7 +37,7 @@
 在使用`storm jar`提交Topology时，可以使用如下方式指定第三方依赖：
 
 + 如果第三方JAR包在本地，可以使用`--jars`指定；
-+ 如果第三方JAR包在远程中央仓库，可以使用`--artifacts` 指定，此时如果想要排除某些依赖，可以使用 `^` 符号；
++ 如果第三方JAR包在远程中央仓库，可以使用`--artifacts` 指定，此时如果想要排除某些依赖，可以使用 `^` 符号。指定后Storm会自动到中央仓库进行下载，然后缓存到本地；
 + 如果第三方JAR包在其他仓库，还需要使用 `--artifactRepositories`指明仓库地址，库名和地址使用 `^` 符号分隔。
 
 以下是一个包含上面三种情况的命令示例：
@@ -51,7 +51,7 @@ org.apache.storm.starter.RollingTopWords blobstore-remote2 remote  \
 HDPRepo^http://repo.hortonworks.com/content/groups/public/"
 ```
 
-
+这种方式是建立在你能够连接到外网的情况下，如果你的服务器不能连接外网，或者你希望能把项目直接打包成一个`ALL IN ONE`的JAR，即包含所有相关依赖，此时可以采用下面介绍的两个插件。
 
 ## 三、maven-assembly-plugin插件
 
