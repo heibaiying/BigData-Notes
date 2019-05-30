@@ -1,21 +1,13 @@
 # Storm单机版本环境搭建
 
-
-
->**storm版本**：1.2.2
-
-
-
-### 1.安装环境要求
-
-按照[官方文档](http://storm.apache.org/releases/1.2.2/Setting-up-a-Storm-cluster.html)的要求：
+### 1. 安装环境要求
 
 > you need to install Storm's dependencies on Nimbus and the worker machines. These are:
 >
 > 1. Java 7+ (Apache Storm 1.x is tested through travis ci against both java 7 and java 8 JDKs)
 > 2. Python 2.6.6 (Python 3.x should work too, but is not tested as part of our CI enviornment)
 
-storm 运行依赖于Java 7+ 和 Python 2.6.6 +，所以需要先安装以上两个软件。由于以上两个软件在多个环境中都有依赖，其安装步骤单独整理至:
+按照[官方文档](http://storm.apache.org/releases/1.2.2/Setting-up-a-Storm-cluster.html)的说明：storm 运行依赖于Java 7+ 和 Python 2.6.6 +，所以需要预先安装这两个软件。由于这两个软件在多个框架中都有依赖，其安装步骤单独整理至  ：
 
 + [Linux环境下JDK安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
 
@@ -23,19 +15,15 @@ storm 运行依赖于Java 7+ 和 Python 2.6.6 +，所以需要先安装以上两
 
   
 
-### 2.下载并解压
+### 2. 下载并解压
 
-官方下载地址：http://storm.apache.org/downloads.html 
-
-下载后进行解压：
+下载并解压，官方下载地址：http://storm.apache.org/downloads.html 
 
 ```shell
 # tar -zxvf apache-storm-1.2.2.tar.gz
 ```
 
-
-
-### 3.配置环境变量
+### 3. 配置环境变量
 
 ```shell
 # vim /etc/profile
@@ -56,7 +44,7 @@ export PATH=$STORM_HOME/bin:$PATH
 
 
 
-### 4.启动相关进程
+### 4. 启动相关进程
 
 因为要启动多个进程，所以统一采用后台进程的方式启动，采用后台启动时需要进入到`${STORM_HOME}/bin`目录下，命令如下：
 
@@ -75,9 +63,9 @@ nohup sh storm logviewer &
 
 
 
-### 5.验证是否启动成功
+### 5. 验证是否启动成功
 
-验证方式一：jps 查看进程
+验证方式一：jps 查看进程：
 
 ```shell
 [root@hadoop001 app]# jps
@@ -88,6 +76,6 @@ nohup sh storm logviewer &
 9630 logviewer
 ```
 
-验证方式二： 访问8080端口，查看Web-UI界面
+验证方式二： 访问8080端口，查看Web-UI界面：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-web-ui.png"/> </div>
