@@ -82,9 +82,9 @@ maven-assembly-plugin是官方文档中介绍的打包方法，来源于官方�
 - maven-assembly-plugin会把所有的依赖一并打包到最后的JAR中；
 - 需要排除掉Storm集群环境中已经提供的Storm jars。
 
-所以采用maven-assembly-plugin进行打包时候，配置应该如下：
+所以采用maven-assembly-plugin进行打包时，配置应该如下：
 
-### 1. 引入插件
+### 1. 基本配置
 
 在POM.xml中引入插件，并指定打包格式的配置文件`assembly.xml`(名称可自定义)：
 
