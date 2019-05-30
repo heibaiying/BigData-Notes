@@ -33,8 +33,8 @@ Hive是一个构建在Hadoop之上的数据仓库，它可以将结构化的数�
 
 可以用command-line shell和thrift／jdbc两种方式来操作数据：
 
-+ **command-line shell**：可以通过hive命令行的的方式来操作数据；
-+ **thrift／jdbc**：可以通过thrift协议按照标准的JDBC的方式操作数据。
++ **command-line shell**：通过hive命令行的的方式来操作数据；
++ **thrift／jdbc**：通过thrift协议按照标准的JDBC的方式操作数据。
 
 ### 2.2 Metastore
 

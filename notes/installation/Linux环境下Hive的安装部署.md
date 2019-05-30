@@ -18,7 +18,7 @@
 
 ### 1.1 下载并解压
 
-下载所需版本的Hive，这里我下载的是`cdh5.15.2`版本的Hive。下载地址为：http://archive.cloudera.com/cdh5/cdh/5/
+下载所需版本的Hive，这里我下载版本为`cdh5.15.2`。下载地址：http://archive.cloudera.com/cdh5/cdh/5/
 
 ```shell
 # 下载后进行解压
@@ -54,7 +54,7 @@ export PATH=$HIVE_HOME/bin:$PATH
 cp hive-env.sh.template hive-env.sh
 ```
 
-修改`hive-env.sh`,指定Hadoop的安装路径：
+修改`hive-env.sh`，指定Hadoop的安装路径：
 
 ```shell
 HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
@@ -62,7 +62,7 @@ HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
 
 **2. hive-site.xml**
 
-新建hive-site.xml 文件，内容如下，主要是配置存放元数据的MySQL数据库的地址、驱动、用户名和密码等信息：
+新建hive-site.xml 文件，内容如下，主要是配置存放元数据的MySQL的地址、驱动、用户名和密码等信息：
 
 ```xml
 <?xml version="1.0"?>
@@ -96,7 +96,7 @@ HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
 
 ### 1.4 拷贝数据库驱动
 
-将MySQL驱动拷贝到Hive安装目录的`lib`目录下, MySQL驱动的下载地址为https://dev.mysql.com/downloads/connector/j/  , 在本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录下我也上传了一份，有需要的可以自行下载。
+将MySQL驱动包拷贝到Hive安装目录的`lib`目录下, MySQL驱动的下载地址为：https://dev.mysql.com/downloads/connector/j/  , 在本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录下我也上传了一份，有需要的可以自行下载。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-mysql.png"/> </div>
 
@@ -113,7 +113,7 @@ HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
   schematool -dbType mysql -initSchema
   ```
 
-本用例使用的CDH版本是`hive-1.1.0-cdh5.15.2.tar.gz`,对应`Hive 1.1.0` 版本，可以跳过这一步。
+这里我使用的是CDH的`hive-1.1.0-cdh5.15.2.tar.gz`，对应`Hive 1.1.0` 版本，可以跳过这一步。
 
 ### 1.6 启动
 
@@ -133,11 +133,9 @@ HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
 
 ## 二、HiveServer2/beeline
 
-Hive内置了HiveServer和HiveServer2服务，两者都允许客户端使用多种编程语言进行连接，但是HiveServer不能处理多个客户端的并发请求，所以产生的HiveServer2。
+Hive内置了HiveServer和HiveServer2服务，两者都允许客户端使用多种编程语言进行连接，但是HiveServer不能处理多个客户端的并发请求，因此产生了HiveServer2。HiveServer2（HS2）允许远程客户端可以使用各种编程语言向Hive提交请求并检索结果，支持多客户端并发访问和身份验证。HS2是由多个服务组成的单个进程，其包括基于Thrift的Hive服务（TCP或HTTP）和用于Web UI的Jetty Web服务。
 
-HiveServer2（HS2）允许远程客户端可以使用各种编程语言向Hive提交请求并检索结果，支持多客户端并发访问和身份验证。HS2是由多个服务组成的单个进程，其包括基于Thrift的Hive服务（TCP或HTTP）和用于Web UI的Jetty Web服务器。
-
- HiveServer2拥有自己的CLI(Beeline)，Beeline是一个基于SQLLine的JDBC客户端。由于HiveServer2是Hive开发维护的重点(Hive0.15后就不再支持hiveserver)，所以Hive CLI已经不推荐使用了，官方更加推荐使用Beeline。以下主要讲解Beeline的使用配置。
+ HiveServer2拥有自己的CLI工具——Beeline。Beeline是一个基于SQLLine的JDBC客户端。由于目前HiveServer2是Hive开发维护的重点，所以官方更加推荐使用Beeline而不是Hive CLI。以下主要讲解Beeline的配置方式。
 
 
 
@@ -156,15 +154,15 @@ HiveServer2（HS2）允许远程客户端可以使用各种编程语言向Hive�
 </property>
 ```
 
-之所以要配置这一步，这是由于hadoop 2.0以后引入了一个安全伪装机制，使得hadoop不允许上层系统（例如hive）直接将实际用户传递到hadoop层，而是将实际用户传递给一个超级代理，由该代理在hadoop上执行操作，避免任意客户端随意操作hadoop。如果不配置这一步，在之后的连接中可能会抛出`AuthorizationException`异常。
+之所以要配置这一步，是因为hadoop 2.0以后引入了安全伪装机制，使得hadoop不允许上层系统（如hive）直接将实际用户传递到hadoop层，而应该将实际用户传递给一个超级代理，由该代理在hadoop上执行操作，以避免任意客户端随意操作hadoop。如果不配置这一步，在之后的连接中可能会抛出`AuthorizationException`异常。
 
->如果想进一步了解Hadoop的用户代理机制，可以参考这篇博客：[hadoop的用户代理机制](https://blog.csdn.net/u012948976/article/details/49904675#官方文档解读)或者官方文档[Proxy user - Superusers Acting On Behalf Of Other Users](http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/Superusers.html)
+>关于Hadoop的用户代理机制，可以参考：[hadoop的用户代理机制](https://blog.csdn.net/u012948976/article/details/49904675#官方文档解读) 或 [Superusers Acting On Behalf Of Other Users](http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/Superusers.html)
 
 
 
 ### 2.2 启动hiveserver2
 
-由于上面已经配置过环境变量，直接启动即可，这里可以使用后台启动：
+由于上面已经配置过环境变量，这里直接启动即可：
 
 ```shell
 # nohup hiveserver2 &
