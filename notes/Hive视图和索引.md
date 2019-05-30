@@ -31,7 +31,7 @@ CREATE VIEW [IF NOT EXISTS] [db_name.]view_name   -- 视图名称
 
 - 删除基表并不会删除视图，需要手动删除视图；
 
-- 视图可能包含ORDER BY和LIMIT子句。如果引用视图的查询语句也包含这类子句，其执行优先级低于视图对应字句。例如，视图`custom_view  `指定LIMIT 5，查询语句为`select * from custom_view  LIMIT 10`，此时结果最多返回5行。
+- 视图可能包含ORDER BY和LIMIT子句。如果引用视图的查询语句也包含这类子句，其执行优先级低于视图对应字句。例如，视图`custom_view`指定LIMIT 5，查询语句为`select * from custom_view  LIMIT 10`，此时结果最多返回5行。
 
 - 创建视图时，如果未提供列名，则将从SELECT语句中自动派生列名；
 
@@ -154,7 +154,7 @@ SHOW FORMATTED INDEX ON table_name;
 DROP INDEX [IF EXISTS] index_name ON table_name;
 ```
 
-如果被索引表被删除了，其对应的索引和索引表都会被删除。如果被索引表的某个分区被删除了，那么分区对应的分区索引也会被删除。
+如果存在索引的表被删除了，其对应的索引和索引表都会被删除。如果被索引表的某个分区被删除了，那么分区对应的分区索引也会被删除。
 
 ### 2.5 重建索引
 
