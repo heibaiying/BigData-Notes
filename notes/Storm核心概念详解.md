@@ -140,7 +140,7 @@ Executor是1个被Worker进程启动的单独线程。每个Executor会运行1�
 
 Task是组成Component的代码单元。Topology启动后，1个Component的Task数目是固定不变的，但该Component使用的Executor线程数可以动态调整（例如：1个Executor线程可以执行该Component的1个或多个Task实例）。这意味着，对于1个Component来说，`#threads<=#tasks`（线程数小于等于Task数目）这样的情况是存在的。默认情况下Task的数目等于Executor线程数，即1个Executor线程只运行1个Task。  
 
-**总结如下：**：
+**总结如下：**
 
 + 一个运行中的Topology由集群中的多个Worker进程组成的；
 + 在默认情况下，每个Worker进程默认启动一个Executor线程；
