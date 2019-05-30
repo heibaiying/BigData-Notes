@@ -15,7 +15,7 @@
 
 ### 1.2 项目主要依赖
 
-项目主要依赖如下，有两个需要注意：
+项目主要依赖如下，有两个地方需要注意：
 
 + 这里由于我服务器上安装的是CDH版本的Hadoop，在导入依赖时引入的也是CDH版本的依赖，需要使用`<repository>`标签指定CDH的仓库地址；
 + `hadoop-common`、`hadoop-client`、`hadoop-hdfs`均需要排除`slf4j-log4j12`依赖，原因是`storm-core`中已经有该依赖，不排除的话有JAR包冲突的风险；
