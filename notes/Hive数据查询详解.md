@@ -31,9 +31,9 @@
 
 ## 一、数据准备
 
-为了演示查询操作，这里需要预先创建两张表，并加载数据。
+为了演示查询操作，这里需要预先创建三张表，并加载测试数据。
 
-> 用例表结构参考自Oracle内置练习表——emp和dept，数据文件emp.txt和dept.txt可以从本仓库的resources目录下载。
+> 数据文件emp.txt和dept.txt可以从本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录下载。
 
 ### 1.1 员工表
 
@@ -159,18 +159,18 @@ set hive.map.aggr=true;
 SELECT deptno,SUM(sal) FROM emp GROUP BY deptno;
 ```
 
-`hive.map.aggr`控制程序如何进行聚合。默认值为false。如果设置为true，Hive会在map任务中就执行一次聚合。这可以提高聚合效率，但需要消耗更多内存。
+`hive.map.aggr`控制程序如何进行聚合。默认值为false。如果设置为true，Hive会在map阶段就执行一次聚合。这可以提高聚合效率，但需要消耗更多内存。
 
 
 
 ### 2.7 ORDER AND SORT
 
-可以使用ORDER BY或者Sort BY对查询结果进行排序，排序字段可以是整型也可以是字符串：如果是整型，则按照大小排序；如果是字符串，则按照字典序排序。ORDER BY 和 Sort BY 的区别如下：
+可以使用ORDER BY或者Sort BY对查询结果进行排序，排序字段可以是整型也可以是字符串：如果是整型，则按照大小排序；如果是字符串，则按照字典序排序。ORDER BY 和 SORT BY 的区别如下：
 
-+ 使用ORDER BY时会有一个Reducer对全部查询结果进行排序，能保证数据的全局有序性；
-+ 使用Sort BY时只会在每个Reducer中进行排序，这可以保证每个Reducer的输出数据时有序的，但是并不能保证全局有序。
++ 使用ORDER BY时会有一个Reducer对全部查询结果进行排序，可以保证数据的全局有序性；
++ 使用SORT BY时只会在每个Reducer中进行排序，这可以保证每个Reducer的输出数据是有序的，但不能保证全局有序。
 
-由于ORDER BY的操作时间可能过长，如果你设置了严格模式(hive.mapred.mode = strict)，则其后面必须再跟一个`limit`子句。
+由于ORDER BY的时间可能很长，如果你设置了严格模式(hive.mapred.mode = strict)，则其后面必须再跟一个`limit`子句。
 
 > 注 ：hive.mapred.mode默认值是nonstrict ，也就是非严格模式。
 
@@ -245,7 +245,7 @@ SELECT empno, deptno, sal FROM emp CLUSTER  BY deptno ;
 
 ## 三、多表联结查询
 
-Hive支持内连接，外连接，左外连接，右外连接，笛卡尔连接，这和传统数据库中的概念一致。关于以上概念，可以参见下图。
+Hive支持内连接，外连接，左外连接，右外连接，笛卡尔连接，这和传统数据库中的概念是一致的，可以参见下图。
 
 需要特别强调：JOIN语句的关联条件必须用ON指定，不能用WHERE指定，否则就会先做笛卡尔积，再过滤，这会导致你得不到预期的结果(下面的演示会有说明)。
 
@@ -318,7 +318,7 @@ WHERE emp.deptno IN (SELECT deptno FROM dept WHERE loc="NEW YORK");
 
 ### 3.6 JOIN
 
-笛卡尔积连接，这个连接日常的开发中可能很少遇到，且性能消耗会比较大，基于这个原因，如果在严格模式下(hive.mapred.mode = strict)，Hive会阻止用户执行此操作。
+笛卡尔积连接，这个连接日常的开发中可能很少遇到，且性能消耗比较大，基于这个原因，如果在严格模式下(hive.mapred.mode = strict)，Hive会阻止用户执行此操作。
 
 ```sql
 SELECT * FROM emp JOIN dept;
@@ -330,10 +330,10 @@ SELECT * FROM emp JOIN dept;
 
 ### 4.1 STREAMTABLE
 
-在多表进行联结的时候，如果每个ON字句都使用到共同的列（如下面的`b.key1`），此时Hive会进行优化，将多表join在同一个map / reduce作业上进行。同时假定查询的最后一个表（如下面的 c 表）是最大的一个表，在对每行记录进行join操作时，它将尝试将其他的表缓存起来，然后扫描最后那个表进行计算。因为用户需要保证连续查询的表的大小从左到右是依次增加的。
+在多表进行联结的时候，如果每个ON字句都使用到共同的列（如下面的`b.key`），此时Hive会进行优化，将多表JOIN在同一个map / reduce作业上进行。同时假定查询的最后一个表（如下面的 c 表）是最大的一个表，在对每行记录进行JOIN操作时，它将尝试将其他的表缓存起来，然后扫描最后那个表进行计算。因此用户需要保证查询的表的大小从左到右是依次增加的。
 
 ```sql
-`SELECT a.val, b.val, c.val FROM a JOIN b ON (a.key = b.key1) JOIN c ON (c.key = b.key2)`
+`SELECT a.val, b.val, c.val FROM a JOIN b ON (a.key = b.key) JOIN c ON (c.key = b.key)`
 ```
 
 然后，用户并非需要总是把最大的表放在查询语句的最后面，Hive提供了`/*+ STREAMTABLE() */`标志，用于标识最大的表，示例如下：
@@ -349,7 +349,7 @@ WHERE job='CLERK';
 
 ### 4.2 MAPJOIN
 
-如果所有表中只有一张表是小表，那么完全可以把这张小表加载到内存中。这时候程序会在map阶段直接拿另外一个表的数据和内存中表数据做匹配，由于在map就进行了join操作，从而可以省略reduce过程，这样效率可以提升很多。Hive中提供了`/*+ MAPJOIN() */`来标记小表，示例如下：
+如果所有表中只有一张表是小表，那么Hive把这张小表加载到内存中。这时候程序会在map阶段直接拿另外一个表的数据和内存中表数据做匹配，由于在map就进行了JOIN操作，从而可以省略reduce过程，这样效率可以提升很多。Hive中提供了`/*+ MAPJOIN() */`来标记小表，示例如下：
 
 ```sql
 SELECT /*+ MAPJOIN(d) */ e.*,d.* 
