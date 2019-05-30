@@ -10,7 +10,7 @@
 
 ## 一、简介
 
-storm-redis提供了Storm与Redis的集成支持，你只需要引入对应的依赖即可使用。
+Storm-Redis提供了Storm与Redis的集成支持，你只需要引入对应的依赖即可使用：
 
 ```xml
 <dependency>
@@ -21,13 +21,13 @@ storm-redis提供了Storm与Redis的集成支持，你只需要引入对应的�
 </dependency> 
 ```
 
-Storm-redis使用Jedis为Redis客户端，并提供了如下三个基本的Bolt实现：
+Storm-Redis使用Jedis为Redis客户端，并提供了如下三个基本的Bolt实现：
 
-+ RedisLookupBolt：从Redis中查询数据；
-+ RedisStoreBolt：存储数据到Redis；
-+ RedisFilterBolt : 查询符合条件的数据；
++ **RedisLookupBolt**：从Redis中查询数据；
++ **RedisStoreBolt**：存储数据到Redis；
++ **RedisFilterBolt** : 查询符合条件的数据；
 
-`RedisLookupBolt`、`RedisStoreBolt`、`RedisFilterBolt `均继承自`AbstractRedisBolt`抽象类。我们可以通过继承该抽象类，进行功能的拓展，实现自定义RedisBolt。
+`RedisLookupBolt`、`RedisStoreBolt`、`RedisFilterBolt `均继承自`AbstractRedisBolt`抽象类。我们可以通过继承该抽象类，实现自定义RedisBolt，进行功能的拓展。
 
 
 
@@ -194,7 +194,7 @@ public class CountBolt extends BaseRichBolt {
 
 ### 2.6 WordCountStoreMapper
 
-实现RedisStoreMapper接口，并定义tuple与Redis中数据的映射关系，Redis中存储的是Key/Value键值对，并且支持多种数据结构，你需要指定tuple中的哪个字段为key，哪个字段为value，并且存储到什么数据结构中。
+实现RedisStoreMapper接口，定义tuple与Redis中数据的映射关系：即需要指定tuple中的哪个字段为key，哪个字段为value，并且存储到Redis的何种数据结构中。
 
 ```java
 /**
@@ -470,11 +470,11 @@ public class RedisDataTypeDescription implements Serializable {
 
 #### 3. RedisStoreMapper
 
-RedisStoreMapper继承TupleMapper和RedisMapper接口，用于存储数据时，没有定义额外方法。
+RedisStoreMapper继承TupleMapper和RedisMapper接口，用于数据存储时，没有定义额外方法。
 
 #### 4. RedisLookupMapper
 
-RedisLookupMapper继承TupleMapper和RedisMapper接口，
+RedisLookupMapper继承TupleMapper和RedisMapper接口：
 
 + 定义了declareOutputFields方法，声明输出的字段。
 + 定义了toTuple方法，将查询结果组装为Storm的Values的集合，并用于发送。
@@ -537,7 +537,7 @@ public void declareOutputFields(OutputFieldsDeclarer declarer) {
 
 ### 4.1 实现原理
 
-自定义RedisBolt：主要利用Redis中哈希结构的hincrby key field命令进行词频统计。在Redis中`hincrby`的执行效果如下，如果在执行时字段不存在，则在执行操作之前将值设置为0。通过这个命令可以非常轻松的实现词频统计功能。
+自定义RedisBolt：主要利用Redis中哈希结构的`hincrby key field`命令进行词频统计。在Redis中`hincrby`的执行效果如下。hincrby可以将字段按照指定的值进行递增，如果该字段不存在的话，还会新建该字段，并赋值为0。通过这个命令可以非常轻松的实现词频统计功能。
 
 ```shell
 redis>  HSET myhash field 5
