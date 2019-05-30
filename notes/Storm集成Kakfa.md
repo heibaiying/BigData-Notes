@@ -170,7 +170,7 @@ public class WritingToKafkaApp {
 
 #### 1. 启动Kakfa
 
-Kafka的运行依赖于zookeeper，需要预先启动，可以启动Kafka内置的zookeeper,也可以启动自己安装的。
+Kafka的运行依赖于zookeeper，需要预先启动，可以启动Kafka内置的zookeeper,也可以启动自己安装的：
 
 ```shell
 # zookeeper启动命令
