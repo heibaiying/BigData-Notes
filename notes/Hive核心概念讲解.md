@@ -22,11 +22,11 @@ Hive表中的列支持以下基本数据类型：
 | **Date and time types（日期时间类型）** | TIMESTAMP —  时间戳 <br/>TIMESTAMP WITH LOCAL TIME ZONE — 时间戳，纳秒精度<br/> DATE—日期类型 |
 | **Binary types（二进制类型）**          | BINARY—字节序列                                              |
 
->TIMESTAMP 和 TIMESTAMP WITH LOCAL TIME ZONE 的区别：
+>TIMESTAMP 和 TIMESTAMP WITH LOCAL TIME ZONE 的区别如下：
 >
->+ TIMESTAMP WITH LOCAL TIME ZONE：用户提交时间给数据库时，该类型会转换成数据库的时区来保存。查询时则按照查询客户端的不同，转换为查询客户端所在的时区的时间。
+>+ **TIMESTAMP WITH LOCAL TIME ZONE**：用户提交时间给数据库时，会被转换成数据库所在的时区来保存。查询时则按照查询客户端的不同，转换为查询客户端所在时区的时间。
 >
->+ TIMESTAMP ：提交什么时间就保存什么时间，查询时也不做任何转换。
+>+ **TIMESTAMP** ：提交什么时间就保存什么时间，查询时也不做任何转换。
 
 ### 1.2 隐式转换
 
@@ -64,7 +64,7 @@ CREATE TABLE students(
 
 ## 二、内容格式
 
-当数据存储在文本文件中，必须按照一定格式区别行和列，比如使用逗号作为分隔符的CSV文件(Comma-Separated Values)或者使用制表符作为分隔值的TSV文件(Tab-Separated Values)。但是使用这些字符作为分隔符的时候存在一个缺点，就是正常的文件内容中也可能出现逗号或者制表符。
+当数据存储在文本文件中，必须按照一定格式区别行和列，如使用逗号作为分隔符的CSV文件(Comma-Separated Values)或者使用制表符作为分隔值的TSV文件(Tab-Separated Values)。但此时也存在一个缺点，就是正常的文件内容中也可能出现逗号或者制表符。
 
 所以Hive默认使用了几个平时很少出现的字符，这些字符一般不会作为内容出现在文件中。Hive默认的行和列分隔符如下表所示。
 
@@ -97,11 +97,11 @@ Hive会在HDFS为每个数据库上创建一个目录，数据库中的表是该
 | 格式             | 说明                                                         |
 | ---------------- | ------------------------------------------------------------ |
 | **TextFile**     | 存储为纯文本文件。 这是Hive默认的文件存储格式。这种存储方式数据不做压缩，磁盘开销大，数据解析开销大。 |
-| **SequenceFile** | SequenceFile是Hadoop API提供的一种二进制文件，它将数据以<key,value>的形式序列化到文件中。这种二进制文件内部使用Hadoop的标准的Writable 接口实现序列化和反序列化。它与Hadoop API中的MapFile 是互相兼容的。Hive中的SequenceFile 继承自Hadoop API 的SequenceFile，不过它的key为空，使用value 存放实际的值，这样是为了避免MR 在运行map阶段的排序过程。 |
-| **RCFile**       | RCFile文件格式是FaceBook开源的一种Hive的文件存储格式，首先将表分为几个行组，对每个行组内的数据进行按列存储，每一列的数据都是分开存储。 |
+| **SequenceFile** | SequenceFile是Hadoop API提供的一种二进制文件，它将数据以<key,value>的形式序列化到文件中。这种二进制文件内部使用Hadoop的标准的Writable 接口实现序列化和反序列化。它与Hadoop API中的MapFile 是互相兼容的。Hive中的SequenceFile 继承自Hadoop API 的SequenceFile，不过它的key为空，使用value存放实际的值，这样是为了避免MR在运行map阶段进行额外的排序操作。 |
+| **RCFile**       | RCFile文件格式是FaceBook开源的一种Hive的文件存储格式，首先将表分为几个行组，对每个行组内的数据按列存储，每一列的数据都是分开存储。 |
 | **ORC Files**    | ORC是在一定程度上扩展了RCFile，是对RCFile的优化。            |
 | **Avro Files**   | Avro是一个数据序列化系统，设计用于支持大批量数据交换的应用。它的主要特点有：支持二进制序列化方式，可以便捷，快速地处理大量数据；动态语言友好，Avro提供的机制使动态语言可以方便地处理Avro数据。 |
-| **Parquet**      | Parquet就是基于Dremel的数据模型和算法实现的，面向分析型业务的列式存储格式。辅以按列的高效压缩和编码技术，实现降低存储空间，提高IO效率，降低上层应用延迟。 |
+| **Parquet**      | Parquet是基于Dremel的数据模型和算法实现的，面向分析型业务的列式存储格式。它通过按列进行高效压缩和特殊的编码技术，从而在降低存储空间的同时提高了IO效率。 |
 
 > 以上压缩格式中ORC和parquet的综合性能突出，使用较为广泛，推荐使用这两种格式。
 
