@@ -1,14 +1,67 @@
-# Hive基本概念讲解
+# Hive简介及核心概念
 
 <nav>
-<a href="#一数据类型">一、数据类型</a><br/>
-<a href="#二文件格式">二、文件格式</a><br/>
-<a href="#三存储格式">三、存储格式</a><br/>
+<a href="#一简介">一、简介</a><br/>
+<a href="#二Hive的体系架构">二、Hive的体系架构</a><br/>
+<a href="#三数据类型">三、数据类型</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-基本数据类型">3.1 基本数据类型</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-隐式转换">3.2 隐式转换</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-复杂类型">3.3 复杂类型</a><br/>
+<a href="#四内容格式">四、内容格式</a><br/>
+<a href="#五存储格式">五、存储格式</a><br/>
+<a href="#六内部表和外部表">六、内部表和外部表</a><br/>
 </nav>
 
-## 一、数据类型
 
-### 1.1 基本数据类型
+## 一、简介
+
+Hive是一个构建在Hadoop之上的数据仓库，它可以将结构化的数据文件映射成表，并提供类SQL查询功能，用于查询的SQL语句会被转化为MapReduce作业，然后提交到Hadoop上运行。
+
+**特点**：
+
+1. 简单、容易上手(提供了类似sql的查询语言hql)，使得精通sql但是不了解Java编程的人也能很好地进行大数据分析；
+3. 灵活性高，可以自定义用户函数(UDF)和存储格式；
+4. 为超大的数据集设计的计算和存储能力，集群扩展容易;
+5. 统一的元数据管理，可与presto／impala／sparksql等共享数据；
+5. 执行延迟高，不适合做数据的实时处理，但适合做海量数据的离线处理。
+
+
+
+## 二、Hive的体系架构
+
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive体系架构.png"/> </div>
+
+### 2.1 command-line shell & thrift/jdbc
+
+可以用command-line shell和thrift／jdbc两种方式来操作数据：
+
++ **command-line shell**：通过hive命令行的的方式来操作数据；
++ **thrift／jdbc**：通过thrift协议按照标准的JDBC的方式操作数据。
+
+### 2.2 Metastore
+
+在Hive中，表名、表结构、字段名、字段类型、表的分隔符等统一被称为元数据。所有的元数据默认存储在Hive内置的derby数据库中，但由于derby只能有一个实例，也就是说不能有多个命令行客户端同时访问，所以在实际生产环境中，通常使用MySQL代替derby。
+
+Hive进行的是统一的元数据管理，就是说你在Hive上创建了一张表，然后在presto／impala／sparksql 中都是可以直接使用的，它们会从Metastore中获取统一的元数据信息，同样的你在presto／impala／sparksql中创建一张表，在Hive中也可以直接使用。
+
+### 2.3 HQL的执行流程
+
+Hive在执行一条HQL的时候，会经过以下步骤：
+
+1. 语法解析：Antlr定义SQL的语法规则，完成SQL词法，语法解析，将SQL转化为抽象 语法树AST Tree；
+2. 语义解析：遍历AST Tree，抽象出查询的基本组成单元QueryBlock；
+3. 生成逻辑执行计划：遍历QueryBlock，翻译为执行操作树OperatorTree；
+4. 优化逻辑执行计划：逻辑层优化器进行OperatorTree变换，合并不必要的ReduceSinkOperator，减少shuffle数据量；
+5. 生成物理执行计划：遍历OperatorTree，翻译为MapReduce任务；
+6. 优化物理执行计划：物理层优化器进行MapReduce任务的变换，生成最终的执行计划。
+
+> 关于Hive SQL的详细执行流程可以参考美团技术团队的文章：[Hive SQL的编译过程](https://tech.meituan.com/2014/02/12/hive-sql-to-mapreduce.html)
+
+
+
+## 三、数据类型
+
+### 3.1 基本数据类型
 
 Hive表中的列支持以下基本数据类型：
 
@@ -22,13 +75,12 @@ Hive表中的列支持以下基本数据类型：
 | **Date and time types（日期时间类型）** | TIMESTAMP —  时间戳 <br/>TIMESTAMP WITH LOCAL TIME ZONE — 时间戳，纳秒精度<br/> DATE—日期类型 |
 | **Binary types（二进制类型）**          | BINARY—字节序列                                              |
 
->TIMESTAMP 和 TIMESTAMP WITH LOCAL TIME ZONE 的区别如下：
+> TIMESTAMP 和 TIMESTAMP WITH LOCAL TIME ZONE 的区别如下：
 >
->+ **TIMESTAMP WITH LOCAL TIME ZONE**：用户提交时间给数据库时，会被转换成数据库所在的时区来保存。查询时则按照查询客户端的不同，转换为查询客户端所在时区的时间。
->
->+ **TIMESTAMP** ：提交什么时间就保存什么时间，查询时也不做任何转换。
+> - **TIMESTAMP WITH LOCAL TIME ZONE**：用户提交时间给数据库时，会被转换成数据库所在的时区来保存。查询时则按照查询客户端的不同，转换为查询客户端所在时区的时间。
+> - **TIMESTAMP** ：提交什么时间就保存什么时间，查询时也不做任何转换。
 
-### 1.2 隐式转换
+### 3.2 隐式转换
 
 Hive中基本数据类型遵循以下的层次结构，按照这个层次结构，子类型到祖先类型允许隐式转换。例如INT类型的数据允许隐式转换为BIGINT类型。额外注意的是：按照类型层次结构允许将STRING类型隐式转换为DOUBLE类型。
 
@@ -36,7 +88,7 @@ Hive中基本数据类型遵循以下的层次结构，按照这个层次结构�
 
 
 
-### 1.3 复杂类型
+### 3.3 复杂类型
 
 | 类型       | 描述                                                         | 示例                                   |
 | ---------- | ------------------------------------------------------------ | -------------------------------------- |
@@ -46,7 +98,7 @@ Hive中基本数据类型遵循以下的层次结构，按照这个层次结构�
 
 
 
-### 1.4 示例
+### 3.4 示例
 
 如下给出一个基本数据类型和复杂数据类型的使用示例：
 
@@ -62,14 +114,14 @@ CREATE TABLE students(
 
 
 
-## 二、内容格式
+## 四、内容格式
 
 当数据存储在文本文件中，必须按照一定格式区别行和列，如使用逗号作为分隔符的CSV文件(Comma-Separated Values)或者使用制表符作为分隔值的TSV文件(Tab-Separated Values)。但此时也存在一个缺点，就是正常的文件内容中也可能出现逗号或者制表符。
 
 所以Hive默认使用了几个平时很少出现的字符，这些字符一般不会作为内容出现在文件中。Hive默认的行和列分隔符如下表所示。
 
-| 分隔符      | 描述                                                         |
-| ----------- | ------------------------------------------------------------ |
+| 分隔符          | 描述                                                         |
+| --------------- | ------------------------------------------------------------ |
 | **\n**          | 对于文本文件来说，每行是一条记录，所以可以使用换行符来分割记录 |
 | **^A (Ctrl+A)** | 分割字段(列)，在CREATE TABLE语句中也可以使用八进制编码 `\001` 来表示 |
 | **^B**          | 用于分割 ARRAY 或者 STRUCT 中的元素，或者用于 MAP 中键值对之间的分割，<br/>在CREATE TABLE语句中也可以使用八进制编码`\002` 表示 |
@@ -88,9 +140,9 @@ CREATE TABLE page_view(viewTime INT, userid BIGINT)
 
 
 
-## 三、存储格式
+## 五、存储格式
 
-### 3.1 支持的存储格式
+### 5.1 支持的存储格式
 
 Hive会在HDFS为每个数据库上创建一个目录，数据库中的表是该目录的子目录，表中的数据会以文件的形式存储在对应的表目录下。Hive支持以下几种文件存储格式：
 
@@ -105,7 +157,7 @@ Hive会在HDFS为每个数据库上创建一个目录，数据库中的表是该
 
 > 以上压缩格式中ORC和Parquet的综合性能突出，使用较为广泛，推荐使用这两种格式。
 
-### 3.2 指定存储格式
+### 5.2 指定存储格式
 
 通常在创建表的时候使用`STORED AS`参数指定：
 
@@ -121,20 +173,15 @@ CREATE TABLE page_view(viewTime INT, userid BIGINT)
 各个存储文件类型指定方式如下：
 
 - STORED AS TEXTFILE
-
 - STORED AS SEQUENCEFILE
-
 - STORED AS ORC
-
 - STORED AS PARQUET
-
 - STORED AS AVRO
-
 - STORED AS RCFILE
 
 
 
-## 四、内部表和外部表
+## 六、内部表和外部表
 
 内部表又叫做管理表(Managed/Internal Table)，创建表时不做任何指定，默认创建的就是内部表。想要创建外部表(External Table)，则需要使用External进行修饰。 内部表和外部表主要区别如下：
 
@@ -146,9 +193,10 @@ CREATE TABLE page_view(viewTime INT, userid BIGINT)
 
 
 
+## 参考资料
 
-## 参考文档
-
-1. [LanguageManual DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL)
-2. [LanguageManual Types](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types)
-3. [Managed vs. External Tables](https://cwiki.apache.org/confluence/display/Hive/Managed+vs.+External+Tables)
+1. [Hive Getting Started](https://cwiki.apache.org/confluence/display/Hive/GettingStarted)
+2. [Hive SQL的编译过程](https://tech.meituan.com/2014/02/12/hive-sql-to-mapreduce.html)
+3. [LanguageManual DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL)
+4. [LanguageManual Types](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types)
+5. [Managed vs. External Tables](https://cwiki.apache.org/confluence/display/Hive/Managed+vs.+External+Tables)

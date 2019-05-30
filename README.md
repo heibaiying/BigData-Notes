@@ -58,10 +58,9 @@
 
 ## 二、Hive
 
-1. [数据仓库Hive简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive.md)
+1. [Hive简介及核心概念](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive简介及核心概念.md)
 2. [Linux环境下Hive的安装部署](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux环境下Hive的安装部署.md)
 4. [Hive CLI和Beeline命令行的基本使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/HiveCLI和Beeline命令行的基本使用.md)
-5. [Hive 核心概念讲解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive核心概念讲解.md)
 6. [Hive 常用DDL操作](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive常用DDL操作.md)
 7. [Hive 分区表和分桶表](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive分区表和分桶表.md)
 8. [Hive 视图和索引](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hive视图和索引.md)
