@@ -26,21 +26,21 @@
 
 ### 1.2  Streams（流）
 
-`stream`是Storm中的核心概念。一个`stream`是一个无界的、以分布式方式并行创建和处理的`Tuple`序列。Tuple可以包含大多数基本类型以及自定义类型的数据。简单来说，Tuple就是流数据的实际载体，而stream就是一系列Tuple。
+`Stream`是Storm中的核心概念。一个`Stream`是一个无界的、以分布式方式并行创建和处理的`Tuple`序列。Tuple可以包含大多数基本类型以及自定义类型的数据。简单来说，Tuple就是流数据的实际载体，而Stream就是一系列Tuple。
 
 ### 1.3 Spouts
 
-`Spouts`是流数据的源头，一个Spout 可以向不止一个`Streams`中发送数据。`Spout`通常分为**可靠**和**不可靠**两种：可靠的` Spout`能够在失败时重新发送 Tuple, 不可靠的`Spout`一旦把Tuple 发送出去就置之不理了。
+`Spouts`是流数据的源头，一个Spout 可以向不止一个`StreamS`中发送数据。`Spout`通常分为**可靠**和**不可靠**两种：可靠的` Spout`能够在失败时重新发送 Tuple, 不可靠的`Spout`一旦把Tuple 发送出去就置之不理了。
 
 ### 1.4 Bolts
 
-`Bolts`是流数据的处理单元，它可以从一个或者多个`Streams`中接收数据，处理完成后再发射到新的`Streams`中。`Bolts`可以执行过滤(filtering)，聚合(aggregations)，连接(joins)等操作，并能与文件系统或数据库进行交互。
+`Bolts`是流数据的处理单元，它可以从一个或者多个`StreamS`中接收数据，处理完成后再发射到新的`StreamS`中。`Bolts`可以执行过滤(filtering)，聚合(aggregations)，连接(joins)等操作，并能与文件系统或数据库进行交互。
 
 ### 1.5 Stream groupings（分组策略）
 
 <div align="center"> <img width="400px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/topology-tasks.png"/> </div>
 
-`spouts`和`bolts`在集群上执行任务时，是由多个Task并行执行（如上图，每一个圆圈代表一个Task）。当一个tuple需要从Bolt A发送给Bolt B执行的时候，程序如何知道应该发送给Bolt B的哪一个Task执行呢？
+`spouts`和`bolts`在集群上执行任务时，是由多个Task并行执行(如上图，每一个圆圈代表一个Task)。当一个Tuple需要从Bolt A发送给Bolt B执行的时候，程序如何知道应该发送给Bolt B的哪一个Task执行呢？
 
 这是由Stream groupings分组策略来决定的，Storm中一共有如下8个内置的Stream Grouping。当然你也可以通过实现 `CustomStreamGrouping`接口来实现自定义Stream分组策略。
 
@@ -50,9 +50,9 @@
 
 2. **Fields grouping** 
 
-    Streams通过grouping指定的字段(field)来分组。假设通过`user-id`字段进行分区，那么具有相同`user-id`的Tuple就会发送到同一个Task。
+    Streams通过grouping指定的字段(field)来分组。假设通过`user-id`字段进行分区，那么具有相同`user-id`的Tuples就会发送到同一个Task。
 
-3. **Partial Key grouping **
+3. **Partial Key grouping**
 
    Streams通过grouping中指定的字段(field)来分组，与`Fields Grouping`相似。但是对于两个下游的Bolt来说是负载均衡的，可以在输入数据不平均的情况下提供更好的优化。
 
@@ -64,17 +64,17 @@
 
    整个Streams会进入Bolt的其中一个Task。通常会进入id最小的Task。
 
-6. **None grouping **
+6. **None grouping**
 
    当前None grouping 和Shuffle grouping等价，都是进行随机分发。
 
-7. **Direct grouping **
+7. **Direct grouping**
 
-   Direct grouping只能被用于direct streams 。使用这种方式需要由Tuple的**生产者**直接指定由哪个Task进行处理。
+   Direct grouping只能被用于direct streams 。使用这种方式需要由Tuple的生产者直接指定由哪个Task进行处理。
 
 8. **Local or shuffle grouping** 
 
-   如果目标bolt有tasks和当前bolt的tasks处在同一个worker进程中，那么则优先将tuples shuffled到处于同一个进程的目标bolt的tasks上，这样可以最大限度地减少网络传输。否则，就和普通的`Shuffle Grouping`行为一致。
+   如果目标Bolt有Tasks和当前Bolt的Tasks处在同一个Worker进程中，那么则优先将Tuple Shuffled到处于同一个进程的目标Bolt的Tasks上，这样可以最大限度地减少网络传输。否则，就和普通的`Shuffle Grouping`行为一致。
 
 
 
@@ -87,19 +87,19 @@
  也叫做Master Node，是Storm集群工作的全局指挥官。主要功能如下：
 
 1. 通过Thrift接口，监听并接收Client提交的Topology；
-2. 根据集群Workers的资源情况，将Client提交的Topology进行任务分配，分配结果写入zookeeper ;
+2. 根据集群Workers的资源情况，将Client提交的Topology进行任务分配，分配结果写入Zookeeper;
 3. 通过Thrift接口，监听Supervisor的下载Topology代码的请求，并提供下载 ;
-4. 通过Thrift接口，监听UI对统计信息的读取，从zookeeper上读取统计信息，返回给UI;
+4. 通过Thrift接口，监听UI对统计信息的读取，从Zookeeper上读取统计信息，返回给UI;
 5. 若进程退出后，立即在本机重启，则不影响集群运行。 
 
 
 
 ### 2.2 Supervisor进程
 
-也叫做Worker Node , 是Storm集群的资源管理者，按需启动worker进程。主要功能如下：
+也叫做Worker Node , 是Storm集群的资源管理者，按需启动Worker进程。主要功能如下：
 
 1. 定时从Zookeeper检查是否有新Topology代码未下载到本地 ，并定时删除旧Topology代码 ;
-2. 根据Nimbus的任务分配计划，在本机按需启动1个或多个Worker进程，并监控所有的worker进程的情况；
+2. 根据Nimbus的任务分配计划，在本机按需启动1个或多个Worker进程，并监控所有的Worker进程的情况；
 3. 若进程退出，立即在本机重启，则不影响集群运行。 
 
 
@@ -114,7 +114,7 @@ Nimbus和Supervisor进程都被设计为**快速失败**（遇到任何意外情
 
 Storm集群的任务构造者 ，构造Spoult或Bolt的Task实例，启动Executor线程。主要功能如下： 
 
-1. 根据Zookeeper上分配的Task，在本进程中启动1个或多个Executor线程，将构造好的Eask实例交给Executor去运行;
+1. 根据Zookeeper上分配的Task，在本进程中启动1个或多个Executor线程，将构造好的Task实例交给Executor去运行；
 
 2. 向Zookeeper写入心跳 ；
 

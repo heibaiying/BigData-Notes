@@ -96,7 +96,7 @@ supervisor.slots.ports:
 
 先启动Zookeeper集群，之后再启动Storm集群。因为要启动多个进程，所以统一采用后台进程的方式启动，进入到`${STORM_HOME}/bin`目录下，依次执行下面的命令：
 
-**hadoop001**
+**hadoop001 ：**
 
 因为hadoop001是nimbus节点，所以需要启动nimbus服务和ui服务；同时hadoop001也是supervisor节点，所以需要启动supervisor服务和logviewer服务：
 
@@ -111,7 +111,7 @@ nohup sh storm ui &
 nohup sh storm logviewer &
 ```
 
-**hadoop002  &  hadoop003**
+**hadoop002  &  hadoop003 ： **
 
 hadoop002和hadoop003都只需要启动supervisor服务和logviewer服务：
 

@@ -89,7 +89,8 @@ maven-assembly-plugin是官方文档中介绍的打包方法，来源于官方�
 ```xml
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0
+                              http://maven.apache.org/xsd/assembly-2.0.0.xsd">
     <id>jar-with-dependencies</id>
     <formats>
         <format>jar</format>
