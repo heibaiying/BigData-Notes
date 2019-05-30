@@ -55,8 +55,6 @@ HDPRepo^http://repo.hortonworks.com/content/groups/public/"
 
 ## 三、maven-assembly-plugin插件
 
-### 3.1 官方文档说明
-
 maven-assembly-plugin是官方文档中介绍的打包方法，来源于官方文档：[Running Topologies on a Production Cluster](http://storm.apache.org/releases/2.0.0-SNAPSHOT/Running-topologies-on-a-production-cluster.html)
 
 > If you're using Maven, the [Maven Assembly Plugin](http://maven.apache.org/plugins/maven-assembly-plugin/) can do the packaging for you. Just add this to your pom.xml:
@@ -84,46 +82,9 @@ maven-assembly-plugin是官方文档中介绍的打包方法，来源于官方�
 - maven-assembly-plugin会把所有的依赖一并打包到最后的JAR中；
 - 需要排除掉Storm集群环境中已经提供的Storm jars。
 
-maven-assembly-plugin的使用非常简单，只需要在POM.xml中引入即可，并且在\<descriptorRef>标签指定打包格式为`jar-with-dependencies`。`jar-with-dependencies`是Maven官方内置的一种打包格式，在Maven官方文档[Pre-defined Descriptor Files](http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html)中有所说明。
+所以采用maven-assembly-plugin进行打包时候，配置应该如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/jar-with-dependencies.png"/> </div>
-
-按照文档要求你还要排除集群环境中已经提供的Storm jars，主要是`storm-core`，此时可以使用`excludes`标签进行排除：
-
-```xml
-<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 
-                              http://maven.apache.org/xsd/assembly-2.0.0.xsd">
-    
-    <id>jar-with-dependencies</id>
-
-    <!--指明打包方式-->
-    <formats>
-        <format>jar</format>
-    </formats>
-
-    <includeBaseDirectory>false</includeBaseDirectory>
-    <dependencySets>
-        <dependencySet>
-            <outputDirectory>/</outputDirectory>
-            <useProjectArtifact>true</useProjectArtifact>
-            <unpack>true</unpack>
-            <scope>runtime</scope>
-            <!--排除storm环境中已经提供的storm-core-->
-            <excludes>
-                <exclude>org.apache.storm:storm-core</exclude>
-            </excludes>
-        </dependencySet>
-    </dependencySets>
-</assembly>
-```
-
-### 3.2 最终配置
-
-所以采用maven-assembly-plugin进行打包时候，最终的配置应该如下：
-
-#### 1. 引入插件
+### 1. 引入插件
 
 在POM.xml中引入插件，并指定打包格式的配置文件`assembly.xml`(名称可自定义)：
 
@@ -180,7 +141,7 @@ assembly.xml文件内容如下：
 
 >在配置文件中不仅可以排除依赖，还可以排除指定的文件，更多的配置规则可以参考官方文档：[Descriptor Format](http://maven.apache.org/plugins/maven-assembly-plugin/assembly.html#)
 
-#### 2.  打包命令
+### 2.  打包命令
 
 采用maven-assembly-plugin进行打包时命令如下：
 
