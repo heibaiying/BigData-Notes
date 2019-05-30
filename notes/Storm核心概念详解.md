@@ -15,6 +15,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-executor线程">2.5 executor线程</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-并行度">2.6 并行度</a><br/>
 </nav>
+
 ## 一、Storm核心概念
 
 下图为Storm为运行流程图：
