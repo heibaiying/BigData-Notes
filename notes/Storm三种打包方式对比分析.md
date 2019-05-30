@@ -12,7 +12,7 @@
 
 ## 一、简介
 
-在将Storm Topology提交到服务器集群进行运行时，需要先将项目进行打包。本文主要对比分析各种打包方式，并将打包过程中需要注意的事项进行说明。主要打包方式有以下三种：
+在将Storm Topology提交到服务器集群运行时，需要先将项目进行打包。本文主要对比分析各种打包方式，并将打包过程中需要注意的事项进行说明。主要打包方式有以下三种：
 
 + 第一种：不加任何插件，直接使用mvn package打包；
 + 第二种：使用maven-assembly-plugin插件进行打包；
@@ -30,17 +30,17 @@
 
 但如果项目中使用了第三方JAR包，就会出现问题，因为`mvn package`打包后的JAR中是不含有依赖包的，如果此时你提交到服务器上运行，就会出现找不到第三方依赖的异常。
 
-如果你想采用这种方式进行打包，但是又使用了第三方JAR包，有没有解决办法？答案是有的，这一点在官方文档中[Command Line Client](http://storm.apache.org/releases/2.0.0-SNAPSHOT/Command-line-client.html)这部分有所讲解，主要解决办法如下。
+如果你想采用这种方式进行打包，但是又使用了第三方JAR，有没有解决办法？答案是有的，这一点在官方文档的[Command Line Client](http://storm.apache.org/releases/2.0.0-SNAPSHOT/Command-line-client.html)章节有所讲解，主要解决办法如下。
 
 ### 2.2 解决办法
 
-在使用`storm jar topology-jar-path class ...`提交Topology的时候，需要指定第三方依赖时候，可以进行如下操作：
+在使用`storm jar`提交Topology时，可以使用如下方式指定第三方依赖：
 
 + 如果第三方JAR包在本地，可以使用`--jars`指定；
 + 如果第三方JAR包在远程中央仓库，可以使用`--artifacts` 指定，此时如果想要排除某些依赖，可以使用 `^` 符号；
 + 如果第三方JAR包在其他仓库，还需要使用 `--artifactRepositories`指明仓库地址，库名和地址使用 `^` 符号分隔。
 
-以下是包含上面三种情况的一个样例命令：
+以下是一个包含上面三种情况的命令示例：
 
 ```shell
 ./bin/storm jar example/storm-starter/storm-starter-topologies-*.jar \
@@ -79,20 +79,16 @@ maven-assembly-plugin是官方文档中介绍的打包方法，来源于官方�
 >
 > Then run mvn assembly:assembly to get an appropriately packaged jar. Make sure you [exclude](http://maven.apache.org/plugins/maven-assembly-plugin/examples/single/including-and-excluding-artifacts.html) the Storm jars since the cluster already has Storm on the classpath.
 
-主要是两点：
+官方文档说明了以下两点：
 
-- 使用maven-assembly-plugin进行打包，因为maven-assembly-plugin会把所有的依赖一并打包到最后的JAR中；
-- 排除掉Storm集群环境中已经提供的Storm jars。
+- maven-assembly-plugin会把所有的依赖一并打包到最后的JAR中；
+- 需要排除掉Storm集群环境中已经提供的Storm jars。
 
-maven-assembly-plugin的使用非常简单，只需要在POM.xml中引入即可，并且在\<descriptorRef>标签指定打包格式为`jar-with-dependencies`。此时还有一个问题：如何排除不需要的JAR包(如：Storm jars)？
-
-### 3.2 排除Storm jars
-
-`jar-with-dependencies`是Maven官方内置的一种打包格式，Maven官方文档[Pre-defined Descriptor Files](http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html)中有所说明：
+maven-assembly-plugin的使用非常简单，只需要在POM.xml中引入即可，并且在\<descriptorRef>标签指定打包格式为`jar-with-dependencies`。`jar-with-dependencies`是Maven官方内置的一种打包格式，在Maven官方文档[Pre-defined Descriptor Files](http://maven.apache.org/plugins/maven-assembly-plugin/descriptor-refs.html)中有所说明。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/jar-with-dependencies.png"/> </div>
 
-如果你想排除某个依赖，这里以排除`storm-core`为例，你可以在`jar-with-dependencies`的XML上进行修改。
+按照文档要求你还要排除集群环境中已经提供的Storm jars，主要是`storm-core`，此时可以使用`excludes`标签进行排除：
 
 ```xml
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
@@ -123,11 +119,11 @@ maven-assembly-plugin的使用非常简单，只需要在POM.xml中引入即可�
 </assembly>
 ```
 
-### 3.3 最终配置
+### 3.2 最终配置
 
-采用maven-assembly-plugin进行打包时候，最终的配置应该如下：
+所以采用maven-assembly-plugin进行打包时候，最终的配置应该如下：
 
-#### 1.引入插件
+#### 1. 引入插件
 
 在POM.xml中引入插件，并指定打包格式的配置文件`assembly.xml`(名称可自定义)：
 
@@ -292,13 +288,13 @@ assembly.xml文件内容如下：
 # mvn  package
 ```
 
-打包后会生成两个JAR包，提交到服务器集群时使用非original开头的JAR.
+打包后会生成两个JAR包，提交到服务器集群时使用`非original`开头的JAR。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-jar2.png"/> </div>
 
 ## 五、结论
 
-通过以上三种打包方式的详细介绍，这里给出最后的结论：**建议使用maven-shade-plugin插件进行打包**，因为其通用性最强，操作最简单，并且storm官方Github中给的所有[examples](https://github.com/apache/storm/tree/master/examples)都是采用的第三种打包方式。
+通过以上三种打包方式的详细介绍，这里给出最后的结论：**建议使用maven-shade-plugin插件进行打包**，因为其通用性最强，操作最简单，并且Storm Github中所有[examples](https://github.com/apache/storm/tree/master/examples)都是采用该方式进行打包。
 
 
 
