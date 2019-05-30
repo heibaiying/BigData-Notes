@@ -26,7 +26,7 @@
 
 ## 二、IComponent接口
 
-`IComponent`接口定义了Topology中所有组件(spout/bolt)的公共方法，自定义的spout或bolt都必须直接或间接实现这个接口。
+`IComponent`接口定义了Topology中所有组件(spout/bolt)的公共方法，自定义的spout或bolt必须直接或间接实现这个接口。
 
 ```java
 public interface IComponent extends Serializable {
