@@ -390,7 +390,7 @@ public class LocalWordCountApp {
 
 ### 6.1 代码更改
 
-提交到服务器的代码和本地代码略有不同，提交到服务器集群时需要使用`StormSubmitter`进行提交。主要代码如下。
+提交到服务器的代码和本地代码略有不同，提交到服务器集群时需要使用`StormSubmitter`进行提交。主要代码如下：
 
 > 为了结构清晰，这里新建ClusterWordCountApp类来演示集群模式的提交。实际开发中可以将两种模式的代码写在同一个类中，通过外部传参来决定启动何种模式。
 
@@ -499,7 +499,7 @@ private String productData() {
 }
 ```
 
-此时直接使用`mvn clean package`打包运行，就会抛出下图异常的。因此这种直接打包的方式并不适用于实际的开发，因为实际开发中通常都是需要第三方的JAR包。
+此时直接使用`mvn clean package`打包运行，就会抛出下图的异常。因此这种直接打包的方式并不适用于实际的开发，因为实际开发中通常都是需要第三方的JAR包。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-package-error.png"/> </div>
 
