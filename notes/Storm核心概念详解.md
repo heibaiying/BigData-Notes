@@ -62,7 +62,7 @@
 
 5. **Global grouping**  
 
-   整个Streams会进入Bolt的其中一个Task。通常会进入id最小的Task。
+   整个Streams会进入Bolt的其中一个Task，通常会进入id最小的Task。
 
 6. **None grouping**
 
@@ -115,11 +115,8 @@ Nimbus和Supervisor进程都被设计为**快速失败**（遇到任何意外情
 Storm集群的任务构造者 ，构造Spoult或Bolt的Task实例，启动Executor线程。主要功能如下： 
 
 1. 根据Zookeeper上分配的Task，在本进程中启动1个或多个Executor线程，将构造好的Task实例交给Executor去运行；
-
 2. 向Zookeeper写入心跳 ；
-
 3. 维持传输队列，发送Tuple到其他的Worker ；
-
 4. 若进程退出，立即在本机重启，则不影响集群运行。 
 
    
