@@ -84,7 +84,7 @@ maven-assembly-plugin是官方文档中介绍的打包方法，来源于官方�
 
 所以采用maven-assembly-plugin进行打包时候，配置应该如下：
 
-### 1. 引入插件
+### 1. 基本配置
 
 在POM.xml中引入插件，并指定打包格式的配置文件`assembly.xml`(名称可自定义)：
 
