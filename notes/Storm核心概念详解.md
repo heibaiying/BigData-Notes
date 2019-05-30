@@ -30,11 +30,11 @@
 
 ### 1.3 Spouts
 
-`Spouts`是流数据的源头，一个Spout 可以向不止一个`StreamS`中发送数据。`Spout`通常分为**可靠**和**不可靠**两种：可靠的` Spout`能够在失败时重新发送 Tuple, 不可靠的`Spout`一旦把Tuple 发送出去就置之不理了。
+`Spouts`是流数据的源头，一个Spout 可以向不止一个`Streams`中发送数据。`Spout`通常分为**可靠**和**不可靠**两种：可靠的` Spout`能够在失败时重新发送 Tuple, 不可靠的`Spout`一旦把Tuple 发送出去就置之不理了。
 
 ### 1.4 Bolts
 
-`Bolts`是流数据的处理单元，它可以从一个或者多个`StreamS`中接收数据，处理完成后再发射到新的`StreamS`中。`Bolts`可以执行过滤(filtering)，聚合(aggregations)，连接(joins)等操作，并能与文件系统或数据库进行交互。
+`Bolts`是流数据的处理单元，它可以从一个或者多个`Streams`中接收数据，处理完成后再发射到新的`Streams`中。`Bolts`可以执行过滤(filtering)，聚合(aggregations)，连接(joins)等操作，并能与文件系统或数据库进行交互。
 
 ### 1.5 Stream groupings（分组策略）
 
