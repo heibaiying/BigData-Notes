@@ -13,19 +13,16 @@
 
 ### 1.1 语法
 
-将文件数据加载到表时，Hive不会进行任何转换，加载操作是纯复制/移动操作，它将数据文件移动到Hive表定义的存储位置。
-
 ```shell
 LOAD DATA [LOCAL] INPATH 'filepath' [OVERWRITE] 
 INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
 ```
 
-- Load 关键字代表从本地文件系统加载文件，省略则代表从HDFS上加载文件：
-
-  + 从本地文件系统加载文件时， `filepath`可以是绝对路径也可以是相对路径(建议使用绝对路径)；
-
-  + 从HDFS加载文件时候，`filepath`为文件完整的URL地址：如`hdfs://namenode:port/user/hive/project/ data1`
-
+- `LOCAL`关键字代表从本地文件系统加载文件，省略则代表从HDFS上加载文件：
++ 从本地文件系统加载文件时， `filepath`可以是绝对路径也可以是相对路径(建议使用绝对路径)；
+  
++ 从HDFS加载文件时候，`filepath`为文件完整的URL地址：如`hdfs://namenode:port/user/hive/project/ data1`
+  
 - `filepath`可以是文件路径(在这种情况下Hive会将文件移动到表中)，也可以目录路径(在这种情况下，Hive会将该目录中的所有文件移动到表中)；
 
 - 如果使用OVERWRITE关键字，则将删除目标表（或分区）的内容，使用新的数据填充；不使用此关键字，则数据以追加的方式加入；
@@ -36,7 +33,7 @@ INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
 
 > 使用建议：
 >
-> **不论是本地路径还是URL都建议使用完整的**。虽然可以使用不完整的URL地址，此时Hive将使用hadoop中fs.default.name配置来推断地址，但是为避免不必要的错误，建议使用完整的本地路径或URL地址；
+> **不论是本地路径还是URL都建议使用完整的**。虽然可以使用不完整的URL地址，此时Hive将使用hadoop中的fs.default.name配置来推断地址，但是为避免不必要的错误，建议使用完整的本地路径或URL地址；
 >
 > **加载对象是分区表时建议显示指定分区**。在Hive 3.0之后，内部将加载(LOAD)重写为INSERT AS SELECT，此时如果不指定分区，INSERT AS SELECT将假设最后一组列是分区列，如果该列不是表定义的分区，它将抛出错误。为避免错误，还是建议显示指定分区。
 
