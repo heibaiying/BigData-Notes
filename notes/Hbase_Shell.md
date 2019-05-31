@@ -29,10 +29,10 @@
 
 ## 一、基本命令
 
-首先打开Hbase Shell
+打开Hbase Shell：
 
 ```shell
-# habse shell
+# hbase shell
 ```
 
 #### 1.1 获取帮助
@@ -136,7 +136,7 @@ alter 'Student', {NAME => 'teacherInfo', METHOD => 'delete'}
 
 #### 3.3 更改列族存储版本的限制
 
-默认情况下，列族只存储一个版本的数据，如果需要存储多个版本的数据，则需要修改列族的属性。修改后可通过`desc`命令查看
+默认情况下，列族只存储一个版本的数据，如果需要存储多个版本的数据，则需要修改列族的属性。修改后可通过`desc`命令查看。
 
 ```shell
 alter 'Student',{NAME=>'baseInfo',VERSIONS=>3}
@@ -194,13 +194,13 @@ delete 'Student','rowkey3','baseInfo:name'
 
 ## 四、查询
 
-hbase中访问数据有两种基本的方式
+hbase中访问数据有两种基本的方式：
 
-+ 按指定rowkey获取唯一一条数据：get方法
++ 按指定rowkey获取数据：get方法；
 
-+ 按指定条件获取数据：scan方法
++ 按指定条件获取数据：scan方法。
 
-get访问指定key的数据，而scan可以设置begin和end来访问一个范围内所有的数据。get本质上就是begin和end相同的一种特殊的scan。
+`scan`可以设置begin和end参数来访问一个范围内所有的数据。get本质上就是begin和end相等的一种特殊的scan。
 
 #### 4.1Get查询
 
@@ -242,13 +242,13 @@ scan 'Student', {COLUMNS=> 'baseInfo:name',STARTROW => 'rowkey2',STOPROW => 'wro
 
 #### 4.5  条件过滤
 
-Filter可以设定一系列条件来进行过滤。如我们要限制某个列的值大于等于24：
+Filter可以设定一系列条件来进行过滤。如我们要查询值等于24的所有数据：
 
 ```shell
 scan 'Student', FILTER=>"ValueFilter(=,'binary:24')"
 ```
 
-值包含yale这个值：
+值包含yale的所有数据：
 
 ```shell
 scan 'Student', FILTER=>"ValueFilter(=,'substring:yale')"
@@ -260,14 +260,14 @@ scan 'Student', FILTER=>"ValueFilter(=,'substring:yale')"
 scan 'Student', FILTER=>"ColumnPrefixFilter('birth')"
 ```
 
-FILTER中支持多个过滤条件通过括号、AND和OR的条件组合：
+FILTER中支持多个过滤条件通过括号、AND和OR进行组合：
 
 ```shell
 # 列名中的前缀为birth且列值中包含1998的数据
 scan 'Student', FILTER=>"ColumnPrefixFilter('birth') AND ValueFilter ValueFilter(=,'substring:1998')"
 ```
 
-`PrefixFilter`是对Rowkey的前缀进行判断：
+`PrefixFilter`用于对Rowkey的前缀进行判断：
 
 ```shell
 scan 'Student', FILTER=>"PrefixFilter('wr')"
