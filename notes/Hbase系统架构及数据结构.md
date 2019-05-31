@@ -29,35 +29,35 @@
 
 `Row Key`是用来检索记录的主键。想要访问HBase Table中的数据，只有以下三种方式：
 
-+ 通过指定`Row Key`进行访问；
++ 通过指定的`Row Key`进行访问；
 
-+ 通过Row Key的range进行访问，即访问指定`Row Key`范围内的行的数据；
++ 通过Row Key的range进行访问，即访问指定范围内的行；
 
 + 进行全表扫描。
 
-`Row Key`可以是任意字符串，存储时，数据按照`Row Key`的字典序进行排序。需要注意以下两点：
+`Row Key`可以是任意字符串，存储时数据按照`Row Key`的字典序进行排序。这里需要注意以下两点：
 
 + 因为字典序对Int排序的结果是1,10,100,11,12,13,14,15,16,17,18,19,2,20,21,…,9,91,92,93,94,95,96,97,98,99。如果你使用整型的字符串作为行键，那么为了保持整型的自然序，行键必须用0作左填充。
 
-+ 行的一次读写是原子操作 (不论一次读写多少列)。
++ 行的一次读写操作时原子性的 (不论一次读写多少列)。
 
 
 
 ### 2.2 Column Family（列族）
 
-HBase表中的每个列，都归属于某个列族。列族是表的Schema的一部分，所以列族需要在创建表时进行定义。列族的所有列都以列族名作为前缀，例如`courses:history`，`courses:math`都属于`courses `这个列族。
+HBase表中的每个列，都归属于某个列族。列族是表的Schema的一部分，所以列族需要在创建表时进行定义。列族的所有列都以列族名作为前缀，例如`courses:history`，`courses:math`都属于`courses`这个列族。
 
 
 
 ### 2.3 Column Qualifier (列限定符)
 
-列限定符，你可以理解为是具体的列名，例如`courses:history`，`courses:math`都属于`courses `这个列族，它们的列限定符分别是`history`和`math`。需要注意的是列限定符不是表Schema的一部分，你可以在插入数据的过程中动态创建列。
+列限定符，你可以理解为是具体的列名，例如`courses:history`，`courses:math`都属于`courses`这个列族，它们的列限定符分别是`history`和`math`。需要注意的是列限定符不是表Schema的一部分，你可以在插入数据的过程中动态创建列。
 
 
 
 ### 2.4 Column(列)
 
-HBase中的列由列族和列限定符组成，它们由`:`（冒号）字符分隔，即一个完整的列名应该表述为`列族名 ：列限定符`。
+HBase中的列由列族和列限定符组成，它们由`:`(冒号)进行分隔，即一个完整的列名应该表述为`列族名 ：列限定符`。
 
 
 
@@ -69,7 +69,7 @@ HBase中的列由列族和列限定符组成，它们由`:`（冒号）字符分
 
 ### 2.6 Timestamp(时间戳)
 
-HBase 中通过`row`和`columns`确定的为一个存储单元称为Cell。每个`Cell`都保存着同一份数据的多个版本。版本通过时间戳来索引。时间戳的类型是 64位整型。时间戳可以由HBase在数据写入时自动赋值，也可以由客户显式指定。每个`Cell`中，不同版本的数据按照时间倒序排列，即最新的数据排在最前面。
+HBase 中通过`row key`和`column`确定的为一个存储单元称为`Cell`。每个`Cell`都保存着同一份数据的多个版本。版本通过时间戳来索引，时间戳的类型是 64位整型，时间戳可以由HBase在数据写入时自动赋值，也可以由客户显式指定。每个`Cell`中，不同版本的数据按照时间戳倒序排列，即最新的数据排在最前面。
 
 
 
@@ -77,9 +77,9 @@ HBase 中通过`row`和`columns`确定的为一个存储单元称为Cell。每�
 
 ### 2.1 Regions
 
-HBase Table中的所有行都按照`Row Key`的字典序排列。HBase Tables 通过行键的范围(row key range)被水平切分成多个`Region`, 一个`Region`包含了在start key 和 end key之间的所有行。
+HBase Table中的所有行按照`Row Key`的字典序排列。HBase Tables 通过行键的范围(row key range)被水平切分成多个`Region`, 一个`Region`包含了在start key 和 end key之间的所有行。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HBaseArchitecture-Blog-Fig2.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HBaseArchitecture-Blog-Fig2.png"/> </div>
 
 每个表一开始只有一个`Region`，随着数据不断增加，`Region`会不断增大，当增大到一个阀值的时候，`Region`就会等分为两个新的`Region`。当Table中的行不断增多，就会有越来越多的`Region`。
 
@@ -93,12 +93,12 @@ HBase Table中的所有行都按照`Row Key`的字典序排列。HBase Tables �
 
 `Region Server`运行在HDFS的DataNode上。它具有以下组件：
 
-- **WAL(Write Ahead Log，预写日志)**：用于存储尚未进持久化存储的数据记录，以便在发生故障时进行恢复；
-- **BlockCache**：读缓存。它将频繁读取的数据存储在内存中。如果存储不足，它将按照`最近最少使用原则`清除多余的数据；
-- **MemStore**：写缓存。它存储尚未写入磁盘的新数据，并会在数据写入磁盘之前对其进行排序。每个Region上的每个列族都有一个MemStore；
+- **WAL(Write Ahead Log，预写日志)**：用于存储尚未进持久化存储的数据记录，以便在发生故障时进行恢复。
+- **BlockCache**：读缓存。它将频繁读取的数据存储在内存中，如果存储不足，它将按照`最近最少使用原则`清除多余的数据。
+- **MemStore**：写缓存。它存储尚未写入磁盘的新数据，并会在数据写入磁盘之前对其进行排序。每个Region上的每个列族都有一个MemStore。
 - **HFile** ：将行数据按照Key\Values的形式存储在文件系统上。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-Region-Server.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-Region-Server.png"/> </div>
 
 
 
@@ -120,7 +120,7 @@ HBase系统遵循Master/Salve架构，由三种不同类型的组件组成：
 
 2. 存贮所有Region的寻址入口；
 
-3. 实时监控Region Server的状态，将Region server的上线和下线信息实时通知给Master；
+3. 实时监控Region Server的状态，将Region Server的上线和下线信息实时通知给Master；
 
 4. 存储HBase的Schema，包括有哪些Table，每个Table有哪些Column Family等信息。
 
@@ -152,7 +152,7 @@ HBase系统遵循Master/Salve架构，由三种不同类型的组件组成：
 
 + 所有Masters会竞争性地在Zookeeper上创建同一个临时节点，由于Zookeeper只能有一个同名节点，所以必然只有一个Master能够创建成功，此时该Master就是主Master，主Master会定期向Zookeeper发送心跳。备用Masters则通过Watcher机制对主HMaster所在节点进行监听；
 
-+ 如果主Master未能定时发送心跳，则其持有的Zookeeper会话会过期，相应的临时节点也会被删除，这会触发定义在该节点上的Watcher事件，使得备用的Master Servers得到通知。所有备用的Master Servers在接到通知后，会再次去竞争性地创建临时节点，完成首领选举。
++ 如果主Master未能定时发送心跳，则其持有的Zookeeper会话会过期，相应的临时节点也会被删除，这会触发定义在该节点上的Watcher事件，使得备用的Master Servers得到通知。所有备用的Master Servers在接到通知后，会再次去竞争性地创建临时节点，完成主Master的选举。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HBaseArchitecture-Blog-Fig5.png"/> </div>
 
@@ -190,9 +190,9 @@ HBase系统遵循Master/Salve架构，由三种不同类型的组件组成：
 
 3. 客户端从行键所在的Region Server上获取数据。
 
-如果再次读取，客户端从缓存中获取行键所在的Region Server。这样客户端就不需要再次查询`META`表，除非Region移动导致缓存失效，这样的话，则将会重新查询并更新缓存。
+如果再次读取，客户端将从缓存中获取行键所在的Region Server。这样客户端就不需要再次查询`META`表，除非Region移动导致缓存失效，这样的话，则将会重新查询并更新缓存。
 
-注：META 表是HBase中一张特殊的表，它保存了HBase中所有数据表的Region位置信息，ZooKeeper存储着META 表的位置。
+注：`META`表是HBase中一张特殊的表，它保存了所有Region的位置信息，META表自己的位置信息则存储在ZooKeeper上。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HBaseArchitecture-Blog-Fig7.png"/> </div>
 
