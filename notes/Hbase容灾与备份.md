@@ -31,7 +31,7 @@
 
 - 支持时间区间 、row区间 、改变表名称 、改变列族名称 、以及是否Copy已被删除的数据等功能；
 - 执行命令前，需先创建与原表结构相同的新表；
-- `CopyTable`的操作是基于HBase Client API进行的，即采用`scan` API进行查询, 采用`put` API进行写入。
+- `CopyTable`的操作是基于HBase Client API进行的，即采用`scan`进行查询, 采用`put`进行写入。
 
 ### 2.2 命令格式
 
