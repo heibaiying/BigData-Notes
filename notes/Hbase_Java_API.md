@@ -748,7 +748,7 @@ config.set("hbase.client.ipc.pool.size",...);
 connection = ConnectionFactory.createConnection(config);
 ```
 
-由此可以看出HBase中Connection类已经实现了对连接的管理功能，所以我们在Connection上再做额外的管理。
+由此可以看出HBase中Connection类已经实现了对连接的管理功能，所以我们不必在Connection上在做额外的管理。
 
 另外，Connection是线程安全的，但Table和Admin却不是线程安全的，因此正确的做法是一个进程共用一个Connection对象，而在不同的线程中使用单独的Table和Admin对象。Table和Admin的获取操作`getTable()`和`getAdmin()`都是轻量级，所以不必担心性能的消耗，同时建议在使用完成后显示的调用`close()`方法来关闭它们。
 
