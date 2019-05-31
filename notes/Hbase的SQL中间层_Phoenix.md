@@ -165,7 +165,7 @@ ORDER BY sum(population) DESC;
 
 ### 3.7 扩展
 
-从上面的操作中可以看出，Phoenix支持大多数标准的SQL语法。关于Phoenix支持的语句、数据类型、函数、序列等详细信息，因为涉及内容很多，可以参考其官方文档，官方文档上有详细的说明：
+从上面的操作中可以看出，Phoenix支持大多数标准的SQL语法。关于Phoenix支持的语法、数据类型、函数、序列等详细信息，因为涉及内容很多，可以参考其官方文档，官方文档上有详细的说明：
 
 + **语法(Grammar)** ：https://phoenix.apache.org/language/index.html
 
@@ -181,7 +181,7 @@ ORDER BY sum(population) DESC;
 
 ## 四、Phoenix Java API
 
-因为Phoenix遵循JDBC规范，并提供了对应的数据库驱动`PhoenixDriver`，这使采用Java对其进行操作的时候，就如同对其他关系型数据库一样，下面给出基本的操作实例。
+因为Phoenix遵循JDBC规范，并提供了对应的数据库驱动`PhoenixDriver`，这使得采用Java语言对其进行操作的时候，就如同对其他关系型数据库一样，下面给出基本的使用示例。
 
 ### 4.1 引入Phoenix core JAR包
 
