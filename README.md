@@ -52,9 +52,10 @@
 1. [分布式文件存储系统——HDFS](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-HDFS.md)
 2. [分布式计算框架——MapReduce](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-MapReduce.md)
 3. [集群资源管理器——YARN](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hadoop-YARN.md)
-4. [Hadoop单机伪集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/hadoop单机版本环境搭建.md)
-5. [HDFS常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/HDFS常用Shell命令.md)
-6. [HDFS Java API的使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/HDFS-Java-API.md)
+4. [Hadoop单机伪集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop单机环境搭建.md)
+5. [Hadoop集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop集群环境搭建.md)
+6. [HDFS常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/HDFS常用Shell命令.md)
+7. [HDFS Java API的使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/HDFS-Java-API.md)
 
 ## 二、Hive
 
@@ -77,6 +78,7 @@
 5. [RDD常用算子详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Transformation和Action算子.md)
 5. [Spark运行模式与作业提交](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark部署模式与作业提交.md)
 6. [Spark累加器与广播变量](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark累加器与广播变量.md)
+7. [基于Zookeeper搭建Spark高可用集群](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Spark集群环境搭建.md)
 
 **Spark SQL :**
 
@@ -113,14 +115,15 @@ TODO
 
 1. [Hbase 简介](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase简介.md)
 2. [HBase系统架构及数据结构](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase系统架构及数据结构.md)
-3. [HBase基本环境搭建（Standalone /pseudo-distributed mode）](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hbase基本环境搭建.md)
-4. [HBase常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase_Shell.md)
-5. [HBase Java API](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase_Java_API.md)
-6. [Hbase 过滤器详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase过滤器详解.md)
-7. [HBase 协处理器详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase协处理器详解.md)
-8. [HBase 容灾与备份](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase容灾与备份.md)
-9. [HBase的SQL中间层——Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase的SQL中间层_Phoenix.md)
-10. [Spring/Spring Boot 整合 Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spring+Mybtais+Phoenix整合.md)
+3. [HBase基本环境搭建(Standalone /pseudo-distributed mode)](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/HBase基本环境搭建.md)
+4. [HBase集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/HBase集群环境搭建.md)
+5. [HBase常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase_Shell.md)
+6. [HBase Java API](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase_Java_API.md)
+7. [Hbase 过滤器详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase过滤器详解.md)
+8. [HBase 协处理器详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase协处理器详解.md)
+9. [HBase 容灾与备份](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase容灾与备份.md)
+10. [HBase的SQL中间层——Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Hbase的SQL中间层_Phoenix.md)
+11. [Spring/Spring Boot 整合 Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spring+Mybtais+Phoenix整合.md)
 
 ## 七、Kafka
 
