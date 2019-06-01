@@ -115,10 +115,14 @@ export  JAVA_HOME=/usr/java/jdk1.8.0_201/
 
 ```xml
 <configuration>
-        <property>
-            <name>fs.defaultFS</name>
-            <value>hdfs://hadoop001:8020</value>
-        </property>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://hadoop001:8020</value>
+    </property>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/home/hadoop/tmp</value>
+    </property>
 </configuration>
 ```
 
@@ -126,14 +130,10 @@ export  JAVA_HOME=/usr/java/jdk1.8.0_201/
 
 ```xml
 <configuration>
-        <property>
-                <name>dfs.replication</name>
-                 <value>1</value>
-        </property>
-        <property>
-                 <name>hadoop.tmp.dir</name>
-                 <value>/usr/app/tmp</value>
-        </property>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
 </configuration>
 ```
 
@@ -222,15 +222,10 @@ etc/hadoop/yarn-site.xml:
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property>
-    <!--这个目录需要和上面配置的hadoop.tmp.dir的路径保持一致-->
-    <property>
-    	<name>yarn.nodemanager.local-dirs</name>
-    	<value>/usr/app/tmp/nm-local-dir</value>
-  	</property>
 </configuration>
 ```
 
-
+`yarn.nodemanager.aux-services`用于配置NodeManager上运行的附属服务。需要配置成`mapreduce_shuffle`后才可以在Yarn上运行MapReduce程序。
 
 #### 4.2 在sbin目录下启动YARN
 
