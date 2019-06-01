@@ -20,7 +20,7 @@
 
 ## 一、简述
 
-在使用Hbase的时，如果当您扩展到数十亿行和数百万列时，在网络中移动大量数据将在网络层产生瓶颈，大量的数据也加重了客户端计算处理的负担。在这种情况下，协处理器（Coprocessors）应运而生。您可以将业务计算代码放入在RegionServer的协处理器中，将处理好的数据再返回给客户端，这可以极大的降低移动的数据量，以获得性能的提升。同时协处理器运也允许用户扩展实现Hbase目前所不具备的功能，如权限校验、二级索引、完整性约束等。
+在使用HBase时，如果你的数据量达到了数十亿行或数百万列，此时能否在查询中返回大量数据将受制于网络的带宽，即便网络状况允许，但是客户端的计算处理也未必能够满足要求。在这种情况下，协处理器（Coprocessors）应运而生。它允许你将业务计算代码放入在RegionServer的协处理器中，将处理好的数据再返回给客户端，这可以极大地降低需要传输的数据量，从而获得性能上的提升。同时协处理器也允许用户扩展实现HBase目前所不具备的功能，如权限校验、二级索引、完整性约束等。
 
 
 
@@ -30,11 +30,11 @@
 
 #### 1. 功能
 
-Observer协处理器类似于关系型数据库中的触发器，当发生某些事件的时候这类协处理器会被 Server端调用。通常可以用来实现下面功能：
+Observer协处理器类似于关系型数据库中的触发器，当发生某些事件的时候这类协处理器会被Server端调用。通常可以用来实现下面功能：
 
-+ 权限校验：在执行`Get`或`Put`操作之前，您可以使用`preGet`或`prePut`方法检查权限；
-+ 完整性约束： HBase不支持关系型数据库中的外键功能，可以通过触发器在插入或者删除数据的时候，对关联的数据进行检查；
-+ 二级索引： 可以使用协处理器来维护二级索引。
++ **权限校验**：在执行`Get`或`Put`操作之前，您可以使用`preGet`或`prePut`方法检查权限；
++ **完整性约束**： HBase不支持关系型数据库中的外键功能，可以通过触发器在插入或者删除数据的时候，对关联的数据进行检查；
++ **二级索引**： 可以使用协处理器来维护二级索引。
 
 </br>
 
@@ -55,7 +55,7 @@ Observer协处理器类似于关系型数据库中的触发器，当发生某些
 
 ####  3. 接口
 
-以上四种类型的Observer协处理器均继承自`Coprocessor`接口，这四个接口中分别定义了所有可用的钩子方法，以便在对应方法前后执行特定的操作。通常情况下，我们并不会直接实现上面接口，而是继承其Base实现类，Base实现类简单空实现了接口中的方法，这样我们在实现自定义的协处理器时，就可以按需重写对应的方法。
+以上四种类型的Observer协处理器均继承自`Coprocessor`接口，这四个接口中分别定义了所有可用的钩子方法，以便在对应方法前后执行特定的操作。通常情况下，我们并不会直接实现上面接口，而是继承其Base实现类，Base实现类只是简单空实现了接口中的方法，这样我们在实现自定义的协处理器时，就不必实现所有方法，只需要重写必要方法即可。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-coprocessor.png"/> </div>
 
@@ -72,9 +72,9 @@ Observer协处理器类似于关系型数据库中的触发器，当发生某些
 + 客户端发出 put 请求
 + 该请求被分派给合适的 RegionServer 和 region
 + coprocessorHost 拦截该请求，然后在该表的每个 RegionObserver 上调用 prePut()
-+ 如果没有被 prePut()拦截，该请求继续送到 region，然后进行处理
-+ region 产生的结果再次被 CoprocessorHost 拦截，调用 postPut()
-+ 假如没有 postPut()拦截该响应，最终结果被返回给客户端
++ 如果没有被`prePut()`拦截，该请求继续送到 region，然后进行处理
++ region 产生的结果再次被 CoprocessorHost 拦截，调用`postPut()`
++ 假如没有`postPut()`拦截该响应，最终结果被返回给客户端
 
 如果大家了解Spring，可以将这种执行方式类比于其AOP的执行原理即可，官方文档当中也是这样类比的：
 
@@ -88,7 +88,7 @@ Observer协处理器类似于关系型数据库中的触发器，当发生某些
 
 Endpoint协处理器类似于关系型数据库中的存储过程。客户端可以调用Endpoint协处理器在服务端对数据进行处理，然后再返回。
 
-以聚集操作为例，如果没有协处理器，当用户需要找出一张表中的最大数据，即 max聚合操作，就必须进行全表扫描，在客户端上遍历扫描结果，这必然会加重了客户端处理数据的压力。利用 Coprocessor，用户可以将求最大值的代码部署到 HBase Server 端，HBase将利用底层 cluster 的多个节点并发执行求最大值的操作。即在每个 Region 范围内执行求最大值的代码，将每个 Region 的最大值在 Region Server 端计算出，仅仅将该 max 值返回给客户端。在客户端进一步将多个Region的最大值进一步处理而找到其中的最大值，以提高执行效率。
+以聚集操作为例，如果没有协处理器，当用户需要找出一张表中的最大数据，即 max 聚合操作，就必须进行全表扫描，然后在客户端上遍历扫描结果，这必然会加重了客户端处理数据的压力。利用 Coprocessor，用户可以将求最大值的代码部署到 HBase Server 端，HBase将利用底层 cluster 的多个节点并发执行求最大值的操作。即在每个 Region 范围内执行求最大值的代码，将每个 Region 的最大值在 Region Server 端计算出来，仅仅将该 max 值返回给客户端。之后客户端只需要将每个 Region 的最大值进行比较而找到其中最大的值即可。
 
 
 
@@ -96,8 +96,8 @@ Endpoint协处理器类似于关系型数据库中的存储过程。客户端可
 
 要使用我们自己开发的协处理器，必须通过静态（使用HBase配置）或动态（使用HBase Shell或Java API）加载它。
 
-+ 静态加载的协处理器称之为 System Coprocessor（系统级协处理器）,作用范围是整个Hbase上的所有表，需要重启Hbase；
-+ 动态加载的协处理器称 之为 Table Coprocessor（表处理器），作用于指定的表，不需要重启Hbase。
++ 静态加载的协处理器称之为 **System Coprocessor**（系统级协处理器）,作用范围是整个HBase上的所有表，需要重启HBase服务；
++ 动态加载的协处理器称之为 **Table Coprocessor**（表处理器），作用于指定的表，不需要重启HBase服务。
 
 其加载和卸载方式分别介绍如下。
 
@@ -109,7 +109,7 @@ Endpoint协处理器类似于关系型数据库中的存储过程。客户端可
 
 静态加载分以下三步：
 
-1. 在hbase-site.xml定义需要加载的协处理器
+1. 在`hbase-site.xml`定义需要加载的协处理器。
 
 ```xml
 <property>
@@ -118,27 +118,27 @@ Endpoint协处理器类似于关系型数据库中的存储过程。客户端可
 </property>
 ```
 
-  \<name>标签的值必须是下面其中之一：
+ ` <name>`标签的值必须是下面其中之一：
 
   + RegionObservers 和 Endpoints协处理器：`hbase.coprocessor.region.classes` 
   + WALObservers协处理器： `hbase.coprocessor.wal.classes` 
   + MasterObservers协处理器：`hbase.coprocessor.master.classes`
 
-  \<value>必须是协处理器实现类的全限定类名。如果为加载指定了多个类，则类名必须以逗号分隔。
+  `<value>`必须是协处理器实现类的全限定类名。如果为加载指定了多个类，则类名必须以逗号分隔。
 
-2. 将jar（包含代码和所有依赖项）放入HBase安装目录中的`lib`目录下
+2. 将jar(包含代码和所有依赖项)放入HBase安装目录中的`lib`目录下；
 
-3. 重启HBase
+3. 重启HBase。
 
 </br>
 
 ### 4.2 静态卸载
 
-1. 从hbase-site.xml中删除配置的协处理器的\<property>元素及其子元素
+1. 从hbase-site.xml中删除配置的协处理器的\<property>元素及其子元素；
 
-2. 从类路径或HBase的lib目录中删除协处理器的JAR文件（可选）
+2. 从类路径或HBase的lib目录中删除协处理器的JAR文件（可选）；
 
-3. 重启HBase
+3. 重启HBase。
    
 
 
@@ -169,17 +169,16 @@ user/<hadoop-user>/coprocessor.jar| org.myname.hbase.Coprocessor.RegionObserverE
 arg1=1,arg2=2'
 ```
 
-Coprocessor 包含由管道（|）字符分隔的四个参数，按顺序解释如下：
+`Coprocessor`包含由管道（|）字符分隔的四个参数，按顺序解释如下：
 
-+ JAR包路径：通常为JAR包在HDFS上的路径。关于路径以下两点需要注意：
-
-  + 允许使用通配符，例如：`hdfs://<namenode>:<port>/user/<hadoop-user>/*.jar` 来添加指定的JAR包；
-
-  + 可以使指定目录，例如：`hdfs://<namenode>:<port>/user/<hadoop-user>/` ，这会添加目录中的所有JAR包，但不会搜索子目录中的JAR包。
-
-+ 类名：协处理器的完整类名。
-+ 优先级：协处理器的优先级，遵循数字的自然序，即值越小优先级越高。可以为空，在这种情况下，将分配默认优先级值。
-+ 参数（可选）：传递的协处理器的可选参数。
++ **JAR包路径**：通常为JAR包在HDFS上的路径。关于路径以下两点需要注意：
++ 允许使用通配符，例如：`hdfs://<namenode>:<port>/user/<hadoop-user>/*.jar` 来添加指定的JAR包；
+  
++ 可以使指定目录，例如：`hdfs://<namenode>:<port>/user/<hadoop-user>/` ，这会添加目录中的所有JAR包，但不会搜索子目录中的JAR包。
+  
++ **类名**：协处理器的完整类名。
++ **优先级**：协处理器的优先级，遵循数字的自然序，即值越小优先级越高。可以为空，在这种情况下，将分配默认优先级值。
++ **可选参数** ：传递的协处理器的可选参数。
 
 3. 启用表
 
@@ -292,7 +291,7 @@ admin.enableTable(tableName);
 
 ## 六、协处理器案例
 
-这里给出一个简单的案例，实现一个类似于Redis中`append` 命令的协处理器，当我们对已有列执行put操作时候，Hbase默认执行的是update操作，这里我们修改为执行append操作。
+这里给出一个简单的案例，实现一个类似于Redis中`append` 命令的协处理器，当我们对已有列执行put操作时候，HBase默认执行的是update操作，这里我们修改为执行append操作。
 
 ```shell
 # redis append 命令示例
@@ -306,14 +305,14 @@ redis>  GET mykey
 "Hello World"
 ```
 
-#### 6.1 创建测试表
+### 6.1 创建测试表
 
 ```shell
 # 创建一张杂志表 有文章和图片两个列族
 hbase >  create 'magazine','article','picture'
 ```
 
-#### 6.2 协处理器编程
+### 6.2 协处理器编程
 
 > 完整代码可见本仓库：[hbase-observer-coprocessor](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hbase\hbase-observer-coprocessor)
 
@@ -368,15 +367,15 @@ public class AppendRegionObserver extends BaseRegionObserver {
 }
 ```
 
-#### 6.3 打包项目
+### 6.3 打包项目
 
-由于项目使用的是maven构建，直接执行以下命令进行打包，这里我打包后的文件名为`hbase-observer-coprocessor-1.0-SNAPSHOT.jar`
+使用maven命令进行打包，打包后的文件名为`hbase-observer-coprocessor-1.0-SNAPSHOT.jar`
 
 ```shell
 # mvn clean package
 ```
 
-#### 6.4 上传JAR包到HDFS
+### 6.4 上传JAR包到HDFS
 
 ```shell
 # 上传项目到HDFS上的hbase目录
@@ -387,7 +386,7 @@ hadoop fs -ls /hbase
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-cp-hdfs.png"/> </div>
 
-#### 6.5 加载协处理器
+### 6.5 加载协处理器
 
 1. 加载协处理器前需要先禁用表
 
@@ -416,7 +415,7 @@ hbase >  desc 'magazine'
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-cp-load.png"/> </div>
 
-#### 6.6 测试加载结果
+### 6.6 测试加载结果
 
 插入一组测试数据：
 
@@ -444,7 +443,7 @@ hbase > get 'magazine','rowkey1','article:author'
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-cp-lisi.png"/> </div>
 
-#### 6.7 卸载协处理器
+### 6.7 卸载协处理器
 1. 卸载协处理器前需要先禁用表
 
 ```shell
@@ -470,7 +469,7 @@ hbase >  desc 'magazine'
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-co-unload.png"/> </div>
 
-#### 6.8 测试卸载结果
+### 6.8 测试卸载结果
 
 依次执行下面命令可以测试卸载是否成功
 

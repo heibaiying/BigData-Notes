@@ -1,4 +1,4 @@
-# Hbase基本环境搭建
+# HBase基本环境搭建
 
 <nav>
 <a href="#一安装前置条件说明">一、安装前置条件说明</a><br/>
@@ -14,12 +14,12 @@ HBase 需要依赖JDK环境，同时HBase 2.0+ 以上版本不再支持JDK 1.7 �
 
 > [Linux环境下JDK安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
 
-### 1.2 standalone 模式和伪集群模式的区别
+### 1.2 Standalone模式和伪集群模式的区别
 
-+ 在standalone 模式下，所有守护进程都运行在一个 jvm 进程/实例中；
-+ 在分布模式下，HBase仍然在单个主机上运行，但是每个 HBase 守护进程（HMaster，HRegionServer 和 ZooKeeper）作为一个单独的进程运行。
++ 在`Standalone`模式下，所有守护进程都运行在一个`jvm`进程/实例中；
++ 在伪分布模式下，HBase仍然在单个主机上运行，但是每个守护进程(HMaster，HRegionServer 和 ZooKeeper)则分别作为一个单独的进程运行。
 
-**说明：两种模式任选其一进行部署即可，对于开发环境来说是没有太大区别的。**
+**说明：两种模式任选其一进行部署即可，对于开发测试来说区别不大。**
 
 
 
@@ -27,7 +27,7 @@ HBase 需要依赖JDK环境，同时HBase 2.0+ 以上版本不再支持JDK 1.7 �
 
 ### 2.1 下载并解压
 
-从[官方网站](https://hbase.apache.org/downloads.html)下载所需要版本的二进制安装包，并进行解压
+从[官方网站](https://hbase.apache.org/downloads.html)下载所需要版本的二进制安装包，并进行解压：
 
 ```shell
 # tar -zxvf hbase-2.1.4-bin.tar.gz
@@ -80,15 +80,15 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 </configuration>
 ```
 
-`hbase.rootdir`: 配置hbase数据的存储路径
+`hbase.rootdir`: 配置hbase数据的存储路径；
 
-`hbase.zookeeper.property.dataDir`: 配置zookeeper数据的存储路径
+`hbase.zookeeper.property.dataDir`: 配置zookeeper数据的存储路径；
 
 `hbase.unsafe.stream.capability.enforce`: 使用本地文件系统存储，不使用HDFS的情况下需要禁用此配置，设置为false。
 
 ### 2.4 启动HBase
 
-由于已经将HBase的bin目录配置到环境变量，直接使用以下命令启动
+由于已经将HBase的bin目录配置到环境变量，直接使用以下命令启动：
 
 ```shell
 # start-hbase.sh
@@ -96,7 +96,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 
 ### 2.5 验证启动是否成功
 
-验证方式一：使用jps 查看HMaster进程是否启动
+验证方式一 ：使用`jps`命令查看HMaster进程是否启动。
 
 ```
 [root@hadoop001 hbase-2.1.4]# jps
@@ -104,7 +104,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 15500 HMaster
 ```
 
-验证方式二：访问HBaseWeb UI 页面，默认端口为`16010`
+验证方式二 ：访问HBaseWeb UI 页面，默认端口为`16010` 。
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-web-ui.png"/> </div>
 
@@ -114,15 +114,13 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 
 ### 3.1 Hadoop单机伪集群安装
 
-这里我们采用HDFS作为Hbase的存储方案，需要预先安装Hadoop。（如果你没有安装Hadoop，依然可以按照Standalone 模式，采用本地文件系统作为存储方案）
+这里我们采用HDFS作为HBase的存储方案，需要预先安装Hadoop。Hadoop的安装方式单独整理至：
 
 > [Hadoop单机伪集群搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop单机版本环境搭建.md)
 
 ### 3.2 Hbase版本选择
 
-HBase的版本必须要与Hadoop的版本兼容，不然会发生各种Jar包冲突。
-
-由于我们Hadoop采用的版本为`hadoop-2.6.0-cdh5.15.2`,所以这里保持CDH版本一致，我们选择的HBase版本为`hbase-1.2.0-cdh5.15.2` ，HBase 1.2 的安装需要依赖JDK 1.7+ 。所有软件版本如下：
+HBase的版本必须要与Hadoop的版本兼容，不然会出现各种Jar包冲突。这里我Hadoop安装的版本为`hadoop-2.6.0-cdh5.15.2`，为保持版本一致，选择的HBase版本为`hbase-1.2.0-cdh5.15.2` 。所有软件版本如下：
 
 + Hadoop 版本： hadoop-2.6.0-cdh5.15.2
 
@@ -134,13 +132,11 @@ HBase的版本必须要与Hadoop的版本兼容，不然会发生各种Jar包冲
 
 ### 3.3 软件下载解压
 
-下载地址：http://archive.cloudera.com/cdh5/cdh/5/    下载后进行解压：
+下载后进行解压，下载地址：http://archive.cloudera.com/cdh5/cdh/5/    
 
 ```shell
 # tar -zxvf hbase-1.2.0-cdh5.15.2.tar.gz
 ```
-
-
 
 ### 3.4 配置环境变量
 ```shell
@@ -172,7 +168,7 @@ export PATH=$HBASE_HOME/bin:$PATH
 export JAVA_HOME=/usr/java/jdk1.8.0_201
 ```
 
-2.修改安装目录下的`conf/hbase-site.xml`，增加如下配置（hadoop001为我虚拟机的主机名）：
+2.修改安装目录下的`conf/hbase-site.xml`，增加如下配置(hadoop001为主机名)：
 
 ```xml
 <configuration>
@@ -194,7 +190,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 </configuration>
 ```
 
-3.修改安装目录下的`conf/regionservers`，指定 region  servers的地址，修改后其内容如下（hadoop001为我虚拟机的主机名）：
+3.修改安装目录下的`conf/regionservers`，指定region  servers的地址，修改后其内容如下：
 
 ```shell
 hadoop001
@@ -212,7 +208,7 @@ hadoop001
 
 ### 3.7 验证启动是否成功
 
-验证方式一：jps查看进程，其中HMaster,HRegionServer,HQuorumPeer三个进程是HBase的进程（其中HQuorumPeer是Hbase内置的Zookeeper的进程），其余的为HDFS和YARN的进程。
+验证方式一 ：使用`jps`命令查看进程。其中`HMaster`，`HRegionServer`是HBase的进程，`HQuorumPeer`是HBase内置的Zookeeper的进程，其余的为HDFS和YARN的进程。
 
 ```shell
 [root@hadoop001 conf]# jps
@@ -229,6 +225,6 @@ hadoop001
 21933 HMaster
 ```
 
-验证方式二：访问HBase Web UI 界面，需要注意的是1.2 版本的HBase的访问端口为`60010`
+验证方式二 ：访问HBase Web UI 界面，需要注意的是1.2 版本的HBase的访问端口为`60010`
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-60010.png"/> </div>
