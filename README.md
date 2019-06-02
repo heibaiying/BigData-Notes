@@ -183,4 +183,6 @@ TODO
 
 <br>
 
-## :bookmark_tabs:后记
+## :bookmark_tabs: 后记
+
+[资料分享与工具推荐]((https://github.com/heibaiying/BigData-Notes/blob/master/notes/资料分享与工具推荐.md))
