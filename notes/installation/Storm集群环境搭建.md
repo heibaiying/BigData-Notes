@@ -3,14 +3,20 @@
 <nav>
 <a href="#一集群规划">一、集群规划</a><br/>
 <a href="#二环境要求">二、环境要求</a><br/>
-<a href="#三安装步骤">三、安装步骤</a><br/>
+<a href="#三集群搭建">三、集群搭建</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-下载并解压">1. 下载并解压</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-配置环境变量">2. 配置环境变量</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-集群配置">3. 集群配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-启动服务">4. 启动服务</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5-查看进程">5. 查看进程</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6-查看Web-UI界面">6. 查看Web-UI界面</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-安装包分发">4. 安装包分发</a><br/>
+<a href="#四-启动集群">四. 启动集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-启动ZooKeeper集群">4.1 启动ZooKeeper集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-启动Storm集群">4.2 启动Storm集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-查看集群">4.3 查看集群</a><br/>
 </nav>
+
+
+
+
 
 ## 一、集群规划
 
@@ -29,24 +35,19 @@ Storm 运行依赖于Java 7+ 和 Python 2.6.6 +，所以需要预先安装这两
 
 
 
-## 三、安装步骤
+## 三、集群搭建
 
 ### 1. 下载并解压
 
-下载安装包，使用scp命令分发到三台服务器上，之后进行解压。官方下载地址：http://storm.apache.org/downloads.html 
+下载安装包，之后进行解压。官方下载地址：http://storm.apache.org/downloads.html 
 
 ```shell
 # 解压
 tar -zxvf apache-storm-1.2.2.tar.gz
 
-# 分发
-scp -r /usr/app/apache-storm-1.2.2/ root@hadoop002:/usr/app/
-scp -r /usr/app/apache-storm-1.2.2/ root@hadoop003:/usr/app/
 ```
 
 ### 2. 配置环境变量
-
-为了方便，三台服务器均配置一下环境变量：
 
 ```shell
 # vim /etc/profile
@@ -67,7 +68,7 @@ export PATH=$STORM_HOME/bin:$PATH
 
 ### 3. 集群配置
 
-修改每台服务器上的`${STORM_HOME}/conf/storm.yaml`文件，配置均如下：
+修改`${STORM_HOME}/conf/storm.yaml`文件，配置如下：
 
 ```yaml
 # Zookeeper集群的主机列表
@@ -80,7 +81,7 @@ storm.zookeeper.servers:
 nimbus.seeds: ["hadoop001"]
 
 # Nimbus和Supervisor需要使用本地磁盘上来存储少量状态（如jar包，配置文件等）
-storm.local.dir: "/usr/local/tmp/storm"
+storm.local.dir: "/home/storm"
 
 # workers进程的端口，每个worker进程会使用一个端口来接收消息
 supervisor.slots.ports:
@@ -92,13 +93,34 @@ supervisor.slots.ports:
 
 `supervisor.slots.ports`参数用来配置workers进程接收消息的端口，默认每个supervisor节点上会启动4个worker，当然你也可以按照自己的需要和服务器性能进行设置，假设只想启动2个worker的话，此处配置2个端口即可。
 
-### 4. 启动服务
+### 4. 安装包分发
 
-先启动Zookeeper集群，之后再启动Storm集群。因为要启动多个进程，所以统一采用后台进程的方式启动，进入到`${STORM_HOME}/bin`目录下，依次执行下面的命令：
+将Storm的安装包分发到其他服务器，分发后建议在这两台服务器上也配置一下Storm的环境变量。
+
+```shell
+scp -r /usr/app/apache-storm-1.2.2/ root@hadoop002:/usr/app/
+scp -r /usr/app/apache-storm-1.2.2/ root@hadoop003:/usr/app/
+```
+
+
+
+## 四. 启动集群
+
+### 4.1 启动ZooKeeper集群
+
+分别到三台服务器上启动ZooKeeper服务：
+
+```shell
+ zkServer.sh start
+```
+
+### 4.2 启动Storm集群
+
+因为要启动多个进程，所以统一采用后台进程的方式启动。进入到`${STORM_HOME}/bin`目录下，执行下面的命令：
 
 **hadoop001 ：**
 
-因为hadoop001是nimbus节点，所以需要启动nimbus服务和ui服务；同时hadoop001也是supervisor节点，所以需要启动supervisor服务和logviewer服务：
+因为hadoop001是`nimbus`节点，所以需要启动`nimbus`服务和`ui`服务；同时hadoop001也是`supervisor`节点，所以需要启动`supervisor`服务和`logviewer`服务：
 
 ```shell
 # 启动主节点 nimbus
@@ -113,7 +135,7 @@ nohup sh storm logviewer &
 
 **hadoop002  &  hadoop003 ：**
 
-hadoop002和hadoop003都只需要启动supervisor服务和logviewer服务：
+hadoop002和hadoop003都只需要启动`supervisor`服务和`logviewer`服务：
 
 ```shell
 # 启动从节点 supervisor 
@@ -124,7 +146,7 @@ nohup sh storm logviewer &
 
 
 
-### 5. 查看进程
+### 4.3 查看集群
 
 使用`jps`查看进程，三台服务器的进程应该分别如下：
 
@@ -132,8 +154,6 @@ nohup sh storm logviewer &
 
 
 
-### 6. 查看Web-UI界面
-
-访问hadoop001的8080端口，界面应如下图，可以看到有1个Nimbus和3个Supervisor，并且每个Supervisor有四个slots，即四个可用的worker进程，此时代表集群已经搭建成功。
+访问hadoop001的`8080`端口，界面应如下图，可以看到有1个`Nimbus`和3个`Supervisor`，并且每个`Supervisor`有四个`slots`，即四个可用的`worker`进程，此时代表集群已经搭建成功。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm集群.png"/> </div>

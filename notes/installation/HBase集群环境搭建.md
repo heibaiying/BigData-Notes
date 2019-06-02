@@ -1,14 +1,32 @@
 # HBase集群环境配置
 
+<nav>
+<a href="#一集群规划">一、集群规划</a><br/>
+<a href="#二前置条件">二、前置条件</a><br/>
+<a href="#三集群搭建">三、集群搭建</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-下载并解压">3.1 下载并解压</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-配置环境变量">3.2 配置环境变量</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-集群配置">3.3 集群配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-HDFS客户端配置">3.4 HDFS客户端配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-安装包分发">3.5 安装包分发</a><br/>
+<a href="#四启动集群">四、启动集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-启动ZooKeeper集群">4.1 启动ZooKeeper集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-启动Hadoop集群">4.2 启动Hadoop集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-启动HBase集群">4.3 启动HBase集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#45-查看服务">4.5 查看服务</a><br/>
+</nav>
+
+
+
 ## 一、集群规划
 
-这里搭建一个3节点的HBase集群，其中三台主机上均为`Regin Server`。同时为了保证高可用，除了在hadoop001上部署主`Master`服务外，还在hadoop002上署备用的`Master`服务，Master服务由Zookeeper集群进行协调管理，如果主`Master`不可用，则备用`Master`会成为新的主`Master`。
+这里搭建一个3节点的HBase集群，其中三台主机上均为`Regin Server`。同时为了保证高可用，除了在hadoop001上部署主`Master`服务外，还在hadoop002上部署备用的`Master`服务。Master服务由Zookeeper集群进行协调管理，如果主`Master`不可用，则备用`Master`会成为新的主`Master`。
 
-![hbase集群规划](D:\BigData-Notes\pictures\hbase集群规划.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase集群规划.png"/> </div>
 
 ## 二、前置条件
 
-HBase的运行需要依赖JDK和Hadoop，HBase 2.0+需要安装JDK 1.8+ 。同时为了保证高可用，这里我们不采用HBase内置的Zookeeper，而采用外置的Zookeeper集群。相关搭建步骤可以参阅：
+HBase的运行需要依赖Hadoop和JDK(`HBase 2.0+`对应`JDK 1.8+`) 。同时为了保证高可用，这里我们不采用HBase内置的Zookeeper服务，而采用外置的Zookeeper集群。相关搭建步骤可以参阅：
 
 - [Linux环境下JDK安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
 - [Zookeeper单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper单机环境和集群环境搭建.md)
@@ -20,10 +38,10 @@ HBase的运行需要依赖JDK和Hadoop，HBase 2.0+需要安装JDK 1.8+ 。同�
 
 ### 3.1 下载并解压
 
-下载并解压，官方下载地址：https://hbase.apache.org/downloads.html
+下载并解压，这里我下载的是CDH版本HBase，下载地址为：http://archive.cloudera.com/cdh5/cdh/5/
 
 ```shell
-# tar -zxvf hbase-2.1.4-bin.tar.gz
+# tar -zxvf hbase-1.2.0-cdh5.15.2.tar.gz
 ```
 
 ### 3.2 配置环境变量
@@ -35,7 +53,7 @@ HBase的运行需要依赖JDK和Hadoop，HBase 2.0+需要安装JDK 1.8+ 。同�
 添加环境变量：
 
 ```shell
-export HBASE_HOME=/usr/app/hbase-2.1.4
+export HBASE_HOME=usr/app/hbase-1.2.0-cdh5.15.2
 export PATH=$HBASE_HOME/bin:$PATH
 ```
 
@@ -172,7 +190,7 @@ start-hbase.sh
 
 访问HBase的Web-UI界面，这里我安装的HBase版本为1.2，访问端口为`60010`，如果你安装的是2.0以上的版本，则访问端口号为`16010`。可以看到`Master`在hadoop001上，三个`Regin Servers`分别在hadoop001，hadoop002，和hadoop003上，并且还有一个`Backup Matser` 服务在 hadoop002上。
 
-![hbase-集群搭建1](D:\BigData-Notes\pictures\hbase-集群搭建1.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-集群搭建1.png"/> </div>
 
 <br/>
 
@@ -180,4 +198,4 @@ hadoop002 上的 HBase出于备用状态：
 
 <br/>
 
-![hbase-集群搭建2](D:\BigData-Notes\pictures\hbase-集群搭建2.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-集群搭建2.png"/> </div>

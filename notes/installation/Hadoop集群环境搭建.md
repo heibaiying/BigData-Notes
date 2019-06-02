@@ -1,10 +1,29 @@
 # Hadoop集群环境搭建
 
+<nav>
+<a href="#一集群规划">一、集群规划</a><br/>
+<a href="#二前置条件">二、前置条件</a><br/>
+<a href="#三配置免密登录">三、配置免密登录</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-生成密匙">3.1 生成密匙</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-免密登录">3.2 免密登录</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-验证免密登录">3.3 验证免密登录</a><br/>
+<a href="#四集群搭建">四、集群搭建</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-下载并解压">3.1 下载并解压</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-配置环境变量">3.2 配置环境变量</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-修改配置">3.3 修改配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-分发程序">3.4 分发程序</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35--初始化">3.5  初始化</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#36-启动集群">3.6 启动集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#37-查看集群">3.7 查看集群</a><br/>
+<a href="#五提交服务到集群">五、提交服务到集群</a><br/>
+</nav>
+
+
 ## 一、集群规划
 
 这里搭建一个3节点的Hadoop集群，其中三台主机均部署`DataNode`和`NodeManager`服务，但只有hadoop001上部署`NameNode`和`ResourceManager`服务。
 
-![hbase集群规划](D:\BigData-Notes\pictures\hadoop集群规划.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop集群规划.png"/> </div>
 
 ## 二、前置条件
 
@@ -18,7 +37,7 @@ Hadoop的运行依赖JDK，需要预先安装。其安装步骤单独整理至�
 
 ### 3.1 生成密匙
 
-在每台主机上使用ssh-keygen产生公钥私钥对：
+在每台主机上使用`ssh-keygen`命令生成公钥私钥对：
 
 ```shell
 ssh-keygen
@@ -177,7 +196,7 @@ hadoop namenode -format
 
 ### 3.6 启动集群
 
-进入到`Hadoop001`的`${HADOOP_HOME}/sbin`目录下，启动Hadoop。此时`hadoop002`和`hadoop003`上的相关服务也会被启动。
+进入到`Hadoop001`的`${HADOOP_HOME}/sbin`目录下，启动Hadoop。此时`hadoop002`和`hadoop003`上的相关服务也会被启动：
 
 ```shell
 # 启动dfs服务
@@ -190,15 +209,15 @@ start-yarn.sh
 
 在每台服务器上使用`jps`命令查看服务进程，或直接进入Web-UI界面进行查看，端口为`50070`。可以看到此时有三个可用的`Datanode`：
 
-![hadoop-集群环境搭建](D:\BigData-Notes\pictures\hadoop-集群环境搭建.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-集群环境搭建.png"/> </div>
 
 点击`Live Nodes`进入，可以看到每个`DataNode`的详细情况：
 
-![hadoop-集群搭建2](D:\BigData-Notes\pictures\hadoop-集群搭建2.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-集群搭建2.png"/> </div>
 
 接着可以查看Yarn集群的情况，端口号为`8088` ：
 
-![hadoop-集群搭建3](D:\BigData-Notes\pictures\hadoop-集群搭建3.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-集群搭建3.png"/> </div>
 
 
 

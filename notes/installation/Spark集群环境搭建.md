@@ -1,10 +1,28 @@
 # 基于ZooKeeper搭建Spark高可用集群
 
+<nav>
+<a href="#一集群规划">一、集群规划</a><br/>
+<a href="#二前置条件">二、前置条件</a><br/>
+<a href="#三Spark集群搭建">三、Spark集群搭建</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-下载解压">3.1 下载解压</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-配置环境变量">3.2 配置环境变量</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-集群配置">3.3 集群配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-安装包分发">3.4 安装包分发</a><br/>
+<a href="#四启动集群">四、启动集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-启动ZooKeeper集群">4.1 启动ZooKeeper集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-启动Hadoop集群">4.2 启动Hadoop集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-启动Spark集群">4.3 启动Spark集群</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#44-查看服务">4.4 查看服务</a><br/>
+<a href="#五验证集群高可用">五、验证集群高可用</a><br/>
+<a href="#六提交作业">六、提交作业</a><br/>
+</nav>
+
+
 ## 一、集群规划
 
 这里搭建一个3节点的Spark集群，其中三台主机上均部署`Worker`服务。同时为了保证高可用，除了在hadoop001上部署主`Master`服务外，还在hadoop002和hadoop003上分别部署备用的`Master`服务，Master服务由Zookeeper集群进行协调管理，如果主`Master`不可用，则备用`Master`会成为新的主`Master`。
 
-![spark-集群规划](D:\BigData-Notes\pictures\spark集群规划.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark集群规划.png"/> </div>
 
 ## 二、前置条件
 
@@ -133,27 +151,25 @@ start-master.sh
 
 查看Spark的Web-UI页面，端口为`8080`。此时可以看到hadoop001上的Master节点处于`ALIVE`状态，并有3个可用的`Worker`节点。
 
-![spark-集群搭建1](D:\BigData-Notes\pictures\spark-集群搭建1.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群搭建1.png"/> </div>
 
 而hadoop002和hadoop003上的Master节点均处于`STANDBY`状态，没有可用的`Worker`节点。
 
-![spark-集群搭建2](D:\BigData-Notes\pictures\spark-集群搭建2.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群搭建2.png"/> </div>
 
-![spark-集群搭建3](D:\BigData-Notes\pictures\spark-集群搭建3.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群搭建3.png"/> </div>
 
 
 
 ## 五、验证集群高可用
 
-此时可以使用`kill`命令杀死hadoop001上的`Master`进程，此时`备用Master`会中会有一个再次成为`主Master`，我这里是hadoop002，可以看到hadoop2上的`Master`经过`RECOVERING`后成为了新的`主Master`，并且获得了全部可以用的`Workers`。
+此时可以使用`kill`命令杀死hadoop001上的`Master`进程，此时`备用Master`会中会有一个再次成为`主Master`，我这里是hadoop002，可以看到hadoop2上的`Master`经过`RECOVERING`后成为了新的`主Master`，并且获得了全部可以用的`Workers`。此时如果你再在hadoop001上使用`start-master.sh`启动Master，那么其会作为`备用Master`存在。
 
-此时如果你再在hadoop001上使用`start-master.sh`启动Master，那么其会作为`备用Master`存在。
-
-![spark-集群搭建4](D:\BigData-Notes\pictures\spark-集群搭建4.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群搭建4.png"/> </div>
 
 Hadoop002上的`Master`成为`主Master`，并获得了全部可以用的`Workers`。
 
-![spark-集群搭建5](D:\BigData-Notes\pictures\spark-集群搭建5.png)
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群搭建5.png"/> </div>
 
 ## 六、提交作业
 

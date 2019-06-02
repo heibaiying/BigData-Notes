@@ -7,28 +7,27 @@
 
 ### 二、Hadoop
 
-1. [Hadoop单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/hadoop单机版本环境搭建.md)
+1. [Hadoop单机环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop单机环境搭建.md)
 
-2. Hadoop集群环境搭建
-3. 基于Zookeeper搭建Hadoop的HA集群
+2. [Hadoop集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop集群环境搭建.md)
 
 ### 三、Spark
 
-1. [Spark单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Spark单机版本环境搭建.md)
+1. [Spark开发环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/SparkSpark开发环境搭建.md)
 
-2. Spark集群环境搭建
+2. [基于Zookeeper搭建Spark高可用集群](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/SparkSpark集群环境搭建.md)
 
 ### 四、Storm
 
-1. [Storm单机版本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Storm单机版本环境搭建.md)
+1. [Storm单机环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Storm单机环境搭建.md)
 
-2. Storm集群环境搭建
+2. [Storm集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Storm集群环境搭建.md)
 
-### 五、Hbase
+### 五、HBase
 
-1. [Hbase基本环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hbase基本环境搭建.md)
+1. [Hbase单机环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hbase单机环境搭建.md)
 
-2. Hbase集群环境搭建
+2. [Hbase集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hbase集群环境搭建.md)
 
 ### 六、Flume
 
