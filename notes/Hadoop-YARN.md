@@ -4,18 +4,15 @@
 <a href="#一hadoop-yarn-简介">一、hadoop yarn 简介</a><br/>
 <a href="#二YARN架构">二、YARN架构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-ResourceManager">1. ResourceManager</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-ApplicationMaster">2. ApplicationMaster </a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-NodeManager">3. NodeManager</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-NodeManager">2. NodeManager</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-ApplicationMaster">3. ApplicationMaster </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-Contain">4. Contain</a><br/>
 <a href="#三YARN工作原理简述">三、YARN工作原理简述</a><br/>
 <a href="#四YARN工作原理详述">四、YARN工作原理详述</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-作业提交">1. 作业提交</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-作业初始化">2. 作业初始化</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-任务分配">3. 任务分配</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-任务运行">4. 任务运行</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5-进度和状态更新">5. 进度和状态更新</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#6-作业完成">6. 作业完成</a><br/>
 <a href="#五提交作业到YARN上运行">五、提交作业到YARN上运行</a><br/>
 </nav>
+
+
 
 ## 一、hadoop yarn 简介
 
@@ -37,18 +34,18 @@
 
 `NodeManager`是YARN集群中的每个具体节点的管理者。主要负责该节点内所有容器的生命周期的管理，监视资源和跟踪节点健康。具体如下：
 
-1. 启动时向`ResourceManager`注册并定时发送心跳消息，等待`ResourceManager`的指令；
-2. 维护`Container`的生命周期，监控`Container`的资源使用情况；
-3. 管理任务运行时的相关依赖，根据`ApplicationMaster`的需要，在启动`Container`之前将需要的程序及其依赖拷贝到本地。
+- 启动时向`ResourceManager`注册并定时发送心跳消息，等待`ResourceManager`的指令；
+- 维护`Container`的生命周期，监控`Container`的资源使用情况；
+- 管理任务运行时的相关依赖，根据`ApplicationMaster`的需要，在启动`Container`之前将需要的程序及其依赖拷贝到本地。
 
 ### 3. ApplicationMaster 
 
 在用户提交一个应用程序时，YARN会启动一个轻量级的进程`ApplicationMaster`。`ApplicationMaster`负责协调来自 `ResourceManager`的资源，并通过`NodeManager` 监视容器内资源的使用情况，同时还负责任务的监控与容错。具体如下：
 
-1. 根据应用的运行状态来决定动态计算资源需求；
-2. 向`ResourceManager`申请资源，监控申请的资源的使用情况；
-3. 跟踪任务状态和进度，报告资源的使用情况和应用的进度信息；
-4. 负责任务的容错。
+- 根据应用的运行状态来决定动态计算资源需求；
+- 向`ResourceManager`申请资源，监控申请的资源的使用情况；
+- 跟踪任务状态和进度，报告资源的使用情况和应用的进度信息；
+- 负责任务的容错。
 
 ### 4. Contain
 
@@ -115,8 +112,7 @@ YARN中的任务将其进度和状态(包括counter)返回给应用管理器, �
 这里以提交Hadoop Examples中计算Pi的MApReduce程序为例，相关Jar包在Hadoop安装目录的`share/hadoop/mapreduce`目录下：
 
 ```shell
-# 提交格式为
-# hadoop jar jar包路径 主类名称 主类参数
+# 提交格式: hadoop jar jar包路径 主类名称 主类参数
 # hadoop jar hadoop-mapreduce-examples-2.6.0-cdh5.15.2.jar pi 3 3
 ```
 
