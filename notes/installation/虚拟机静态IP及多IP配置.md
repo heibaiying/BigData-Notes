@@ -1,25 +1,22 @@
 # 虚拟机静态IP及多IP配置
 
->  虚拟机环境：centos 7.6
-
-
-
 <nav>
 <a href="#一虚拟机静态IP配置">一、虚拟机静态IP配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-编辑网络配置文件">1. 编辑网络配置文件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-重启网络服务">2. 重启网络服务</a><br/>
 <a href="#二虚拟机多个静态IP配置">二、虚拟机多个静态IP配置</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-配置多网卡">1. 配置多网卡</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-查看网卡名称">2. 查看网卡名称</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-配置第二块网卡">3. 配置第二块网卡</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4-重启网络服务器">4. 重启网络服务器</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#5-使用说明">5. 使用说明</a><br/>
 </nav>
 
 
 
 ## 一、虚拟机静态IP配置
 
-### 1. 查看当前网卡名称
-
-​	使用`ifconfig`，本机网卡名称为`enp0s3`
-
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/en0s3.png"/> </div>
-
-### 2. 编辑网络配置文件
+### 1. 编辑网络配置文件
 
 ```shell
 # vim /etc/sysconfig/network-scripts/ifcfg-enp0s3
@@ -68,7 +65,7 @@ DEVICE=enp0s3
 ONBOOT=yes
 ```
 
-### 3. 重启网络服务
+### 2. 重启网络服务
 
 ```shell
 #  systemctl restart network
@@ -78,7 +75,7 @@ ONBOOT=yes
 
 ## 二、虚拟机多个静态IP配置
 
-这里说一下多个静态IP的使用场景：主要是针对同一台电脑在经常在不同网络环境使用（办公，家庭，学习等），配置好多个IP后，在`hosts`文件中映射到同一个主机名，这样在不同网络中就可以直接启动Hadoop等软件。
+如果一台虚拟机需要经常在不同网络环境使用，可以配置多个静态IP。
 
 ### 1. 配置多网卡
 
@@ -88,13 +85,13 @@ ONBOOT=yes
 
 ### 2. 查看网卡名称
 
-使用`ifconfig`，查看第二块网卡名称，这里我的名称为`enp0s8`。
+使用`ifconfig`，查看第二块网卡名称，这里我的名称为`enp0s8`：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/mutli-net-ip.png"/> </div>
 
 ### 3. 配置第二块网卡
 
-开启多网卡后并不会自动生成配置文件，需要拷贝`ifcfg-enp0s3`进行修改。
+开启多网卡后并不会自动生成配置文件，需要拷贝`ifcfg-enp0s3`进行修改：
 
 ```shell
 # cp ifcfg-enp0s3 ifcfg-enp0s8
@@ -114,3 +111,8 @@ DEVICE=enp0s8
 #  systemctl restart network
 ```
 
+### 5. 使用说明
+
+使用时只需要根据所处的网络环境，勾选对应的网卡即可，不使用的网卡尽量不要勾选启动。
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/virtualbox启用网络.png"/> </div>
