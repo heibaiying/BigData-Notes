@@ -43,7 +43,7 @@
 
 
 
-> 为方便查阅，所有软件的安装步骤统一整理至：[Linux下大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Linux中大数据常用软件安装指南.md)
+> 为方便查阅，所有软件的安装步骤统一整理至：[大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据常用软件安装指南.md)
 
 
 

@@ -163,13 +163,15 @@ start-master.sh
 
 ## 五、验证集群高可用
 
-此时可以使用`kill`命令杀死hadoop001上的`Master`进程，此时`备用Master`会中会有一个再次成为`主Master`，我这里是hadoop002，可以看到hadoop2上的`Master`经过`RECOVERING`后成为了新的`主Master`，并且获得了全部可以用的`Workers`。此时如果你再在hadoop001上使用`start-master.sh`启动Master，那么其会作为`备用Master`存在。
+此时可以使用`kill`命令杀死hadoop001上的`Master`进程，此时备用`Master`会中会有一个再次成为`主Master`，我这里是hadoop002，可以看到hadoop2上的`Master`经过`RECOVERING`后成为了新的主`Master`，并且获得了全部可以用的`Workers`。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群搭建4.png"/> </div>
 
-Hadoop002上的`Master`成为`主Master`，并获得了全部可以用的`Workers`。
+Hadoop002上的`Master`成为主`Master`，并获得了全部可以用的`Workers`。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群搭建5.png"/> </div>
+
+此时如果你再在hadoop001上使用`start-master.sh`启动Master服务，那么其会作为备用`Master`存在。
 
 ## 六、提交作业
 

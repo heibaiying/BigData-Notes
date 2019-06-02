@@ -211,9 +211,13 @@ start-yarn.sh
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-集群环境搭建.png"/> </div>
 
+<BR/>
+
 点击`Live Nodes`进入，可以看到每个`DataNode`的详细情况：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-集群搭建2.png"/> </div>
+
+<BR/>
 
 接着可以查看Yarn集群的情况，端口号为`8088` ：
 
