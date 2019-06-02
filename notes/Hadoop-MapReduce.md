@@ -126,7 +126,7 @@ HBase	Hive
 
 ### 4.3 WordCountMapper
 
-将每行数据按照指定分隔符进行拆分：
+将每行数据按照指定分隔符进行拆分。这里需要注意在MapReduce中必须使用Hadoop定义的类型，因为Hadoop预定义的类型都是可序列化，可比较的，所有类型均实现了`WritableComparable`接口。
 
 ```java
 public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
@@ -152,17 +152,17 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritabl
 `WordCountMapper`继承自`Mappe`r类，这是一个泛型类，定义如下：
 
 ```java
+WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable>
+
 public class Mapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT> {
    ......
 }
 ```
 
-+ **KEYIN** : `mapping`输入的key的数据类型，即每行的偏移量(每行第一个字符在整个文本中的位置)，`Long`类型，对应Hadoop中的`LongWritable`类型；
-+ **VALUEIN** : `mapping`输入的value的数据类型，即每行数据；`String`类型，对应Hadoop中`Text`类型；
-+ **KEYOUT** ：`mapping`输出的key的数据类型，即每个单词；`String`类型，对应Hadoop中`Text`类型；
-+ **VALUEOUT**：`mapping`输出的value的数据类型，即每个单词出现的次数；这里用`int`类型，对应Hadoop中`IntWritable`类型；
-
-在MapReduce中必须使用Hadoop定义的类型，因为Hadoop预定义的类型都是可序列化，可比较的，所有类型均实现了`WritableComparable`接口。
++ **KEYIN** : `mapping`输入key的类型，即每行的偏移量(每行第一个字符在整个文本中的位置)，`Long`类型，对应Hadoop中的`LongWritable`类型；
++ **VALUEIN** : `mapping`输入value的类型，即每行数据；`String`类型，对应Hadoop中`Text`类型；
++ **KEYOUT** ：`mapping`输出的key的类型，即每个单词；`String`类型，对应Hadoop中`Text`类型；
++ **VALUEOUT**：`mapping`输出value的类型，即每个单词出现的次数；这里用`int`类型，对应Hadoop中`IntWritable`类型。
 
 
 
