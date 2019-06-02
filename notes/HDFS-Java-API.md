@@ -21,9 +21,7 @@
 
 ## 一、 简介
 
-Hadoop提供了简单易用的Java API用于操作HDFS。通过这些API，我们可以通过编程来更灵活的操作HDFS。同时从编程体验上来说，这些API的设计确实非常人性化，基本上你只需要一行代码就能完成相应的操作。
-
-想要使用HDFS API，你只需要导入`hadoop-client`这个依赖包即可。以下关于API的操作我均使用单元测试的方法进行演示，完整的POM文件如下：
+想要使用HDFS API，需要导入依赖`hadoop-client`。如果是CDH版本的Hadoop，还需要额外指明其仓库地址：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -77,7 +75,7 @@ Hadoop提供了简单易用的Java API用于操作HDFS。通过这些API，我�
 
 ### 2.1 FileSystem
 
-FileSystem是操作HDFS的入口，通过FileSystem我们可以完成对HDFS上文件和目录的所有操作。在使用前需要获取它，这里由于之后的每个单元测试都需要用到FileSystem，所以使用`@Before`注解进行标注。
+FileSystem是所有HDFS操作的主入口。由于之后的每个单元测试都需要用到它，这里使用`@Before`注解进行标注。
 
 ```java
 private static final String HDFS_PATH = "hdfs://192.168.0.106:8020";
@@ -88,7 +86,7 @@ private static FileSystem fileSystem;
 public void prepare() {
     try {
         Configuration configuration = new Configuration();
-        // 这里我启动的是单节点的Hadoop,副本系数可以设置为1,不设置的话默认值为3
+        // 这里我启动的是单节点的Hadoop,所以副本系数设置为1,默认值为3
         configuration.set("dfs.replication", "1");
         fileSystem = FileSystem.get(new URI(HDFS_PATH), configuration, HDFS_USER);
     } catch (IOException e) {
@@ -111,7 +109,7 @@ public void destroy() {
 
 ### 2.2 创建目录
 
-这里目录可以是多级，支持递归创建。
+支持递归创建目录：
 
 ```java
 @Test
@@ -124,7 +122,7 @@ public void mkDir() throws Exception {
 
 ### 2.3 创建指定权限的目录
 
-这里`FsPermission(FsAction u, FsAction g, FsAction o)` 的三个参数分别对应创建者权限，同组其他用户权限，其他用户权限，可以使用`FsAction`枚举类中的值进行指定。
+`FsPermission(FsAction u, FsAction g, FsAction o)` 的三个参数分别对应：创建者权限，同组其他用户权限，其他用户权限，权限值定义在`FsAction`枚举类中。
 
 ```java
 @Test
@@ -169,7 +167,7 @@ public void exist() throws Exception {
 
 ### 2.6 查看文件内容
 
-这里我们查看的是一个小文件的内容，所以直接转换成字符串后输出，对于大文件，还是应该从输出流中读取数据，分批处理。
+查看小文本文件的内容，直接转换成字符串后输出：
 
 ```java
 @Test
@@ -180,7 +178,7 @@ public void readToString() throws Exception {
 }
 ```
 
-inputStreamToString 是一个自定义方法，实现如下：
+`inputStreamToString`是一个自定义方法，代码如下：
 
 ```java
 /**
@@ -314,7 +312,7 @@ public void listFiles() throws Exception {
 }
 ```
 
-FileStatus中包含了文件的基本信息，比如文件路径，是否是文件夹，修改时间，访问时间，所有者，所属组，文件权限，是否是符号链接等，输出内容示例如下(这里为了直观，我对输出进行了换行显示)：
+`FileStatus`中包含了文件的基本信息，比如文件路径，是否是文件夹，修改时间，访问时间，所有者，所属组，文件权限，是否是符号链接等，输出内容示例如下：
 
 ```properties
 FileStatus{
@@ -343,7 +341,7 @@ public void listFilesRecursive() throws Exception {
 }
 ```
 
-这里输出和上面类似，只是多了文本大小，副本系数，块大小等信息。
+和上面输出类似，只是多了文本大小，副本系数，块大小信息。
 
 ```properties
 LocatedFileStatus{
@@ -375,16 +373,16 @@ public void getFileBlockLocations() throws Exception {
 }
 ```
 
-块输出信息比较简单，第一个值是文件的起始偏移量(offset)，第二个值是文件大小(length)，第三个是块所在的主机名(hosts)。
+块输出信息有三个值，分别是文件的起始偏移量(offset)，文件大小(length)，块所在的主机名(hosts)。
 
 ```
 0,57028557,hadoop001
 ```
 
-这里我上传的文件比较小，只有57M(小于128M)，且程序中设置了副本系数为1，所有只有一个块信息，如果文件很大，则这里会输出文件所有块的信息。
+这里我上传的文件只有57M(小于128M)，且程序中设置了副本系数为1，所有只有一个块信息。
 
 <br/>
 
 <br/>
 
-**以上所有测试用例可以从本仓库进行下载**：[HDFS Java API](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hadoop/hdfs-java-api)
+**以上所有测试用例下载地址**：[HDFS Java API](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hadoop/hdfs-java-api)
