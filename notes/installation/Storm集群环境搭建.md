@@ -155,6 +155,8 @@ nohup sh storm logviewer &
 
 
 
+<br/>
+
 访问hadoop001或hadoop002的`8080`端口，界面如下。可以看到有一主一备2个`Nimbus`和3个`Supervisor`，并且每个`Supervisor`有四个`slots`，即四个可用的`worker`进程，此时代表集群已经搭建成功。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-集群搭建1.png"/> </div>
