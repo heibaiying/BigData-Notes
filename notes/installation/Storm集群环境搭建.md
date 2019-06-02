@@ -2,7 +2,7 @@
 
 <nav>
 <a href="#一集群规划">一、集群规划</a><br/>
-<a href="#二环境要求">二、环境要求</a><br/>
+<a href="#二前置条件">二、前置条件</a><br/>
 <a href="#三集群搭建">三、集群搭建</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-下载并解压">1. 下载并解压</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-配置环境变量">2. 配置环境变量</a><br/>
@@ -12,7 +12,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-启动ZooKeeper集群">4.1 启动ZooKeeper集群</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-启动Storm集群">4.2 启动Storm集群</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-查看集群">4.3 查看集群</a><br/>
+<a href="#五高可用验证">五、高可用验证</a><br/>
 </nav>
+
+
 
 
 
@@ -20,11 +23,11 @@
 
 ## 一、集群规划
 
-这里我们采用三台服务器搭建一个Storm集群，集群由一个1个Nimbus和3个Supervisor组成，因为只有三台服务器，所以hadoop001上既为Nimbus节点，也为Supervisor节点。
+这里搭建一个3节点的Storm集群：三台主机上均部署`Supervisor`和`LogViewer`服务。同时为了保证高可用，除了在hadoop001上部署主`Nimbus`服务外，还在hadoop002上部署备用的`Nimbus`服务。`Nimbus`服务由Zookeeper集群进行协调管理，如果主`Nimbus`不可用，则备用`Nimbus`会成为新的主`Nimbus`。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-集群规划.png"/> </div>
 
-## 二、环境要求
+## 二、前置条件
 
 Storm 运行依赖于Java 7+ 和 Python 2.6.6 +，所以需要预先安装这两个软件。同时为了保证高可用，这里我们不采用Storm内置的Zookeeper，而采用外置的Zookeeper集群。由于这三个软件在多个框架中都有依赖，其安装步骤单独整理至 ：
 
@@ -78,7 +81,7 @@ storm.zookeeper.servers:
      - "hadoop003"
 
 # Nimbus的节点列表
-nimbus.seeds: ["hadoop001"]
+nimbus.seeds: ["hadoop001","hadoop002"]
 
 # Nimbus和Supervisor需要使用本地磁盘上来存储少量状态（如jar包，配置文件等）
 storm.local.dir: "/home/storm"
@@ -118,9 +121,7 @@ scp -r /usr/app/apache-storm-1.2.2/ root@hadoop003:/usr/app/
 
 因为要启动多个进程，所以统一采用后台进程的方式启动。进入到`${STORM_HOME}/bin`目录下，执行下面的命令：
 
-**hadoop001 ：**
-
-因为hadoop001是`nimbus`节点，所以需要启动`nimbus`服务和`ui`服务；同时hadoop001也是`supervisor`节点，所以需要启动`supervisor`服务和`logviewer`服务：
+**hadoop001 & hadoop002 ：**
 
 ```shell
 # 启动主节点 nimbus
@@ -133,9 +134,9 @@ nohup sh storm ui &
 nohup sh storm logviewer &
 ```
 
-**hadoop002  &  hadoop003 ：**
+**hadoop003 : **
 
-hadoop002和hadoop003都只需要启动`supervisor`服务和`logviewer`服务：
+hadoop003上只需要启动`supervisor`服务和`logviewer`服务：
 
 ```shell
 # 启动从节点 supervisor 
@@ -154,6 +155,14 @@ nohup sh storm logviewer &
 
 
 
-访问hadoop001的`8080`端口，界面应如下图，可以看到有1个`Nimbus`和3个`Supervisor`，并且每个`Supervisor`有四个`slots`，即四个可用的`worker`进程，此时代表集群已经搭建成功。
+访问hadoop001或hadoop002的`8080`端口，界面如下。可以看到有一主一备2个`Nimbus`和3个`Supervisor`，并且每个`Supervisor`有四个`slots`，即四个可用的`worker`进程，此时代表集群已经搭建成功。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm集群.png"/> </div>
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-集群搭建1.png"/> </div>
+
+
+
+## 五、高可用验证
+
+这里手动模拟主`Nimbus`异常的情况，在hadoop001上使用`kill`命令杀死`Nimbus`的线程，此时可以看到hadoop001上的`Nimbus`已经处于`offline`状态，而hadoop002上的`Nimbus`则成为新的`Leader`。
+
+<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm集群搭建2.png"/> </div>
