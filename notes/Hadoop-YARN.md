@@ -19,7 +19,7 @@
 
 ## 一、hadoop yarn 简介
 
-**Apache YARN** (Yet Another Resource Negotiator)  在 hadoop 2 中被引入，作为hadoop集群资源管理系统。用户可以将各种各样的计算框架部署在YARN上，由YARN进行统一管理和资源的分配。
+**Apache YARN** (Yet Another Resource Negotiator)  是hadoop 2.0 引入的集群资源管理系统。用户可以将各种服务框架部署在YARN上，由YARN进行统一地管理和资源分配。
 
 <div align="center"> <img width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/yarn-base.png"/> </div>
 
@@ -29,19 +29,32 @@
 
 <div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Figure3Architecture-of-YARN.png"/> </div>
 
-#### 1. ResourceManager
+### 1. ResourceManager
 
-以主要后台进程的形式运行，它通常在专用机器上运行，在各种竞争的应用程序之间仲裁可用的集群资源。ResourceManager 会追踪集群中有多少可用的活动节点和资源，协调用户提交的哪些应用程序应该在何时获取这些资源。ResourceManager 是惟一拥有此信息的进程，所以它可通过某种共享的、安全的、多租户的方式制定分配（或者调度）决策（例如，依据应用程序优先级、队列容量、ACLs、数据位置等）。
+`ResourceManager`通常在独立的机器上以后台进程的形式运行，它是整个集群资源的主要协调者和管理者。`ResourceManager`负责给用户提交的所有应用程序分配资源，它根据应用程序优先级、队列容量、ACLs、数据位置等信息，做出决策，然后以共享的、安全的、多租户的方式制定分配策略，调度集群资源。
 
-#### 2. ApplicationMaster 
+### 2. NodeManager
 
-在用户提交一个应用程序时，一个称为 ApplicationMaster 的轻量型进程实例会启动来协调应用程序内的所有任务的执行。这包括监视任务，重新启动失败的任务，推测性地运行缓慢的任务，以及计算应用程序计数器值的总和。这些职责以前分配给所有作业的单个 JobTracker。ApplicationMaster 和属于它的应用程序的任务，在受 NodeManager 控制的资源容器中运行。
+`NodeManager`是YARN集群中的每个具体节点的管理者。主要负责该节点内所有容器的生命周期的管理，监视资源和跟踪节点健康。具体如下：
 
-ApplicationMaster 可在容器内运行任何类型的任务。例如，MapReduce ApplicationMaster 请求一个容器来启动 map 或 reduce 任务，而 Giraph ApplicationMaster 请求一个容器来运行 Giraph 任务。
+1. 启动时向`ResourceManager`注册并定时发送心跳消息，等待`ResourceManager`的指令；
+2. 维护`Container`的生命周期，监控`Container`的资源使用情况；
+3. 管理任务运行时的相关依赖，根据`ApplicationMaster`的需要，在启动`Container`之前将需要的程序及其依赖拷贝到本地。
 
-#### 3. NodeManager
+### 3. ApplicationMaster 
 
-NodeManager管理YARN集群中的每个节点。NodeManager 提供针对集群中每个节点的服务，负责节点内容器生命周期的管理、监视资源和跟踪节点健康。
+在用户提交一个应用程序时，YARN会启动一个轻量级的进程`ApplicationMaster`。`ApplicationMaster`负责协调来自 `ResourceManager`的资源，并通过`NodeManager` 监视容器内资源的使用情况，同时还负责任务的监控与容错。具体如下：
+
+1. 根据应用的运行状态来决定动态计算资源需求；
+2. 向`ResourceManager`申请资源，监控申请的资源的使用情况；
+3. 跟踪任务状态和进度，报告资源的使用情况和应用的进度信息；
+4. 负责任务的容错。
+
+### 4. Contain
+
+`Container`是YARN中的资源抽象，它封装了某个节点上的多维度资源，如内存、CPU、磁盘、网络等。当AM向RM申请资源时，RM为AM返回的资源是用`Container`表示的。YARN会为每个任务分配一个`Container`，该任务只能使用该`Container`中描述的资源。`ApplicationMaster`可在`Container`内运行任何类型的任务。例如，`MapReduce ApplicationMaster`请求一个容器来启动 map 或 reduce 任务，而`Giraph ApplicationMaster`请求一个容器来运行 Giraph 任务。
+
+
 
 
 
@@ -49,13 +62,13 @@ NodeManager管理YARN集群中的每个节点。NodeManager 提供针对集群�
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/yarn工作原理简图.png"/> </div>
 
-1. Client提交作业到YARN上；
+1. `Client`提交作业到YARN上；
 
-2. Resource Manager选择一个Node Manager，启动一个Container并运行Application Master实例；
+2. `Resource Manager`选择一个`Node Manager`，启动一个`Container`并运行`Application Master`实例；
 
-3. Application Master根据实际需要向Resource Manager请求更多的Container资源（如果作业很小, 应用管理器会选择在其自己的JVM中运行任务）；
+3. `Application Master`根据实际需要向`Resource Manager`请求更多的`Container`资源（如果作业很小, 应用管理器会选择在其自己的JVM中运行任务）；
 
-4. Application Master通过获取到的Container资源执行分布式计算。
+4. `Application Master`通过获取到的`Container`资源执行分布式计算。
 
    
 
@@ -67,7 +80,7 @@ NodeManager管理YARN集群中的每个节点。NodeManager 提供针对集群�
 
 #### 1. 作业提交
 
-client  调用job.waitForCompletion方法，向整个集群提交MapReduce作业 (第1步) 。新的作业ID(应用ID)由资源管理器分配(第2步)。作业的client核实作业的输出, 计算输入的split, 将作业的资源(包括Jar包，配置文件, split信息)拷贝给HDFS(第3步)。 最后, 通过调用资源管理器的submitApplication()来提交作业(第4步)。
+client调用job.waitForCompletion方法，向整个集群提交MapReduce作业 (第1步) 。新的作业ID(应用ID)由资源管理器分配(第2步)。作业的client核实作业的输出, 计算输入的split, 将作业的资源(包括Jar包，配置文件, split信息)拷贝给HDFS(第3步)。 最后, 通过调用资源管理器的submitApplication()来提交作业(第4步)。
 
 #### 2. 作业初始化
 
@@ -95,13 +108,11 @@ YARN中的任务将其进度和状态(包括counter)返回给应用管理器, �
 
 除了向应用管理器请求作业进度外,  客户端每5分钟都会通过调用waitForCompletion()来检查作业是否完成，时间间隔可以通过mapreduce.client.completion.pollinterval来设置。作业完成之后,  应用管理器和container会清理工作状态， OutputCommiter的作业清理方法也会被调用。作业的信息会被作业历史服务器存储以备之后用户核查。
 
-本小结内容引用自博客[初步掌握Yarn的架构及原理](https://www.cnblogs.com/codeOfLife/p/5492740.html)
-
 
 
 ## 五、提交作业到YARN上运行
 
-在${HADOOP_HOME}/share/hadoop/mapreduce 目录下，存放了样例文本，可以提交计算pi的MApReduce作业作为用例：
+这里以提交Hadoop Examples中计算Pi的MApReduce程序为例，相关Jar包在Hadoop安装目录的`share/hadoop/mapreduce`目录下：
 
 ```shell
 # 提交格式为
@@ -113,7 +124,9 @@ YARN中的任务将其进度和状态(包括counter)返回给应用管理器, �
 
 ## 参考资料
 
-1. [Apache Hadoop 2.9.2 > Apache Hadoop YARN](http://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/YARN.html)
-2. [YARN：下一代 Hadoop 计算平台](https://www.ibm.com/developerworks/cn/data/library/bd-yarn-intro/index.html?mhq=yarn)
-3. [初步掌握Yarn的架构及原理](https://www.cnblogs.com/codeOfLife/p/5492740.html)
+1. [初步掌握Yarn的架构及原理](https://www.cnblogs.com/codeOfLife/p/5492740.html)
+
+2. [Apache Hadoop 2.9.2 > Apache Hadoop YARN](http://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/YARN.html)
+
+   
 
