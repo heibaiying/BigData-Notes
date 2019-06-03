@@ -31,11 +31,11 @@ zkCli.sh -server hadoop001:2181
 
 ### 1.2 help命令
 
-使用help命令可以查看所有支持的命令及其格式。
+使用`help`可以查看所有命令及格式。
 
 ### 1.3 查看节点列表
 
-查看节点列表有`ls path`和 `ls2 path`两个命令，后者是前者的增强，不仅可以查看指定路径下所有节点的列表，还可以查看当前节点的信息。
+查看节点列表有`ls path`和 `ls2 path`两个命令，后者是前者的增强，不仅可以查看指定路径下的所有节点，还可以查看当前节点的信息。
 
 ```shell
 [zk: localhost:2181(CONNECTED) 0] ls /
@@ -61,7 +61,7 @@ numChildren = 11
 create [-s] [-e] path data acl   #其中-s为有序节点，-e临时节点
 ```
 
-创建节点并将数据绑定到该节点：
+创建节点并写入数据：
 
 ```shell
 create /hadoop 123456
@@ -78,7 +78,7 @@ Created /b0000000023
 Created /c0000000024
 ```
 
-创建临时节点，临时节点会在会话结束后被删除：
+创建临时节点，临时节点会在会话过期后被删除：
 
 ```shell
 [zk: localhost:2181(CONNECTED) 26] create -e /tmp  "tmp"
@@ -110,7 +110,7 @@ dataLength = 6
 numChildren = 0
 ```
 
-节点各个属性如下表，其中一个重要的概念是Zxid(ZooKeeper Transaction  Id)，ZooKeeper节点的每个更改都具有唯一的zxid，如果zxid1小于zxid2，则zxid1更改发生在zxid2更改之前。
+节点各个属性如下表。其中一个重要的概念是Zxid(ZooKeeper Transaction  Id)，ZooKeeper节点的每一次更改都具有唯一的Zxid，如果Zxid1小于Zxid2，则Zxid1的更改发生在Zxid2更改之前。
 
 | **状态属性**   | **说明**                                                     |
 | -------------- | ------------------------------------------------------------ |
@@ -128,7 +128,7 @@ numChildren = 0
 
 #### 2. 查看节点状态
 
-可以使用stat命令查看节点状态，它的返回值和get命令类似，但不会返回节点数据。
+可以使用`stat`命令查看节点状态，它的返回值和`get`命令类似，但不会返回节点数据。
 
 ```shell
 [zk: localhost:2181(CONNECTED) 32] stat /hadoop
@@ -164,7 +164,7 @@ dataLength = 3
 numChildren = 0
 ```
 
-也可以基于版本号进行更改，这种实现类似于乐观锁机制，当你传入的数据版本号(dataVersion)和当前节点的数据版本号不符合时，zookeeper会拒绝本次修改：
+也可以基于版本号进行更改，此时类似于乐观锁机制，当你传入的数据版本号(dataVersion)和当前节点的数据版本号不符合时，zookeeper会拒绝本次修改：
 
 ```shell
 [zk: localhost:2181(CONNECTED) 34] set /hadoop 678 0
@@ -179,7 +179,7 @@ version No is not valid : /hadoop    #无效的版本号
 delete path [version]
 ```
 
-和更新节点数据一样，也可以传入版本号，当你传入的数据版本号(dataVersion)和当前节点的数据版本号不符合时，zookeeper不会执行删除。
+和更新节点数据一样，也可以传入版本号，当你传入的数据版本号(dataVersion)和当前节点的数据版本号不符合时，zookeeper不会执行删除操作。
 
 ```shell
 [zk: localhost:2181(CONNECTED) 36] delete /hadoop 0
@@ -234,7 +234,7 @@ WatchedEvent state:SyncConnected type:NodeChildrenChanged path:/hadoop
 | ---- | ------------------------------------------------------------ |
 | conf | 打印服务配置的详细信息。                                     |
 | cons | 列出连接到此服务器的所有客户端的完整连接/会话详细信息。包括接收/发送的数据包数量，会话ID，操作延迟，上次执行的操作等信息。 |
-| dump | 列出未完成的会话和临时节点。这只适用于leader节点。           |
+| dump | 列出未完成的会话和临时节点。这只适用于Leader节点。           |
 | envi | 打印服务环境的详细信息。                                     |
 | ruok | 测试服务是否处于正确状态。如果正确则返回“imok”，否则不做任何相应。 |
 | stat | 列出服务器和连接客户端的简要详细信息。                       |

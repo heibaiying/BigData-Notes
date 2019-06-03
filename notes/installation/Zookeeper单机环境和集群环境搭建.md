@@ -53,7 +53,7 @@ export PATH=$ZOOKEEPER_HOME/bin:$PATH
 
 ### 1.4 修改配置
 
-进入安装目录的`conf/`目录下，拷贝配置样本并进行修改
+进入安装目录的`conf/`目录下，拷贝配置样本并进行修改：
 
 ```
 # cp zoo_sample.cfg  zoo.cfg
@@ -106,7 +106,7 @@ clientPort=2181
 
 ### 1.5 启动
 
-由于已经配置过环境变量，直接使用下面命令启动即可
+由于已经配置过环境变量，直接使用下面命令启动即可：
 
 ```
 zkServer.sh start
@@ -114,7 +114,7 @@ zkServer.sh start
 
 ### 1.6 验证
 
-使用JPS验证进程是否已经启动，出现`QuorumPeerMain`则代表启动成功
+使用JPS验证进程是否已经启动，出现`QuorumPeerMain`则代表启动成功。
 
 ```shell
 [root@hadoop001 bin]# jps
@@ -148,7 +148,7 @@ server.3=hadoop003:2287:3387
 
 ### 2.2 标识节点
 
-分别在三台主机的`dataDir`目录下新建`myid`文件,并写入对应的节点标识。Zookeeper集群通过`myid`文件识别集群节点，并通过上文配置的节点通信端口和选举端口来进行节点通信，选举出leader节点。
+分别在三台主机的`dataDir`目录下新建`myid`文件,并写入对应的节点标识。Zookeeper集群通过`myid`文件识别集群节点，并通过上文配置的节点通信端口和选举端口来进行节点通信，选举出Leader节点。
 
 创建存储目录：
 
