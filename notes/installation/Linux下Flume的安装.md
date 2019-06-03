@@ -13,7 +13,7 @@ Flume需要依赖JDK 1.8+，JDK安装方式见本仓库：
 
 ### 2.1 下载并解压
 
-下载所需版本的Flume，这里我下载的是`cdh5.15.2`版本的Flume。下载地址为：http://archive.cloudera.com/cdh5/cdh/5/
+下载所需版本的Flume，这里我下载的是`CDH`版本的Flume。下载地址为：http://archive.cloudera.com/cdh5/cdh/5/
 
 ```shell
 # 下载后进行解压
@@ -41,7 +41,7 @@ export PATH=$FLUME_HOME/bin:$PATH
 
 ### 2.3 修改配置
 
-进入安装目录下的`conf/`目录，拷贝flume的环境配置模板`flume-env.sh.template`
+进入安装目录下的`conf/`目录，拷贝Flume的环境配置模板`flume-env.sh.template`：
 
 ```shell
 # cp flume-env.sh.template flume-env.sh
@@ -56,13 +56,13 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 
 ### 2.4 验证
 
-由于已经将Flume的bin目录配置到环境变量，直接使用以下命令验证是否配置成功
+由于已经将Flume的bin目录配置到环境变量，直接使用以下命令验证是否配置成功：
 
 ```shell
 # flume-ng version
 ```
 
-出现对应的版本信息则代表配置成功
+出现对应的版本信息则代表配置成功。
 
 ![flume-version](https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-version.png)
 
