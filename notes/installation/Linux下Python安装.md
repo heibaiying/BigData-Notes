@@ -1,6 +1,7 @@
 ## Linux下Python安装
 
 >**系统环境**：centos 7.6
+>
 >**Python版本**：Python-3.6.8
 
 ### 1.环境依赖
