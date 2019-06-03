@@ -46,21 +46,21 @@ getAcl path
 
 Zookeeper的权限由[scheme : id :permissions]三部分组成，其中Schemes和Permissions内置的可选项分别如下：
 
-Permissions可选项：
+**Permissions可选项**：
 
-- CREATE：允许创建子节点；
-- READ：允许从节点获取数据并列出其子节点；
-- WRITE：允许为节点设置数据；
-- DELETE：允许删除子节点；
-- ADMIN：允许为节点设置权限。  
+- **CREATE**：允许创建子节点；
+- **READ**：允许从节点获取数据并列出其子节点；
+- **WRITE**：允许为节点设置数据；
+- **DELETE**：允许删除子节点；
+- **ADMIN**：允许为节点设置权限。  
 
-Schemes可选项：
+**Schemes可选项**：
 
-- world：默认模式, 所有客户端都拥有指定权限。world下只有一个id选项，就是anyone，通常组合写法为`world:anyone:[permissons]`；
-- auth：只有经过认证的用户, 才拥有指定的权限。通常组合写法为`auth:user:password:[permissons]`，使用这种模式时，你需要先进行登录，之后采用auth模式时，user和password都将使用登录的用户名和密码；
-- digest：只有经过认证的用户, 才拥有指定的权限。通常组合写法为`auth:user:BASE64(SHA1(password)):[permissons]`,这种形式下的密码必须通过SHA1和BASE64进行双重加密；
-- ip：限制只有特定IP的客户端才拥有指定的权限。通常组成写法为`ip:182.168.0.168:[permissions]`；
-- super：代表超级管理员，拥有所有的权限，需要修改Zookeeper启动脚本进行配置。
+- **world**：默认模式，所有客户端都拥有指定的权限。world下只有一个id选项，就是anyone，通常组合写法为`world:anyone:[permissons]`；
+- **auth**：只有经过认证的用户才拥有指定的权限。通常组合写法为`auth:user:password:[permissons]`，使用这种模式时，你需要先进行登录，之后采用auth模式设置权限时，`user`和`password`都将使用登录的用户名和密码；
+- **digest**：只有经过认证的用户才拥有指定的权限。通常组合写法为`auth:user:BASE64(SHA1(password)):[permissons]`，这种形式下的密码必须通过SHA1和BASE64进行双重加密；
+- **ip**：限制只有特定IP的客户端才拥有指定的权限。通常组成写法为`ip:182.168.0.168:[permissions]`；
+- **super**：代表超级管理员，拥有所有的权限，需要修改Zookeeper启动脚本进行配置。
 
 
 
@@ -123,7 +123,7 @@ Authentication is not valid : /hadoop     # 权限不足
 : cdrwa
 ```
 
-到这里你可以发现使用auth模式设置的权限和使用digest模式设置的权限，在最终结果上，得到的权限模式都是`digest`。某种程度上，你可以把auth模式理解成是digest模式的一种简便实现。因为在digest模式下，每次设置都需要书写用户名和加密后的密码，这是比较繁琐的，采用auth模式，则可以在登录一次后就可以不用重复书写了。
+到这里你可以发现使用`auth`模式设置的权限和使用`digest`模式设置的权限，在最终结果上，得到的权限模式都是`digest`。某种程度上，你可以把`auth`模式理解成是`digest`模式的一种简便实现。因为在`digest`模式下，每次设置都需要书写用户名和加密后的密码，这是比较繁琐的，采用`auth`模式就可以避免这种麻烦。
 
 #### 4. ip模式
 
@@ -135,11 +135,11 @@ Authentication is not valid : /hadoop     # 权限不足
 Authentication is not valid : /hive  # 当前主机已经不能访问
 ```
 
-这里可以使用限定IP的主机客户端进行访问，也可以使用下面的super模式配置超级管理员进行访问。
+这里可以看到当前主机已经不能访问，想要能够再次访问，可以使用对应IP的客户端，或使用下面介绍的`super`模式。
 
 #### 5. super模式
 
-需要修改启动脚本`zkServer.sh`,在指定位置添加管理员账户和密码信息：
+需要修改启动脚本`zkServer.sh`，并在指定位置添加超级管理员账户和密码信息：
 
 ```shell
 "-Dzookeeper.DigestAuthenticationProvider.superDigest=heibai:sCxtVJ1gPG8UW/jzFHR0A1ZKY5s=" 
@@ -172,10 +172,11 @@ numChildren = 0
 
 ### 3.1 主要依赖
 
-使用前需要导入curator相关Jar包，完整依赖如下：
+这里以 Apache Curator 为例，使用前需要导入相关依赖，完整依赖如下：
 
 ```xml
 <dependencies>
+    <!--Apache Curator相关依赖-->
     <dependency>
         <groupId>org.apache.curator</groupId>
         <artifactId>curator-framework</artifactId>
@@ -202,7 +203,7 @@ numChildren = 0
 
 ### 3.2 权限管理API
 
- Curator权限设置、修改和查看的API调用示例如下：
+ Apache Curator 权限设置的示例如下：
 
 ```java
 public class AclOperation {
