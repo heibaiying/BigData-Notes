@@ -158,7 +158,7 @@ tar -xzf kafka_2.12-2.2.0.tgz
 
 ### 2.2 拷贝配置文件
 
-进入解压目录的` config`目录下 ，拷贝三份配置文件
+进入解压目录的` config`目录下 ，拷贝三份配置文件：
 
 ```shell
 # cp server.properties server-1.properties
@@ -201,7 +201,7 @@ log.dirs=/usr/local/kafka-logs/02
 zookeeper.connect=hadoop001:2181,hadoop001:2182,hadoop001:2183
 ```
 
-针对上面配置，需要特别说明的是`log.dirs`指的是数据日志的存储位置，确切的说，就是分区数据的存储位置，而不是程序运行日志的位置。程序运行日志的位置是通过同一目录下的`log4j.properties`进行配置的。
+这里需要说明的是`log.dirs`指的是数据日志的存储位置，确切的说，就是分区数据的存储位置，而不是程序运行日志的位置。程序运行日志的位置是通过同一目录下的`log4j.properties`进行配置的。
 
 ### 2.4 启动集群
 
@@ -218,7 +218,9 @@ bin/kafka-server-start.sh config/server-3.properties
 创建测试主题：
 
 ```shell
-bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 --replication-factor 3 --partitions 1 --topic my-replicated-topic
+bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 \
+					--replication-factor 3 \
+					--partitions 1 --topic my-replicated-topic
 ```
 
 创建后可以使用以下命令查看创建的主题信息：
