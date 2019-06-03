@@ -167,7 +167,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
 
 #### 5. slaves
 
-配置所有从属节点的主机名或IP地址，每行一个。
+配置所有从属节点的主机名或IP地址，每行一个。所有从属节点上的`DataNode`服务和`NodeManager`服务都会被启动。
 
 ```properties
 hadoop001
@@ -191,7 +191,7 @@ scp -r /usr/app/hadoop-2.6.0-cdh5.15.2/  hadoop003:/usr/app/
 在`Hadoop001`上执行namenode初始化命令：
 
 ```
-hadoop namenode -format
+hdfs namenode -format
 ```
 
 ### 3.6 启动集群
@@ -219,7 +219,7 @@ start-yarn.sh
 
 <BR/>
 
-接着可以查看Yarn集群的情况，端口号为`8088` ：
+接着可以查看Yarn的情况，端口号为`8088` ：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-集群搭建3.png"/> </div>
 
