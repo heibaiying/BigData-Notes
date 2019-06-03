@@ -135,7 +135,7 @@ hive >  select ${hivevar:j} from emp;
 
 ### 2.1 HiveServer2
 
-Hive内置了HiveServer和HiveServer2服务，两者都允许客户端使用多种编程语言进行连接，但是HiveServer不能处理多个客户端的并发请求，所以产生的HiveServer2。
+Hive内置了HiveServer和HiveServer2服务，两者都允许客户端使用多种编程语言进行连接，但是HiveServer不能处理多个客户端的并发请求，所以产生了HiveServer2。
 
 HiveServer2（HS2）允许远程客户端可以使用各种编程语言向Hive提交请求并检索结果，支持多客户端并发访问和身份验证。HS2是由多个服务组成的单个进程，其包括基于Thrift的Hive服务（TCP或HTTP）和用于Web UI的Jetty Web服务器。
 
