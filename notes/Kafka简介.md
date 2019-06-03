@@ -52,7 +52,7 @@ Kafka的消息通过Topics(主题)进行分类，一个主题可以被分为若�
 
 ### 2.4 Brokers And Clusters 
 
-一个独立的kafka服务器被称为Broker。Broker 接收来自生产者的消息，为消息设置偏移量，并提交消息到磁盘保存。Broker为消费者提供服务，对读取分区的请求做出响应，返回已经提交到磁盘的消息。
+一个独立的Kafka服务器被称为Broker。Broker接收来自生产者的消息，为消息设置偏移量，并提交消息到磁盘保存。Broker为消费者提供服务，对读取分区的请求做出响应，返回已经提交到磁盘的消息。
 
 Broker是集群(Cluster)的组成部分。每一个集群都会选举出一个Broker作为集群控制器(Controller)，集群控制器负责管理工作，包括将分区分配给Broker和监控Broker。
 
