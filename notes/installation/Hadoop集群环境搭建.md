@@ -167,7 +167,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
 
 #### 5. slaves
 
-配置所有从属节点的主机名或IP地址，每行一个。
+配置所有从属节点的主机名或IP地址，每行一个。所有从属节点上的`DataNode`服务和`NodeManager`服务都会被启动。
 
 ```properties
 hadoop001
