@@ -1,20 +1,13 @@
 # Linux下JDK的安装
 
-
-
 >**系统环境**：centos 7.6
->
 >**JDK版本**：jdk 1.8.0_20
 
 
 
-### 1. 下载jdk安装包
+### 1. 下载并解压
 
-在[官网](https://www.oracle.com/technetwork/java/javase/downloads/index.html)下载所需版本的jdk，上传至服务器对应位置（这里我们下载的版本为[jdk1.8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) ,上传至服务器的/usr/java/目录下）
-
-
-
-### 2. 解压安装包
+在[官网](https://www.oracle.com/technetwork/java/javase/downloads/index.html)下载所需版本的JDK，这里我下载的版本为[JDK 1.8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) ,下载后进行解压：
 
 ```shell
 [root@ java]# tar -zxvf jdk-8u201-linux-x64.tar.gz
@@ -22,13 +15,13 @@
 
 
 
-### 3. 设置环境变量
+### 2. 设置环境变量
 
 ```shell
 [root@ java]# vi /etc/profile
 ```
 
-在文件末尾添加：
+添加如下配置：
 
 ```shell
 export JAVA_HOME=/usr/java/jdk1.8.0_201  
@@ -37,9 +30,7 @@ export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 export  PATH=${JAVA_HOME}/bin:$PATH
 ```
 
-
-
-### 4. 执行source命令,使得配置立即生效
+执行`source`命令，使得配置立即生效：
 
 ```shell
 [root@ java]# source /etc/profile
@@ -47,7 +38,7 @@ export  PATH=${JAVA_HOME}/bin:$PATH
 
 
 
-### 5. 检查是否安装成功
+### 3. 检查是否安装成功
 
 ```shell
 [root@ java]# java -version
