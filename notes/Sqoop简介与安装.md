@@ -25,9 +25,7 @@ Sqoop是一个常用的数据迁移工具，主要用于在不同存储系统之
 
 ## 二、安装
 
-版本选择：
-
-目前Sqoop有Sqoop 1和Sqoop 2两个版本，但是截至到目前，官方并不推荐使用Sqoop 2，因为其与Sqoop 1并不兼容，且功能还没有完善，所以这里优先推荐使用Sqoop 1。
+版本选择：目前Sqoop有Sqoop 1和Sqoop 2两个版本，但是截至到目前，官方并不推荐使用Sqoop 2，因为其与Sqoop 1并不兼容，且功能还没有完善，所以这里优先推荐使用Sqoop 1。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-version-selected.png"/> </div>
 
@@ -92,7 +90,7 @@ export ZOOCFGDIR=/usr/app/zookeeper-3.4.13/conf
 
 ### 2.4 拷贝数据库驱动
 
-将MySQL驱动包拷贝到Sqoop安装目录的`lib`目录下, 驱动包的下载地址为https://dev.mysql.com/downloads/connector/j/  。在本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录下我也上传了一份，有需要的可以自行下载。
+将MySQL驱动包拷贝到Sqoop安装目录的`lib`目录下, 驱动包的下载地址为https://dev.mysql.com/downloads/connector/j/  。在本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录下我也上传了一份，有需要的话可以自行下载。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-mysql-jar.png"/> </div>
 
