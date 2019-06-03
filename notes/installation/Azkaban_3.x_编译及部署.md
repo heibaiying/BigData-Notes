@@ -84,9 +84,8 @@ Azkaban 的编译过程中用到Git下载部分需要的Jar包的，所以需要
 
 按照官方文档的说明，Azkaban 3.x 之后版本提供2种运行模式：
 
-+ solo server model（单服务模式）：元数据默认存放在内置的H2数据库（也可以修改为MYSQL），该模式中 webServer 和 executorServer 运行在同一个进程中，进程名是AzkabanSingleServer。该模式适用于小规模的使用。
-
-+ multiple-executor（分布式多服务模式）：存放元数据的数据库为MYSQL，采用主从设置进行备份，管理服务器（webServer）和执行服务器（executorServer）在不同进程中运行，这种模式下，管理服务器和执行服务器互不影响，适合用于生产环境。
++ **solo server model(单服务模式)** ：元数据默认存放在内置的H2数据库（可以修改为MySQL），该模式中`webServer`(管理服务器)和 `executorServer`(执行服务器)运行在同一个进程中，进程名是`AzkabanSingleServer`。该模式适用于小规模工作流的调度。
+- **multiple-executor(分布式多服务模式)** ：存放元数据的数据库为MySQL，MySQL应采用主从模式进行备份和容错。这种模式下`webServer`和`executorServer`在不同进程中运行，彼此之间互不影响，适合用于生产环境。
 
 
 
