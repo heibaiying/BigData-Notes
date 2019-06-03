@@ -4,7 +4,7 @@
 >
 >**Python版本**：Python-3.6.8
 
-### 1.环境依赖
+### 1. 环境依赖
 
 Python3.x的安装需要依赖这四个组件：gcc， zlib，zlib-devel，openssl-devel；所以需要预先安装，命令如下：
 
@@ -15,7 +15,7 @@ yum install zlib-devel -y
 yum install openssl-devel -y
 ```
 
-### 2.下载编译
+### 2. 下载编译
 
 Python源码包下载地址： https://www.python.org/downloads/
 
@@ -23,7 +23,7 @@ Python源码包下载地址： https://www.python.org/downloads/
 # wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz
 ```
 
-### 3.解压编译
+### 3. 解压编译
 
 ```shell
 # tar -zxvf Python-3.6.8.tgz
@@ -37,7 +37,7 @@ Python源码包下载地址： https://www.python.org/downloads/
 # make && make install
 ```
 
-### 4.环境变量配置
+### 4. 环境变量配置
 
 ```shell
 vim  /etc/profile
@@ -54,9 +54,9 @@ export  PATH=${PYTHON_HOME}/bin:$PATH
 source /etc/profile
 ```
 
-### 5.验证安装是否成功
+### 5. 验证安装是否成功
 
-输入python3命令，如果能进入python交互环境，则代表安装成功：
+输入`python3`命令，如果能进入python交互环境，则代表安装成功：
 
 ```shell
 [root@hadoop001 app]# python3
