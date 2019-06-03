@@ -15,13 +15,11 @@
 
 ## 一、Flume简介
 
-Apache Flume是一个分布式，高可用的数据收集系统，可以从不同的数据源收集数据，经过聚合后发送到存储系统中。在大数据场景中我们通常使用Flume来进行日志数据收集。
-
-版本说明：
-
-Flume 分为 NG 和 OG (1.0 之前)，NG在OG的基础上进行了完全的重构，是目前使用最为广泛的版本。下面的介绍均以NG版本为基础。
+Apache Flume是一个分布式，高可用的数据收集系统。它可以从不同的数据源收集数据，经过聚合后发送到存储系统中，通常用于日志数据的收集。Flume 分为 NG 和 OG (1.0 之前)两个版本，NG在OG的基础上进行了完全的重构，是目前使用最为广泛的版本。下面的介绍均以NG为基础。
 
 ## 二、Flume架构和基本概念
+
+下图为Flume的基本架构图：
 
 
 
@@ -29,18 +27,15 @@ Flume 分为 NG 和 OG (1.0 之前)，NG在OG的基础上进行了完全的重�
 
 ### 2.1 基本架构
 
-上图是flume的基本架构图：
-
-外部数据源以特定格式向Flume发送`events` (事件)。当`source`接收到`events`时，它将其存储到一个或多个`channel`。`channe`会一直保存`events`直到它被`sink`所消费。`sink`的主要功能从`channel`中读取`events`，并将其存入外部存储系统中（如HDFS）或将其转发到下一个Flume的`source`，成功后再从`channel`中移除`events`。
+外部数据源以特定格式向Flume发送`events` (事件)，当`source`接收到`events`时，它将其存储到一个或多个`channel`，`channe`会一直保存`events`直到它被`sink`所消费。`sink`的主要功能从`channel`中读取`events`，并将其存入外部存储系统或转发到下一个`source`，成功后再从`channel`中移除`events`。
 
 
 
 ### 2.2 基本概念
 
-以下概念需要记住，在之后的配置文件中会用到：
-
 **1. Event**
-Evnet是可由Flume NG传输的单一数据单元。类似于JMS和消息传递系统中的消息。一个事件由标题和正文组成：前者是键/值映射，后者是任意字节数组。
+
+`Evnet`是Flume NG数据传输的基本单元。类似于JMS和消息系统中的消息。一个`Evnet`由标题和正文组成：前者是键/值映射，后者是任意字节数组。
 
 **2. Source** 
 
@@ -48,32 +43,32 @@ Evnet是可由Flume NG传输的单一数据单元。类似于JMS和消息传递�
 
 **3. Channel**
 
-Channel是源和接收器之间事件的管道，用于临时存储数据。可以是内存也可以是持久化的文件系统，说明如下。
+`Channel`是源和接收器之间事件的管道，用于临时存储数据。可以是内存或持久化的文件系统：
 
-+ Memory Channel : 使用内存，优点是速度快，但是数据可能会丢失。如在突然宕机的情况下，内存中的数据就有丢失的风险；
-+ File Channel : 使用持久化的文件系统，优点是能保证数据不丢失，但是速度慢。
++ `Memory Channel` : 使用内存，优点是速度快，但数据可能会丢失(如突然宕机)；
++ `File Channel` : 使用持久化的文件系统，优点是能保证数据不丢失，但是速度慢。
 
 **4. Sink**
 
-Sink的主要功能从Channel中读取Evnet，并将其存入外部存储系统中（如HDFS）或将其转发到下一个Flume的Source，成功后再从channel中移除Event。
+`Sink`的主要功能从`Channel`中读取`Evnet`，并将其存入外部存储系统或将其转发到下一个`Source`，成功后再从`Channel`中移除`Event`。
 
 **5. Agent**
 
-是一个独立的（JVM）进程，包含组件Source、 Channel、 Sink等组件。
+是一个独立的(JVM)进程，包含组件`Source`、 `Channel`、 `Sink`等组件。
 
 
 
 ### 2.3 组件种类
 
-1. Flume提供了多达几十种类型的Source，比如`Avro Source`，`Thrift Source`，`Exec Source`，`JMS Source`等，使得我们仅仅通过配置类型和参数的方式就能从不同的数据源获取数据；
+Flume中的每一个组件都提供了丰富的类型，适用于不同场景：
 
-2. 与Source相比，Flume也提供了多种Sink，比如`HDFS Sink`，`Hive Sink`，`HBaseSinks`，`Avro Sink`，得益于丰富的Sink，我们也可以仅通过配置就能将收集到的数据输出到指定存储位置；
+- Source类型 ：内置了几十种类型，如`Avro Source`，`Thrift Source`，`Kafka Source`，`JMS Source`；
 
-3. 同样的Flume也支持多种Channel，比如`Memory Channel`，`JDBC Channel`，`Kafka Channel`，`File Channel`等。
+- Sink类型 ：`HDFS Sink`，`Hive Sink`，`HBaseSinks`，`Avro Sink`等；
 
-4. 其实对于Flume的使用，除非有特别的需求，否则通过简单的配置组合Flume内置Source，Sink，Channel就能满足我们大多数的需求，所以对于Flume的基本使用主要是写配置文件为主。
+- Channel类型 ：`Memory Channel`，`JDBC Channel`，`Kafka Channel`，`File Channel`等。
 
-   在 [Flume官网](http://flume.apache.org/releases/content/1.9.0/FlumeUserGuide.html)上对所有类型的组件的配置参数均以表格的方式做了详尽的介绍，并且都有配置样例。同时不同版本的参数可能略有所不同，所以建议在使用时，选取官网对应版本的User Guide作为主要参考资料。
+对于Flume的使用，除非有特别的需求，否则通过组合内置的各种类型的Source，Sink和Channel就能满足大多数的需求。在 [Flume官网](http://flume.apache.org/releases/content/1.9.0/FlumeUserGuide.html)上对所有类型组件的配置参数均以表格的方式做了详尽的介绍，并附有配置样例；同时不同版本的参数可能略有所不同，所以使用时建议选取官网对应版本的User Guide作为主要参考资料。
 
    
 
@@ -87,7 +82,9 @@ Flume 支持多种架构模式，分别介绍如下
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-multi-agent-flow.png"/> </div>
 
-Flume支持跨越多个Agent的数据传递，这要求前一个Agent的Sink和下一个Agent的source都必须是`Avro`类型，Sink指向Source所在主机名（或IP地址）和端口（详细配置见下文案例三）。
+<br/>
+
+Flume支持跨越多个Agent的数据传递，这要求前一个Agent的Sink和下一个Agent的Source都必须是`Avro`类型，Sink指向Source所在主机名(或IP地址)和端口（详细配置见下文案例三）。
 
 ### 3.2 Consolidation
 
@@ -95,13 +92,15 @@ Flume支持跨越多个Agent的数据传递，这要求前一个Agent的Sink和�
 
 
 
-日志收集中常常存在大量的客户端（比如分布式web服务），Flume 支持在使用多个Agent分别收集日志，然后通过一个或者多个Agent聚合后再存储到文件系统中。
+<br/>
+
+日志收集中常常存在大量的客户端（比如分布式web服务），Flume支持使用多个Agent分别收集日志，然后通过一个或者多个Agent聚合后再存储到文件系统中。
 
 ### 3.3 Multiplexing the flow
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-multiplexing-the-flow.png"/> </div>
 
-Flume支持从一个source源向多个channnel，也就是向多个sink传递事件，这个操作称之为`fan out`(扇出)。默认情况下`fan out`是向所有的channel复制`event`，即所有channel收到的数据都是相同的，当然Flume也支持在source上自定义一个复用选择器(multiplexing selecto) 来实现我们自己的路由规则。
+Flume支持从一个Source向多个Channel，也就是向多个Sink传递事件，这个操作称之为`Fan Out`(扇出)。默认情况下`Fan Out`是向所有的Channel复制`Event`，即所有Channel收到的数据都是相同的。同时Flume也支持在`Source`上自定义一个复用选择器(multiplexing selector) 来实现自定义的路由规则。
 
 
 
@@ -109,7 +108,7 @@ Flume支持从一个source源向多个channnel，也就是向多个sink传递事
 
 Flume配置通常需要以下两个步骤：
 
-1. 分别定义好Agent的sources，sinks，channels，然后将sources和sinks与通道进行绑定。需要注意的是一个source可以配置多个channel，但一个sink只能配置一个channel。基本格式如下：
+1. 分别定义好Agent的Sources，Sinks，Channels，然后将Sources和Sinks与通道进行绑定。需要注意的是一个Source可以配置多个Channel，但一个Sink只能配置一个Channel。基本格式如下：
 
 ```shell
 <Agent>.sources = <Source>
@@ -123,7 +122,7 @@ Flume配置通常需要以下两个步骤：
 <Agent>.sinks.<Sink>.channel = <Channel1>
 ```
 
-2. 分别定义source，sink，channel的具体属性。基本格式如下：
+2. 分别定义Source，Sink，Channel的具体属性。基本格式如下：
 
 ```shell
 
@@ -150,15 +149,15 @@ Flume配置通常需要以下两个步骤：
 
 介绍几个Flume的使用案例：
 
-+ 案例一：使用Flume监听文件内容变动，将新增加的内容输出到控制台
-+ 案例二：使用Flume监听指定目录，将目录下新增加的文件存储到HDFS
-+ 案例三：使用avro将本服务器收集到的日志数据发送到另外一台服务器
++ 案例一：使用Flume监听文件内容变动，将新增加的内容输出到控制台。
++ 案例二：使用Flume监听指定目录，将目录下新增加的文件存储到HDFS。
++ 案例三：使用Avro将本服务器收集到的日志数据发送到另外一台服务器。
 
-### 5.1 案例一
+### 6.1 案例一
 
-需求： 监听文件内容变动，将新增加的内容输出到控制台
+需求： 监听文件内容变动，将新增加的内容输出到控制台。
 
-实现： 主要使用`Exec Source`配合`tail`命令实现
+实现： 主要使用`Exec Source`配合`tail`命令实现。
 
 #### 1. 配置
 
@@ -200,21 +199,21 @@ flume-ng agent \
 
 #### 3. 测试
 
-向文件中追加数据
+向文件中追加数据：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-example-1.png"/> </div>
 
-追加内容在日志中显示
+控制台的显示：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-example-2.png"/> </div>
 
 
 
-### 5.2 案例二
+### 6.2 案例二
 
-需求： 监听指定目录，将目录下新增加的文件存储到HDFS
+需求： 监听指定目录，将目录下新增加的文件存储到HDFS。
 
-实现：使用`Spooling Directory Source`和`HDFS Sink`
+实现：使用`Spooling Directory Source`和`HDFS Sink`。
 
 #### 1. 配置
 
@@ -258,7 +257,7 @@ flume-ng agent \
 
 #### 3. 测试
 
-拷贝任意文件到监听目录下。可以从日志看到文件上传到HDFS的路径
+拷贝任意文件到监听目录下，可以从日志看到文件上传到HDFS的路径：
 
 ```shell
 # cp log.txt logs/
@@ -266,7 +265,7 @@ flume-ng agent \
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-example-3.png"/> </div>
 
-查看上传到HDFS上的文件内容与本地是否一致
+查看上传到HDFS上的文件内容与本地是否一致：
 
 ```shell
 # hdfs dfs -cat /flume/events/19-04-09/13/log.txt.1554788567801
@@ -276,15 +275,15 @@ flume-ng agent \
 
 
 
-### 5.3 案例三
+### 6.3 案例三
 
-需求： 使用avro将本服务器收集到的数据发送到另外一台服务器
+需求： 使用avro将本服务器收集到的数据发送到另外一台服务器。
 
-实现：使用`avro sources`和`avro Sink`实现
+实现：使用`avro sources`和`avro Sink`实现。
 
 #### 1. 配置日志收集Flume
 
-新建配置`netcat-memory-avro.properties`，监听文件内容变化，然后将新的文件内容通过`avro sink`发送到hadoop001这台服务器的8888端口
+新建配置`netcat-memory-avro.properties`，监听文件内容变化，然后将新的文件内容通过`avro sink`发送到hadoop001这台服务器的8888端口：
 
 ```properties
 #指定agent的sources,sinks,channels
@@ -313,7 +312,7 @@ a1.channels.c1.transactionCapacity = 100
 
 #### 2. 配置日志聚合Flume
 
-使用 `avro source`监听hadoop001服务器的8888端口，将获取到内容输出到控制台
+使用 `avro source`监听hadoop001服务器的8888端口，将获取到内容输出到控制台：
 
 ```properties
 #指定agent的sources,sinks,channels
@@ -361,16 +360,16 @@ flume-ng agent \
 --name a1 -Dflume.root.logger=INFO,console
 ```
 
-这里建议按以上顺序启动，原因是`avro.source`会先建立与端口的绑定，这样`avro sink`连接时才不会报无法连接到端口的异常，但是即使不按顺序启动也是没关系的，flume会一直重试与端口的连接，直到`avro.source`建立好连接。
+这里建议按以上顺序启动，原因是`avro.source`会先与端口进行绑定，这样`avro sink`连接时才不会报无法连接的异常。但是即使不按顺序启动也是没关系的，`sink`会一直重试，直至建立好连接。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-retry.png"/> </div>
 
 #### 4.测试
 
-向文件`tmp/log.txt`中追加内容
+向文件`tmp/log.txt`中追加内容：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-example-8.png"/> </div>
 
-可以看到已经从8888端口监听到内容，并成功输出到控制台
+可以看到已经从8888端口监听到内容，并成功输出到控制台：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-example-9.png"/> </div>
