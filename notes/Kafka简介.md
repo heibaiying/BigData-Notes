@@ -15,8 +15,8 @@
 ApacheKafka是一个分布式的流处理平台。它具有以下特点：
 
 + 支持消息的发布和订阅，类似于RabbtMQ、ActiveMQ等消息队列；
-+ 支持消息的持久化存储，并通过多副本分布式的存储方案来保证消息的容错性；
-+ 支持数据在线实时处理；
++ 支持消息的持久化存储，并通过多副本分布式的存储方案来保证消息的容错；
++ 支持数据实时处理；
 + 高吞吐率，单broker可以轻松处理数千个分区以及每秒百万级的消息量；
 + 能保证消息的可靠性投递。
 
@@ -28,9 +28,9 @@ Kafka的基本数据单元被称为message(消息)，为减少网络开销，提
 
 ### 2.2 Topics And Partitions
 
-kafka 的消息通过Topics(主题)进行分类，可以把Topics理解为关系型数据库中的表。一个主题可以被分为若干个Partitions(分区)，一个分区就是一个提交日志(commit log)。
+Kafka的消息通过Topics(主题)进行分类，可以把Topics理解为关系型数据库中的表。一个主题可以被分为若干个Partitions(分区)，一个分区就是一个提交日志(commit log)。
 
-消息以追加的方式写入分区，然后以先入先出的顺序读取。kafka通过分区来实现数据的冗余和伸缩性，分区可以分布在不同的服务器上，这意味着一个Topic可以横跨多个服务器，以提供比单个服务器更强大的性能。
+消息以追加的方式写入分区，然后以先入先出的顺序读取。Kafka通过分区来实现数据的冗余和伸缩性，分区可以分布在不同的服务器上，这意味着一个Topic可以横跨多个服务器，以提供比单个服务器更强大的性能。
 
 由于一个Topic包含多个分区，因此无法在整个Topic范围内保证消息的顺序性，但可以保证消息在单个分区内的顺序性。
 
@@ -58,8 +58,14 @@ kafka 的消息通过Topics(主题)进行分类，可以把Topics理解为关系
 
 一个独立的kafka服务器被称为broker。broker 接收来自生产者的消息，为消息设置偏移量，并提交消息到磁盘保存。broker为消费者提供服务，对读取分区的请求做出响应，返回已经提交到磁盘的消息。
 
-broker是集群(Cluster)的组成部分。每一个集群都有一个broker同时充当了集群控制器(controller)的角色（自动从集群的活跃成员中选举出来），控制器负责管理工作，包括将分区分配给broker和监控broker。
+broker是集群(Cluster)的组成部分。每一个集群都有一个broker同时充当了集群控制器(controller)的角色(自动从集群的活跃成员中选举出来)，控制器负责管理工作，包括将分区分配给broker和监控broker。
 
-在集群中，一个分区(Partition)从属一个broker,该broker被称为分区的首领（leader）。一个分区可以分配给多个broker,这个时候会发生分区复制。这种复制机制为分区提供了消息冗余，如果有一个broker失效，其他broker可以接管领导权。
+在集群中，一个分区(Partition)从属一个broker,该broker被称为分区的首领(Leader)。一个分区可以分配给多个broker,这个时候会发生分区复制。这种复制机制为分区提供了消息冗余，如果有一个broker失效，其他broker可以接管领导权。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-cluster.png"/> </div>
+
+
+
+## 参考资料
+
+1. Neha Narkhede, Gwen Shapira ,Todd Palino(著) , 薛命灯(译) . Kafka权威指南 . 人民邮电出版社 . 2017-12-26
