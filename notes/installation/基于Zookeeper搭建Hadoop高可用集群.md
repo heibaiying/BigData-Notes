@@ -344,7 +344,7 @@ start-yarn.sh
 需要注意的是，这个时候`hadoop003`上的`ResourceManager`服务通常是没有启动的，需要手动启动：
 
 ```shell
-hadoop-daemon.sh start datanode
+yarn-daemon.sh start resourcemanager
 ```
 
 ## 六、查看集群
