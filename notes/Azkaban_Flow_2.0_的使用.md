@@ -20,7 +20,7 @@ Azkaban 目前同时支持 Flow 1.0 和 Flow2.0 ，但是官方文档上更推�
 项目zip将包含多个流YAML文件，一个项目YAML文件以及可选库和源代码。Flow YAML文件的基本结构如下：
 
 + 每个Flow都在单个YAML文件中定义；
-+ 流文件以流名称命名。如：`my-flow-name.flow`；
++ 流文件以流名称命名，如：`my-flow-name.flow`；
 + 包含DAG中的所有节点；
 +  每个节点可以是作业或流程；
 +  每个节点 可以拥有 name, type, config, dependsOn 和 nodes sections等属性；
