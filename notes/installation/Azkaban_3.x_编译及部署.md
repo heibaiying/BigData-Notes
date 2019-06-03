@@ -39,7 +39,7 @@ Azkaban 3.70.0编译需要依赖`gradle-4.6-all.zip`。Gradle是一个项目自�
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-gradle-wrapper.png"/> </div>
 
-在编译时程序会自动去图中指定的地址下载，但是下载速度很慢。为避免影响编译过程，建议先手动下载至`/gradle/wrapper/`目录下：
+在编译时程序会自动去图中所示的地址进行下载，但是下载速度很慢。为避免影响编译过程，建议先手动下载至`/gradle/wrapper/`目录下：
 
 ```shell
 # wget https://services.gradle.org/distributions/gradle-4.6-all.zip
@@ -118,7 +118,7 @@ tar -zxvf  azkaban-solo-server-3.70.0.tar.gz
 
 <br/>
 
-验证方式二：访问8081端口，查看Web UI界面，默认的登录名密码都是`azkaban`，如果需要修改或新增，则可以在`conf/azkaban-users.xml `文件中进行配置：
+验证方式二：访问8081端口，查看Web UI界面，默认的登录名密码都是`azkaban`，如果需要修改或新增用户，可以在`conf/azkaban-users.xml `文件中进行配置：
 
 <div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-web-ui.png"/> </div>
 
