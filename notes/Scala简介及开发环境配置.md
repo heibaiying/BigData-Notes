@@ -59,7 +59,7 @@ Scala的运行依赖于JDK，Scala 2.12.x需要JDK 1.8+。
 
 ### 2.2 安装Scala插件
 
-IDEA默认不支持scala语言的开发，需要通过插件进行扩展。打开 IDEA，依次点击 **File** => **settings**=> **plugins **选项卡，搜索Scala插件(如下图)。找到插件后进行安装，并重启IDEA使得安装生效。
+IDEA默认不支持Scala语言的开发，需要通过插件进行扩展。打开 IDEA，依次点击 **File** => **settings**=> **plugins** 选项卡，搜索Scala插件(如下图)。找到插件后进行安装，并重启IDEA使得安装生效。
 
 <div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-plugin.png"/> </div>
 
