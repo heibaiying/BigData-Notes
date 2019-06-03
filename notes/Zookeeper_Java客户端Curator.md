@@ -1,5 +1,6 @@
 # Zookeeper Java 客户端 ——Apache Curator
-<nav>
+
+<nav>
 <a href="#一基本依赖">一、基本依赖</a><br/>
 <a href="#二客户端相关操作">二、客户端相关操作</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-创建客户端实例">2.1 创建客户端实例</a><br/>
@@ -20,10 +21,11 @@
 
 ## 一、基本依赖
 
-Curator是Netflix公司开源的一个Zookeeper客户端，目前由Apache进行维护。与Zookeeper原生客户端相比，Curator的抽象层次更高，功能也更加丰富，是Zookeeper使用范围最广的Java客户端。本片文章主要讲解其基本使用，以下项目采用Maven构建，以单元测试的方法进行讲解，相关依赖如下：
+Curator是Netflix公司开源的一个Zookeeper客户端，目前由Apache进行维护。与Zookeeper原生客户端相比，Curator的抽象层次更高，功能也更加丰富，是目前Zookeeper使用范围最广的Java客户端。本篇文章主要讲解其基本使用，项目采用Maven构建，以单元测试的方法进行讲解，相关依赖如下：
 
 ```xml
 <dependencies>
+    <!--Curator相关依赖-->
     <dependency>
         <groupId>org.apache.curator</groupId>
         <artifactId>curator-framework</artifactId>
@@ -87,14 +89,14 @@ public class BasicOperation {
 
 ### 2.2 重试策略
 
-在连接Zookeeper服务时候，Curator提供了多种重试策略以满足各种需求，所有重试策略继承自`RetryPolicy`接口，如下图：
+在连接Zookeeper时，Curator提供了多种重试策略以满足各种需求，所有重试策略均继承自`RetryPolicy`接口，如下图：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/curator-retry-policy.png"/> </div>
 
-而这些重试策略类又分为两大类别：
+这些重试策略类主要分为以下两类：
 
-+ RetryForever ：代表一直重试，直到连接成功；
-+ SleepingRetry ： 基于一定间隔时间的重试，这里以其子类`ExponentialBackoffRetry`为例说明，其构造器如下：
++ **RetryForever** ：代表一直重试，直到连接成功；
++ **SleepingRetry** ： 基于一定间隔时间的重试。这里以其子类`ExponentialBackoffRetry`为例说明，其构造器如下：
 
 ```java
 /**
@@ -131,7 +133,7 @@ public void createNodes() throws Exception {
 }
 ```
 
-创建时可以指定节点类型，这里的节点类型和Zookeeper原生的一致，全部定义在枚举类`CreateMode`中：
+创建时可以指定节点类型，这里的节点类型和Zookeeper原生的一致，全部类型定义在枚举类`CreateMode`中：
 
 ```java
 public enum CreateMode {
