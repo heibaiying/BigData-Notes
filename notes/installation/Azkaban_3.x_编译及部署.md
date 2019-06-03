@@ -1,20 +1,14 @@
 # Azkaban 3.x 编译及部署
 
 <nav>
-<a href="#一Azkaban-编译">一、Azkaban 编译</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-下载并解压">1.1 下载并解压</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-准备编译环境">1.2 准备编译环境</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-项目编译">1.3 项目编译</a><br/>
-<a href="#二Azkaban-部署模式介绍">二、Azkaban 部署模式介绍</a><br/>
-<a href="#三-Solo-Server-模式部署">三 、Solo Server 模式部署</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21--解压">2.1  解压</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-修改时区">2.2 修改时区</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-启动">2.3 启动</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-验证">2.4 验证</a><br/>
+<a href="#一Azkaban-源码编译">一、Azkaban 源码编译</a><br/>
+<a href="#二Azkaban-部署模式">二、Azkaban 部署模式</a><br/>
+<a href="#三-Solo-Server-模式部署">三、Solo Server 模式部署</a><br/>
 </nav>
 
 
-## 一、Azkaban 编译
+
+## 一、Azkaban 源码编译
 
 ### 1.1 下载并解压
 
@@ -78,7 +72,7 @@ Azkaban 的编译过程需要用Git下载部分JAR包，所以需要预先安装
 
 
 
-## 二、Azkaban 部署模式介绍
+## 二、Azkaban 部署模式
 
 >After version 3.0, we provide two modes: the stand alone “solo-server” mode and distributed multiple-executor mode. The following describes thedifferences between the two modes.
 
