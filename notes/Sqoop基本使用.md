@@ -90,7 +90,6 @@ sqoop import \
 日志输出如下，可以看到输入数据被平均`split`为三份，分别由三个`map task`进行处理。数据默认以表的主键列作为拆分依据，如果你的表没有主键，有以下两种方案：
 
 + 添加`-- autoreset-to-one-mapper`参数，代表只启动一个`map task`，即不并行执行；
-
 + 若仍希望并行执行，则可以使用`--split-by <column-name>` 指明拆分数据的参考列。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-map-task.png"/> </div>
@@ -335,9 +334,7 @@ sqoop import \
 在使用`query`进行数据过滤时，需要注意以下三点：
 
 + 必须用`--hive-table`指明目标表；
-
 + 如果并行度`-m`不为1或者没有指定`--autoreset-to-one-mapper`，则需要用` --split-by `指明参考列；
-
 + SQL的`where`字句必须包含`$CONDITIONS`，这是固定写法，作用是动态替换。
 
   
@@ -362,7 +359,6 @@ sqoop import \
 `incremental`参数有以下两个可选的选项：
 
 + **append**：要求参考列的值必须是递增的，所有大于`last-value`的值都会被导入；
-
 + **lastmodified**：要求参考列的值必须是`timestamp`类型，且插入数据时候要在参考列插入当前时间戳，更新数据时也要更新参考列的时间戳，所有时间晚于``last-value``的数据都会被导入。
 
 通过上面的解释我们可以看出来，其实Sqoop的增量导入并没有太多神器的地方，就是依靠维护的参考列来判断哪些是增量数据。当然我们也可以使用上面介绍的`query`参数来进行手动的增量导出，这样反而更加灵活。
