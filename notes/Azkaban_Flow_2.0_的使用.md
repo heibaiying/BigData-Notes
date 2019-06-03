@@ -1,46 +1,32 @@
 # Azkaban Flow 2.0的使用
-<nav>
+
+<nav>
 <a href="#一Flow-20-简介">一、Flow 2.0 简介</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-Flow-20-的产生">1.1 Flow 2.0 的产生</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基本结构">1.2 基本结构</a><br/>
 <a href="#二YAML语法">二、YAML语法</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-基本规则">2.1 基本规则</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-对象的写法">2.2 对象的写法</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-map的写法">2.3 map的写法</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-数组的写法">2.3 数组的写法</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-单双引号">2.5 单双引号</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-特殊符号">2.6 特殊符号</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#27-配置引用">2.7 配置引用</a><br/>
 <a href="#三简单任务调度">三、简单任务调度</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-任务配置">3.1 任务配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-打包上传">3.2 打包上传</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-执行结果">3.3 执行结果</a><br/>
 <a href="#四多任务调度">四、多任务调度</a><br/>
 <a href="#五内嵌流">五、内嵌流</a><br/>
 </nav>
+
 
 ## 一、Flow 2.0 简介
 
 ### 1.1 Flow 2.0 的产生
 
-Azkaban 目前同时支持Flow 1.0和Flow2.0,但是官方文档上更推荐使用2.0，因为Flow 1.0 会在将来的版本被移除。
-
->This section covers how to create your Azkaban flows using Azkaban Flow 2.0.Flow 1.0 will be deprecated in the future.
-
-Flow 2.0设计的主要思想是提供1.0版本没有的流级定义。用户可以将属于给定流的所有.job / .properties文件合并到单个流定义文件中，而不是创建多个.job / .properties文件。配置文件以YAML格式定义，每个项目zip将包含多个流YAML文件和一个项目YAML文件。同时可以在YAML文件中的流内定义流，称为为嵌入流或子流。
+Azkaban 目前同时支持 Flow 1.0 和 Flow2.0 ，但是官方文档上更推荐使用Flow 2.0，因为Flow 1.0会在将来的版本被移除。Flow 2.0的主要设计思想是提供1.0所没有的流级定义。用户可以将属于给定流的所有`job / properties`文件合并到单个流定义文件中，其内容采用YAML语法进行定义，同时还支持在流中再定义流，称为为嵌入流或子流。
 
 ### 1.2 基本结构
 
 项目zip将包含多个流YAML文件，一个项目YAML文件以及可选库和源代码。Flow YAML文件的基本结构如下：
 
-+ 每个Flow都在单个YAML文件中定义
-+ 流文件以流名称命名。如：my-flow-name.flow
-+ 包含DAG中的所有节点
-+  每个节点可以是作业或流程
-+  每个节点 可以拥有 name, type, config, dependsOn and nodes sections等属性
-+  通过列出dependsOn列表中的父节点来指定节点依赖性
-+ 包含与流相关的其他配置
-+   当前.properties文件中流的所有常见属性都将迁移到每个流YAML文件中的config部分
++ 每个Flow都在单个YAML文件中定义；
++ 流文件以流名称命名。如：`my-flow-name.flow`；
++ 包含DAG中的所有节点；
++  每个节点可以是作业或流程；
++  每个节点 可以拥有 name, type, config, dependsOn 和 nodes sections等属性；
++  通过列出dependsOn列表中的父节点来指定节点依赖性；
++ 包含与流相关的其他配置；
++   当前properties文件中流的所有常见属性都将迁移到每个流YAML文件中的config部分。
 
 官方提供了一个比较完善的配置样例，如下：
 
@@ -126,15 +112,15 @@ nodes:
 
 ## 二、YAML语法
 
-想要进行Flow流的配置，首先需要了解YAML ，YAML 是一种简洁的非标记语言，有着严格的格式要求的，如果你的格式配置失败，上传到Azkaban的时候就会抛出解析异常。
+想要使用 Flow 2.0 进行工作流的配置，首先需要了解YAML 。YAML 是一种简洁的非标记语言，有着严格的格式要求的，如果你的格式配置失败，上传到Azkaban的时候就会抛出解析异常。
 
 ### 2.1 基本规则
 
-1. 大小写敏感 
-2. 使用缩进表示层级关系 
-3. 缩进长度没有限制，只要元素对齐就表示这些元素属于一个层级。 
-4. 使用#表示注释 
-5. 字符串默认不用加单双引号，但单引号和双引号都可以使用，双引号不会对特殊字符转义。
+1. 大小写敏感 ；
+2. 使用缩进表示层级关系 ；
+3. 缩进长度没有限制，只要元素对齐就表示这些元素属于一个层级； 
+4. 使用#表示注释 ；
+5. 字符串默认不用加单双引号，但单引号和双引号都可以使用，双引号表示不需要对特殊字符进行转义；
 6. YAML中提供了多种常量结构，包括：整数，浮点数，字符串，NULL，日期，布尔，时间。
 
 ### 2.2 对象的写法
@@ -170,7 +156,7 @@ key:
 
 ### 2.5 单双引号
 
-单引号和双引号都可以使用，双引号不会对特殊字符转义。
+支持单引号和双引号，但双引号不会对特殊字符进行转义：
 
 ```yaml
 s1: '内容\n字符串'
@@ -182,11 +168,11 @@ s2: "内容\n字符串"
 
 ### 2.6 特殊符号
 
-`---`  YAML可以在同一个文件中，使用`---`表示一个文档的开始。
+一个YAML文件中可以包括多个文档，使用`---`进行分割。
 
 ### 2.7 配置引用
 
-在Azkaban中可以使用`${}`引用定义的配置，同时也建议将公共的参数抽取到config中，并使用`${}`进行引用。
+Flow 2.0 建议将公共参数定义在`config`下，并通过`${}`进行引用。
 
 
 
@@ -194,7 +180,7 @@ s2: "内容\n字符串"
 
 ### 3.1 任务配置
 
-新建`flow`配置文件
+新建`flow`配置文件：
 
 ```yaml
 nodes:
@@ -204,7 +190,7 @@ nodes:
       command: echo "Hello Azkaban Flow 2.0."
 ```
 
-在当前的版本中，由于Azkaban是同时支持Flow 1.0 和 Flow 2.0的，如果你想让Azkaban知道你是希望以2.0方式运行，则需要新建一个`project`文件，指明是使用的Flow 2.0
+在当前的版本中，Azkaban同时支持 Flow 1.0 和 Flow 2.0，如果你希望以2.0的方式运行，则需要新建一个`project`文件，指明是使用的是Flow 2.0：
 
 ```shell
 azkaban-flow-version: 2.0
@@ -218,13 +204,13 @@ azkaban-flow-version: 2.0
 
 ### 3.3 执行结果
 
-由于在1.0 版本中已经介绍过web ui的使用，这里就不再赘述，对于1.0和2.0版本，只有配置的方式是不同的，其他上传执行的操作方式都是相同的。执行结果如下：
+由于在1.0 版本中已经介绍过Web UI的使用，这里就不再赘述。对于1.0和2.0版本，只有配置方式有所不同，其他上传执行的方式都是相同的。执行结果如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-simle-result.png"/> </div>
 
 ## 四、多任务调度
 
-和1.0给的案例一样，这里假设我们有五个任务（jobA——jobE）,D任务需要在A，B，C任务执行完成后才能执行，而E任务则需要在D任务执行完成后才能执行。`Flow`配置如下。可以看到在1.0中我们需要分别定义五个配置文件，而在2.0中我们只需要一个配置文件即可完成配置。
+和1.0给出的案例一样，这里假设我们有五个任务（jobA——jobE）, D 任务需要在A，B，C任务执行完成后才能执行，而 E 任务则需要在 D 任务执行完成后才能执行，相关配置文件应如下。可以看到在1.0中我们需要分别定义五个配置文件，而在2.0中我们只需要一个配置文件即可完成配置。
 
 ```yaml
 nodes:
