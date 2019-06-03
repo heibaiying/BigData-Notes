@@ -19,7 +19,7 @@ Sqoop是一个常用的数据迁移工具，主要用于在不同存储系统之
 
 + 导出数据：从 分布式文件系统中导出数据到关系数据库中。
 
-其原理是将执行命令转化成 MapReduce 作业来实现数据的迁移，如下图。
+其原理是将执行命令转化成 MapReduce 作业来实现数据的迁移，如下图：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-tool.png"/> </div>
 
