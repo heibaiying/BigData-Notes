@@ -73,7 +73,7 @@ sc.parallelize(list).filter(_ >= 10).foreach(println)
 
 ### 1.3 flatMap
 
-`flatMap(func)`与`map`类似，但每一个输入的 item 会被映射成 0 个或多个输出的 items（ *func* 返回类型需要为`Seq`类型）。
+`flatMap(func)`与`map`类似，但每一个输入的item会被映射成 0 个或多个输出的items（ *func* 返回类型需要为`Seq`）。
 
 ```scala
 val list = List(List(1, 2), List(3), List(), List(4, 5))
@@ -319,7 +319,7 @@ sc.parallelize(list,numSlices = 2).aggregateByKey(zeroValue = 0,numPartitions = 
 (spark,7)
 ```
 
-`aggregateByKey(zeroValue = 0,numPartitions = 3)`的第二个参数`numPartitions `决定的是输出RDD的分区数量，想要验证这个问题，可以对上面代码进行改写，使用`getNumPartitions`方法获取分区数量：
+`aggregateByKey(zeroValue = 0,numPartitions = 3)`的第二个参数`numPartitions`决定的是输出RDD的分区数量，想要验证这个问题，可以对上面代码进行改写，使用`getNumPartitions`方法获取分区数量：
 
 ```scala
 sc.parallelize(list,numSlices = 6).aggregateByKey(zeroValue = 0,numPartitions = 3)(
