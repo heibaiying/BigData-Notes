@@ -256,7 +256,7 @@ def SubscribePattern[K, V](
 + `commitSync`:  用于异步提交；
 + `commitAsync`：用于同步提交。
 
-具体提交方式可以参见：[Kafka消费者详解]([https://github.com/heibaiying/BigData-Notes/blob/master/notes/Kafka消费者详解.md)
+具体提交方式可以参见：[Kafka消费者详解](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Kafka消费者详解.md)
 
 
 
