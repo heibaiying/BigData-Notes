@@ -1,4 +1,4 @@
-# Spark SQL DataFrames
+# DataFrame和Dataset简介
 
 <nav>
 <a href="#一Spark-SQL简介">一、Spark SQL简介</a><br/>
@@ -17,13 +17,14 @@
 
 ## 一、Spark SQL简介
 
-Spark SQL是Spark中的一个子模块，主要用于操作结构化数据。其具有以下特点：
+Spark SQL是Spark中的一个子模块，主要用于操作结构化数据。它具有以下特点：
 
-+  能够将SQL查询与Spark程序无缝混合。允许您使用SQL或DataFrame API对结构化数据进行查询，支持Java，Scala，Python和R语言；
-+ Spark SQL支持多种数据源，包括Hive，Avro，Parquet，ORC，JSON和JDBC；
-+ Spark SQL支持HiveQL语法以及Hive SerDes和UDF，允许你访问现有的Hive仓库；
++  能够将SQL查询与Spark程序无缝混合，允许您使用SQL或DataFrame API对结构化数据进行查询；
++  支持多种开发语言；
++ 支持多达上百种的外部数据源，包括Hive，Avro，Parquet，ORC，JSON和JDBC等；
++ 支持HiveQL语法以及Hive SerDes和UDF，允许你访问现有的Hive仓库；
 + 支持标准的JDBC和ODBC连接；
-+ Spark SQL支持优化器，列式存储和代码生成等特性，以提高查询效率；
++ 支持优化器，列式存储和代码生成等特性；
 + 支持扩展并能保证容错。
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sql-hive-arch.png"/> </div>
@@ -32,18 +33,11 @@ Spark SQL是Spark中的一个子模块，主要用于操作结构化数据。其
 
 ### 2.1 DataFrame  
 
-为了支持结构化数据的处理，Spark SQL提供了新的数据结构DataFrame。
-
-DataFrame是一个由具名列组成的数据集。它在概念上等同于关系数据库中的表或R/Python语言中的data frame，同时DataFrame还在底层做了更多的优化，以保证查询效率。 DataFrame具备以下特点：
-
-+ 支持多种数据源，如结构化数据文件，Hive表，外部数据库或现有RDD；
-+ 支持Scala，Java，Python和R语言，在Scala和Java中，DataFrame由行数据集(Rows)表示：
-  + 在Scala API中，DataFrame等价于Dataset [Row]；
-  + 在Java API中，DataFrame等价于Dataset\<Row>。
+为了支持结构化数据的处理，Spark SQL提供了新的数据结构DataFrame。DataFrame是一个由具名列组成的数据集。它在概念上等同于关系数据库中的表或R/Python语言中的`data frame`。 由于Spark SQL支持多种语言的开发，所以每种语言都定义了`DataFrame`的抽象，主要如下：
 
 | 语言   | 主要抽象                                     |
 | ------ | -------------------------------------------- |
-| Scala  | Dataset[T] & DataFrame (Dataset[Row] 的别名)                                                               |
+| Scala  | Dataset[T] & DataFrame (Dataset[Row] 的别名) |
 | Java   | Dataset[T]                                   |
 | Python | DataFrame                                    |
 | R      | DataFrame                                    |
@@ -60,13 +54,11 @@ DataFrame内部的有明确Scheme结构，即列名、列字段类型都是已�
 
 + 如果你想使用函数式编程而不是DataFrame API，则使用RDDs；
 + 如果你的数据是非结构化的(比如流媒体或者字符流)，则使用RDDs，
-+ 如果你的数据是结构化的(如RDBMS中的数据)或者半结构化的(如日志)，出于性能和优化上的考虑，建议使用DataFrame。
++ 如果你的数据是结构化的(如RDBMS中的数据)或者半结构化的(如日志)，出于性能上的考虑，应优先使用DataFrame。
 
 ### 2.3 DataSet
 
-在上一小节中，我们提到了Dataset这个概念，这里做一下解释：
-
-Dataset是分布式的数据集合，在Spark 1.6版本被引入。它集成了RDD和Spark SQL的优点，具备强类型，完善的lambda函数和执行引擎优化等特点，支持Scala和Java语言。在Spark 2.0后，为了方便开发者，Spark将DataFrame和Dataset的API融合到一起，提供一致性API，即用户可以通过一套标准API完成对两者的操作。
+Dataset也是分布式的数据集合，在Spark 1.6版本被引入，它集成了RDD和DataFrame的优点，具备强类型的特点，同时支持lambda函数，但只能在Scala和Java语言中使用。在Spark 2.0后，为了方便开发者，Spark将DataFrame和Dataset的API融合到一起，提供了结构化的API(Structured API)，即用户可以通过一套标准API完成对两者的操作。
 
 > 这里注意一下：DataFrame被标记为Untyped API，而DataSet被标记为Typed API，后文会对两者做出解释。
 
@@ -94,11 +86,9 @@ Dataset是分布式的数据集合，在Spark 1.6版本被引入。它集成了R
 
 ### 2.5 Untyped & Typed 
 
-在2.3小节，我们介绍过DataFrame API被标记为Untyped API，而DataSet API被标记为Typed API。
+在2.3小节，我们介绍过DataFrame API被标记为`Untyped API`，而DataSet API被标记为`Typed API`。DataFrame的`Untyped`是相对于语言或API层面而言，它确实有明确的Scheme结构，即列名，列类型都是确定的，但这些信息完全由Spark来维护，Spark只会在运行时检查这些类型和指定类型是否一致。这也就是为什么在Spark 2.0之后，官方推荐把DataFrame看做是`DatSet[Row]`，Row是spark中定义的一个`trait`，其子类中封装了列字段的信息。
 
-DataFrame的Untyped是相对于语言(或API)层面而言，它确实有明确的Scheme结构，即列名，列类型都是确定的，但这些信息完全由Spark来维护，Spark只会在运行时检查这些类型和指定类型是否一致。这也就是为什么在Spark 2.0之后，官方推荐把DataFrame看做是`DatSet[Row]`，Row是spark中定义的一个`trait`，其子类中封装了列字段的信息。
-
-相对而言，DataSet是Typed的，即强类型。如下面代码，dataSet的类型由case class(scala)或者Java bean(Java)来明确指定的，在这里即每一行数据代表一个`Person`，这些信息由JVM来保证正确性，所以字段名错误和类型错误在编译的时候就会被IDE发现。
+相对而言，DataSet是`Typed`的，即强类型。如下面代码，dataSet的类型由case class(Scala)或者Java bean(Java)来明确指定的，在这里即每一行数据代表一个`Person`，这些信息由JVM来保证正确性，所以字段名错误和类型错误在编译的时候就会被IDE所发现。
 
 ```scala
 case class Person(name: String, age: Long)
@@ -112,7 +102,7 @@ val dataSet: Dataset[Person] = spark.read.json("people.json").as[Person]
 这里对三者做一下简单的总结：
 
 + RDDs适合非结构化数据的处理，而DataFrame & DataSet更适合结构化数据和半结构化的处理；
-+ DataFrame & DataSet可以通过统一的Dataset API进行访问，而RDDs则更适合函数式编程的场景；
++ DataFrame & DataSet可以通过统一的Structured API进行访问，而RDDs则更适合函数式编程的场景；
 + 相比于DataFrame而言，DataSet是强类型的(Typed)，有着更为严格的静态类型检查；
 + DataSets、DataFrames、SQL的底层都依赖了RDDs API，并对外提供结构化的访问接口。
 
@@ -122,17 +112,16 @@ val dataSet: Dataset[Person] = spark.read.json("people.json").as[Person]
 
 ## 四、Spark SQL的运行原理
 
-对于结构化APIs(DataFrames & DataSets  & SQL)，其实际执行流程都是相同的：
+DataFrames、DataSets和Spark SQL的实际执行流程都是相同的：
 
-1.  进行DataFrame/Dataset/SQL编程；
-
-2. 如果是有效的代码，即代码没有编译错误，Spark 将其转换为一个逻辑计划；
-3. Spark 将此逻辑计划转换为物理计划，同时进行代码优化；
-4. Spark 然后在集群上执行这个物理计划(基于 RDD 操作) 。
+1. 进行DataFrame/Dataset/SQL编程；
+2. 如果是有效的代码，即代码没有编译错误，Spark会将其转换为一个逻辑计划；
+3. Spark将此逻辑计划转换为物理计划，同时进行代码优化；
+4. Spark然后在集群上执行这个物理计划(基于RDD操作) 。
 
 ### 4.1 逻辑计划(Logical Plan)
 
-执行的第一个阶段是将用户代码转换成一个逻辑计划。它首先将用户代码转换成unresolved logical plan(未解决的逻辑计划)，之所以这个计划是未解决的，是因为尽管您的代码在语法上是正确的，但是它引用的表或列可能不存在。 Spark使用analyzer(分析器)基于catalog(存储的所有表和DataFrame信息)进行解析。解析失败则拒绝执行，解析成功则将结果传给Catalyst优化器(Catalyst Optimizer)，优化器是一组规则的集合，用于优化逻辑计划，通过谓词下推等方式进行优化，最终输出优化后的逻辑执行计划。
+执行的第一个阶段是将用户代码转换成一个逻辑计划。它首先将用户代码转换成`unresolved logical plan`(未解决的逻辑计划)，之所以这个计划是未解决的，是因为尽管您的代码在语法上是正确的，但是它引用的表或列可能不存在。 Spark使用`analyzer`(分析器)基于`catalog`(存储的所有表和DataFrame信息)进行解析。解析失败则拒绝执行，解析成功则将结果传给`Catalyst`优化器(Catalyst Optimizer)，优化器是一组规则的集合，用于优化逻辑计划，通过谓词下推等方式进行优化，最终输出优化后的逻辑执行计划。
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-Logical-Planning.png"/> </div>
 
@@ -140,7 +129,7 @@ val dataSet: Dataset[Person] = spark.read.json("people.json").as[Person]
 
 ### 4.2 物理计划(Physical Plan) 
 
-在得到优化后的逻辑计划后，Spark就开始了物理计划过程。 它如何通过生成不同的物理执行策略，并通过成本模型来比较它们，从而选择一个最优的物理计划在集群上面执行的。物理规划的输出结果是一系列的RDDs和转换关系(transformations)。
+得到优化后的逻辑计划后，Spark就开始了物理计划过程。 它通过生成不同的物理执行策略，并通过成本模型来比较它们，从而选择一个最优的物理计划在集群上面执行的。物理规划的输出结果是一系列的RDDs和转换关系(transformations)。
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-Physical-Planning.png"/> </div>
 
