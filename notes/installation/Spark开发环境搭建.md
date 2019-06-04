@@ -10,7 +10,7 @@
 
 ### 1.1 下载并解压
 
-官方下载地址：http://spark.apache.org/downloads.html，选择Spark版本和对应的Hadoop版本后再下载：
+官方下载地址：http://spark.apache.org/downloads.html ，选择Spark版本和对应的Hadoop版本后再下载：
 
 <div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-download.png"/> </div>
 
@@ -43,7 +43,7 @@ export  PATH=${SPARK_HOME}/bin:$PATH
 
 ### 1.3 Local模式
 
-Local 模式是最简单的一种运行方式，它采用单节点多线程(cpu)方式运行，不用部署，开箱即用，适合日常测试开发。
+Local 模式是最简单的一种运行方式，它采用单节点多线程方式运行，不用部署，开箱即用，适合日常测试开发。
 
 ```shell
 # 启动spark-shell
