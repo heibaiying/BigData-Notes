@@ -73,7 +73,7 @@ sc.parallelize(list).filter(_ >= 10).foreach(println)
 
 ### 1.3 flatMap
 
-`flatMap(func)`与`map`类似，但每一个输入的 item 会被映射成 0 个或多个输出的 items（ *func* 返回类型需要为`Seq`类型）。
+`flatMap(func)`与`map`类似，但每一个输入的item会被映射成 0 个或多个输出的items（ *func* 返回类型需要为`Seq`）。
 
 ```scala
 val list = List(List(1, 2), List(3), List(), List(4, 5))
