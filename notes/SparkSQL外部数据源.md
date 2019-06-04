@@ -240,8 +240,6 @@ csvFile.write.format("orc").mode("overwrite").save("/tmp/spark/orc/dept")
 
 Spark同样支持与传统的关系型数据库进行数据读写。但是Spark程序默认是没有提供数据库驱动的，所以在使用前需要将对应的数据库驱动上传到安装目录下的`jars`目录中。下面示例使用的是Mysql数据库，使用前需要将对应的`mysql-connector-java-x.x.x.jar`上传到`jars`目录下。
 
-> MySQL JAR 可以从本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录进行下载。
-
 ### 6.1 读取数据
 
 读取全表数据示例如下，这里的`help_keyword`是mysql内置的字典表，只有`help_keyword_id`和`name`两个字段。
