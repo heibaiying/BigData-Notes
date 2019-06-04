@@ -16,7 +16,7 @@
 
 ## 一、 数据准备
 
-本文主要介绍Spark的多表连接，需要预先准备测试数据。分别创建员工和部门的datafame，并注册为临时视图，代码如下：
+本文主要介绍Spark SQL的多表连接，需要预先准备测试数据。分别创建员工和部门的Datafame，并注册为临时视图，代码如下：
 
 ```scala
 val spark = SparkSession.builder().appName("aggregations").master("local[2]").getOrCreate()
@@ -49,7 +49,7 @@ dept部门表
  |-- LOC:    部门所在城市
 ```
 
-> 注：emp.json，dept.json可以在本仓库的resources目录进行下载。
+> 注：emp.json，dept.json可以在本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录进行下载。
 
 
 
@@ -57,20 +57,20 @@ dept部门表
 
 Spark中支持多种连接类型：
 
-+ Inner joins : 内连接；
-+ Full Outer joins :  全外连接；
-+ Left outer joins :  左外连接；
-+ Right outer joins :  右外连接；
-+ Left semi joins :  左半连接；
-+ Left anti joins :  左反连接；
-+ Natural joins :  自然连接；
-+ Cross (or Cartesian) joins :  交叉(或笛卡尔)连接。
++ **Inner Join** : 内连接；
++ **Full Outer Join** :  全外连接；
++ **Left Outer Join** :  左外连接；
++ **Right Outer Join** :  右外连接；
++ **Left Semi Join** :  左半连接；
++ **Left Anti Join** :  左反连接；
++ **Natural Join** :  自然连接；
++ **Cross (or Cartesian) Join** :  交叉(或笛卡尔)连接。
 
 其中内，外连接，笛卡尔积均与普通关系型数据库中的相同，如下图所示：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sql-join.jpg"/> </div>
 
-这里解释一下左半连接和左反连接，这两个连接等价于关系型数据库中的IN和NOT IN字句：
+这里解释一下左半连接和左反连接，这两个连接等价于关系型数据库中的`IN`和`NOT IN`字句：
 
 ```sql
 -- LEFT SEMI JOIN
@@ -162,17 +162,17 @@ spark.sql("SELECT * FROM emp JOIN dept ON emp.deptno = dept.deptno").show()
 
 ## 三、连接的执行
 
-在对大表与大表之间进行连接操作时，通常都会触发shuffle join，两表的所有分区节点会进行All-to-All的通讯，这种查询通常比较昂贵，会对网络IO会造成比较大的负担。
+在对大表与大表之间进行连接操作时，通常都会触发`Shuffle Join`，两表的所有分区节点会进行`All-to-All`的通讯，这种查询通常比较昂贵，会对网络IO会造成比较大的负担。
 
 <div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-Big-table–to–big-table.png"/> </div>
 
 
 
-而对于大表和小表的连接操作，Spark会在一定程度上进行优化，如果小表的数据量小于Work Node上内存空间，Spark会考虑将小表的数据广播到每一个工作节点，在每个工作节点内部执行连接计算，这可以降低网络的IO，但会加大每个工作节点上的CPU负担。
+而对于大表和小表的连接操作，Spark会在一定程度上进行优化，如果小表的数据量小于Worker Node的内存空间，Spark会考虑将小表的数据广播到每一个Worker Node，在每个工作节点内部执行连接计算，这可以降低网络的IO，但会加大每个Worker Node的CPU负担。
 
 <div align="center"> <img  width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-Big-table–to–small-table.png"/> </div>
 
-是否采用广播方式进行JOIN取决于程序内部的判断，如果想明确使用广播方式进行JOIN，可以在DataFrame API 中使用`broadcast`方法显示指定需要广播的小表：
+是否采用广播方式进行`Join`取决于程序内部对小表的判断，如果想明确使用广播方式进行`Join`，则可以在DataFrame API 中使用`broadcast`方法指定需要广播的小表：
 
 ```scala
 empDF.join(broadcast(deptDF), joinExpression).show()
