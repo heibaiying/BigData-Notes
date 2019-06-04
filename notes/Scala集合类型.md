@@ -21,11 +21,11 @@ Scala中拥有多种集合类型，主要分为可变的和不可变的集合两
 
 ## 二、集合结构
 
-scala所有的集合类主要位于`scala.collection` 、`scala.collection.mutable`、`scala.collection.immutable`、`scala.collection.generic`包中 ，大部分集合类存在三类变体，分别位于`scala.collection`, `scala.collection.immutable`, `scala.collection.mutable`包。
+Scala中的大部分集合类都存在三类变体，分别位于`scala.collection`, `scala.collection.immutable`, `scala.collection.mutable`包中。还有部分集合类位于`scala.collection.generic`包下。
 
-- `scala.collection.immutable`包是中的集合是不可变的；
-- `scala.collection.mutable`包中的集合是可变的；
-- `scala.collection`包中的集合，既可以是可变的，也可以是不可变的。
+- **scala.collection.immutable** ：包是中的集合是不可变的；
+- **scala.collection.mutable** ：包中的集合是可变的；
+- **scala.collection** ：包中的集合，既可以是可变的，也可以是不可变的。
 
 ```scala
 val sortSet = scala.collection.SortedSet(1, 2, 3, 4, 5)
@@ -66,13 +66,13 @@ Scala中所有集合的顶层实现是`Traversable` 。它唯一的抽象方法�
 def foreach[U](f: Elem => U)
 ```
 
-实现Traversable的集合类只需要实现这个抽象方法，所有其他方法都可以从Traversable继承。Traversable中定义了其余的几十种的方法，具体可以参考官方文档：https://docs.scala-lang.org/overviews/collections/trait-traversable.html
+实现`Traversable`的集合类只需要实现这个抽象方法，所有其他方法都可以从`Traversable继承`。Traversable中一共定义了几十种关于集合操作方法，关于这些方法的说明可以参考官方文档：[trait-traversable](https://docs.scala-lang.org/overviews/collections/trait-traversable.html)。
 
 
 
 ## 四、Trait Iterable
 
-Iterable拓展了Traversable，并定义了一些额外的方法，Scala中所有的集合都直接或者间接实现了Iterable。Iterable中额外定义了十几种方法，具体可以参考官方文档：https://docs.scala-lang.org/overviews/collections/trait-iterable.html
+Scala中所有的集合都直接或者间接实现了`Iterable`特质，`Iterable`拓展自`Traversable`，并额外定义了十几种方法，关于这些方法的用途，官方文档上同样也有详细的说明：[trait-iterable](https://docs.scala-lang.org/overviews/collections/trait-iterable.html)。
 
 
 
@@ -98,8 +98,6 @@ Iterable拓展了Traversable，并定义了一些额外的方法，Scala中所�
 
 ## 参考资料
 
-1. Martin Odersky . Scala编程(第3版)[M] . 电子工业出版社 . 2018-1-1  
-2. 凯.S.霍斯特曼  . 快学Scala(第2版)[M] . 电子工业出版社 . 2017-7
 3. https://docs.scala-lang.org/overviews/collections/overview.html
 4. https://docs.scala-lang.org/overviews/collections/trait-traversable.html
 5. https://docs.scala-lang.org/overviews/collections/trait-iterable.html
