@@ -82,8 +82,7 @@ spark.read.format("csv")
 
 ```scala
 // 格式
-DataFrameWriter.format(...).option(...).partitionBy(...).bucketBy(...).sortBy(
-...).save()
+DataFrameWriter.format(...).option(...).partitionBy(...).bucketBy(...).sortBy(...).save()
 
 //示例
 dataframe.write.format("csv")
@@ -212,8 +211,8 @@ Parquet文件有着自己的存储规则，因此其可选配置项比较少，�
 
 | 读写操作 | 配置项               | 可选值                                                       | 默认值                                      | 描述                                                         |
 | -------- | -------------------- | ------------------------------------------------------------ | ------------------------------------------- | ------------------------------------------------------------ |
-| 读       | compression or codec | None,<br/>uncompressed,<br/>bzip2,<br/>deflate, gzip,<br/>lz4, or snappy | None                                        | 压缩文件格式                                                 |
-| Read     | mergeSchema          | true, false                                                  | 取决于配置项`spark.sql.parquet.mergeSchema` | 当为真时，Parquet数据源将从所有数据文件收集的Schema合并在一起，否则将从摘要文件中选择Schema，如果没有可用的摘要文件，则从随机数据文件中选择Schema。 |
+| Write    | compression or codec | None,<br/>uncompressed,<br/>bzip2,<br/>deflate, gzip,<br/>lz4, or snappy | None                                        | 压缩文件格式                                                 |
+| Read     | mergeSchema          | true, false                                                  | 取决于配置项`spark.sql.parquet.mergeSchema` | 当为真时，Parquet数据源将所有数据文件收集的Schema合并在一起，否则将从摘要文件中选择Schema，如果没有可用的摘要文件，则从随机数据文件中选择Schema。 |
 
 > 更多可选配置可以参阅官方文档：https://spark.apache.org/docs/latest/sql-data-sources-parquet.html
 
@@ -239,9 +238,9 @@ csvFile.write.format("orc").mode("overwrite").save("/tmp/spark/orc/dept")
 
 ## 六、SQL Databases 
 
-spark同样支持与传统的关系型数据库进行数据读写。但是Spark程序默认是没有提供数据库驱动的，所以在使用前需要将对应的数据库驱动上传到安装目录下的`jars`目录中。下面示例使用的是Mysql数据库，使用前需要将对应的`mysql-connector-java-x.x.x.jar`上传到jars目录下。
+Spark同样支持与传统的关系型数据库进行数据读写。但是Spark程序默认是没有提供数据库驱动的，所以在使用前需要将对应的数据库驱动上传到安装目录下的`jars`目录中。下面示例使用的是Mysql数据库，使用前需要将对应的`mysql-connector-java-x.x.x.jar`上传到`jars`目录下。
 
-> 为方便大家测试，我在本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录下上传了mysql-connector-java-5.1.47.jar
+> MySQL JAR 可以从本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录进行下载。
 
 ### 6.1 读取数据
 
@@ -391,7 +390,7 @@ df.write.text("/tmp/spark/txt/dept")
 
 ### 8.1 并行读
 
-多个executors不能同时读取同一个文件，但它们可以同时读取不同的文件。这意味着当您从一个包含多个文件的文件夹中读取数据时，这些文件中的每一个都将成为DataFrame中的一个分区，并由可用的executors并行读取。
+多个Executors不能同时读取同一个文件，但它们可以同时读取不同的文件。这意味着当您从一个包含多个文件的文件夹中读取数据时，这些文件中的每一个都将成为DataFrame中的一个分区，并由可用的Executors并行读取。
 
 ### 8.2 并行写
 
