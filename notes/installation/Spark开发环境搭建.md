@@ -65,9 +65,6 @@ val conf = new SparkConf().setAppName("Spark shell").setMaster("local[2]")
 val sc = new SparkContext(conf)
 ```
 
-同时从输出的日志也可以看出来，Local模式还提供了对应的Web UI界面，端口为4040。
-
-
 
 ## 二、词频统计案例
 
