@@ -58,13 +58,13 @@ RDD有两种创建方式，分别介绍如下：
 
 ### 2.1 由现有集合创建
 
-这里使用`spark-shell`的本地模式作为测试，指定使用4个CPU 核心，启动命令如下：
+这里使用`spark-shell`进行测试，启动命令如下：
 
 ```shell
 spark-shell --master local[4]
 ```
 
-启动`spark-shell`后，程序会自动创建应用上下文，相当于程序自动执行了下面的语句：
+启动`spark-shell`后，程序会自动创建应用上下文，相当于执行了下面的Scala语句：
 
 ```scala
 val conf = new SparkConf().setAppName("Spark shell").setMaster("local[4]")
@@ -121,7 +121,7 @@ def wholeTextFiles(path: String,minPartitions: Int = defaultMinPartitions): RDD[
 
 ## 三、操作RDD
 
-RDD支持两种类型的操作：*transformations*（转换，从现有数据集创建新数据集）和 *actions*（在数据集上运行计算后将值返回到驱动程序）。RDD中的所有转换操作都是惰性的，它们只是记住这些转换操作，但不会立即执行，只有遇到 *action*操作后才会真正的进行计算，这类似于函数式编程中的惰性求值。
+RDD支持两种类型的操作：*transformations*（转换，从现有数据集创建新数据集）和 *actions*（在数据集上运行计算后将值返回到驱动程序）。RDD中的所有转换操作都是惰性的，它们只是记住这些转换操作，但不会立即执行，只有遇到 *action* 操作后才会真正的进行计算，这类似于函数式编程中的惰性求值。
 
 ```scala
 val list = List(1, 2, 3)
@@ -138,17 +138,17 @@ sc.parallelize(list).map(_ * 10).foreach(println)
 
 Spark速度非常快的一个原因是RDD支持缓存。成功缓存后，如果之后的操作使用到了该数据集，则直接从缓存中获取。虽然缓存也有丢失的风险，但是由于RDD之间的依赖关系，如果某个分区的缓存数据丢失，只需要重新计算该分区即可。
 
-Spark支持多种缓存级别，见下表：
+Spark支持多种缓存级别 ：
 
-| Storage Level<br/>（存储级别）                    | Meaning（含义）                                              |
-| ------------------------------------------------- | ------------------------------------------------------------ |
-| `MEMORY_ONLY`                                     | 默认的缓存级别，将 RDD以反序列化的Java对象的形式存储在 JVM 中。如果内存空间不够，则部分分区数据将不再缓存。 |
-| `MEMORY_AND_DISK`                                 | 将 RDD 以反序列化的Java对象的形式存储JVM中。如果内存空间不够，将未缓存的分区数据存储到磁盘，在需要使用这些分区时从磁盘读取。 |
-| `MEMORY_ONLY_SER`<br/>(仅支持 Java and Scala)     | 将 RDD 以序列化的Java对象的形式进行存储（每个分区为一个 byte 数组）。这种方式比反序列化对象节省存储空间，但在读取时会增加CPU的计算负担。 |
-| `MEMORY_AND_DISK_SER`<br/>(仅支持 Java and Scala) | 类似于`MEMORY_ONLY_SER`，但是溢出的分区数据会存储到磁盘，而不是在用到它们时重新计算。 |
-| `DISK_ONLY`                                       | 只在磁盘上缓存RDD                                            |
-| `MEMORY_ONLY_2`, <br/>`MEMORY_AND_DISK_2`, etc    | 与上面的对应级别功能相同，但是会为每个分区在集群中的两个节点上建立副本。 |
-| `OFF_HEAP`                                        | 与`MEMORY_ONLY_SER`类似，但将数据存储在堆外内存中。这需要启用堆外内存。 |
+| Storage Level<br/>（存储级别）                 | Meaning（含义）                                              |
+| ---------------------------------------------- | ------------------------------------------------------------ |
+| `MEMORY_ONLY`                                  | 默认的缓存级别，将 RDD以反序列化的Java对象的形式存储在 JVM 中。如果内存空间不够，则部分分区数据将不再缓存。 |
+| `MEMORY_AND_DISK`                              | 将 RDD 以反序列化的Java对象的形式存储JVM中。如果内存空间不够，将未缓存的分区数据存储到磁盘，在需要使用这些分区时从磁盘读取。 |
+| `MEMORY_ONLY_SER`<br/>(仅支持Java和Scala)      | 将 RDD 以序列化的Java对象的形式进行存储（每个分区为一个 byte 数组）。这种方式比反序列化对象节省存储空间，但在读取时会增加CPU的计算负担。 |
+| `MEMORY_AND_DISK_SER`<br/>(仅支持Java和Scala)  | 类似于`MEMORY_ONLY_SER`，但是溢出的分区数据会存储到磁盘，而不是在用到它们时重新计算。 |
+| `DISK_ONLY`                                    | 只在磁盘上缓存RDD                                            |
+| `MEMORY_ONLY_2`, <br/>`MEMORY_AND_DISK_2`, etc | 与上面的对应级别功能相同，但是会为每个分区在集群中的两个节点上建立副本。 |
+| `OFF_HEAP`                                     | 与`MEMORY_ONLY_SER`类似，但将数据存储在堆外内存中。这需要启用堆外内存。 |
 
 > 启动堆外内存需要配置两个参数：
 >
@@ -157,7 +157,7 @@ Spark支持多种缓存级别，见下表：
 
 ### 4.2 使用缓存
 
-缓存数据的方法有两个：`persist`和`cache` 。`cache`内部调用的也是`persist`，其等价于`persist(StorageLevel.MEMORY_ONLY)`。
+缓存数据的方法有两个：`persist`和`cache` 。`cache`内部调用的也是`persist`，其等价于`persist(StorageLevel.MEMORY_ONLY)`。示例如下：
 
 ```scala
 // 所有存储级别均定义在StorageLevel对象中
@@ -183,7 +183,7 @@ Spark会自动监视每个节点上的缓存使用情况，并按照最近最少
 
 ### 5.2 Shuffle的影响
 
-Shuffle是一项昂贵的操作，因为它通常会跨节点操作数据，这会涉及磁盘I/O，网络I/O，和数据序列化。某些Shuffle操作还会消耗大量的堆内存，因为它们使用内存来临时存储需要网络传输的数据。Shuffle还会在磁盘上生成大量中间文件，从Spark 1.3开始，这些文件将被保留，直到相应的RDD不再使用并进行垃圾回收，这样做是为了避免在计算时重复创建Shuffle文件。如果应用程序长期保留对这些RDD的引用，则垃圾回收可能在很长一段时间后才会发生，这意味着长时间运行的Spark作业可能会占用大量磁盘空间，通常可以使用`spark.local.dir`参数指定这些临时文件的存储目录。
+Shuffle是一项昂贵的操作，因为它通常会跨节点操作数据，这会涉及磁盘I/O，网络I/O，和数据序列化。某些Shuffle操作还会消耗大量的堆内存，因为它们使用堆内存来临时存储需要网络传输的数据。Shuffle还会在磁盘上生成大量中间文件，从Spark 1.3开始，这些文件将被保留，直到相应的RDD不再使用并进行垃圾回收，这样做是为了避免在计算时重复创建Shuffle文件。如果应用程序长期保留对这些RDD的引用，则垃圾回收可能在很长一段时间后才会发生，这意味着长时间运行的Spark作业可能会占用大量磁盘空间，通常可以使用`spark.local.dir`参数来指定这些临时文件的存储目录。
 
 ### 5.3 导致Shuffle的操作
 
