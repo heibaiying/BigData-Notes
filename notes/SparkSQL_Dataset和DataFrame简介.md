@@ -58,7 +58,7 @@ DataFrame内部的有明确Scheme结构，即列名、列字段类型都是已�
 
 ### 2.3 DataSet
 
-Dataset也是分布式的数据集合，在Spark 1.6版本被引入，它集成了RDD和DataFrame的优点，具备强类型的特点，同时支持lambda函数，但只能在Scala和Java语言中使用。在Spark 2.0后，为了方便开发者，Spark将DataFrame和Dataset的API融合到一起，提供了结构化的API(Structured API)，即用户可以通过一套标准API完成对两者的操作。
+Dataset也是分布式的数据集合，在Spark 1.6版本被引入，它集成了RDD和DataFrame的优点，具备强类型的特点，同时支持lambda函数，但只能在Scala和Java语言中使用。在Spark 2.0后，为了方便开发者，Spark将DataFrame和Dataset的API融合到一起，提供了结构化的API(Structured API)，即用户可以通过一套标准的API就能完成对两者的操作。
 
 > 这里注意一下：DataFrame被标记为Untyped API，而DataSet被标记为Typed API，后文会对两者做出解释。
 
@@ -86,9 +86,9 @@ Dataset也是分布式的数据集合，在Spark 1.6版本被引入，它集成�
 
 ### 2.5 Untyped & Typed 
 
-在2.3小节，我们介绍过DataFrame API被标记为`Untyped API`，而DataSet API被标记为`Typed API`。DataFrame的`Untyped`是相对于语言或API层面而言，它确实有明确的Scheme结构，即列名，列类型都是确定的，但这些信息完全由Spark来维护，Spark只会在运行时检查这些类型和指定类型是否一致。这也就是为什么在Spark 2.0之后，官方推荐把DataFrame看做是`DatSet[Row]`，Row是spark中定义的一个`trait`，其子类中封装了列字段的信息。
+在上面我们介绍过DataFrame API被标记为`Untyped API`，而DataSet API被标记为`Typed API`。DataFrame的`Untyped`是相对于语言或API层面而言，它确实有明确的Scheme结构，即列名，列类型都是确定的，但这些信息完全由Spark来维护，Spark只会在运行时检查这些类型和指定类型是否一致。这也就是为什么在Spark 2.0之后，官方推荐把DataFrame看做是`DatSet[Row]`，Row是Spark中定义的一个`trait`，其子类中封装了列字段的信息。
 
-相对而言，DataSet是`Typed`的，即强类型。如下面代码，dataSet的类型由case class(Scala)或者Java bean(Java)来明确指定的，在这里即每一行数据代表一个`Person`，这些信息由JVM来保证正确性，所以字段名错误和类型错误在编译的时候就会被IDE所发现。
+相对而言，DataSet是`Typed`的，即强类型。如下面代码，DataSet的类型由Case Class(Scala)或者Java Bean(Java)来明确指定的，在这里即每一行数据代表一个`Person`，这些信息由JVM来保证正确性，所以字段名错误和类型错误在编译的时候就会被IDE所发现。
 
 ```scala
 case class Person(name: String, age: Long)
@@ -121,7 +121,7 @@ DataFrames、DataSets和Spark SQL的实际执行流程都是相同的：
 
 ### 4.1 逻辑计划(Logical Plan)
 
-执行的第一个阶段是将用户代码转换成一个逻辑计划。它首先将用户代码转换成`unresolved logical plan`(未解决的逻辑计划)，之所以这个计划是未解决的，是因为尽管您的代码在语法上是正确的，但是它引用的表或列可能不存在。 Spark使用`analyzer`(分析器)基于`catalog`(存储的所有表和DataFrame信息)进行解析。解析失败则拒绝执行，解析成功则将结果传给`Catalyst`优化器(Catalyst Optimizer)，优化器是一组规则的集合，用于优化逻辑计划，通过谓词下推等方式进行优化，最终输出优化后的逻辑执行计划。
+执行的第一个阶段是将用户代码转换成一个逻辑计划。它首先将用户代码转换成`unresolved logical plan`(未解决的逻辑计划)，之所以这个计划是未解决的，是因为尽管您的代码在语法上是正确的，但是它引用的表或列可能不存在。 Spark使用`analyzer`(分析器)基于`catalog`(存储的所有表和`DataFrames`的信息)进行解析。解析失败则拒绝执行，解析成功则将结果传给`Catalyst`优化器(`Catalyst Optimizer`)，优化器是一组规则的集合，用于优化逻辑计划，通过谓词下推等方式进行优化，最终输出优化后的逻辑执行计划。
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-Logical-Planning.png"/> </div>
 
