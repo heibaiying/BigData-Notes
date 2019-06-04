@@ -156,7 +156,7 @@ Spark支持多种缓存级别 ：
 
 ### 4.2 使用缓存
 
-缓存数据的方法有两个：`persist`和`cache` 。`cache`内部调用的也是`persist`，其等价于`persist(StorageLevel.MEMORY_ONLY)`。示例如下：
+缓存数据的方法有两个：`persist`和`cache` 。`cache`内部调用的也是`persist`，它是`persist`的特殊化形式，等价于`persist(StorageLevel.MEMORY_ONLY)`。示例如下：
 
 ```scala
 // 所有存储级别均定义在StorageLevel对象中
