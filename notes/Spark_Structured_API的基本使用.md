@@ -69,7 +69,7 @@ caseClassDS.show()
 
 ### 1.3 由RDD创建DataFrame
 
-Spark支持两种方式把RDD转换为DataFrame，分别是使用反射推断和指定Schema转换。
+Spark支持两种方式把RDD转换为DataFrame，分别是使用反射推断和指定Schema转换：
 
 #### 1. 使用反射推断
 
