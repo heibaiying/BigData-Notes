@@ -319,7 +319,7 @@ sc.parallelize(list,numSlices = 2).aggregateByKey(zeroValue = 0,numPartitions = 
 (spark,7)
 ```
 
-`aggregateByKey(zeroValue = 0,numPartitions = 3)`的第二个参数`numPartitions `决定的是输出RDD的分区数量，想要验证这个问题，可以对上面代码进行改写，使用`getNumPartitions`方法获取分区数量：
+`aggregateByKey(zeroValue = 0,numPartitions = 3)`的第二个参数`numPartitions`决定的是输出RDD的分区数量，想要验证这个问题，可以对上面代码进行改写，使用`getNumPartitions`方法获取分区数量：
 
 ```scala
 sc.parallelize(list,numSlices = 6).aggregateByKey(zeroValue = 0,numPartitions = 3)(
