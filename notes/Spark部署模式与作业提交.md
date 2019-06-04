@@ -12,7 +12,7 @@
 
 ### 1.1  spark-submit
 
-Spark所有模式均通过使用`spark-submit`提交作业，其命令格式如下：
+Spark所有模式均使用`spark-submit`命令提交作业，其格式如下：
 
 ```shell
 ./bin/spark-submit \
@@ -25,14 +25,14 @@ Spark所有模式均通过使用`spark-submit`提交作业，其命令格式如�
   [application-arguments]       #传递给主入口类的参数  
 ```
 
-需要注意的是：在集群环境下，`application-jar`必须能被集群中所有节点都能访问，可以是HDFS上的路径；也可以是本地文件系统路径，如果是本地文件系统路径，则要求集群中每一个节点上的相同路径都存在该Jar包。
+需要注意的是：在集群环境下，`application-jar`必须能被集群中所有节点都能访问，可以是HDFS上的路径；也可以是本地文件系统路径，如果是本地文件系统路径，则要求集群中每一个机器节点上的相同路径都存在该Jar包。
 
 ### 1.2 deploy-mode
 
 deploy-mode有`cluster`和`client`两个可选参数，默认为`client`。这里以Spark On Yarn模式对两者的区别进行说明 ：
 
-+ 在cluster模式下，Spark Drvier在应用程序Master进程内运行，该进程由群集上的YARN管理，提交作业的客户端可以在启动应用程序后关闭；
-+ 在client模式下，Spark Drvier在提交作业的客户端进程中运行，应用程序Master服务器仅用于从YARN请求资源。
++ 在cluster模式下，Spark Drvier在应用程序的Master进程内运行，该进程由群集上的YARN管理，提交作业的客户端可以在启动应用程序后关闭；
++ 在client模式下，Spark Drvier在提交作业的客户端进程中运行，Master进程仅用于从YARN请求资源。
 
 ### 1.3 master-url
 
@@ -45,12 +45,12 @@ master-url的所有可选参数如下表所示：
 | `local[K,F]`                      | 使用 K 个 worker 线程本地运行 , 第二个参数为Task的失败重试次数 |
 | `local[*]`                        | 使用与CPU核心数一样的线程数在本地运行Spark                   |
 | `local[*,F]`                      | 使用与CPU核心数一样的线程数在本地运行Spark<br/>第二个参数为Task的失败重试次数 |
-| `spark://HOST:PORT`               | 连接至指定的standalone 集群的 master节点。端口号默认是 7077。 |
+| `spark://HOST:PORT`               | 连接至指定的 standalone 集群的 master 节点。端口号默认是 7077。 |
 | `spark://HOST1:PORT1,HOST2:PORT2` | 如果standalone集群采用Zookeeper实现高可用，则必须包含由zookeeper设置的所有master主机地址。 |
 | `mesos://HOST:PORT`               | 连接至给定的Mesos集群。端口默认是 5050。对于使用了 ZooKeeper 的 Mesos cluster 来说，使用 `mesos://zk://...`来指定地址，使用 `--deploy-mode cluster`模式来提交。 |
-| `yarn`                            | 连接至一个YARN 集群，集群由配置的 `HADOOP_CONF_DIR` 或者 `YARN_CONF_DIR` 来决定。使用`--deploy-mode`参数来配置`client` 或`cluster` 模式。 |
+| `yarn`                            | 连接至一个 YARN 集群，集群由配置的 `HADOOP_CONF_DIR` 或者 `YARN_CONF_DIR` 来决定。使用`--deploy-mode`参数来配置`client` 或`cluster` 模式。 |
 
-接下来主要介绍三种常用部署模式的配置及作业的提交。
+下面主要介绍三种常用部署模式及对应的作业提交方式。
 
 ## 二、Local模式
 
@@ -65,7 +65,7 @@ spark-submit \
 100   # 传给SparkPi的参数
 ```
 
-这里的`spark-examples_2.11-2.4.0.jar`在Spark安装包里默认就有，是Spark官方提供的测试用例，`SparkPi`用于计算Pi值，执行成功后可以在输出中看到计算出的Pi值。
+`spark-examples_2.11-2.4.0.jar`是Spark提供的测试用例包，`SparkPi`用于计算Pi值，执行结果如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-pi.png"/> </div>
 
@@ -73,9 +73,7 @@ spark-submit \
 
 ## 三、Standalone模式
 
-Standalone是Spark提供的一种内置的集群模式，采用内置的资源管理器进行管理。
-
-下面按照如图所示演示1个Mater和2个Worker节点的集群配置，这里使用两台主机进行演示：
+Standalone是Spark提供的一种内置的集群模式，采用内置的资源管理器进行管理。下面按照如图所示演示1个Mater和2个Worker节点的集群配置，这里使用两台主机进行演示：
 
 + hadoop001： 由于只有两台主机，所以hadoop001既是Master节点，也是Worker节点;
 + hadoop002 ： Worker节点。
@@ -121,7 +119,7 @@ hadoop002
 
 + 主机名与IP地址的映射必须在`/etc/hosts`文件中已经配置，否则就直接使用IP地址；
 + 每个主机名必须独占一行；
-+ Spark的Master主机是通过ssh访问所有的Worker节点，所以需要预先配置免密登录。或者通过设置环境变量`SPARK_SSH_FOREGROUND`并为每个Worker节点指定密码。
++ Spark的Master主机是通过SSH访问所有的Worker节点，所以需要预先配置免密登录。
 
 ### 3.3 启动
 
@@ -170,9 +168,13 @@ check your cluster UI to ensure that workers are registered and have sufficient 
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-内存不足2.png"/> </div>
 
+<br/>
+
 这时候可以查看Web UI，我这里是内存空间不足：提交命令中要求作业的`executor-memory`是2G，但是实际的工作节点的`Memory`只有1G，这时候你可以修改`--executor-memory`，也可以修改 Woker 的`Memory`，其默认值为主机所有可用内存值减去1G。
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-内存不足.png"/> </div>   
+
+<br/>
 
 关于Master和Woker节点的所有可选配置如下，可以在`spark-env.sh`中进行对应的配置：    
 
@@ -211,7 +213,7 @@ JAVA_HOME=/usr/java/jdk1.8.0_201
 
 ### 3.2 启动
 
-必须要保证Hadoop已经启动，这里包括Yarn和HDFS都需要启动，因为在计算过程中Spark会使用HDFS存储临时文件，如果HDFS没有启动，则会抛出异常。
+必须要保证Hadoop已经启动，这里包括YARN和HDFS都需要启动，因为在计算过程中Spark会使用HDFS存储临时文件，如果HDFS没有启动，则会抛出异常。
 
 ```shell
 # start-yarn.sh
