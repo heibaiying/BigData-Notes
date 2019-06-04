@@ -2,35 +2,18 @@
 
 <nav>
 <a href="#一安装Spark">一、安装Spark</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-下载安装包">1.1 下载安装包</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-解压安装包">1.2 解压安装包</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-配置环境变量">1.3 配置环境变量</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-Local模式">1.4 Local模式</a><br/>
 <a href="#二词频统计案例">二、词频统计案例</a><br/>
 <a href="#三Scala开发环境配置">三、Scala开发环境配置</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-前置条件">2.1 前置条件</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-安装Scala插件">2.2 安装Scala插件</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-创建Scala项目">2.3 创建Scala项目</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-下载Scala-SDK">2.4 下载Scala SDK</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-创建Hello-World">2.5 创建Hello World</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-切换Scala版本">2.6 切换Scala版本</a><br/>
-<a href="#"></a><br/>
 </nav>
-
-
 ## 一、安装Spark
 
-### 1.1 下载安装包
+### 1.1 下载并解压
 
-官网下载地址：http://spark.apache.org/downloads.html
-
-因为Spark常常和Hadoop联合使用，所以下载时候需要选择Spark版本和对应的Hadoop版本后再下载
+官方下载地址：http://spark.apache.org/downloads.html，选择Spark版本和对应的Hadoop版本后再下载：
 
 <div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-download.png"/> </div>
 
-
-
-### 1.2 解压安装包
+解压安装包：
 
 ```shell
 # tar -zxvf  spark-2.2.3-bin-hadoop2.6.tgz
@@ -38,7 +21,7 @@
 
 
 
-### 1.3 配置环境变量
+### 1.2 配置环境变量
 
 ```shell
 # vim /etc/profile
@@ -51,28 +34,30 @@ export SPARK_HOME=/usr/app/spark-2.2.3-bin-hadoop2.6
 export  PATH=${SPARK_HOME}/bin:$PATH
 ```
 
-使得配置的环境变量生效：
+使得配置的环境变量立即生效：
 
 ```shell
 # source /etc/profile
 ```
 
-### 1.4 Local模式
+### 1.3 Local模式
 
 Local 模式是最简单的一种运行方式，它采用单节点多线程(cpu)方式运行，不用部署，开箱即用，适合日常测试开发。
 
 ```shell
-# 启动命令
+# 启动spark-shell
 spark-shell --master local[2]
 ```
 
-- local：只启动一个工作线程；
-- local[k]：启动k个工作线程；
-- local[*]：启动跟cpu数目相同的工作线程数。
+- **local**：只启动一个工作线程；
+- **local[k]**：启动k个工作线程；
+- **local[*]**：启动跟cpu数目相同的工作线程数。
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-shell-local.png"/> </div>
 
-采用这种模式创建后，你会进入Scala交互式命令行，并且程序已经自动创建了SparkContext，即Spark的应用上下文，等效于执行了下面的Scala代码：
+<br/>
+
+进入spark-shell后，程序已经自动创建好了上下文`SparkContext`，等效于执行了下面的Scala代码：
 
 ```scala
 val conf = new SparkConf().setAppName("Spark shell").setMaster("local[2]")
@@ -85,7 +70,7 @@ val sc = new SparkContext(conf)
 
 ## 二、词频统计案例
 
-安装完成后可以先做一个简单的词频统计例子，感受spark的魅力。准备一个词频统计的文件样本wc.txt,内容如下：
+安装完成后可以先做一个简单的词频统计例子，感受spark的魅力。准备一个词频统计的文件样本`wc.txt`，内容如下：
 
 ```txt
 hadoop,spark,hadoop
@@ -101,11 +86,11 @@ val wordCounts = file.flatMap(line => line.split(",")).map((word => (word, 1))).
 wordCounts.collect
 ```
 
-执行过程如下：
+执行过程如下，可以看到已经输出了词频统计的结果：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-shell.png"/> </div>
 
-可以通过spark shell web-ui可以查看作业的执行情况，访问端口为4040
+同时还可以通过Web UI查看作业的执行情况，访问端口为`4040`：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-shell-web-ui.png"/> </div>
 
@@ -117,43 +102,41 @@ wordCounts.collect
 
 Spark是基于Scala语言进行开发的，分别提供了基于Scala、Java、Python语言的API，如果你想使用Scala语言进行开发，则需要搭建Scala语言的开发环境。
 
-### 2.1 前置条件
+### 3.1 前置条件
 
-首先Scala的运行依赖于Java环境，目前最新的Scala 2.12.x要求你必须安装JDK 1.8或以上版本。
+Scala的运行依赖于JDK，所以需要你本机有安装对应版本的JDK，最新的Scala 2.12.x需要JDK 1.8+。
 
-### 2.2 安装Scala插件
+### 3.2 安装Scala插件
 
-首先需要安装Scala插件，使得IDEA支持scala语言的开发。打开 IDEA，依次点击**File** => **settings**=> **plugins**选项卡，搜索Scala插件(如下图)。找到插件后进行安装，并重启IDEA使得安装生效。
+IDEA默认不支持Scala语言的开发，需要通过插件进行扩展。打开 IDEA，依次点击 **File** => **settings**=> **plugins** 选项卡，搜索Scala插件(如下图)。找到插件后进行安装，并重启IDEA使得安装生效。
 
 <div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-plugin.png"/> </div>
 
 
 
-### 2.3 创建Scala项目
+### 3.3 创建Scala项目
 
-在IDEA中依次点击 **File** => **New** => **Project**选项卡，然后选择创建Scala—IDEA工程：
+在IDEA中依次点击 **File** => **New** => **Project** 选项卡，然后选择创建`Scala—IDEA`工程：
 
 <div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-newproject-scala.png"/> </div>
 
 
 
-### 2.4 下载Scala SDK
+### 3.4 下载Scala SDK
 
-#### 1.方式一
+#### 1. 方式一
 
-此时看到Scala SDK为空，依次点击`Create` => `Download` ,选择所需的版本后，点击`OK`按钮进行下载，下载完成点击`Finish`进入工程。
+此时看到`Scala SDK`为空，依次点击`Create` => `Download` ，选择所需的版本后，点击`OK`按钮进行下载，下载完成点击`Finish`进入工程。
 
 <div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-select.png"/> </div>
 
 
 
-#### 2.方式二
+#### 2. 方式二
 
-方式一是Scala官方安装指南里使用的方式，但下载速度可能会比较慢，且这种安装下并没有直接提供Scala命令行工具。所以个人推荐使用方式二进行安装。
+方式一是Scala官方安装指南里使用的方式，但下载速度通常比较慢，且这种安装下并没有直接提供Scala命令行工具。所以个人推荐到官网下载安装包进行安装，下载地址：https://www.scala-lang.org/download/
 
-> 官方下载地址：https://www.scala-lang.org/download/
-
-这里我的系统是Windows，下载msi版本的安装包后，一直点击下一步安装即可，安装完成后会自动配置好环境变量。
+这里我的系统是Windows，下载msi版本的安装包后，一直点击下一步进行安装，安装完成后会自动配置好环境变量。
 
 <div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-other-resources.png"/> </div>
 
@@ -165,9 +148,9 @@ Spark是基于Scala语言进行开发的，分别提供了基于Scala、Java、P
 
 
 
-### 2.5 创建Hello World
+### 3.5 创建Hello World
 
-在工程 `src`目录上右击**New** => **Scala class**.创建`Hello.scala`。输入代码如下，完成后点击运行按钮，成功运行则代表搭建成功。
+在工程 `src`目录上右击 **New** => **Scala class** 创建`Hello.scala`。输入代码如下，完成后点击运行按钮，成功运行则代表搭建成功。
 
 <div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-hello-world.png"/> </div>
 
@@ -175,9 +158,9 @@ Spark是基于Scala语言进行开发的，分别提供了基于Scala、Java、P
 
 
 
-### 2.6 切换Scala版本
+### 3.6 切换Scala版本
 
-在日常的开发中，由于Spark版本的切换，可能导致需要切换Scala版本，此时可以在`Project Structures`中的`Global Libraries`选项卡进行切换。
+在日常的开发中，由于对应软件（如Spark）的版本切换，可能导致需要切换Scala的版本，则可以在`Project Structures`中的`Global Libraries`选项卡中进行切换。
 
 <div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-change.png"/> </div>
 
@@ -185,7 +168,13 @@ Spark是基于Scala语言进行开发的，分别提供了基于Scala、Java、P
 
 
 
+### 3.7 可能出现的问题
+
+在IDEA中有时候重新打开项目后，右击并不会出现新建`scala`文件的选项，或者在编写时没有Scala语法提示，此时可以先删除`Global Libraries`中配置好的SDK，之后再重新添加：
+
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-sdk.png"/> </div>
 
 
 
+**另外在IDEA中以本地模式运行Spark项目是不需要在本机搭建Spark和Hadoop环境的。**
 
