@@ -36,7 +36,7 @@ empDF.createOrReplaceTempView("emp")
 empDF.show()
 ```
 
-> 注：emp.json可以在本仓库的resources目录进行下载。
+> 注：emp.json可以从本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录下载。
 
 ### 1.2 count
 
@@ -173,8 +173,8 @@ spark.sql("SELECT deptno, count(ename) ,sum(sal) FROM emp GROUP BY deptno").show
 
 Scala提供了两种自定义聚合函数的方法，分别如下：
 
-- 有类型的自定义聚合函数，主要适用于DataSets；
-- 无类型的自定义聚合函数，主要适用于DataFrames。
+- 有类型的自定义聚合函数，主要适用于DataSet；
+- 无类型的自定义聚合函数，主要适用于DataFrame。
 
 以下分别使用两种方式来自定义一个求平均值的聚合函数，这里以计算员工平均工资为例。两种自定义方式分别如下：
 
@@ -252,8 +252,8 @@ object SparkSqlApp {
 
 关于`zero`,`reduce`,`merge`,`finish`方法的作用在上图都有说明，这里解释一下中间类型和输出类型的编码转换，这个写法比较固定，基本上就是两种情况：
 
-- 自定义类型case class或者元组就使用`Encoders.product`方法；
-- 基本类型就使用其对应名称的方法，如`scalaByte `，`scalaFloat`，`scalaShort`等。
+- 自定义类型Case Class或者元组就使用`Encoders.product`方法；
+- 基本类型就使用其对应名称的方法，如`scalaByte `，`scalaFloat`，`scalaShort`等，示例如下：
 
 ```scala
 override def bufferEncoder: Encoder[SumAndCount] = Encoders.product
