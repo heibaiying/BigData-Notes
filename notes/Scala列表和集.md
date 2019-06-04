@@ -32,8 +32,8 @@ scala> list(1) = "hive"
 
 Scala中List具有以下两个特性：
 
-+ 同构(homogeneous)：同一个List中的所有元素都必须是相同的类型；
-+ 协变(covariant)：如果S是T的子类型，那么`List[S]`就是`List[T]`的子类型，例如`List[String]`是`List[Object]`的子类型。
++ **同构(homogeneous)**：同一个List中的所有元素都必须是相同的类型；
++ **协变(covariant)**：如果S是T的子类型，那么`List[S]`就是`List[T]`的子类型，例如`List[String]`是`List[Object]`的子类型。
 
 需要特别说明的是空列表的类型为`List[Nothing]`：
 
@@ -127,9 +127,9 @@ res2: scala.collection.immutable.Range = Range(0, 1, 2)
 
 ### 5.3 take & drop & splitAt
 
-- take：获取前n个元素；
-- drop：删除前n个元素；
-- splitAt：从第几个位置开始拆分。
+- **take**：获取前n个元素；
+- **drop**：删除前n个元素；
+- **splitAt**：从第几个位置开始拆分。
 
 ```scala
 scala> list take 2
@@ -168,14 +168,14 @@ res7: (List[String], List[Int]) = (List(hadoop, spark, storm),List(10, 20, 30))
 
 ### 5.6 toString & mkString
 
-toString 返回 list的字符串表现形式。
+toString 返回List的字符串表现形式。
 
 ```scala
 scala> list.toString
 res8: String = List(hadoop, spark, storm)
 ```
 
-如果想改变list的字符串表现形式，可以使用mkString，mkString有三个重载方法：
+如果想改变List的字符串表现形式，可以使用mkString。mkString有三个重载方法，方法定义如下：
 
 ```scala
 // start：前缀  sep：分隔符  end:后缀
@@ -335,7 +335,7 @@ res27: (List[Int], List[Int]) = (List(1, 2, 3),List(-4, 5))
 
 ### 6.3 列表检查：forall & exists
 
-forall检查List中所有元素，如果所有元素都满足条件，则返回true；
+forall检查List中所有元素，如果所有元素都满足条件，则返回true。
 
 ```scala
 scala> List(1, 2, 3, -4, 5) forall ( _ > 0 )

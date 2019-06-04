@@ -60,9 +60,7 @@ object Utils {
 
 ### 2.1 类型上界限定
 
-Scala和Java一样，对于对象之间进行大小比较，要求被比较的对象实现`java.lang.Comparable`接口。
-
-所以如果想对泛型进行比较，需要限定类型上界为`java.lang.Comparable`，语法为` S <: T`,代表类型S是类型T的子类或其本身。示例如下：
+Scala和Java一样，对于对象之间进行大小比较，要求被比较的对象实现`java.lang.Comparable`接口。所以如果想对泛型进行比较，需要限定类型上界为`java.lang.Comparable`，语法为` S <: T`，代表类型S是类型T的子类或其本身。示例如下：
 
 ```scala
 // 使用 <: 符号，限定T必须是Comparable[T]的子类型
@@ -126,7 +124,7 @@ trait Ordered[A] extends Any with java.lang.Comparable[A] {
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-richInt.png"/> </div>
 
-要想解决传入数值无法进行比较的问题，可以使用视图界定。语法为`T <% U`,代表T能够通过隐式转换转为U，即允许Int型参数在无法进行比较的时候转换为RichInt类型。示例如下：
+要想解决传入数值无法进行比较的问题，可以使用视图界定。语法为`T <% U`，代表T能够通过隐式转换转为U，即允许Int型参数在无法进行比较的时候转换为RichInt类型。示例如下：
 
 ```scala
 // 视图界定符号 <%
@@ -147,7 +145,7 @@ class Pair[T <% Comparable[T]](val first: T, val second: T) {
 
 ### 2.3 类型约束
 
-如果你用的Scala是2.11+，会发现IDEA会提示视图界定已被标识为废弃。官方推荐使用类型约束(type constraint)来实现同样的功能，其本质是使用隐式参数进行隐式转换，示例如下：
+如果你用的Scala是2.11+，会发现视图界定已被标识为废弃。官方推荐使用类型约束(type constraint)来实现同样的功能，其本质是使用隐式参数进行隐式转换，示例如下：
 
 ```scala
  // 1.使用隐式参数隐式转换为Comparable[T]
@@ -224,7 +222,7 @@ object ScalaApp extends App {
 }
 ```
 
-Scala针对这个问题，提供了ClassTag上下文界定，即把泛型的信息存储在ClassTag中，这样在运行阶段需要时，只需要从中进行获取即可。其语法为`T : ClassTag`，示例如下：
+Scala针对这个问题，提供了ClassTag上下文界定，即把泛型的信息存储在ClassTag中，这样在运行阶段需要时，只需要从ClassTag中进行获取即可。其语法为`T : ClassTag`，示例如下：
 
 ```scala
 import scala.reflect._
@@ -309,7 +307,7 @@ object ScalaApp extends App {
 
 ### 3.1 Comparable
 
-```scala
+```java
 import java.util.Arrays;
 // 实现Comparable接口
 public class Person implements Comparable<Person> {
@@ -342,7 +340,7 @@ ying:77
 
 ### 3.2 Comparator
 
-```scala
+```java
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -358,7 +356,7 @@ public class Person {
     public static void main(String[] args) {
         Person[] peoples= {new Person("hei", 66), new Person("bai", 55), new Person("ying", 77)};
         // 这里为了直观直接使用匿名内部类,实现Comparator接口
-         //如果是Java8你也可以写成Arrays.sort(peoples, Comparator.comparingInt(o -> o.age));
+        //如果是Java8你也可以写成Arrays.sort(peoples, Comparator.comparingInt(o -> o.age));
         Arrays.sort(peoples, new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {

@@ -20,7 +20,7 @@
 
 ### 1.1 函数与方法
 
-在Scala中，函数与方法的区别非常小，如果函数作为某个对象的成员，这样的函数被称为方法，否则就是一个正常的函数。
+Scala中函数与方法的区别非常小，如果函数作为某个对象的成员，这样的函数被称为方法，否则就是一个正常的函数。
 
 ```scala
 // 定义方法
@@ -32,7 +32,7 @@ println(multi1(3)) //输出 9
 println(multi2(3)) //输出 9
 ```
 
-其实对于定义函数，使用val和def并没有区别，你也可以使用`def`定义函数：
+也可以使用`def`定义函数：
 
 ```scala
 def multi3 = (x: Int) => {x * x}
@@ -52,14 +52,14 @@ multi2: Int => Int = $$Lambda$1092/594363215@1dd1a777
 scala> def multi3 = (x: Int) => {x * x}
 multi3: Int => Int
 
-// 如果有多个参数，则类型（参数类型，参数类型 ...）=>返回值类型
+// 如果有多个参数，则类型为：（参数类型，参数类型 ...）=>返回值类型
 scala> val multi4 = (x: Int,name: String) => {name + x * x }
 multi4: (Int, String) => String = $$Lambda$1093/1039732747@2eb4fe7
 ```
 
 ### 1.3 一等公民&匿名函数
 
-在Scala中函数是一等公民，这意味着不仅可以定义函数并调用它们，还可以用匿名的字面量来编写函数并将它们作为值进行传递：
+在Scala中函数是一等公民，这意味着不仅可以定义函数并调用它们，还可以将它们作为值进行传递：
 
 ```scala
 import scala.math.ceil
@@ -93,7 +93,7 @@ object ScalaApp extends App {
 
 #### 1. 可变长度参数列表
 
-在Java中如果你想要传递可变长度的参数列表，则需要使用`String ...args`这种语法，Scala中等效的语法为`args: String*`。
+在Java中如果你想要传递可变长度的参数，需要使用`String ...args`这种形式，Scala中等效的表达为`args: String*`。
 
 ```scala
 object ScalaApp extends App {
@@ -110,7 +110,7 @@ flink
 
 #### 2. 传递具名参数
 
-向函数传递参数时候可以指定具体的名称。
+向函数传递参数时候可以指定具体的参数名。
 
 ```scala
 object ScalaApp extends App {
@@ -127,7 +127,7 @@ object ScalaApp extends App {
 
 #### 3. 默认值参数
 
-可以为函数的参数指定默认值。
+在定义函数时，可以为参数指定默认值。
 
 ```scala
 object ScalaApp extends App {
@@ -163,7 +163,7 @@ val addMore = (x: Int) => x + more
 这里需要注意的是，闭包捕获的是变量本身，即是对变量本身的引用，这意味着：
 
 + 闭包外部对自由变量的修改，在闭包内部是可见的；
-+ 闭包内部对自由变量的修改，在闭包外部也是可见的；
++ 闭包内部对自由变量的修改，在闭包外部也是可见的。
 
 ```scala
 // 声明more变量
@@ -239,7 +239,7 @@ object ScalaApp extends App {
     x * x
   }
 
-  // 2.定义高阶函数: 第一个参数是类型为Int => Int的函数,第二个参数为Int类型的值
+  // 2.定义高阶函数: 第一个参数是类型为Int => Int的函数
   def multi(fun: Int => Int, x: Int) = {
     fun(x) * 100
   }
@@ -267,8 +267,8 @@ object ScalaApp extends App {
 
 这里当你调用curriedSum时候，实际上是连着做了两次传统的函数调用，实际执行的柯里化过程如下：
 
-+ 第一次调用接收一个名为x的int参数，返回一个用于第二次调用的函数，假设x为2，则返回函数`2+y`；
-+ 返回的函数接收Int参数y，并计算并返回值`2+3`的值。
++ 第一次调用接收一个名为`x`的Int型参数，返回一个用于第二次调用的函数，假设`x`为2，则返回函数`2+y`；
++ 返回的函数接收参数`y`，并计算并返回值`2+3`的值。
 
 想要获得柯里化的中间返回的函数其实也比较简单：
 

@@ -32,7 +32,7 @@ Scala中继承关系如下图：
 
 ### 1.2 extends & override
 
-Scala的集成机制和Java有很多相似之处，比如都使用`extends`关键字表示继承，都使用`override`关键字表示重写父类的方法或成员变量。下面给出一个Scala继承的示例：
+Scala的集成机制和Java有很多相似之处，比如都使用`extends`关键字表示继承，都使用`override`关键字表示重写父类的方法或成员变量。示例如下：
 
 ```scala
 //父类
@@ -102,7 +102,7 @@ class Employee(name:String,age:Int,salary:Double) extends Person(name:String,age
 
 ### 1.4 类型检查和转换
 
-想要实现类检查可以使用`isInstanceOf`,判断一个实例是否来源于某个类或者其子类，如果是，则可以使用`asInstanceOf`进行强制类型转换。
+想要实现类检查可以使用`isInstanceOf`，判断一个实例是否来源于某个类或者其子类，如果是，则可以使用`asInstanceOf`进行强制类型转换。
 
 ```scala
 object ScalaApp extends App {
@@ -208,7 +208,7 @@ class Employee extends {
 
 但是这种语法也有其限制：你只能在上面代码块中重写已有的变量，而不能定义新的变量和方法，定义新的变量和方法只能写在下面代码块中。
 
->**注意事项**：不仅是类的继承存在这个问题，后文介绍的特质(trait)的继承也存在这个问题，也同样可以通过提前定义来解决。即便可以通过多种方法解决该问题，但还是建议合理设计继承以规避此类问题。
+>**注意事项**：类的继承和下文特质(trait)的继承都存在这个问题，也同样可以通过提前定义来解决。虽然如此，但还是建议合理设计以规避该类问题。
 
 <br/>
 
@@ -270,7 +270,7 @@ trait Logger {
 }
 ```
 
-想要使用特质，需要使用`extends`关键字,而不是`implements`关键字，如果想要添加多个特质，可以使用`with`关键字。
+想要使用特质，需要使用`extends`关键字，而不是`implements`关键字，如果想要添加多个特质，可以使用`with`关键字。
 
 ```scala
 // 1.使用extends关键字,而不是implements,如果想要添加多个特质，可以使用with关键字
@@ -310,7 +310,7 @@ class InfoLogger extends Logger {
 
 ### 3.3 带有特质的对象
 
-Scala支持在类定义的时混入`父类trait`，而在类实例化为具体对象的时候指明其实际使用的`子类trait`。下面给出一个示例：
+Scala支持在类定义的时混入`父类trait`，而在类实例化为具体对象的时候指明其实际使用的`子类trait`。示例如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala带有特质的对象.png"/> </div>
 
@@ -388,9 +388,9 @@ object ScalaApp extends App {
 class Employee extends Person with InfoLogger with ErrorLogger {...}
 ```
 
-1. 超类首先被构造(Person构造器执行)；
+1. 超类首先被构造，即Person的构造器首先被执行；
 2. 特质的构造器在超类构造器之前，在类构造器之后；特质由左到右被构造；每个特质中，父特质首先被构造；
-   + Logger构造器执行(Logger是InfoLogger的父类)；
+   + Logger构造器执行（Logger是InfoLogger的父类）；
    + InfoLogger构造器执行；
    + ErrorLogger构造器执行;
 3. 所有超类和特质构造完毕，子类才会被构造。

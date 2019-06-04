@@ -170,7 +170,7 @@ TODO
 7. [常用集合类型之——Map & Tuple](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala映射和元组.md)
 8. [类和对象](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala类和对象.md)
 9. [继承和特质](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala继承和特质.md)
-10. [函数和闭包](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala函数和闭包.md)
+10. [函数 & 闭包 & 柯里化](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala函数和闭包.md)
 11. [模式匹配](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala模式匹配.md)
 12. [类型参数](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala类型参数.md)
 13. [隐式转换和隐式参数](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Scala隐式转换和隐式参数.md)

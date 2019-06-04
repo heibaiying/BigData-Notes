@@ -98,18 +98,18 @@ object ScalaApp extends App {
 
 ### 1.4 提取器
 
-数组、列表和元组能使用模式匹配，都是依靠提取器(extractor)机制，它们伴生对象中定义unapply或unapplySeq方法：
+数组、列表和元组能使用模式匹配，都是依靠提取器(extractor)机制，它们伴生对象中定义了`unapply`或`unapplySeq`方法：
 
-+ unapply方法用于提取固定数量的对象；
-+ unapplySeq用于提取一个序列；
++ **unapply**：用于提取固定数量的对象；
++ **unapplySeq**：用于提取一个序列；
 
-以下是`Array.scala`类源码中定义的`unapplySeq`方法：
+这里以数组为例，`Array.scala`定义了`unapplySeq`方法：
 
 ```scala
 def unapplySeq[T](x : scala.Array[T]) : scala.Option[scala.IndexedSeq[T]] = { /* compiled code */ }
 ```
 
-`unapplySeq`返回一个序列值，即数组中的值，以和模式匹配case语句中的表达式进行对应位置的值匹配。
+`unapplySeq`返回一个序列，包含数组中的所有值，这样在模式匹配时，才能知道对应位置上的值。
 
 
 
@@ -138,7 +138,7 @@ case class Student(name: String, age: Int) extends Person {}
 
 - 构造器中每个参数都默认为`val`；
 - 自动地生成`equals, hashCode, toString, copy`等方法；
-- 伴生对象中自动生成`apply`方法，使得不用new关键字就能构造出相应的对象；
+- 伴生对象中自动生成`apply`方法，使得可以不用new关键字就能构造出相应的对象；
 - 伴生对象中自动生成`unapply`方法，以支持模式匹配。
 
 除了上面的特征外，样例类和其他类相同，可以任意添加方法和字段，扩展它们。

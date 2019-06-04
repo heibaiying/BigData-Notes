@@ -17,7 +17,7 @@
 
 ## 一、初识类和对象
 
-Scala中的类与Java中的类具有非常多的相似性，这里为了有个直观上的印象，首先给出一个类的示例。
+Scala的类与Java的类具有非常多的相似性，示例如下：
 
 ```scala
 // 1. 在scala中，类不需要用public声明,所有的类都具有公共的可见性
@@ -26,11 +26,11 @@ class Person {
   // 2. 声明私有变量,用var修饰的变量默认拥有getter/setter属性
   private var age = 0
 
-  // 3.如果声明的变量不需要进行初始赋值，此时scala无法进行类型推荐，需要显式指明类型
+  // 3.如果声明的变量不需要进行初始赋值，此时Scala就无法进行类型推断，所以需要显式指明类型
   private var name: String = _
 
 
-  // 4. 定义方法,应该指明传参类型和返回值的类型
+  // 4. 定义方法,应指明传参类型。返回值类型不是必须的，Scala可以自动推断出来，但是为了方便调用者，建议指明
   def growUp(step: Int): Unit = {
     age += step
   }
@@ -58,7 +58,7 @@ class Person {
 object Person {
 
   def main(args: Array[String]): Unit = {
-    // 8.创建类的实例对象
+    // 8.创建类的实例
     val counter = new Person()
     // 9.用var修饰的变量默认拥有getter/setter属性，可以直接对其进行赋值
     counter.age = 12
@@ -120,8 +120,8 @@ object Person {
 >
 > ```scala
 > class Person {
->   var name = ""
->   private var age = ""
+> var name = ""
+> private var age = ""
 > }
 > ```
 >
@@ -132,21 +132,21 @@ object Person {
 > > javap -private Person
 > ```
 >
-> 编译结果如下，从编译结果可以看到实际的get和set的方法名，同时也验证了成员变量默认的可见性为public。
+> 编译结果如下，从编译结果可以看到实际的get和set的方法名(因为JVM不允许在方法名中出现＝，所以它被翻译成$eq)，同时也验证了成员变量默认的可见性为public。
 >
 > ```java
 > Compiled from "Person.scala"
 > public class Person {
->   private java.lang.String name;
->   private java.lang.String age;
->     
->   public java.lang.String name();
->   public void name_$eq(java.lang.String);
->     
->   private java.lang.String age();
->   private void age_$eq(java.lang.String);
->     
->   public Person();
+> private java.lang.String name;
+> private java.lang.String age;
+>  
+> public java.lang.String name();
+> public void name_$eq(java.lang.String);
+>  
+> private java.lang.String age();
+> private void age_$eq(java.lang.String);
+>  
+> public Person();
 > }
 > ```
 
@@ -172,7 +172,7 @@ object Person {
 
 ### 2.4 主构造器
 
-和Java不同的是，Scala类的主构造器直接写在类名后面，同时需要注意以下两点：
+和Java不同的是，Scala类的主构造器直接写在类名后面，但注意以下两点：
 
 + 主构造器传入的参数默认就是val类型的，即不可变，你没有办法在内部改变传参；
 + 写在主构造器中的代码块会在类初始化的时候被执行，功能类似于Java的静态代码块`static{}`
@@ -206,7 +206,7 @@ heibaiying:20
 
 辅助构造器有两点硬性要求：
 
-+ 辅助构造器的名称必须为this;
++ 辅助构造器的名称必须为this；
 + 每个辅助构造器必须以主构造器或其他的辅助构造器的调用开始。
 
 ```scala
@@ -236,7 +236,7 @@ object Person {
 
 ### 2.6 方法传参不可变
 
-在Scala中，方法传参默认是val类型，即不可变，这意味着你在方法体内部不能改变传入的参数。这和scala的设计理念有关，Scala遵循函数式编程理念，强调方法不应该有副作用。
+在Scala中，方法传参默认是val类型，即不可变，这意味着你在方法体内部不能改变传入的参数。这和Scala的设计理念有关，Scala遵循函数式编程理念，强调方法不应该有副作用。
 
 ```scala
 class Person() {
@@ -378,16 +378,19 @@ object Color extends Enumeration {
 使用枚举类：
 
 ```scala
+// 1.使用类型别名导入枚举类
+import com.heibaiying.Color.Color
+
 object ScalaApp extends App {
 
-  // 1.使用枚举类型,这种情况下需要导入枚举类，在枚举类中定义的类型别名就有用了
+  // 2.使用枚举类型,这种情况下需要导入枚举类
   def printColor(color: Color): Unit = {
     println(color.toString)
   }
 
-  // 2.判断传入值和枚举值是否相等
+  // 3.判断传入值和枚举值是否相等
   println(Color.YELLOW.toString == "yellow")
-  // 3.遍历枚举类和值
+  // 4.遍历枚举类和值
   for (c <- Color.values) println(c.id + ":" + c.toString)
 }
 

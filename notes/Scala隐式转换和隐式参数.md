@@ -129,7 +129,7 @@ This is Class B
 
 上面我们使用的方法相当于直接定义在执行代码的作用域中，下面分别给出其他两种定义的代码示例：
 
-定义在原类型的伴生对象中：
+**定义在原类型的伴生对象中**：
 
 ```scala
 class Person(val name: String)
@@ -154,7 +154,7 @@ object ScalaApp extends App {
 }
 ```
 
-定义在一个公共的对象中：
+**定义在一个公共的对象中**：
 
 ```scala
 object Convert {
@@ -167,12 +167,11 @@ object Convert {
 import com.heibaiying.Convert._
 
 object ScalaApp extends App {
-  // 这样普通人也能举起雷神之锤
   new Person("普通人").hammer()
 }
 ```
 
-> 注：Scala中隐式转换函数大部分定义在`Predef.scala`中，你可以打开源文件查看，也可以在Scala交互式命令行中采用`:implicit -v`查看全部隐式转换函数。
+> 注：Scala自身的隐式转换函数大部分定义在`Predef.scala`中，你可以打开源文件查看，也可以在Scala交互式命令行中采用`:implicit -v`查看全部隐式转换函数。
 
 <br/>
 
@@ -180,7 +179,7 @@ object ScalaApp extends App {
 
 ### 2.1 使用隐式参数
 
-函数或方法可以带有一个标记为`implicit`的参数列表，这种情况下，编译器将会查找默认值，提供给函数调用。
+在定义函数或方法时可以使用标记为`implicit`的参数，这种情况下，编译器将会查找默认值，提供给函数调用。
 
 ```scala
 // 定义分隔符类
@@ -204,7 +203,7 @@ object ScalaApp extends App {
 1.我们上面定义`formatted`函数的时候使用了柯里化，如果你不使用柯里化表达式，按照通常习惯只有下面两种写法：
 
 ```scala
-//这种写法没有语法错误，但是无法通过编译
+// 这种写法没有语法错误，但是无法通过编译
 def formatted(implicit context: String, deli: Delimiters): Unit = {
   println(deli.left + context + deli.right)
 } 
@@ -243,7 +242,7 @@ formatted("this is context")
 
 我们上面示例程序相当于直接定义执行代码的上下文作用域中，下面给出其他两种方式的示例：
 
-定义在隐式参数对应类的伴生对象中；
+**定义在隐式参数对应类的伴生对象中**；
 
 ```scala
 class Delimiters(val left: String, val right: String)
@@ -264,7 +263,7 @@ object ScalaApp extends App {
 }
 ```
 
-统一定义在一个文件中，在使用时候导入：
+**统一定义在一个文件中，在使用时候导入**：
 
 ```scala
 object Convert {
@@ -292,9 +291,7 @@ object ScalaApp extends App {
 def smaller[T] (a: T, b: T) = if (a < b) a else b
 ```
 
-在Scala中如果定义了一个如上所示的比较对象大小的泛型方法，你会发现无法通过编译。对于对象之间进行大小比较，Scala和Java一样，都要求被比较的对象需要实现java.lang.Comparable接口。
-
-在Scala中，直接继承Java中Comparable接口的是特质Ordered，它在继承compareTo方法的基础上，额外定义了关系符方法，源码如下:
+在Scala中如果定义了一个如上所示的比较对象大小的泛型方法，你会发现无法通过编译。对于对象之间进行大小比较，Scala和Java一样，都要求被比较的对象需要实现java.lang.Comparable接口。在Scala中，直接继承Java中Comparable接口的是特质Ordered，它在继承compareTo方法的基础上，额外定义了关系符方法，源码如下:
 
 ```scala
 trait Ordered[A] extends Any with java.lang.Comparable[A] {
@@ -336,7 +333,7 @@ object Pair extends App {
 
 #### 2. 利用隐式参数进行隐式转换
 
-在Scala2.11+后，视图界定被标识为废弃，官方推荐使用类型限定来解决上面的问题，本质上就是使用隐式参数进行隐式转换。
+Scala2.11+后，视图界定被标识为废弃，官方推荐使用类型限定来解决上面的问题，本质上就是使用隐式参数进行隐式转换。
 
 ```scala
 object Pair extends App {
