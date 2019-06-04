@@ -209,7 +209,7 @@ sudo systemctl stop firewalld.service
 
 ```shell
 # 如果没有mapred-site.xml，则拷贝一份样例文件后再修改
-cp ./mapred-site.xml.template ./mapred-site.xml
+cp mapred-site.xml.template mapred-site.xml
 ```
 
 ```xml
