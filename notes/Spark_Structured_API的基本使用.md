@@ -12,7 +12,7 @@
 
 ### 1.1 创建DataFrame
 
-Spark中所有功能的入口点是`SparkSession`，可以使用`SparkSession.builder()`创建。创建后应用程序就可以从现有RDD，Hive表或Spark数据源创建DataFrame。如下所示：
+Spark中所有功能的入口点是`SparkSession`，可以使用`SparkSession.builder()`创建。创建后应用程序就可以从现有RDD，Hive表或Spark数据源创建DataFrame。示例如下：
 
 ```scala
 val spark = SparkSession.builder().appName("Spark-SQL").master("local[2]").getOrCreate()
@@ -31,7 +31,7 @@ import spark.implicits._
 
 ### 1.2 创建Dataset
 
-Spark支持由内部数据集和外部数据集来创建DataSets，其创建方式分别如下：
+Spark支持由内部数据集和外部数据集来创建DataSet，其创建方式分别如下：
 
 ####  1. 由外部数据集创建
 
@@ -69,7 +69,7 @@ caseClassDS.show()
 
 ### 1.3 由RDD创建DataFrame
 
-Spark支持两种方式把RDD转换为DataFrames，分别是使用反射推断和指定schema转换。
+Spark支持两种方式把RDD转换为DataFrame，分别是使用反射推断和指定Schema转换。
 
 #### 1. 使用反射推断
 
@@ -117,7 +117,7 @@ deptDF.show()
 
 ### 1.4  DataFrames与Datasets互相转换
 
-Spark提供了非常简单的转换方法用于DataFrames与Datasets互相转换，示例如下：
+Spark提供了非常简单的转换方法用于DataFrame与Dataset间的互相转换，示例如下：
 
 ```shell
 # DataFrames转Datasets
@@ -227,7 +227,7 @@ spark.sql("SELECT deptno,count(ename) FROM emp group by deptno").show()
 
 上面使用`createOrReplaceTempView`创建的是会话临时视图，它的生命周期仅限于会话范围，会随会话的结束而结束。
 
-你也可以使用`createGlobalTempView`创建全局临时视图，全局临时视图可以在所有会话之间共享，并直到整个Spark应用程序终止才会消失。全局临时视图被定义在内置的`global_temp`数据库下，需要使用限定名称进行引用，如`SELECT * FROM global_temp.view1`。
+你也可以使用`createGlobalTempView`创建全局临时视图，全局临时视图可以在所有会话之间共享，并直到整个Spark应用程序终止后才会消失。全局临时视图被定义在内置的`global_temp`数据库下，需要使用限定名称进行引用，如`SELECT * FROM global_temp.view1`。
 
 ```scala
 // 注册为全局临时视图
