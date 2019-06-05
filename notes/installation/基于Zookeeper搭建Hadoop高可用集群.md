@@ -51,15 +51,10 @@ NameNode 实现主备切换的流程下图所示：
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-namenode主备切换.png"/> </div>
 
 1. HealthMonitor 初始化完成之后会启动内部的线程来定时调用对应 NameNode 的 HAServiceProtocol RPC 接口的方法，对 NameNode 的健康状态进行检测。
-
 2. HealthMonitor 如果检测到 NameNode 的健康状态发生变化，会回调 ZKFailoverController 注册的相应方法进行处理。
-
 3. 如果 ZKFailoverController 判断需要进行主备切换，会首先使用 ActiveStandbyElector 来进行自动的主备选举。
-
 4. ActiveStandbyElector 与 Zookeeper 进行交互完成自动的主备选举。
-
 5. ActiveStandbyElector 在主备选举完成后，会回调 ZKFailoverController 的相应方法来通知当前的 NameNode 成为主 NameNode 或备 NameNode。
-
 6. ZKFailoverController 调用对应 NameNode 的 HAServiceProtocol RPC 接口的方法将 NameNode 转换为 Active 状态或 Standby 状态。
 
    
@@ -85,7 +80,6 @@ YARN ResourceManager 的高可用与 HDFS NameNode 的高可用类似，但是 R
 
 + 所有服务器都安装有JDK，安装步骤可以参见：[Linux下JDK的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/JDK%E5%AE%89%E8%A3%85.md)；
 + 搭建好ZooKeeper集群，搭建步骤可以参见：[Zookeeper单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper单机环境和集群环境搭建.md)
-
 + 所有服务器之间都配置好SSH免密登录。
 
 
