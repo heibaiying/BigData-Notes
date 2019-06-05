@@ -56,6 +56,7 @@
 5. [Hadoop集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop集群环境搭建.md)
 6. [HDFS常用Shell命令](https://github.com/heibaiying/BigData-Notes/blob/master/notes/HDFS常用Shell命令.md)
 7. [HDFS Java API的使用](https://github.com/heibaiying/BigData-Notes/blob/master/notes/HDFS-Java-API.md)
+8. [基于Zookeeper搭建Hadoop高可用集群](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/基于Zookeeper搭建Hadoop高可用集群.md)
 
 ## 二、Hive
 
