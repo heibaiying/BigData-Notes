@@ -70,7 +70,7 @@ YARN ResourceManager 的高可用与 HDFS NameNode 的高可用类似，但是 R
 
 ## 二、集群规划
 
-按照高可用的设计目标：需要保证至少有两个 NameNode (一主一备)  和 两个 ResourceManager (一主一备)  ，同时为满足“半写入则成功”的原则，需要至少要有3个 JournalNode 节点。这里使用三台主机进行搭建，集群规划如下：
+按照高可用的设计目标：需要保证至少有两个 NameNode (一主一备)  和 两个 ResourceManager (一主一备)  ，同时为满足“过半写入则成功”的原则，需要至少要有3个 JournalNode 节点。这里使用三台主机进行搭建，集群规划如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop高可用集群规划.png"/> </div>
 
