@@ -381,7 +381,7 @@ hdfs namenode -format
 
 ### 5.4 初始化HA状态
 
-在任意一台`NameNode`上使用以下命令来初始化ZooKeeper中HA状态。
+在任意一台`NameNode`上使用以下命令来初始化ZooKeeper中的HA状态：
 
 ```shell
 hdfs zkfc -formatZK
@@ -397,7 +397,7 @@ start-dfs.sh
 
 ### 5.6 启动YARN
 
-进入到`hadoop002`的`${HADOOP_HOME}/sbin`目录下，启动YARN。此时`hadoop002`上的`ResourceManager`服务，和三台服务器上的`NodeManager`服务都会被启动。
+进入到`hadoop002`的`${HADOOP_HOME}/sbin`目录下，启动YARN。此时`hadoop002`上的`ResourceManager`服务，和三台服务器上的`NodeManager`服务都会被启动：
 
 ```SHEll
 start-yarn.sh
