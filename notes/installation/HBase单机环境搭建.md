@@ -123,9 +123,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 HBase的版本必须要与Hadoop的版本兼容，不然会出现各种Jar包冲突。这里我Hadoop安装的版本为`hadoop-2.6.0-cdh5.15.2`，为保持版本一致，选择的HBase版本为`hbase-1.2.0-cdh5.15.2` 。所有软件版本如下：
 
 + Hadoop 版本： hadoop-2.6.0-cdh5.15.2
-
 + HBase 版本： hbase-1.2.0-cdh5.15.2
-
 + JDK 版本：JDK 1.8
 
 
