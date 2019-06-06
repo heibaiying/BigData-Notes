@@ -54,7 +54,7 @@ Apache Flume是一个分布式，高可用的数据收集系统。它可以从�
 
 **5. Agent**
 
-是一个独立的(JVM)进程，包含组件`Source`、 `Channel`、 `Sink`等组件。
+是一个独立的(JVM)进程，包含`Source`、 `Channel`、 `Sink`等组件。
 
 
 
