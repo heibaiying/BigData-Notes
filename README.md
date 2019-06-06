@@ -40,12 +40,13 @@
       <td align="center"><a href="#十二scala">Scala</a></td>
     </tr>
   </table>
+<br/>
 
+## 前言
 
+[大数据技术栈思维导图](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据技术栈思维导图.md)
 
-> 为方便查阅，所有软件的安装步骤统一整理至：[大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据常用软件安装指南.md)
-
-
+[大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据常用软件安装指南.md)
 
 ## 一、Hadoop
 
