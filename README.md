@@ -42,9 +42,9 @@
   </table>
 <br/>
 
-## 前言
+## :black_nib: 前  言
 
-1. [大数据技术栈思维导图](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据技术栈思维导图.md)
+1. [大数据技术栈思维导图](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据技术栈思维导图.md)        
 2. [大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据常用软件安装指南.md)
 
 ## 一、Hadoop
@@ -183,6 +183,6 @@ TODO
 
 <br>
 
-## :bookmark_tabs: 后记
+## :bookmark_tabs: 后  记
 
 [资料分享与工具推荐](https://github.com/heibaiying/BigData-Notes/blob/master/notes/资料分享与工具推荐.md)
