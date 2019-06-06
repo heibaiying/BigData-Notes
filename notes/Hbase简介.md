@@ -54,7 +54,7 @@ HBase是一个面向`列`的数据库管理系统，这里更为确切的而说�
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HBase_table-iteblog.png"/> </div>
 
-> 图片引用自博客：HBase 是列式存储数据库吗（https://www.iteblog.com/archives/2498.html ）
+> *图片引用自：HBase是列式存储数据库吗 https://www.iteblog.com/archives/2498.html *
 
 Hbase的表具有以下特点：
 
