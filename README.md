@@ -4,9 +4,9 @@
 
 <div align="center"> <img width="470px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/bigdata-notes-icon.png"/> </div>
 
+<br/>
 
-
-> Java 程序员的大数据学习之路（2019） — — 持续更新中
+> Java 程序员的大数据学习之路（2019） — —  持续更新中
 
 
 
