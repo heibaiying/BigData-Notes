@@ -185,4 +185,4 @@ TODO
 
 ## :bookmark_tabs: 后  记
 
-[资料分享与工具推荐](https://github.com/heibaiying/BigData-Notes/blob/master/notes/资料分享与工具推荐.md)
+[资料分享与开发工具推荐](https://github.com/heibaiying/BigData-Notes/blob/master/notes/资料分享与工具推荐.md)
