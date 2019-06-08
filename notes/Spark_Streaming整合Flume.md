@@ -1,4 +1,4 @@
-# Spark Straming 整合 Flume
+# Spark Streaming 整合 Flume
 
 <nav>
 <a href="#一简介">一、简介</a><br/>
