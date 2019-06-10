@@ -98,6 +98,6 @@ Scala中所有的集合都直接或者间接实现了`Iterable`特质，`Iterabl
 
 ## 参考资料
 
-3. https://docs.scala-lang.org/overviews/collections/overview.html
-4. https://docs.scala-lang.org/overviews/collections/trait-traversable.html
-5. https://docs.scala-lang.org/overviews/collections/trait-iterable.html
+1. https://docs.scala-lang.org/overviews/collections/overview.html
+2. https://docs.scala-lang.org/overviews/collections/trait-traversable.html
+3. https://docs.scala-lang.org/overviews/collections/trait-iterable.html
