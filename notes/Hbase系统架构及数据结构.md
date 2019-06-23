@@ -2,12 +2,12 @@
 
 <nav>
 <a href="#一基本概念">一、基本概念</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-Row-Key-行键">2.1 Row Key (行键)</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-Column-Family列族">2.2 Column Family（列族）</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-Column-Qualifier-列限定符">2.3 Column Qualifier (列限定符)</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-Column列">2.4 Column(列)</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-Cell">2.5 Cell</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-Timestamp时间戳">2.6 Timestamp(时间戳)</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#11-Row-Key-行键">1.1 Row Key (行键)</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-Column-Family列族">1.2 Column Family（列族）</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13-Column-Qualifier-列限定符">1.3 Column Qualifier (列限定符)</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#14-Column列">1.4 Column(列)</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#15-Cell">1.5 Cell</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#16-Timestamp时间戳">1.6 Timestamp(时间戳)</a><br/>
 <a href="#二存储结构">二、存储结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-Regions">2.1 Regions</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-Region-Server">2.2 Region Server</a><br/>
@@ -25,7 +25,7 @@
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-webtable.png"/> </div>
 
-### 2.1 Row Key (行键)
+### 1.1 Row Key (行键)
 
 `Row Key`是用来检索记录的主键。想要访问HBase Table中的数据，只有以下三种方式：
 
@@ -43,31 +43,31 @@
 
 
 
-### 2.2 Column Family（列族）
+### 1.2 Column Family（列族）
 
 HBase表中的每个列，都归属于某个列族。列族是表的Schema的一部分，所以列族需要在创建表时进行定义。列族的所有列都以列族名作为前缀，例如`courses:history`，`courses:math`都属于`courses`这个列族。
 
 
 
-### 2.3 Column Qualifier (列限定符)
+### 1.3 Column Qualifier (列限定符)
 
 列限定符，你可以理解为是具体的列名，例如`courses:history`，`courses:math`都属于`courses`这个列族，它们的列限定符分别是`history`和`math`。需要注意的是列限定符不是表Schema的一部分，你可以在插入数据的过程中动态创建列。
 
 
 
-### 2.4 Column(列)
+### 1.4 Column(列)
 
 HBase中的列由列族和列限定符组成，它们由`:`(冒号)进行分隔，即一个完整的列名应该表述为`列族名 ：列限定符`。
 
 
 
-### 2.5 Cell
+### 1.5 Cell
 
 `Cell`是行，列族和列限定符的组合，并包含值和时间戳。你可以等价理解为关系型数据库中由指定行和指定列确定的一个单元格，但不同的是HBase中的一个单元格是由多个版本的数据组成的，每个版本的数据用时间戳进行区分。
 
 
 
-### 2.6 Timestamp(时间戳)
+### 1.6 Timestamp(时间戳)
 
 HBase 中通过`row key`和`column`确定的为一个存储单元称为`Cell`。每个`Cell`都保存着同一份数据的多个版本。版本通过时间戳来索引，时间戳的类型是 64位整型，时间戳可以由HBase在数据写入时自动赋值，也可以由客户显式指定。每个`Cell`中，不同版本的数据按照时间戳倒序排列，即最新的数据排在最前面。
 
