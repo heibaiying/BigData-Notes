@@ -139,16 +139,17 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
 #### 4. yarn-site.xml
 
 ```xml
-<property>
-    <!--配置NodeManager上运行的附属服务。需要配置成mapreduce_shuffle后才可以在Yarn上运行MapReduce程序。-->
-    <name>yarn.nodemanager.aux-services</name>
-    <value>mapreduce_shuffle</value>
-</property>
-<property>
-    <!--resourcemanager的主机名-->
-    <name>yarn.resourcemanager.hostname</name>
-    <value>hadoop001</value>
-</property>
+<configuration>
+    <property>
+        <!--配置NodeManager上运行的附属服务。需要配置成mapreduce_shuffle后才可以在Yarn上运行MapReduce程序。-->
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <!--resourcemanager的主机名-->
+        <name>yarn.resourcemanager.hostname</name>
+        <value>hadoop001</value>
+    </property>
 </configuration>
 
 ```
