@@ -3,7 +3,6 @@
 
 
 <div align="center"> <img width="470px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/bigdata-notes-icon.png"/> </div>
-
 <br/>
 
 > 大数据入门指南（2019） — —  持续更新中
@@ -44,8 +43,9 @@
 
 ## :black_nib: 前  言
 
-1. [大数据技术栈思维导图](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据技术栈思维导图.md)        
-2. [大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据常用软件安装指南.md)
+1. [大数据学习路线](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据学习路线.md)
+2. [大数据技术栈思维导图](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据技术栈思维导图.md)        
+3. [大数据常用软件安装指南](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据常用软件安装指南.md)
 
 ## 一、Hadoop
 
