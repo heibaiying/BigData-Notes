@@ -63,7 +63,6 @@ storm storm flink azkaban
 此时控制台输出如下，可以看到已经接收到数据并按行进行了词频统计。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-word-count-v1.png"/> </div>
-
 <br/>
 
 下面针对示例代码进行讲解：
@@ -92,7 +91,7 @@ streamingContext.fileStream[KeyClass, ValueClass, InputFormatClass](dataDirector
 
 被监听的目录可以是具体目录，如 `hdfs://host:8040/logs/`；也可以使用通配符，如 `hdfs://host:8040/logs/2017/*`。
 
-> 关于高级数据源的整合单独整理至：[Spark Streaming 整合 Flume](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Streaming 整合 Flume.md) 和 [Spark Streaming 整合 Kafka](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Streaming 整合 Kafka.md)
+> 关于高级数据源的整合单独整理至：[Spark Streaming 整合 Flume](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Streaming整合Flume.md) 和 [Spark Streaming 整合 Kafka](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spark_Streaming整合Kafka.md)
 
 ### 3.3 服务的启动与停止
 
@@ -107,7 +106,6 @@ streamingContext.fileStream[KeyClass, ValueClass, InputFormatClass](dataDirector
 DStream 是 Spark Streaming 提供的基本抽象。它表示连续的数据流。在内部，DStream 由一系列连续的 RDD 表示。所以从本质上而言，应用于 DStream 的任何操作都会转换为底层 RDD 上的操作。例如，在示例代码中 flatMap 算子的操作实际上是作用在每个 RDDs 上 (如下图)。因为这个原因，所以 DStream 能够支持 RDD 大部分的*transformation*算子。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-dstream-ops.png"/> </div>
-
 ### 2.2 updateStateByKey
 
 除了能够支持 RDD 的算子外，DStream 还有部分独有的*transformation*算子，这当中比较常用的是 `updateStateByKey`。文章开头的词频统计程序，只能统计每一次输入文本中单词出现的数量，想要统计所有历史输入中单词出现的数量，可以使用 `updateStateByKey` 算子。代码如下：
@@ -169,7 +167,6 @@ storm storm flink azkaban
 此时控制台输出如下，所有输入都被进行了词频累计：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-word-count-v2.png"/> </div>
-
 同时在输出日志中还可以看到检查点操作的相关信息：
 
 ```shell
@@ -326,7 +323,6 @@ storm storm flink azkaban
 使用 Redis Manager 查看写入结果 (如下图),可以看到与使用 `updateStateByKey` 算子得到的计算结果相同。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-word-count-v3.png"/> </div>  
-
 <br/>
 
 > 本片文章所有源码见本仓库：[spark-streaming-basis](https://github.com/heibaiying/BigData-Notes/tree/master/code/spark/spark-streaming-basis)

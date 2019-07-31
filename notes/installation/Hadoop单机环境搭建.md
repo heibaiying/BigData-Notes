@@ -14,7 +14,7 @@
 
 Hadoop 的运行依赖 JDK，需要预先安装，安装步骤见：
 
-+ [Linux 下 JDK 的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/JDK%E5%AE%89%E8%A3%85.md)
++ [Linux 下 JDK 的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
 
 
 
@@ -196,7 +196,6 @@ sudo systemctl stop firewalld.service
 方式二：查看 Web UI 界面，端口为 `50070`：
 
 <div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop安装验证.png"/> </div>
-
 
 
 ## 四、Hadoop(YARN)环境搭建

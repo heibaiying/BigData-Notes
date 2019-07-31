@@ -251,8 +251,6 @@ Hive 支持内连接，外连接，左外连接，右外连接，笛卡尔连接
 
 <div align="center"> <img width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sql-join.jpg"/> </div>
 
-
-
 ### 3.1 INNER JOIN
 
 ```sql
@@ -289,7 +287,6 @@ ON e.deptno = d.deptno;
 执行右连接后，由于 40 号部门下没有任何员工，所以此时员工信息为 NULL。这个查询可以很好的复述上面提到的——JOIN 语句的关联条件必须用 ON 指定，不能用 WHERE 指定。你可以把 ON 改成 WHERE，你会发现无论如何都查不出 40 号部门这条数据，因为笛卡尔运算不会有 (NULL, 40) 这种情况。
 
 <div align="center"> <img width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-right-join.png"/> </div>
-
 ### 3.4 FULL OUTER  JOIN 
 
 ```sql
@@ -394,14 +391,6 @@ SET hive.exec.mode.local.auto=true;
 ## 参考资料
 
 1. [LanguageManual Select](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Select)
-
 2. [LanguageManual Joins](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Joins)
 3. [LanguageManual GroupBy](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+GroupBy)
 4. [LanguageManual SortBy](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+SortBy)
-
-
-
-
-
-
-

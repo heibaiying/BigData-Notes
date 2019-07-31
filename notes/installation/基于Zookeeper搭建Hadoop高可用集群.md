@@ -21,7 +21,6 @@ Hadoop 高可用 (High Availability) 分为 HDFS 高可用和 YARN 高可用，�
 HDFS 高可用架构如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HDFS-HA-Architecture-Edureka.png"/> </div>
-
 > *图片引用自：https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/*
 
 HDFS 高可用架构主要由以下组件所构成：
@@ -43,13 +42,11 @@ HDFS 高可用架构主要由以下组件所构成：
 需要说明的是向 JournalNode 集群写入 EditLog 是遵循 “过半写入则成功” 的策略，所以你至少要有 3 个 JournalNode 节点，当然你也可以继续增加节点数量，但是应该保证节点总数是奇数。同时如果有 2N+1 台 JournalNode，那么根据过半写的原则，最多可以容忍有 N 台 JournalNode 节点挂掉。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-QJM-同步机制.png"/> </div>
-
 ### 1.3 NameNode 主备切换
 
 NameNode 实现主备切换的流程下图所示：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-namenode主备切换.png"/> </div>
-
 1. HealthMonitor 初始化完成之后会启动内部的线程来定时调用对应 NameNode 的 HAServiceProtocol RPC 接口的方法，对 NameNode 的健康状态进行检测。
 2. HealthMonitor 如果检测到 NameNode 的健康状态发生变化，会回调 ZKFailoverController 注册的相应方法进行处理。
 3. 如果 ZKFailoverController 判断需要进行主备切换，会首先使用 ActiveStandbyElector 来进行自动的主备选举。
@@ -67,7 +64,6 @@ YARN ResourceManager 的高可用与 HDFS NameNode 的高可用类似，但是 R
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-rm-ha-overview.png"/> </div>
 
 
-
 ## 二、集群规划
 
 按照高可用的设计目标：需要保证至少有两个 NameNode (一主一备)  和 两个 ResourceManager (一主一备)  ，同时为满足“过半写入则成功”的原则，需要至少要有 3 个 JournalNode 节点。这里使用三台主机进行搭建，集群规划如下：
@@ -75,11 +71,10 @@ YARN ResourceManager 的高可用与 HDFS NameNode 的高可用类似，但是 R
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop高可用集群规划.png"/> </div>
 
 
-
 ## 三、前置条件
 
-+ 所有服务器都安装有 JDK，安装步骤可以参见：[Linux 下 JDK 的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/JDK%E5%AE%89%E8%A3%85.md)；
-+ 搭建好 ZooKeeper 集群，搭建步骤可以参见：[Zookeeper 单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper 单机环境和集群环境搭建.md)
++ 所有服务器都安装有 JDK，安装步骤可以参见：[Linux 下 JDK 的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)；
++ 搭建好 ZooKeeper 集群，搭建步骤可以参见：[Zookeeper 单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper单机环境和集群环境搭建.md)
 + 所有服务器之间都配置好 SSH 免密登录。
 
 
@@ -452,13 +447,11 @@ HDFS 和 YARN 的端口号分别为 `50070` 和 `8080`，界面应该如下：
 此时 hadoop001 上的 `NameNode` 处于可用状态：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop高可用集群1.png"/> </div>
-
 而 hadoop002 上的 `NameNode` 则处于备用状态：
 
 <br/>
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop高可用集群3.png"/> </div>
-
 <br/>
 
 hadoop002 上的 `ResourceManager` 处于可用状态：
@@ -466,7 +459,6 @@ hadoop002 上的 `ResourceManager` 处于可用状态：
 <br/>
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop高可用集群4.png"/> </div>
-
 <br/>
 
 hadoop003 上的 `ResourceManager` 则处于备用状态：
@@ -474,7 +466,6 @@ hadoop003 上的 `ResourceManager` 则处于备用状态：
 <br/>
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop高可用集群5.png"/> </div>
-
 <br/>
 
 同时界面上也有 `Journal Manager` 的相关信息：
@@ -482,7 +473,6 @@ hadoop003 上的 `ResourceManager` 则处于备用状态：
 <br/>
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop高可用集群2.png"/> </div>
-
 ## 七、集群的二次启动
 
 上面的集群初次启动涉及到一些必要初始化操作，所以过程略显繁琐。但是集群一旦搭建好后，想要再次启用它是比较方便的，步骤如下（首选需要确保 ZooKeeper 集群已经启动）：

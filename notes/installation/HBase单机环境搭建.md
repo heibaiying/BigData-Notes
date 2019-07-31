@@ -12,7 +12,7 @@
 
 HBase 需要依赖 JDK 环境，同时 HBase 2.0+ 以上版本不再支持 JDK 1.7 ，需要安装 JDK 1.8+ 。JDK 安装方式见本仓库：
 
-> [Linux 环境下 JDK 安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux 下 JDK 安装.md)
+> [Linux 环境下 JDK 安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
 
 ### 1.2 Standalone模式和伪集群模式的区别
 
@@ -109,14 +109,13 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-web-ui.png"/> </div>
 
 
-
 ## 三、伪集群模式安装（Pseudo-Distributed）
 
 ### 3.1 Hadoop单机伪集群安装
 
 这里我们采用 HDFS 作为 HBase 的存储方案，需要预先安装 Hadoop。Hadoop 的安装方式单独整理至：
 
-> [Hadoop 单机伪集群搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop 单机版本环境搭建.md)
+> [Hadoop 单机伪集群搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop单机版本环境搭建.md)
 
 ### 3.2 Hbase版本选择
 

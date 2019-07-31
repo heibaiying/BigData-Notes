@@ -5,7 +5,7 @@
 
 Flume 需要依赖 JDK 1.8+，JDK 安装方式见本仓库：
 
-> [Linux 环境下 JDK 安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux 下 JDK 安装.md)
+> [Linux 环境下 JDK 安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
 
 
 

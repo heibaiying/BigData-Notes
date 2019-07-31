@@ -23,7 +23,6 @@
 下图为 Strom 的运行流程图，在开发 Storm 流处理程序时，我们需要采用内置或自定义实现 `spout`(数据源) 和 `bolt`(处理单元)，并通过 `TopologyBuilder` 将它们之间进行关联，形成 `Topology`。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spout-bolt.png"/> </div>
-
 ## 二、IComponent接口
 
 `IComponent` 接口定义了 Topology 中所有组件 (spout/bolt) 的公共方法，自定义的 spout 或 bolt 必须直接或间接实现这个接口。
@@ -102,7 +101,6 @@ public interface ISpout extends Serializable {
 **通常情况下，我们实现自定义的 Spout 时不会直接去实现 `ISpout` 接口，而是继承 `BaseRichSpout`。**`BaseRichSpout` 继承自 `BaseCompont`，同时实现了 `IRichSpout` 接口。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-baseRichSpout.png"/> </div>
-
 `IRichSpout` 接口继承自 `ISpout` 和 `IComponent`,自身并没有定义任何方法：
 
 ```java
@@ -193,7 +191,6 @@ public interface IBolt extends Serializable {
 同样的，在实现自定义 bolt 时，通常是继承 `BaseRichBolt` 抽象类来实现。`BaseRichBolt` 继承自 `BaseComponent` 抽象类并实现了 `IRichBolt` 接口。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-baseRichbolt.png"/> </div>
-
 `IRichBolt` 接口继承自 `IBolt` 和 `IComponent`,自身并没有定义任何方法：
 
 ```
@@ -217,7 +214,6 @@ public interface IRichBolt extends IBolt, IComponent {
 这里我们使用自定义的 `DataSourceSpout` 产生词频数据，然后使用自定义的 `SplitBolt` 和 `CountBolt` 来进行词频统计。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-word-count-p.png"/> </div>
-
 > 案例源码下载地址：[storm-word-count](https://github.com/heibaiying/BigData-Notes/tree/master/code/Storm/storm-word-count)
 
 ### 5.2 代码实现
@@ -385,7 +381,6 @@ public class LocalWordCountApp {
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-word-count-console.png"/> </div>
 
 
-
 ## 六、提交到服务器集群运行
 
 ### 6.1 代码更改
@@ -439,7 +434,6 @@ storm jar /usr/appjar/storm-word-count-1.0.jar  com.heibaiying.wordcount.Cluster
 出现 `successfully` 则代表提交成功：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-submit-success.png"/> </div>
-
 ### 6.4 查看Topology与停止Topology（命令行方式）
 
 ```shell
@@ -451,13 +445,11 @@ storm kill ClusterWordCountApp -w 3
 ```
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-list-kill.png"/> </div>
-
 ### 6.5 查看Topology与停止Topology（界面方式）
 
 使用 UI 界面同样也可进行停止操作，进入 WEB UI 界面（8080 端口），在 `Topology Summary` 中点击对应 Topology 即可进入详情页面进行操作。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-ui-actions.png"/> </div>
-
 
 
 
@@ -475,7 +467,6 @@ storm kill ClusterWordCountApp -w 3
 这时候可能大家会有疑惑，在我们的项目中不是使用了 `storm-core` 这个依赖吗？其实上面之所以我们能运行成功，是因为在 Storm 的集群环境中提供了这个 JAR 包，在安装目录的 lib 目录下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-lib.png"/> </div>
-
 为了说明这个问题我在 Maven 中引入了一个第三方的 JAR 包，并修改产生数据的方法：
 
 ```xml
@@ -504,10 +495,9 @@ private String productData() {
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-package-error.png"/> </div>
 
 
-
 想把依赖包一并打入最后的 JAR 中，maven 提供了两个插件来实现，分别是 `maven-assembly-plugin` 和 `maven-shade-plugin`。鉴于本篇文章篇幅已经比较长，且关于 Storm 打包还有很多需要说明的地方，所以关于 Storm 的打包方式单独整理至下一篇文章：
 
-[Storm 三种打包方式对比分析](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm 三种打包方式对比分析.md)
+[Storm 三种打包方式对比分析](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm三种打包方式对比分析.md)
 
 ## 参考资料
 

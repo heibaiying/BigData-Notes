@@ -30,7 +30,6 @@
 <div align="center"> <img width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Phoenix-hadoop.png"/> </div>
 
 
-
 ## 二、Phoenix安装
 
 > 我们可以按照官方安装说明进行安装，官方说明如下：
@@ -89,7 +88,6 @@ start-hbase.sh
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/phoenix-shell.png"/> </div>
 
 
-
 ## 三、Phoenix 简单使用
 
 ### 3.1 创建表
@@ -103,11 +101,9 @@ CREATE TABLE IF NOT EXISTS us_population (
 ```
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Phoenix-create-table.png"/> </div>
-
 新建的表会按照特定的规则转换为 HBase 上的表，关于表的信息，可以通过 Hbase Web UI 进行查看：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-web-ui-phoenix.png"/> </div>
-
 ### 3.2 插入数据
 
 Phoenix 中插入数据采用的是 `UPSERT` 而不是 `INSERT`,因为 Phoenix 并没有更新操作，插入相同主键的数据就视为更新，所以 `UPSERT` 就相当于 `UPDATE`+`INSERT`
@@ -133,7 +129,6 @@ UPSERT INTO us_population VALUES('NY','New York',999999);
 ```
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Phoenix-update.png"/> </div>
-
 ### 3.4 删除数据
 
 ```sql
@@ -141,7 +136,6 @@ DELETE FROM us_population WHERE city='Dallas';
 ```
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Phoenix-delete.png"/> </div>
-
 ### 3.5 查询数据
 
 ```sql
@@ -152,7 +146,6 @@ ORDER BY sum(population) DESC;
 ```
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Phoenix-select.png"/> </div>
-
 
 
 ### 3.6 退出命令
@@ -199,7 +192,6 @@ ORDER BY sum(population) DESC;
 如果是普通项目，则可以从 Phoenix 解压目录下找到对应的 JAR 包，然后手动引入：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/phoenix-core-jar.png"/> </div>
-
 ### 4.2 简单的Java API实例
 
 ```java
@@ -242,8 +234,7 @@ public class PhoenixJavaApi {
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Phoenix-java-api-result.png"/> </div>
 
 
-
-实际的开发中我们通常都是采用第三方框架来操作数据库，如 `mybatis`，`Hibernate`，`Spring Data` 等。关于 Phoenix 与这些框架的整合步骤参见下一篇文章：[Spring/Spring Boot + Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spring+Mybtais+Phoenix 整合.md)
+实际的开发中我们通常都是采用第三方框架来操作数据库，如 `mybatis`，`Hibernate`，`Spring Data` 等。关于 Phoenix 与这些框架的整合步骤参见下一篇文章：[Spring/Spring Boot + Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spring+Mybtais+Phoenix整合.md)
 
 # 参考资料
 
