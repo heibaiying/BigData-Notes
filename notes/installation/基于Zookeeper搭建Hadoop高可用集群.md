@@ -21,6 +21,7 @@ Hadoop 高可用 (High Availability) 分为 HDFS 高可用和 YARN 高可用，�
 HDFS 高可用架构如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/HDFS-HA-Architecture-Edureka.png"/> </div>
+
 > *图片引用自：https://www.edureka.co/blog/how-to-set-up-hadoop-cluster-with-hdfs-high-availability/*
 
 HDFS 高可用架构主要由以下组件所构成：
@@ -42,6 +43,7 @@ HDFS 高可用架构主要由以下组件所构成：
 需要说明的是向 JournalNode 集群写入 EditLog 是遵循 “过半写入则成功” 的策略，所以你至少要有 3 个 JournalNode 节点，当然你也可以继续增加节点数量，但是应该保证节点总数是奇数。同时如果有 2N+1 台 JournalNode，那么根据过半写的原则，最多可以容忍有 N 台 JournalNode 节点挂掉。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-QJM-同步机制.png"/> </div>
+
 ### 1.3 NameNode 主备切换
 
 NameNode 实现主备切换的流程下图所示：
