@@ -20,7 +20,7 @@
 
 ### 1.1 函数与方法
 
-Scala中函数与方法的区别非常小，如果函数作为某个对象的成员，这样的函数被称为方法，否则就是一个正常的函数。
+Scala 中函数与方法的区别非常小，如果函数作为某个对象的成员，这样的函数被称为方法，否则就是一个正常的函数。
 
 ```scala
 // 定义方法
@@ -32,18 +32,18 @@ println(multi1(3)) //输出 9
 println(multi2(3)) //输出 9
 ```
 
-也可以使用`def`定义函数：
+也可以使用 `def` 定义函数：
 
 ```scala
 def multi3 = (x: Int) => {x * x}
-println(multi3(3))  //输出9 
+println(multi3(3))  //输出 9 
 ```
 
-`multi2`和`multi3`本质上没有区别，这是因为函数是一等公民，`val multi2 = (x: Int) => {x * x}`这个语句相当于是使用`def`预先定义了函数，之后赋值给变量`multi2`。
+`multi2` 和 `multi3` 本质上没有区别，这是因为函数是一等公民，`val multi2 = (x: Int) => {x * x}` 这个语句相当于是使用 `def` 预先定义了函数，之后赋值给变量 `multi2`。
 
 ### 1.2 函数类型
 
-上面我们说过`multi2`和`multi3`本质上是一样的，那么作为函数它们是什么类型的？两者的类型实际上都是`Int => Int`，前面一个Int代表输入参数类型，后面一个Int代表返回值类型。
+上面我们说过 `multi2` 和 `multi3` 本质上是一样的，那么作为函数它们是什么类型的？两者的类型实际上都是 `Int => Int`，前面一个 Int 代表输入参数类型，后面一个 Int 代表返回值类型。
 
 ```scala
 scala> val multi2 = (x: Int) => {x * x}
@@ -59,19 +59,19 @@ multi4: (Int, String) => String = $$Lambda$1093/1039732747@2eb4fe7
 
 ### 1.3 一等公民&匿名函数
 
-在Scala中函数是一等公民，这意味着不仅可以定义函数并调用它们，还可以将它们作为值进行传递：
+在 Scala 中函数是一等公民，这意味着不仅可以定义函数并调用它们，还可以将它们作为值进行传递：
 
 ```scala
 import scala.math.ceil
 object ScalaApp extends App {
-  // 将函数ceil赋值给变量fun,使用下划线(_)指明是ceil函数但不传递参数
+  // 将函数 ceil 赋值给变量 fun,使用下划线 (_) 指明是 ceil 函数但不传递参数
   val fun = ceil _
-  println(fun(2.3456))  //输出3.0
+  println(fun(2.3456))  //输出 3.0
 
 }
 ```
 
-在Scala中你不必给每一个函数都命名，如`(x: Int) => 3 * x`就是一个匿名函数：
+在 Scala 中你不必给每一个函数都命名，如 `(x: Int) => 3 * x` 就是一个匿名函数：
 
 ```scala
 object ScalaApp extends App {
@@ -93,7 +93,7 @@ object ScalaApp extends App {
 
 #### 1. 可变长度参数列表
 
-在Java中如果你想要传递可变长度的参数，需要使用`String ...args`这种形式，Scala中等效的表达为`args: String*`。
+在 Java 中如果你想要传递可变长度的参数，需要使用 `String ...args` 这种形式，Scala 中等效的表达为 `args: String*`。
 
 ```scala
 object ScalaApp extends App {
@@ -134,7 +134,7 @@ object ScalaApp extends App {
 
   def detail(name: String, age: Int = 88): Unit = println(name + ":" + age)
 
-  // 如果没有传递age值,则使用默认值
+  // 如果没有传递 age 值,则使用默认值
   detail("heibaiying")
   detail("heibaiying", 12)
 
@@ -147,14 +147,14 @@ object ScalaApp extends App {
 
 ```scala
 var more = 10
-// addMore一个闭包函数:因为其捕获了自由变量more从而闭合了该函数字面量
+// addMore 一个闭包函数:因为其捕获了自由变量 more 从而闭合了该函数字面量
 val addMore = (x: Int) => x + more
 ```
 
-如上函数`addMore`中有两个变量x和more:
+如上函数 `addMore` 中有两个变量 x 和 more:
 
-+ **x** : 是一个绑定变量(bound variable)，因为其是该函数的入参，在函数的上下文中有明确的定义；
-+ **more** : 是一个自由变量(free variable)，因为函数字面量本生并没有给more赋予任何含义。
++ **x** : 是一个绑定变量 (bound variable)，因为其是该函数的入参，在函数的上下文中有明确的定义；
++ **more** : 是一个自由变量 (free variable)，因为函数字面量本生并没有给 more 赋予任何含义。
 
 按照定义：在创建函数时，如果需要捕获自由变量，那么包含指向被捕获变量的引用的函数就被称为闭包函数。
 
@@ -166,18 +166,18 @@ val addMore = (x: Int) => x + more
 + 闭包内部对自由变量的修改，在闭包外部也是可见的。
 
 ```scala
-// 声明more变量
+// 声明 more 变量
 scala> var more = 10
 more: Int = 10
 
-// more变量必须已经被声明，否则下面的语句会报错
+// more 变量必须已经被声明，否则下面的语句会报错
 scala> val addMore = (x: Int) => {x + more}
 addMore: Int => Int = $$Lambda$1076/1844473121@876c4f0
 
 scala> addMore(10)
 res7: Int = 20
 
-// 注意这里是给more变量赋值，而不是重新声明more变量
+// 注意这里是给 more 变量赋值，而不是重新声明 more 变量
 scala> more=1000
 more: Int = 1000
 
@@ -190,7 +190,7 @@ res8: Int = 1010
 自由变量可能随着程序的改变而改变，从而产生多个副本，但是闭包永远指向创建时候有效的那个变量副本。
 
 ```scala
-// 第一次声明more变量
+// 第一次声明 more 变量
 scala> var more = 10
 more: Int = 10
 
@@ -202,7 +202,7 @@ addMore10: Int => Int = $$Lambda$1077/1144251618@1bdaa13c
 scala> addMore10(9)
 res9: Int = 19
 
-// 重新声明more变量
+// 重新声明 more 变量
 scala> var more = 100
 more: Int = 100
 
@@ -210,20 +210,20 @@ more: Int = 100
 scala> val addMore100 = (x: Int) => {x + more}
 addMore100: Int => Int = $$Lambda$1078/626955849@4d0be2ac
 
-// 引用的是重新声明more变量
+// 引用的是重新声明 more 变量
 scala> addMore100(9)
 res10: Int = 109
 
-// 引用的还是第一次声明的more变量
+// 引用的还是第一次声明的 more 变量
 scala> addMore10(9)
 res11: Int = 19
 
-// 对于全局而言more还是100
+// 对于全局而言 more 还是 100
 scala> more
 res12: Int = 100
 ```
 
-从上面的示例可以看出重新声明`more`后，全局的`more`的值是100，但是对于闭包函数`addMore10`还是引用的是值为10的`more`，这是由虚拟机来实现的，虚拟机会保证`more`变量在重新声明后，原来的被捕获的变量副本继续在堆上保持存活。
+从上面的示例可以看出重新声明 `more` 后，全局的 `more` 的值是 100，但是对于闭包函数 `addMore10` 还是引用的是值为 10 的 `more`，这是由虚拟机来实现的，虚拟机会保证 `more` 变量在重新声明后，原来的被捕获的变量副本继续在堆上保持存活。
 
 ## 三、高阶函数
 
@@ -239,7 +239,7 @@ object ScalaApp extends App {
     x * x
   }
 
-  // 2.定义高阶函数: 第一个参数是类型为Int => Int的函数
+  // 2.定义高阶函数: 第一个参数是类型为 Int => Int 的函数
   def multi(fun: Int => Int, x: Int) = {
     fun(x) * 100
   }
@@ -265,10 +265,10 @@ object ScalaApp extends App {
 }
 ```
 
-这里当你调用curriedSum时候，实际上是连着做了两次传统的函数调用，实际执行的柯里化过程如下：
+这里当你调用 curriedSum 时候，实际上是连着做了两次传统的函数调用，实际执行的柯里化过程如下：
 
-+ 第一次调用接收一个名为`x`的Int型参数，返回一个用于第二次调用的函数，假设`x`为2，则返回函数`2+y`；
-+ 返回的函数接收参数`y`，并计算并返回值`2+3`的值。
++ 第一次调用接收一个名为 `x` 的 Int 型参数，返回一个用于第二次调用的函数，假设 `x` 为 2，则返回函数 `2+y`；
++ 返回的函数接收参数 `y`，并计算并返回值 `2+3` 的值。
 
 想要获得柯里化的中间返回的函数其实也比较简单：
 
@@ -278,7 +278,7 @@ object ScalaApp extends App {
   def curriedSum(x: Int)(y: Int) = x + y
   println(curriedSum(2)(3)) //输出 5
 
-  // 获取传入值为10返回的中间函数 10 + y
+  // 获取传入值为 10 返回的中间函数 10 + y
   val plus: Int => Int = curriedSum(10)_
   println(plus(3)) //输出值 13
 }
@@ -301,8 +301,8 @@ object ScalaApp extends App {
 
 ## 参考资料
 
-1. Martin Odersky . Scala编程(第3版)[M] . 电子工业出版社 . 2018-1-1  
-2. 凯.S.霍斯特曼  . 快学Scala(第2版)[M] . 电子工业出版社 . 2017-7
+1. Martin Odersky . Scala 编程 (第 3 版)[M] . 电子工业出版社 . 2018-1-1  
+2. 凯.S.霍斯特曼  . 快学 Scala(第 2 版)[M] . 电子工业出版社 . 2017-7
 
 
 

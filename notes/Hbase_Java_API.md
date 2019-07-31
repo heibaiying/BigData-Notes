@@ -11,19 +11,19 @@
 
 ## 一、简述
 
-截至到目前(2019.04)，HBase 有两个主要的版本，分别是1.x 和 2.x ，两个版本的Java API有所不同，1.x 中某些方法在2.x中被标识为`@deprecated`过时。所以下面关于API的样例，我会分别给出1.x和2.x两个版本。完整的代码见本仓库：
+截至到目前 (2019.04)，HBase 有两个主要的版本，分别是 1.x 和 2.x ，两个版本的 Java API 有所不同，1.x 中某些方法在 2.x 中被标识为 `@deprecated` 过时。所以下面关于 API 的样例，我会分别给出 1.x 和 2.x 两个版本。完整的代码见本仓库：
 
 >+ [Java API 1.x Examples](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hbase/hbase-java-api-1.x)
 >
 >+ [Java API 2.x Examples](https://github.com/heibaiying/BigData-Notes/tree/master/code/Hbase/hbase-java-api-2.x)
 
-同时你使用的客户端的版本必须与服务端版本保持一致，如果用2.x版本的客户端代码去连接1.x版本的服务端，会抛出`NoSuchColumnFamilyException`等异常。
+同时你使用的客户端的版本必须与服务端版本保持一致，如果用 2.x 版本的客户端代码去连接 1.x 版本的服务端，会抛出 `NoSuchColumnFamilyException` 等异常。
 
 ## 二、Java API 1.x 基本使用
 
 #### 2.1 新建Maven工程，导入项目依赖
 
-要使用Java API 操作HBase，需要引入`hbase-client`。这里选取的`HBase Client`的版本为`1.2.0`。
+要使用 Java API 操作 HBase，需要引入 `hbase-client`。这里选取的 `HBase Client` 的版本为 `1.2.0`。
 
 ```xml
 <dependency>
@@ -53,7 +53,7 @@ public class HBaseUtils {
     }
 
     /**
-     * 创建HBase表
+     * 创建 HBase 表
      *
      * @param tableName      表名
      * @param columnFamilies 列族的数组
@@ -79,7 +79,7 @@ public class HBaseUtils {
 
 
     /**
-     * 删除hBase表
+     * 删除 hBase 表
      *
      * @param tableName 表名
      */
@@ -142,7 +142,7 @@ public class HBaseUtils {
 
 
     /**
-     * 根据rowKey获取指定行的数据
+     * 根据 rowKey 获取指定行的数据
      *
      * @param tableName 表名
      * @param rowKey    唯一标识
@@ -160,7 +160,7 @@ public class HBaseUtils {
 
 
     /**
-     * 获取指定行指定列(cell)的最新版本的数据
+     * 获取指定行指定列 (cell) 的最新版本的数据
      *
      * @param tableName    表名
      * @param rowKey       唯一标识
@@ -227,8 +227,8 @@ public class HBaseUtils {
      * 检索表中指定数据
      *
      * @param tableName   表名
-     * @param startRowKey 起始RowKey
-     * @param endRowKey   终止RowKey
+     * @param startRowKey 起始 RowKey
+     * @param endRowKey   终止 RowKey
      * @param filterList  过滤器
      */
 
@@ -292,7 +292,7 @@ public class HBaseUtils {
 
 ### 2.3 单元测试
 
-以单元测试的方式对上面封装的API进行测试。
+以单元测试的方式对上面封装的 API 进行测试。
 
 ```java
 public class HBaseUtilsTest {
@@ -396,7 +396,7 @@ public class HBaseUtilsTest {
 
 #### 3.1 新建Maven工程，导入项目依赖
 
-这里选取的`HBase Client`的版本为最新的`2.1.4`。
+这里选取的 `HBase Client` 的版本为最新的 `2.1.4`。
 
 ```xml
 <dependency>
@@ -408,13 +408,13 @@ public class HBaseUtilsTest {
 
 #### 3.2 API 的基本使用
 
-2.x 版本相比于1.x 废弃了一部分方法，关于废弃的方法在源码中都会指明新的替代方法，比如，在2.x中创建表时：`HTableDescriptor`和`HColumnDescriptor`等类都标识为废弃，取而代之的是使用`TableDescriptorBuilder`和`ColumnFamilyDescriptorBuilder`来定义表和列族。
+2.x 版本相比于 1.x 废弃了一部分方法，关于废弃的方法在源码中都会指明新的替代方法，比如，在 2.x 中创建表时：`HTableDescriptor` 和 `HColumnDescriptor` 等类都标识为废弃，取而代之的是使用 `TableDescriptorBuilder` 和 `ColumnFamilyDescriptorBuilder` 来定义表和列族。
 
 <div align="center"> <img width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/deprecated.png"/> </div>
 
 
 
-以下为HBase  2.x 版本Java API的使用示例：
+以下为 HBase  2.x 版本 Java API 的使用示例：
 
 ```java
 public class HBaseUtils {
@@ -434,7 +434,7 @@ public class HBaseUtils {
     }
 
     /**
-     * 创建HBase表
+     * 创建 HBase 表
      *
      * @param tableName      表名
      * @param columnFamilies 列族的数组
@@ -461,7 +461,7 @@ public class HBaseUtils {
 
 
     /**
-     * 删除hBase表
+     * 删除 hBase 表
      *
      * @param tableName 表名
      */
@@ -524,7 +524,7 @@ public class HBaseUtils {
 
 
     /**
-     * 根据rowKey获取指定行的数据
+     * 根据 rowKey 获取指定行的数据
      *
      * @param tableName 表名
      * @param rowKey    唯一标识
@@ -542,7 +542,7 @@ public class HBaseUtils {
 
 
     /**
-     * 获取指定行指定列(cell)的最新版本的数据
+     * 获取指定行指定列 (cell) 的最新版本的数据
      *
      * @param tableName    表名
      * @param rowKey       唯一标识
@@ -609,8 +609,8 @@ public class HBaseUtils {
      * 检索表中指定数据
      *
      * @param tableName   表名
-     * @param startRowKey 起始RowKey
-     * @param endRowKey   终止RowKey
+     * @param startRowKey 起始 RowKey
+     * @param endRowKey   终止 RowKey
      * @param filterList  过滤器
      */
 
@@ -676,9 +676,9 @@ public class HBaseUtils {
 
 ## 四、正确连接Hbase
 
-在上面的代码中，在类加载时就初始化了Connection连接，并且之后的方法都是复用这个Connection，这时我们可能会考虑是否可以使用自定义连接池来获取更好的性能表现？实际上这是没有必要的。
+在上面的代码中，在类加载时就初始化了 Connection 连接，并且之后的方法都是复用这个 Connection，这时我们可能会考虑是否可以使用自定义连接池来获取更好的性能表现？实际上这是没有必要的。
 
-首先官方对于`Connection`的使用说明如下：
+首先官方对于 `Connection` 的使用说明如下：
 
 ```properties
 Connection Pooling For applications which require high-end multithreaded   
@@ -686,8 +686,8 @@ access (e.g., web-servers or  application servers  that may serve many
 application threads in a single JVM), you can pre-create a Connection,   
 as shown in the following example:
 
-对于高并发多线程访问的应用程序（例如，在单个JVM中存在的为多个线程服务的Web服务器或应用程序服务器），  
-您只需要预先创建一个Connection。例子如下：
+对于高并发多线程访问的应用程序（例如，在单个 JVM 中存在的为多个线程服务的 Web 服务器或应用程序服务器），  
+您只需要预先创建一个 Connection。例子如下：
 
 // Create a connection to the cluster.
 Configuration conf = HBaseConfiguration.create();
@@ -697,7 +697,7 @@ try (Connection connection = ConnectionFactory.createConnection(conf);
 }
 ```
 
-之所以能这样使用，这是因为Connection并不是一个简单的socket连接，[接口文档](https://hbase.apache.org/apidocs/org/apache/hadoop/hbase/client/Connection.html)中对Connection的表述是：
+之所以能这样使用，这是因为 Connection 并不是一个简单的 socket 连接，[接口文档](https://hbase.apache.org/apidocs/org/apache/hadoop/hbase/client/Connection.html) 中对 Connection 的表述是：
 
 ```properties
 A cluster connection encapsulating lower level individual connections to actual servers and a  
@@ -705,25 +705,25 @@ connection to zookeeper.  Connections are instantiated through the ConnectionFac
 The lifecycle of the connection is managed by the caller,  who has to close() the connection   
 to release the resources. 
 
-Connection是一个集群连接，封装了与多台服务器（Matser/Region Server）的底层连接以及与zookeeper的连接。  
-连接通过ConnectionFactory  类实例化。连接的生命周期由调用者管理，调用者必须使用close()关闭连接以释放资源。
+Connection 是一个集群连接，封装了与多台服务器（Matser/Region Server）的底层连接以及与 zookeeper 的连接。  
+连接通过 ConnectionFactory  类实例化。连接的生命周期由调用者管理，调用者必须使用 close() 关闭连接以释放资源。
 ```
 
-之所以封装这些连接，是因为HBase客户端需要连接三个不同的服务角色：
+之所以封装这些连接，是因为 HBase 客户端需要连接三个不同的服务角色：
 
-+ **Zookeeper** ：主要用于获取`meta`表的位置信息，Master的信息；
-+ **HBase Master** ：主要用于执行HBaseAdmin接口的一些操作，例如建表等；
++ **Zookeeper** ：主要用于获取 `meta` 表的位置信息，Master 的信息；
++ **HBase Master** ：主要用于执行 HBaseAdmin 接口的一些操作，例如建表等；
 + **HBase RegionServer** ：用于读、写数据。
 
 <div align="center"> <img width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-arc.png"/> </div>
 
-Connection对象和实际的Socket连接之间的对应关系如下图：
+Connection 对象和实际的 Socket 连接之间的对应关系如下图：
 
 <div align="center"> <img width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-connection.png"/> </div>
 
-> 上面两张图片引用自博客：[连接HBase的正确姿势](https://yq.aliyun.com/articles/581702?spm=a2c4e.11157919.spm-cont-list.1.146c27aeFxoMsN%20%E8%BF%9E%E6%8E%A5HBase%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF)
+> 上面两张图片引用自博客：[连接 HBase 的正确姿势](https://yq.aliyun.com/articles/581702?spm=a2c4e.11157919.spm-cont-list.1.146c27aeFxoMsN%20%E8%BF%9E%E6%8E%A5HBase%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF)
 
-在HBase客户端代码中，真正对应Socket连接的是`RpcConnection`对象。HBase使用`PoolMap`这种数据结构来存储客户端到HBase服务器之间的连接。`PoolMap`的内部有一个`ConcurrentHashMap`实例，其key是`ConnectionId`(封装了服务器地址和用户ticket)，value是一个`RpcConnection`对象的资源池。当HBase需要连接一个服务器时，首先会根据`ConnectionId`找到对应的连接池，然后从连接池中取出一个连接对象。
+在 HBase 客户端代码中，真正对应 Socket 连接的是 `RpcConnection` 对象。HBase 使用 `PoolMap` 这种数据结构来存储客户端到 HBase 服务器之间的连接。`PoolMap` 的内部有一个 `ConcurrentHashMap` 实例，其 key 是 `ConnectionId`(封装了服务器地址和用户 ticket)，value 是一个 `RpcConnection` 对象的资源池。当 HBase 需要连接一个服务器时，首先会根据 `ConnectionId` 找到对应的连接池，然后从连接池中取出一个连接对象。
 
 ```java
 @InterfaceAudience.Private
@@ -740,7 +740,7 @@ public class PoolMap<K, V> implements Map<K, V> {
   .....
 ```
 
-HBase中提供了三种资源池的实现，分别是`Reusable`，`RoundRobin`和`ThreadLocal`。具体实现可以通`hbase.client.ipc.pool.type`配置项指定，默认为`Reusable`。连接池的大小也可以通过`hbase.client.ipc.pool.size`配置项指定，默认为1，即每个Server 1个连接。也可以通过修改配置实现：
+HBase 中提供了三种资源池的实现，分别是 `Reusable`，`RoundRobin` 和 `ThreadLocal`。具体实现可以通 `hbase.client.ipc.pool.type` 配置项指定，默认为 `Reusable`。连接池的大小也可以通过 `hbase.client.ipc.pool.size` 配置项指定，默认为 1，即每个 Server 1 个连接。也可以通过修改配置实现：
 
 ```java
 config.set("hbase.client.ipc.pool.type",...);
@@ -748,14 +748,14 @@ config.set("hbase.client.ipc.pool.size",...);
 connection = ConnectionFactory.createConnection(config);
 ```
 
-由此可以看出HBase中Connection类已经实现了对连接的管理功能，所以我们不必在Connection上在做额外的管理。
+由此可以看出 HBase 中 Connection 类已经实现了对连接的管理功能，所以我们不必在 Connection 上在做额外的管理。
 
-另外，Connection是线程安全的，但Table和Admin却不是线程安全的，因此正确的做法是一个进程共用一个Connection对象，而在不同的线程中使用单独的Table和Admin对象。Table和Admin的获取操作`getTable()`和`getAdmin()`都是轻量级，所以不必担心性能的消耗，同时建议在使用完成后显示的调用`close()`方法来关闭它们。
+另外，Connection 是线程安全的，但 Table 和 Admin 却不是线程安全的，因此正确的做法是一个进程共用一个 Connection 对象，而在不同的线程中使用单独的 Table 和 Admin 对象。Table 和 Admin 的获取操作 `getTable()` 和 `getAdmin()` 都是轻量级，所以不必担心性能的消耗，同时建议在使用完成后显示的调用 `close()` 方法来关闭它们。
 
 
 
 ## 参考资料
 
-1. [连接HBase的正确姿势](https://yq.aliyun.com/articles/581702?spm=a2c4e.11157919.spm-cont-list.1.146c27aeFxoMsN%20%E8%BF%9E%E6%8E%A5HBase%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF)
+1. [连接 HBase 的正确姿势](https://yq.aliyun.com/articles/581702?spm=a2c4e.11157919.spm-cont-list.1.146c27aeFxoMsN%20%E8%BF%9E%E6%8E%A5HBase%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF)
 2. [Apache HBase ™ Reference Guide](http://hbase.apache.org/book.htm)
 

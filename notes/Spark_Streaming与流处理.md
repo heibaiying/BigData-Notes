@@ -14,7 +14,7 @@
 
 ### 1.1 静态数据处理
 
-在流处理之前，数据通常存储在数据库，文件系统或其他形式的存储系统中。应用程序根据需要查询数据或计算数据。这就是传统的静态数据处理架构。Hadoop采用HDFS进行数据存储，采用MapReduce进行数据查询或分析，这就是典型的静态数据处理架构。
+在流处理之前，数据通常存储在数据库，文件系统或其他形式的存储系统中。应用程序根据需要查询数据或计算数据。这就是传统的静态数据处理架构。Hadoop 采用 HDFS 进行数据存储，采用 MapReduce 进行数据查询或分析，这就是典型的静态数据处理架构。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/01_data_at_rest_infrastructure.png"/> </div>
 
@@ -26,7 +26,7 @@
 
 大多数数据都是连续的流：传感器事件，网站上的用户活动，金融交易等等 ，所有这些数据都是随着时间的推移而创建的。
 
-接收和发送数据流并执行应用程序或分析逻辑的系统称为**流处理器**。流处理器的基本职责是确保数据有效流动，同时具备可扩展性和容错能力，Storm和Flink就是其代表性的实现。
+接收和发送数据流并执行应用程序或分析逻辑的系统称为**流处理器**。流处理器的基本职责是确保数据有效流动，同时具备可扩展性和容错能力，Storm 和 Flink 就是其代表性的实现。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/02_stream_processing_infrastructure.png"/> </div>
 
@@ -47,19 +47,19 @@
 
 ### 2.1 简介
 
-Spark Streaming是Spark的一个子模块，用于快速构建可扩展，高吞吐量，高容错的流处理程序。具有以下特点：
+Spark Streaming 是 Spark 的一个子模块，用于快速构建可扩展，高吞吐量，高容错的流处理程序。具有以下特点：
 
-+ 通过高级API构建应用程序，简单易用；
-+ 支持多种语言，如Java，Scala和Python；
-+ 良好的容错性，Spark Streaming支持快速从失败中恢复丢失的操作状态；
-+ 能够和Spark其他模块无缝集成，将流处理与批处理完美结合；
-+ Spark Streaming可以从HDFS，Flume，Kafka，Twitter和ZeroMQ读取数据，也支持自定义数据源。
++ 通过高级 API 构建应用程序，简单易用；
++ 支持多种语言，如 Java，Scala 和 Python；
++ 良好的容错性，Spark Streaming 支持快速从失败中恢复丢失的操作状态；
++ 能够和 Spark 其他模块无缝集成，将流处理与批处理完美结合；
++ Spark Streaming 可以从 HDFS，Flume，Kafka，Twitter 和 ZeroMQ 读取数据，也支持自定义数据源。
 
 <div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-arch.png"/> </div>
 
 ### 2.2 DStream
 
-Spark Streaming提供称为离散流(DStream)的高级抽象，用于表示连续的数据流。 DStream可以从来自Kafka，Flume和Kinesis等数据源的输入数据流创建，也可以由其他DStream转化而来。**在内部，DStream表示为一系列RDD**。
+Spark Streaming 提供称为离散流 (DStream) 的高级抽象，用于表示连续的数据流。 DStream 可以从来自 Kafka，Flume 和 Kinesis 等数据源的输入数据流创建，也可以由其他 DStream 转化而来。**在内部，DStream 表示为一系列 RDD**。
 
 <div align="center"> <img width="600px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-flow.png"/> </div>
 
@@ -67,7 +67,7 @@ Spark Streaming提供称为离散流(DStream)的高级抽象，用于表示连�
 
 ### 2.3 Spark & Storm & Flink
 
-storm和Flink都是真正意义上的流计算框架，但 Spark Streaming 只是将数据流进行极小粒度的拆分，拆分为多个批处理，使得其能够得到接近于流处理的效果，但其本质上还是批处理（或微批处理）。
+storm 和 Flink 都是真正意义上的流计算框架，但 Spark Streaming 只是将数据流进行极小粒度的拆分，拆分为多个批处理，使得其能够得到接近于流处理的效果，但其本质上还是批处理（或微批处理）。
 
 
 

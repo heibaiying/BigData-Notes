@@ -1,5 +1,6 @@
 # Spring/Spring Boot 整合 Mybatis + Phoenix
-<nav>
+
+<nav>
 <a href="#一前言">一、前言</a><br/>
 <a href="#二Spring-+-Mybatis-+-Phoenix">二、Spring + Mybatis + Phoenix</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-项目结构">2.1 项目结构</a><br/>
@@ -20,7 +21,7 @@
 
 ## 一、前言
 
-使用Spring+Mybatis操作Phoenix和操作其他的关系型数据库（如Mysql，Oracle）在配置上是基本相同的，下面会分别给出Spring/Spring Boot 整合步骤，完整代码见本仓库：
+使用 Spring+Mybatis 操作 Phoenix 和操作其他的关系型数据库（如 Mysql，Oracle）在配置上是基本相同的，下面会分别给出 Spring/Spring Boot 整合步骤，完整代码见本仓库：
 
 + [Spring + Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/tree/master/code/Phoenix/spring-mybatis-phoenix)
 + [SpringBoot + Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/tree/master/code/Phoenix/spring-boot-mybatis-phoenix)
@@ -33,7 +34,7 @@
 
 ### 2.2 主要依赖
 
-除了Spring相关依赖外，还需要导入`phoenix-core`和对应的Mybatis依赖包
+除了 Spring 相关依赖外，还需要导入 `phoenix-core` 和对应的 Mybatis 依赖包
 
 ```xml
 <!--mybatis 依赖包-->
@@ -57,7 +58,7 @@
 
 ### 2.3  数据库配置文件
 
-在数据库配置文件 `jdbc.properties`  中配置数据库驱动和zookeeper地址
+在数据库配置文件 `jdbc.properties`  中配置数据库驱动和 zookeeper 地址
 
 ```properties
 # 数据库驱动
@@ -84,7 +85,7 @@ phoenix.url=jdbc:phoenix:192.168.0.105:2181
 
     <!--配置数据源-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <!--Phoenix配置-->
+        <!--Phoenix 配置-->
         <property name="driverClassName" value="${phoenix.driverClassName}"/>
         <property name="url" value="${phoenix.url}"/>
     </bean>
@@ -92,7 +93,7 @@ phoenix.url=jdbc:phoenix:192.168.0.105:2181
     <!--配置 mybatis 会话工厂 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!--指定mapper文件所在的位置-->
+        <!--指定 mapper 文件所在的位置-->
         <property name="mapperLocations" value="classpath*:/mappers/**/*.xml"/>
         <property name="configLocation" value="classpath:mybatisConfig.xml"/>
     </bean>
@@ -102,7 +103,7 @@ phoenix.url=jdbc:phoenix:192.168.0.105:2181
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--指定会话工厂 -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <!-- 指定mybatis接口所在的包 -->
+        <!-- 指定 mybatis 接口所在的包 -->
         <property name="basePackage" value="com.heibaiying.dao"/>
     </bean>
 
@@ -111,7 +112,7 @@ phoenix.url=jdbc:phoenix:192.168.0.105:2181
 
 ### 2.5 Mybtais参数配置
 
-新建mybtais配置文件，按照需求配置额外参数， 更多settings配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
+新建 mybtais 配置文件，按照需求配置额外参数， 更多 settings 配置项可以参考[官方文档](http://www.mybatis.org/mybatis-3/zh/configuration.html)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -124,7 +125,7 @@ phoenix.url=jdbc:phoenix:192.168.0.105:2181
     <settings>
         <!-- 开启驼峰命名 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-        <!-- 打印查询sql -->
+        <!-- 打印查询 sql -->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
 </configuration>
@@ -226,7 +227,7 @@ public class PopulationDaoTest {
 
 ```xml
 <!--spring 1.5 x 以上版本对应 mybatis 1.3.x (1.3.1)
-        关于更多spring-boot 与 mybatis 的版本对应可以参见 <a href="http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/">-->
+        关于更多 spring-boot 与 mybatis 的版本对应可以参见 <a href="http://www.mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/">-->
 <dependency>
     <groupId>org.mybatis.spring.boot</groupId>
     <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -252,12 +253,12 @@ spring boot 与 mybatis 版本的对应关系：
 
 ### 3.3 配置数据源
 
-在application.yml 中配置数据源，spring boot 2.x 版本默认采用Hikari作为数据库连接池，Hikari是目前java平台性能最好的连接池，性能好于druid。
+在 application.yml 中配置数据源，spring boot 2.x 版本默认采用 Hikari 作为数据库连接池，Hikari 是目前 java 平台性能最好的连接池，性能好于 druid。
 
 ```yaml
 spring:
   datasource:
-    #zookeeper地址
+    #zookeeper 地址
     url: jdbc:phoenix:192.168.0.105:2181
     driver-class-name: org.apache.phoenix.jdbc.PhoenixDriver
 
@@ -269,29 +270,29 @@ spring:
       minimum-idle: 10
       # 池中最大连接数，包括闲置和使用中的连接
       maximum-pool-size: 20
-      # 此属性控制从池返回的连接的默认自动提交行为。默认为true
+      # 此属性控制从池返回的连接的默认自动提交行为。默认为 true
       auto-commit: true
       # 允许最长空闲时间
       idle-timeout: 30000
-      # 此属性表示连接池的用户定义名称，主要显示在日志记录和JMX管理控制台中，以标识池和池配置。 默认值：自动生成
+      # 此属性表示连接池的用户定义名称，主要显示在日志记录和 JMX 管理控制台中，以标识池和池配置。 默认值：自动生成
       pool-name: custom-hikari
-      #此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      #此属性控制池中连接的最长生命周期，值 0 表示无限生命周期，默认 1800000 即 30 分钟
       max-lifetime: 1800000
-      # 数据库连接超时时间,默认30秒，即30000
+      # 数据库连接超时时间,默认 30 秒，即 30000
       connection-timeout: 30000
-      # 连接测试sql 这个地方需要根据数据库方言差异而配置 例如 oracle 就应该写成  select 1 from dual
+      # 连接测试 sql 这个地方需要根据数据库方言差异而配置 例如 oracle 就应该写成  select 1 from dual
       connection-test-query: SELECT 1
 
 # mybatis 相关配置
 mybatis:
   configuration:
-    # 是否打印sql语句 调试的时候可以开启
+    # 是否打印 sql 语句 调试的时候可以开启
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ```
 
 ### 3.4 新建查询接口
 
-上面Spring+Mybatis我们使用了XML的方式来写SQL，为了体现Mybatis支持多种方式，这里使用注解的方式来写SQL。
+上面 Spring+Mybatis 我们使用了 XML 的方式来写 SQL，为了体现 Mybatis 支持多种方式，这里使用注解的方式来写 SQL。
 
 ```java
 @Mapper

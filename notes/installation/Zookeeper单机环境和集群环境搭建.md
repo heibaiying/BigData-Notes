@@ -20,7 +20,7 @@
 
 ### 1.1 下载
 
-下载对应版本Zookeeper，这里我下载的版本`3.4.14`。官方下载地址：https://archive.apache.org/dist/zookeeper/
+下载对应版本 Zookeeper，这里我下载的版本 `3.4.14`。官方下载地址：https://archive.apache.org/dist/zookeeper/
 
 ```shell
 # wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz
@@ -53,7 +53,7 @@ export PATH=$ZOOKEEPER_HOME/bin:$PATH
 
 ### 1.4 修改配置
 
-进入安装目录的`conf/`目录下，拷贝配置样本并进行修改：
+进入安装目录的 `conf/` 目录下，拷贝配置样本并进行修改：
 
 ```
 # cp zoo_sample.cfg  zoo.cfg
@@ -95,12 +95,12 @@ clientPort=2181
 
 >配置参数说明：
 >
->- **tickTime**：用于计算的基础时间单元。比如session超时：N*tickTime；
->- **initLimit**：用于集群，允许从节点连接并同步到 master节点的初始化连接时间，以tickTime的倍数来表示；
->- **syncLimit**：用于集群， master主节点与从节点之间发送消息，请求和应答时间长度（心跳机制）；
+>- **tickTime**：用于计算的基础时间单元。比如 session 超时：N*tickTime；
+>- **initLimit**：用于集群，允许从节点连接并同步到 master 节点的初始化连接时间，以 tickTime 的倍数来表示；
+>- **syncLimit**：用于集群， master 主节点与从节点之间发送消息，请求和应答时间长度（心跳机制）；
 >- **dataDir**：数据存储位置；
 >- **dataLogDir**：日志目录；
->- **clientPort**：用于客户端连接的端口，默认2181
+>- **clientPort**：用于客户端连接的端口，默认 2181
 
 
 
@@ -114,7 +114,7 @@ zkServer.sh start
 
 ### 1.6 验证
 
-使用JPS验证进程是否已经启动，出现`QuorumPeerMain`则代表启动成功。
+使用 JPS 验证进程是否已经启动，出现 `QuorumPeerMain` 则代表启动成功。
 
 ```shell
 [root@hadoop001 bin]# jps
@@ -125,11 +125,11 @@ zkServer.sh start
 
 ## 二、集群环境搭建
 
-为保证集群高可用，Zookeeper集群的节点数最好是奇数，最少有三个节点，所以这里演示搭建一个三个节点的集群。这里我使用三台主机进行搭建，主机名分别为hadoop001，hadoop002，hadoop003。
+为保证集群高可用，Zookeeper 集群的节点数最好是奇数，最少有三个节点，所以这里演示搭建一个三个节点的集群。这里我使用三台主机进行搭建，主机名分别为 hadoop001，hadoop002，hadoop003。
 
 ### 2.1 修改配置
 
-解压一份zookeeper安装包，修改其配置文件`zoo.cfg`，内容如下。之后使用scp命令将安装包分发到三台服务器上：
+解压一份 zookeeper 安装包，修改其配置文件 `zoo.cfg`，内容如下。之后使用 scp 命令将安装包分发到三台服务器上：
 
 ```shell
 tickTime=2000
@@ -148,7 +148,7 @@ server.3=hadoop003:2287:3387
 
 ### 2.2 标识节点
 
-分别在三台主机的`dataDir`目录下新建`myid`文件,并写入对应的节点标识。Zookeeper集群通过`myid`文件识别集群节点，并通过上文配置的节点通信端口和选举端口来进行节点通信，选举出Leader节点。
+分别在三台主机的 `dataDir` 目录下新建 `myid` 文件,并写入对应的节点标识。Zookeeper 集群通过 `myid` 文件识别集群节点，并通过上文配置的节点通信端口和选举端口来进行节点通信，选举出 Leader 节点。
 
 创建存储目录：
 
@@ -157,7 +157,7 @@ server.3=hadoop003:2287:3387
 mkdir -vp  /usr/local/zookeeper-cluster/data/
 ```
 
-创建并写入节点标识到`myid`文件：
+创建并写入节点标识到 `myid` 文件：
 
 ```shell
 # hadoop001主机
@@ -178,7 +178,7 @@ echo "3" > /usr/local/zookeeper-cluster/data/myid
 
 ### 2.4 集群验证
 
-启动后使用`zkServer.sh status`查看集群各个节点状态。如图所示：三个节点进程均启动成功，并且hadoop002为leader节点，hadoop001和hadoop003为follower节点。
+启动后使用 `zkServer.sh status` 查看集群各个节点状态。如图所示：三个节点进程均启动成功，并且 hadoop002 为 leader 节点，hadoop001 和 hadoop003 为 follower 节点。
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-hadoop001.png"/> </div>
 

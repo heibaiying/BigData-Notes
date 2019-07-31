@@ -10,14 +10,14 @@
 
 ### 1.1 JDK版本说明
 
-HBase 需要依赖JDK环境，同时HBase 2.0+ 以上版本不再支持JDK 1.7 ，需要安装JDK 1.8+ 。JDK 安装方式见本仓库：
+HBase 需要依赖 JDK 环境，同时 HBase 2.0+ 以上版本不再支持 JDK 1.7 ，需要安装 JDK 1.8+ 。JDK 安装方式见本仓库：
 
-> [Linux环境下JDK安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
+> [Linux 环境下 JDK 安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux 下 JDK 安装.md)
 
 ### 1.2 Standalone模式和伪集群模式的区别
 
-+ 在`Standalone`模式下，所有守护进程都运行在一个`jvm`进程/实例中；
-+ 在伪分布模式下，HBase仍然在单个主机上运行，但是每个守护进程(HMaster，HRegionServer 和 ZooKeeper)则分别作为一个单独的进程运行。
++ 在 `Standalone` 模式下，所有守护进程都运行在一个 `jvm` 进程/实例中；
++ 在伪分布模式下，HBase 仍然在单个主机上运行，但是每个守护进程 (HMaster，HRegionServer 和 ZooKeeper) 则分别作为一个单独的进程运行。
 
 **说明：两种模式任选其一进行部署即可，对于开发测试来说区别不大。**
 
@@ -27,7 +27,7 @@ HBase 需要依赖JDK环境，同时HBase 2.0+ 以上版本不再支持JDK 1.7 �
 
 ### 2.1 下载并解压
 
-从[官方网站](https://hbase.apache.org/downloads.html)下载所需要版本的二进制安装包，并进行解压：
+从[官方网站](https://hbase.apache.org/downloads.html) 下载所需要版本的二进制安装包，并进行解压：
 
 ```shell
 # tar -zxvf hbase-2.1.4-bin.tar.gz
@@ -54,14 +54,14 @@ export PATH=$HBASE_HOME/bin:$PATH
 
 ### 2.3 进行HBase相关配置
 
-修改安装目录下的`conf/hbase-env.sh`,指定JDK的安装路径：
+修改安装目录下的 `conf/hbase-env.sh`,指定 JDK 的安装路径：
 
 ```shell
 # The java implementation to use.  Java 1.8+ required.
 export JAVA_HOME=/usr/java/jdk1.8.0_201
 ```
 
-修改安装目录下的`conf/hbase-site.xml`，增加如下配置：
+修改安装目录下的 `conf/hbase-site.xml`，增加如下配置：
 
 ```xml
 <configuration>
@@ -80,15 +80,15 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 </configuration>
 ```
 
-`hbase.rootdir`: 配置hbase数据的存储路径；
+`hbase.rootdir`: 配置 hbase 数据的存储路径；
 
-`hbase.zookeeper.property.dataDir`: 配置zookeeper数据的存储路径；
+`hbase.zookeeper.property.dataDir`: 配置 zookeeper 数据的存储路径；
 
-`hbase.unsafe.stream.capability.enforce`: 使用本地文件系统存储，不使用HDFS的情况下需要禁用此配置，设置为false。
+`hbase.unsafe.stream.capability.enforce`: 使用本地文件系统存储，不使用 HDFS 的情况下需要禁用此配置，设置为 false。
 
 ### 2.4 启动HBase
 
-由于已经将HBase的bin目录配置到环境变量，直接使用以下命令启动：
+由于已经将 HBase 的 bin 目录配置到环境变量，直接使用以下命令启动：
 
 ```shell
 # start-hbase.sh
@@ -96,7 +96,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 
 ### 2.5 验证启动是否成功
 
-验证方式一 ：使用`jps`命令查看HMaster进程是否启动。
+验证方式一 ：使用 `jps` 命令查看 HMaster 进程是否启动。
 
 ```
 [root@hadoop001 hbase-2.1.4]# jps
@@ -104,7 +104,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 15500 HMaster
 ```
 
-验证方式二 ：访问HBaseWeb UI 页面，默认端口为`16010` 。
+验证方式二 ：访问 HBaseWeb UI 页面，默认端口为 `16010` 。
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-web-ui.png"/> </div>
 
@@ -114,13 +114,13 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 
 ### 3.1 Hadoop单机伪集群安装
 
-这里我们采用HDFS作为HBase的存储方案，需要预先安装Hadoop。Hadoop的安装方式单独整理至：
+这里我们采用 HDFS 作为 HBase 的存储方案，需要预先安装 Hadoop。Hadoop 的安装方式单独整理至：
 
-> [Hadoop单机伪集群搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop单机版本环境搭建.md)
+> [Hadoop 单机伪集群搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop 单机版本环境搭建.md)
 
 ### 3.2 Hbase版本选择
 
-HBase的版本必须要与Hadoop的版本兼容，不然会出现各种Jar包冲突。这里我Hadoop安装的版本为`hadoop-2.6.0-cdh5.15.2`，为保持版本一致，选择的HBase版本为`hbase-1.2.0-cdh5.15.2` 。所有软件版本如下：
+HBase 的版本必须要与 Hadoop 的版本兼容，不然会出现各种 Jar 包冲突。这里我 Hadoop 安装的版本为 `hadoop-2.6.0-cdh5.15.2`，为保持版本一致，选择的 HBase 版本为 `hbase-1.2.0-cdh5.15.2` 。所有软件版本如下：
 
 + Hadoop 版本： hadoop-2.6.0-cdh5.15.2
 + HBase 版本： hbase-1.2.0-cdh5.15.2
@@ -159,14 +159,14 @@ export PATH=$HBASE_HOME/bin:$PATH
 
 ### 3.5 进行HBase相关配置
 
-1.修改安装目录下的`conf/hbase-env.sh`,指定JDK的安装路径：
+1.修改安装目录下的 `conf/hbase-env.sh`,指定 JDK 的安装路径：
 
 ```shell
 # The java implementation to use.  Java 1.7+ required.
 export JAVA_HOME=/usr/java/jdk1.8.0_201
 ```
 
-2.修改安装目录下的`conf/hbase-site.xml`，增加如下配置(hadoop001为主机名)：
+2.修改安装目录下的 `conf/hbase-site.xml`，增加如下配置 (hadoop001 为主机名)：
 
 ```xml
 <configuration>
@@ -175,7 +175,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
     <name>hbase.cluster.distributed</name>
     <value>true</value>
  </property>
- <!--指定 HBase 数据存储路径为HDFS上的hbase目录,hbase目录不需要预先创建，程序会自动创建-->   
+ <!--指定 HBase 数据存储路径为 HDFS 上的 hbase 目录,hbase 目录不需要预先创建，程序会自动创建-->   
  <property>
     <name>hbase.rootdir</name>
     <value>hdfs://hadoop001:8020/hbase</value>
@@ -188,7 +188,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 </configuration>
 ```
 
-3.修改安装目录下的`conf/regionservers`，指定region  servers的地址，修改后其内容如下：
+3.修改安装目录下的 `conf/regionservers`，指定 region  servers 的地址，修改后其内容如下：
 
 ```shell
 hadoop001
@@ -206,7 +206,7 @@ hadoop001
 
 ### 3.7 验证启动是否成功
 
-验证方式一 ：使用`jps`命令查看进程。其中`HMaster`，`HRegionServer`是HBase的进程，`HQuorumPeer`是HBase内置的Zookeeper的进程，其余的为HDFS和YARN的进程。
+验证方式一 ：使用 `jps` 命令查看进程。其中 `HMaster`，`HRegionServer` 是 HBase 的进程，`HQuorumPeer` 是 HBase 内置的 Zookeeper 的进程，其余的为 HDFS 和 YARN 的进程。
 
 ```shell
 [root@hadoop001 conf]# jps
@@ -223,6 +223,6 @@ hadoop001
 21933 HMaster
 ```
 
-验证方式二 ：访问HBase Web UI 界面，需要注意的是1.2 版本的HBase的访问端口为`60010`
+验证方式二 ：访问 HBase Web UI 界面，需要注意的是 1.2 版本的 HBase 的访问端口为 `60010`
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-60010.png"/> </div>

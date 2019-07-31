@@ -23,17 +23,17 @@
 
 ## 一、集群规划
 
-这里搭建一个3节点的Storm集群：三台主机上均部署`Supervisor`和`LogViewer`服务。同时为了保证高可用，除了在hadoop001上部署主`Nimbus`服务外，还在hadoop002上部署备用的`Nimbus`服务。`Nimbus`服务由Zookeeper集群进行协调管理，如果主`Nimbus`不可用，则备用`Nimbus`会成为新的主`Nimbus`。
+这里搭建一个 3 节点的 Storm 集群：三台主机上均部署 `Supervisor` 和 `LogViewer` 服务。同时为了保证高可用，除了在 hadoop001 上部署主 `Nimbus` 服务外，还在 hadoop002 上部署备用的 `Nimbus` 服务。`Nimbus` 服务由 Zookeeper 集群进行协调管理，如果主 `Nimbus` 不可用，则备用 `Nimbus` 会成为新的主 `Nimbus`。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-集群规划.png"/> </div>
 
 ## 二、前置条件
 
-Storm 运行依赖于Java 7+ 和 Python 2.6.6 +，所以需要预先安装这两个软件。同时为了保证高可用，这里我们不采用Storm内置的Zookeeper，而采用外置的Zookeeper集群。由于这三个软件在多个框架中都有依赖，其安装步骤单独整理至 ：
+Storm 运行依赖于 Java 7+ 和 Python 2.6.6 +，所以需要预先安装这两个软件。同时为了保证高可用，这里我们不采用 Storm 内置的 Zookeeper，而采用外置的 Zookeeper 集群。由于这三个软件在多个框架中都有依赖，其安装步骤单独整理至 ：
 
-- [Linux环境下JDK安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
-- [Linux环境下Python安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下Python安装.md)
-- [Zookeeper单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper单机环境和集群环境搭建.md)
+- [Linux 环境下 JDK 安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux 下 JDK 安装.md)
+- [Linux 环境下 Python 安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux 下 Python 安装.md)
+- [Zookeeper 单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper 单机环境和集群环境搭建.md)
 
 
 
@@ -70,7 +70,7 @@ export PATH=$STORM_HOME/bin:$PATH
 
 ### 3. 集群配置
 
-修改`${STORM_HOME}/conf/storm.yaml`文件，配置如下：
+修改 `${STORM_HOME}/conf/storm.yaml` 文件，配置如下：
 
 ```yaml
 # Zookeeper集群的主机列表
@@ -93,11 +93,11 @@ supervisor.slots.ports:
      - 6703
 ```
 
-`supervisor.slots.ports`参数用来配置workers进程接收消息的端口，默认每个supervisor节点上会启动4个worker，当然你也可以按照自己的需要和服务器性能进行设置，假设只想启动2个worker的话，此处配置2个端口即可。
+`supervisor.slots.ports` 参数用来配置 workers 进程接收消息的端口，默认每个 supervisor 节点上会启动 4 个 worker，当然你也可以按照自己的需要和服务器性能进行设置，假设只想启动 2 个 worker 的话，此处配置 2 个端口即可。
 
 ### 4. 安装包分发
 
-将Storm的安装包分发到其他服务器，分发后建议在这两台服务器上也配置一下Storm的环境变量。
+将 Storm 的安装包分发到其他服务器，分发后建议在这两台服务器上也配置一下 Storm 的环境变量。
 
 ```shell
 scp -r /usr/app/apache-storm-1.2.2/ root@hadoop002:/usr/app/
@@ -110,7 +110,7 @@ scp -r /usr/app/apache-storm-1.2.2/ root@hadoop003:/usr/app/
 
 ### 4.1 启动ZooKeeper集群
 
-分别到三台服务器上启动ZooKeeper服务：
+分别到三台服务器上启动 ZooKeeper 服务：
 
 ```shell
  zkServer.sh start
@@ -118,7 +118,7 @@ scp -r /usr/app/apache-storm-1.2.2/ root@hadoop003:/usr/app/
 
 ### 4.2 启动Storm集群
 
-因为要启动多个进程，所以统一采用后台进程的方式启动。进入到`${STORM_HOME}/bin`目录下，执行下面的命令：
+因为要启动多个进程，所以统一采用后台进程的方式启动。进入到 `${STORM_HOME}/bin` 目录下，执行下面的命令：
 
 **hadoop001 & hadoop002 ：**
 
@@ -135,7 +135,7 @@ nohup sh storm logviewer &
 
 **hadoop003 ：**
 
-hadoop003上只需要启动`supervisor`服务和`logviewer`服务：
+hadoop003 上只需要启动 `supervisor` 服务和 `logviewer` 服务：
 
 ```shell
 # 启动从节点 supervisor 
@@ -148,7 +148,7 @@ nohup sh storm logviewer &
 
 ### 4.3 查看集群
 
-使用`jps`查看进程，三台服务器的进程应该分别如下：
+使用 `jps` 查看进程，三台服务器的进程应该分别如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-集群-shell.png"/> </div>
 
@@ -156,7 +156,7 @@ nohup sh storm logviewer &
 
 <br/>
 
-访问hadoop001或hadoop002的`8080`端口，界面如下。可以看到有一主一备2个`Nimbus`和3个`Supervisor`，并且每个`Supervisor`有四个`slots`，即四个可用的`worker`进程，此时代表集群已经搭建成功。
+访问 hadoop001 或 hadoop002 的 `8080` 端口，界面如下。可以看到有一主一备 2 个 `Nimbus` 和 3 个 `Supervisor`，并且每个 `Supervisor` 有四个 `slots`，即四个可用的 `worker` 进程，此时代表集群已经搭建成功。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-集群搭建1.png"/> </div>
 
@@ -164,6 +164,6 @@ nohup sh storm logviewer &
 
 ## 五、高可用验证
 
-这里手动模拟主`Nimbus`异常的情况，在hadoop001上使用`kill`命令杀死`Nimbus`的线程，此时可以看到hadoop001上的`Nimbus`已经处于`offline`状态，而hadoop002上的`Nimbus`则成为新的`Leader`。
+这里手动模拟主 `Nimbus` 异常的情况，在 hadoop001 上使用 `kill` 命令杀死 `Nimbus` 的线程，此时可以看到 hadoop001 上的 `Nimbus` 已经处于 `offline` 状态，而 hadoop002 上的 `Nimbus` 则成为新的 `Leader`。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm集群搭建2.png"/> </div>

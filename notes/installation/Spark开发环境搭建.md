@@ -10,7 +10,7 @@
 
 ### 1.1 下载并解压
 
-官方下载地址：http://spark.apache.org/downloads.html ，选择Spark版本和对应的Hadoop版本后再下载：
+官方下载地址：http://spark.apache.org/downloads.html ，选择 Spark 版本和对应的 Hadoop 版本后再下载：
 
 <div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-download.png"/> </div>
 
@@ -51,14 +51,14 @@ spark-shell --master local[2]
 ```
 
 - **local**：只启动一个工作线程；
-- **local[k]**：启动k个工作线程；
-- **local[*]**：启动跟cpu数目相同的工作线程数。
+- **local[k]**：启动 k 个工作线程；
+- **local[*]**：启动跟 cpu 数目相同的工作线程数。
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-shell-local.png"/> </div>
 
 <br/>
 
-进入spark-shell后，程序已经自动创建好了上下文`SparkContext`，等效于执行了下面的Scala代码：
+进入 spark-shell 后，程序已经自动创建好了上下文 `SparkContext`，等效于执行了下面的 Scala 代码：
 
 ```scala
 val conf = new SparkConf().setAppName("Spark shell").setMaster("local[2]")
@@ -68,7 +68,7 @@ val sc = new SparkContext(conf)
 
 ## 二、词频统计案例
 
-安装完成后可以先做一个简单的词频统计例子，感受spark的魅力。准备一个词频统计的文件样本`wc.txt`，内容如下：
+安装完成后可以先做一个简单的词频统计例子，感受 spark 的魅力。准备一个词频统计的文件样本 `wc.txt`，内容如下：
 
 ```txt
 hadoop,spark,hadoop
@@ -76,7 +76,7 @@ spark,flink,flink,spark
 hadoop,hadoop
 ```
 
-在scala交互式命令行中执行如下Scala语句：
+在 scala 交互式命令行中执行如下 Scala 语句：
 
 ```scala
 val file = spark.sparkContext.textFile("file:///usr/app/wc.txt")
@@ -88,7 +88,7 @@ wordCounts.collect
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-shell.png"/> </div>
 
-同时还可以通过Web UI查看作业的执行情况，访问端口为`4040`：
+同时还可以通过 Web UI 查看作业的执行情况，访问端口为 `4040`：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-shell-web-ui.png"/> </div>
 
@@ -98,15 +98,15 @@ wordCounts.collect
 
 ## 三、Scala开发环境配置
 
-Spark是基于Scala语言进行开发的，分别提供了基于Scala、Java、Python语言的API，如果你想使用Scala语言进行开发，则需要搭建Scala语言的开发环境。
+Spark 是基于 Scala 语言进行开发的，分别提供了基于 Scala、Java、Python 语言的 API，如果你想使用 Scala 语言进行开发，则需要搭建 Scala 语言的开发环境。
 
 ### 3.1 前置条件
 
-Scala的运行依赖于JDK，所以需要你本机有安装对应版本的JDK，最新的Scala 2.12.x需要JDK 1.8+。
+Scala 的运行依赖于 JDK，所以需要你本机有安装对应版本的 JDK，最新的 Scala 2.12.x 需要 JDK 1.8+。
 
 ### 3.2 安装Scala插件
 
-IDEA默认不支持Scala语言的开发，需要通过插件进行扩展。打开 IDEA，依次点击 **File** => **settings**=> **plugins** 选项卡，搜索Scala插件(如下图)。找到插件后进行安装，并重启IDEA使得安装生效。
+IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。打开 IDEA，依次点击 **File** => **settings**=> **plugins** 选项卡，搜索 Scala 插件 (如下图)。找到插件后进行安装，并重启 IDEA 使得安装生效。
 
 <div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-plugin.png"/> </div>
 
@@ -114,7 +114,7 @@ IDEA默认不支持Scala语言的开发，需要通过插件进行扩展。打�
 
 ### 3.3 创建Scala项目
 
-在IDEA中依次点击 **File** => **New** => **Project** 选项卡，然后选择创建`Scala—IDEA`工程：
+在 IDEA 中依次点击 **File** => **New** => **Project** 选项卡，然后选择创建 `Scala—IDEA` 工程：
 
 <div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-newproject-scala.png"/> </div>
 
@@ -124,7 +124,7 @@ IDEA默认不支持Scala语言的开发，需要通过插件进行扩展。打�
 
 #### 1. 方式一
 
-此时看到`Scala SDK`为空，依次点击`Create` => `Download` ，选择所需的版本后，点击`OK`按钮进行下载，下载完成点击`Finish`进入工程。
+此时看到 `Scala SDK` 为空，依次点击 `Create` => `Download` ，选择所需的版本后，点击 `OK` 按钮进行下载，下载完成点击 `Finish` 进入工程。
 
 <div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-select.png"/> </div>
 
@@ -132,15 +132,15 @@ IDEA默认不支持Scala语言的开发，需要通过插件进行扩展。打�
 
 #### 2. 方式二
 
-方式一是Scala官方安装指南里使用的方式，但下载速度通常比较慢，且这种安装下并没有直接提供Scala命令行工具。所以个人推荐到官网下载安装包进行安装，下载地址：https://www.scala-lang.org/download/
+方式一是 Scala 官方安装指南里使用的方式，但下载速度通常比较慢，且这种安装下并没有直接提供 Scala 命令行工具。所以个人推荐到官网下载安装包进行安装，下载地址：https://www.scala-lang.org/download/
 
-这里我的系统是Windows，下载msi版本的安装包后，一直点击下一步进行安装，安装完成后会自动配置好环境变量。
+这里我的系统是 Windows，下载 msi 版本的安装包后，一直点击下一步进行安装，安装完成后会自动配置好环境变量。
 
 <div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-other-resources.png"/> </div>
 
 
 
-由于安装时已经自动配置好环境变量，所以IDEA会自动选择对应版本的SDK。
+由于安装时已经自动配置好环境变量，所以 IDEA 会自动选择对应版本的 SDK。
 
 <div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-2.1.8.png"/> </div>
 
@@ -148,7 +148,7 @@ IDEA默认不支持Scala语言的开发，需要通过插件进行扩展。打�
 
 ### 3.5 创建Hello World
 
-在工程 `src`目录上右击 **New** => **Scala class** 创建`Hello.scala`。输入代码如下，完成后点击运行按钮，成功运行则代表搭建成功。
+在工程 `src` 目录上右击 **New** => **Scala class** 创建 `Hello.scala`。输入代码如下，完成后点击运行按钮，成功运行则代表搭建成功。
 
 <div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-hello-world.png"/> </div>
 
@@ -158,7 +158,7 @@ IDEA默认不支持Scala语言的开发，需要通过插件进行扩展。打�
 
 ### 3.6 切换Scala版本
 
-在日常的开发中，由于对应软件（如Spark）的版本切换，可能导致需要切换Scala的版本，则可以在`Project Structures`中的`Global Libraries`选项卡中进行切换。
+在日常的开发中，由于对应软件（如 Spark）的版本切换，可能导致需要切换 Scala 的版本，则可以在 `Project Structures` 中的 `Global Libraries` 选项卡中进行切换。
 
 <div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-change.png"/> </div>
 
@@ -168,11 +168,11 @@ IDEA默认不支持Scala语言的开发，需要通过插件进行扩展。打�
 
 ### 3.7 可能出现的问题
 
-在IDEA中有时候重新打开项目后，右击并不会出现新建`scala`文件的选项，或者在编写时没有Scala语法提示，此时可以先删除`Global Libraries`中配置好的SDK，之后再重新添加：
+在 IDEA 中有时候重新打开项目后，右击并不会出现新建 `scala` 文件的选项，或者在编写时没有 Scala 语法提示，此时可以先删除 `Global Libraries` 中配置好的 SDK，之后再重新添加：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-sdk.png"/> </div>
 
 
 
-**另外在IDEA中以本地模式运行Spark项目是不需要在本机搭建Spark和Hadoop环境的。**
+**另外在 IDEA 中以本地模式运行 Spark 项目是不需要在本机搭建 Spark 和 Hadoop 环境的。**
 

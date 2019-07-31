@@ -12,19 +12,19 @@
 
 ## 一、前置条件
 
-Hadoop的运行依赖JDK，需要预先安装，安装步骤见：
+Hadoop 的运行依赖 JDK，需要预先安装，安装步骤见：
 
-+ [Linux下JDK的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/JDK%E5%AE%89%E8%A3%85.md)
++ [Linux 下 JDK 的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/JDK%E5%AE%89%E8%A3%85.md)
 
 
 
 ## 二、配置免密登录
 
-Hadoop组件之间需要基于SSH进行通讯。
+Hadoop 组件之间需要基于 SSH 进行通讯。
 
 #### 2.1 配置映射
 
-配置ip地址和主机名映射：
+配置 ip 地址和主机名映射：
 
 ```shell
 vim /etc/hosts
@@ -42,13 +42,13 @@ ssh-keygen -t rsa
 
 ### 3.3 授权
 
-进入`~/.ssh`目录下，查看生成的公匙和私匙，并将公匙写入到授权文件：
+进入 `~/.ssh` 目录下，查看生成的公匙和私匙，并将公匙写入到授权文件：
 
 ```shell
 [root@@hadoop001 sbin]#  cd ~/.ssh
 [root@@hadoop001 .ssh]# ll
--rw-------. 1 root root 1675 3月  15 09:48 id_rsa
--rw-r--r--. 1 root root  388 3月  15 09:48 id_rsa.pub
+-rw-------. 1 root root 1675 3 月  15 09:48 id_rsa
+-rw-r--r--. 1 root root  388 3 月  15 09:48 id_rsa.pub
 ```
 
 ```shell
@@ -65,7 +65,7 @@ ssh-keygen -t rsa
 
 ### 3.1 下载并解压
 
-下载Hadoop安装包，这里我下载的是CDH版本的，下载地址为：http://archive.cloudera.com/cdh5/cdh/5/
+下载 Hadoop 安装包，这里我下载的是 CDH 版本的，下载地址为：http://archive.cloudera.com/cdh5/cdh/5/
 
 ```shell
 # 解压
@@ -87,7 +87,7 @@ export HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
 export  PATH=${HADOOP_HOME}/bin:$PATH
 ```
 
-执行`source`命令，使得配置的环境变量立即生效：
+执行 `source` 命令，使得配置的环境变量立即生效：
 
 ```shell
 # source /etc/profile
@@ -97,7 +97,7 @@ export  PATH=${HADOOP_HOME}/bin:$PATH
 
 ### 3.3 修改Hadoop配置
 
-进入`${HADOOP_HOME}/etc/hadoop/ `目录下，修改以下配置：
+进入 `${HADOOP_HOME}/etc/hadoop/ ` 目录下，修改以下配置：
 
 #### 1. hadoop-env.sh
 
@@ -111,12 +111,12 @@ export  JAVA_HOME=/usr/java/jdk1.8.0_201/
 ```xml
 <configuration>
     <property>
-        <!--指定namenode的hdfs协议文件系统的通信地址-->
+        <!--指定 namenode 的 hdfs 协议文件系统的通信地址-->
         <name>fs.defaultFS</name>
         <value>hdfs://hadoop001:8020</value>
     </property>
     <property>
-        <!--指定hadoop存储临时文件的目录-->
+        <!--指定 hadoop 存储临时文件的目录-->
         <name>hadoop.tmp.dir</name>
         <value>/home/hadoop/tmp</value>
     </property>
@@ -130,7 +130,7 @@ export  JAVA_HOME=/usr/java/jdk1.8.0_201/
 ```xml
 <configuration>
     <property>
-        <!--由于我们这里搭建是单机版本，所以指定dfs的副本系数为1-->
+        <!--由于我们这里搭建是单机版本，所以指定 dfs 的副本系数为 1-->
         <name>dfs.replication</name>
         <value>1</value>
     </property>
@@ -139,7 +139,7 @@ export  JAVA_HOME=/usr/java/jdk1.8.0_201/
 
 #### 4. slaves
 
-配置所有从属节点的主机名或IP地址，由于是单机版本，所以指定本机即可：
+配置所有从属节点的主机名或 IP 地址，由于是单机版本，所以指定本机即可：
 
 ```shell
 hadoop001
@@ -149,7 +149,7 @@ hadoop001
 
 ### 3.4 关闭防火墙
 
-不关闭防火墙可能导致无法访问Hadoop的Web UI界面：
+不关闭防火墙可能导致无法访问 Hadoop 的 Web UI 界面：
 
 ```shell
 # 查看防火墙状态
@@ -162,7 +162,7 @@ sudo systemctl stop firewalld.service
 
 ### 3.5 初始化
 
-第一次启动Hadoop时需要进行初始化，进入`${HADOOP_HOME}/bin/`目录下，执行以下命令：
+第一次启动 Hadoop 时需要进行初始化，进入 `${HADOOP_HOME}/bin/` 目录下，执行以下命令：
 
 ```shell
 [root@hadoop001 bin]# ./hdfs namenode -format
@@ -172,7 +172,7 @@ sudo systemctl stop firewalld.service
 
 ### 3.6 启动HDFS
 
-进入`${HADOOP_HOME}/sbin/`目录下，启动HDFS：
+进入 `${HADOOP_HOME}/sbin/` 目录下，启动 HDFS：
 
 ```shell
 [root@hadoop001 sbin]# ./start-dfs.sh
@@ -182,7 +182,7 @@ sudo systemctl stop firewalld.service
 
 ### 3.7 验证是否启动成功
 
-方式一：执行`jps`查看`NameNode`和`DataNode`服务是否已经启动：
+方式一：执行 `jps` 查看 `NameNode` 和 `DataNode` 服务是否已经启动：
 
 ```shell
 [root@hadoop001 hadoop-2.6.0-cdh5.15.2]# jps
@@ -193,7 +193,7 @@ sudo systemctl stop firewalld.service
 
 
 
-方式二：查看Web UI界面，端口为`50070`：
+方式二：查看 Web UI 界面，端口为 `50070`：
 
 <div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop安装验证.png"/> </div>
 
@@ -203,7 +203,7 @@ sudo systemctl stop firewalld.service
 
 ### 4.1 修改配置
 
-进入`${HADOOP_HOME}/etc/hadoop/ `目录下，修改以下配置：
+进入 `${HADOOP_HOME}/etc/hadoop/ ` 目录下，修改以下配置：
 
 #### 1. mapred-site.xml
 
@@ -226,7 +226,7 @@ cp mapred-site.xml.template mapred-site.xml
 ```xml
 <configuration>
     <property>
-        <!--配置NodeManager上运行的附属服务。需要配置成mapreduce_shuffle后才可以在Yarn上运行MapReduce程序。-->
+        <!--配置 NodeManager 上运行的附属服务。需要配置成 mapreduce_shuffle 后才可以在 Yarn 上运行 MapReduce 程序。-->
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property>
@@ -237,7 +237,7 @@ cp mapred-site.xml.template mapred-site.xml
 
 ### 4.2 启动服务
 
-进入`${HADOOP_HOME}/sbin/`目录下，启动YARN：
+进入 `${HADOOP_HOME}/sbin/` 目录下，启动 YARN：
 
 ```shell
 ./start-yarn.sh
@@ -247,7 +247,7 @@ cp mapred-site.xml.template mapred-site.xml
 
 #### 4.3 验证是否启动成功
 
-方式一：执行`jps`命令查看`NodeManager`和`ResourceManager`服务是否已经启动：
+方式一：执行 `jps` 命令查看 `NodeManager` 和 `ResourceManager` 服务是否已经启动：
 
 ```shell
 [root@hadoop001 hadoop-2.6.0-cdh5.15.2]# jps
@@ -258,6 +258,6 @@ cp mapred-site.xml.template mapred-site.xml
 9390 SecondaryNameNode
 ```
 
-方式二：查看Web UI界面，端口号为`8088`：
+方式二：查看 Web UI 界面，端口号为 `8088`：
 
 <div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-yarn安装验证.png"/> </div>

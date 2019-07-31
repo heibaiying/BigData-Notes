@@ -24,8 +24,8 @@
 
 添加如下网络配置：
 
-+ IPADDR需要和宿主机同一个网段；
-+ GATEWAY保持和宿主机一致；
++ IPADDR 需要和宿主机同一个网段；
++ GATEWAY 保持和宿主机一致；
 
 ```properties
 BOOTPROTO=static
@@ -75,29 +75,29 @@ ONBOOT=yes
 
 ## 二、虚拟机多个静态IP配置
 
-如果一台虚拟机需要经常在不同网络环境使用，可以配置多个静态IP。
+如果一台虚拟机需要经常在不同网络环境使用，可以配置多个静态 IP。
 
 ### 1. 配置多网卡
 
-这里我是用的虚拟机是virtualBox，开启多网卡配置方式如下：
+这里我是用的虚拟机是 virtualBox，开启多网卡配置方式如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/virtualbox-multi-network.png"/> </div>
 
 ### 2. 查看网卡名称
 
-使用`ifconfig`，查看第二块网卡名称，这里我的名称为`enp0s8`：
+使用 `ifconfig`，查看第二块网卡名称，这里我的名称为 `enp0s8`：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/mutli-net-ip.png"/> </div>
 
 ### 3. 配置第二块网卡
 
-开启多网卡后并不会自动生成配置文件，需要拷贝`ifcfg-enp0s3`进行修改：
+开启多网卡后并不会自动生成配置文件，需要拷贝 `ifcfg-enp0s3` 进行修改：
 
 ```shell
 # cp ifcfg-enp0s3 ifcfg-enp0s8
 ```
 
-静态IP配置方法如上，这里不再赘述。除了静态IP参数外，以下三个参数还需要修改，UUID必须与`ifcfg-enp0s3`中的不一样：
+静态 IP 配置方法如上，这里不再赘述。除了静态 IP 参数外，以下三个参数还需要修改，UUID 必须与 `ifcfg-enp0s3` 中的不一样：
 
 ```properties
 NAME=enp0s8

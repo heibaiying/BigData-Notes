@@ -20,23 +20,23 @@
 
 ## 一、集群规划
 
-这里搭建一个3节点的Spark集群，其中三台主机上均部署`Worker`服务。同时为了保证高可用，除了在hadoop001上部署主`Master`服务外，还在hadoop002和hadoop003上分别部署备用的`Master`服务，Master服务由Zookeeper集群进行协调管理，如果主`Master`不可用，则备用`Master`会成为新的主`Master`。
+这里搭建一个 3 节点的 Spark 集群，其中三台主机上均部署 `Worker` 服务。同时为了保证高可用，除了在 hadoop001 上部署主 `Master` 服务外，还在 hadoop002 和 hadoop003 上分别部署备用的 `Master` 服务，Master 服务由 Zookeeper 集群进行协调管理，如果主 `Master` 不可用，则备用 `Master` 会成为新的主 `Master`。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark集群规划.png"/> </div>
 
 ## 二、前置条件
 
-搭建Spark集群前，需要保证JDK环境、Zookeeper集群和Hadoop集群已经搭建，相关步骤可以参阅：
+搭建 Spark 集群前，需要保证 JDK 环境、Zookeeper 集群和 Hadoop 集群已经搭建，相关步骤可以参阅：
 
-- [Linux环境下JDK安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux下JDK安装.md)
-- [Zookeeper单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper单机环境和集群环境搭建.md)
-- [Hadoop集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop集群环境搭建.md)
+- [Linux 环境下 JDK 安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Linux 下 JDK 安装.md)
+- [Zookeeper 单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper 单机环境和集群环境搭建.md)
+- [Hadoop 集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop 集群环境搭建.md)
 
 ## 三、Spark集群搭建
 
 ### 3.1 下载解压
 
-下载所需版本的Spark，官网下载地址：http://spark.apache.org/downloads.html
+下载所需版本的 Spark，官网下载地址：http://spark.apache.org/downloads.html
 
 <div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-download.png"/> </div>
 
@@ -71,7 +71,7 @@ export  PATH=${SPARK_HOME}/bin:$PATH
 
 ### 3.3 集群配置
 
-进入`${SPARK_HOME}/conf`目录，拷贝配置样本进行修改：
+进入 `${SPARK_HOME}/conf` 目录，拷贝配置样本进行修改：
 
 #### 1. spark-env.sh
 
@@ -94,7 +94,7 @@ SPARK_DAEMON_JAVA_OPTS="-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zoo
 cp slaves.template slaves
 ```
 
-配置所有Woker节点的位置：
+配置所有 Woker 节点的位置：
 
 ```properties
 hadoop001
@@ -104,7 +104,7 @@ hadoop003
 
 ### 3.4 安装包分发
 
-将Spark的安装包分发到其他服务器，分发后建议在这两台服务器上也配置一下Spark的环境变量。
+将 Spark 的安装包分发到其他服务器，分发后建议在这两台服务器上也配置一下 Spark 的环境变量。
 
 ```shell
 scp -r /usr/app/spark-2.4.0-bin-hadoop2.6/   hadoop002:usr/app/
@@ -117,7 +117,7 @@ scp -r /usr/app/spark-2.4.0-bin-hadoop2.6/   hadoop003:usr/app/
 
 ### 4.1 启动ZooKeeper集群
 
-分别到三台服务器上启动ZooKeeper服务：
+分别到三台服务器上启动 ZooKeeper 服务：
 
 ```shell
  zkServer.sh start
@@ -134,13 +134,13 @@ start-yarn.sh
 
 ### 4.3 启动Spark集群
 
-进入hadoop001的` ${SPARK_HOME}/sbin`目录下，执行下面命令启动集群。执行命令后，会在hadoop001上启动`Maser`服务，会在`slaves`配置文件中配置的所有节点上启动`Worker`服务。
+进入 hadoop001 的 ` ${SPARK_HOME}/sbin` 目录下，执行下面命令启动集群。执行命令后，会在 hadoop001 上启动 `Maser` 服务，会在 `slaves` 配置文件中配置的所有节点上启动 `Worker` 服务。
 
 ```shell
 start-all.sh
 ```
 
-分别在hadoop002和hadoop003上执行下面的命令，启动备用的`Master`服务：
+分别在 hadoop002 和 hadoop003 上执行下面的命令，启动备用的 `Master` 服务：
 
 ```shell
 # ${SPARK_HOME}/sbin 下执行
@@ -149,11 +149,11 @@ start-master.sh
 
 ### 4.4 查看服务
 
-查看Spark的Web-UI页面，端口为`8080`。此时可以看到hadoop001上的Master节点处于`ALIVE`状态，并有3个可用的`Worker`节点。
+查看 Spark 的 Web-UI 页面，端口为 `8080`。此时可以看到 hadoop001 上的 Master 节点处于 `ALIVE` 状态，并有 3 个可用的 `Worker` 节点。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群搭建1.png"/> </div>
 
-而hadoop002和hadoop003上的Master节点均处于`STANDBY`状态，没有可用的`Worker`节点。
+而 hadoop002 和 hadoop003 上的 Master 节点均处于 `STANDBY` 状态，没有可用的 `Worker` 节点。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群搭建2.png"/> </div>
 
@@ -163,19 +163,19 @@ start-master.sh
 
 ## 五、验证集群高可用
 
-此时可以使用`kill`命令杀死hadoop001上的`Master`进程，此时备用`Master`会中会有一个再次成为`主Master`，我这里是hadoop002，可以看到hadoop2上的`Master`经过`RECOVERING`后成为了新的主`Master`，并且获得了全部可以用的`Workers`。
+此时可以使用 `kill` 命令杀死 hadoop001 上的 `Master` 进程，此时备用 `Master` 会中会有一个再次成为 ` 主 Master`，我这里是 hadoop002，可以看到 hadoop2 上的 `Master` 经过 `RECOVERING` 后成为了新的主 `Master`，并且获得了全部可以用的 `Workers`。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群搭建4.png"/> </div>
 
-Hadoop002上的`Master`成为主`Master`，并获得了全部可以用的`Workers`。
+Hadoop002 上的 `Master` 成为主 `Master`，并获得了全部可以用的 `Workers`。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群搭建5.png"/> </div>
 
-此时如果你再在hadoop001上使用`start-master.sh`启动Master服务，那么其会作为备用`Master`存在。
+此时如果你再在 hadoop001 上使用 `start-master.sh` 启动 Master 服务，那么其会作为备用 `Master` 存在。
 
 ## 六、提交作业
 
-和单机环境下的提交到Yarn上的命令完全一致，这里以Spark内置的计算Pi的样例程序为例，提交命令如下：
+和单机环境下的提交到 Yarn 上的命令完全一致，这里以 Spark 内置的计算 Pi 的样例程序为例，提交命令如下：
 
 ```shell
 spark-submit \

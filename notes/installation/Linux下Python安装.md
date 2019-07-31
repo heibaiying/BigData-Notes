@@ -2,11 +2,11 @@
 
 >**系统环境**：centos 7.6
 >
->**Python版本**：Python-3.6.8
+>**Python 版本**：Python-3.6.8
 
 ### 1. 环境依赖
 
-Python3.x的安装需要依赖这四个组件：gcc， zlib，zlib-devel，openssl-devel；所以需要预先安装，命令如下：
+Python3.x 的安装需要依赖这四个组件：gcc， zlib，zlib-devel，openssl-devel；所以需要预先安装，命令如下：
 
 ```shell
 yum install gcc -y
@@ -17,7 +17,7 @@ yum install openssl-devel -y
 
 ### 2. 下载编译
 
-Python源码包下载地址： https://www.python.org/downloads/
+Python 源码包下载地址： https://www.python.org/downloads/
 
 ```shell
 # wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz
@@ -29,7 +29,7 @@ Python源码包下载地址： https://www.python.org/downloads/
 # tar -zxvf Python-3.6.8.tgz
 ```
 
-进入根目录进行编译，可以指定编译安装的路径，这里我们指定为`/usr/app/python3.6` ：
+进入根目录进行编译，可以指定编译安装的路径，这里我们指定为 `/usr/app/python3.6` ：
 
 ```shell
 # cd Python-3.6.8
@@ -56,7 +56,7 @@ source /etc/profile
 
 ### 5. 验证安装是否成功
 
-输入`python3`命令，如果能进入python交互环境，则代表安装成功：
+输入 `python3` 命令，如果能进入 python 交互环境，则代表安装成功：
 
 ```shell
 [root@hadoop001 app]# python3

@@ -26,17 +26,17 @@
 ### 1.1 数据准备
 
 ```scala
-// 需要导入spark sql内置的函数包
+// 需要导入 spark sql 内置的函数包
 import org.apache.spark.sql.functions._
 
 val spark = SparkSession.builder().appName("aggregations").master("local[2]").getOrCreate()
 val empDF = spark.read.json("/usr/file/json/emp.json")
-// 注册为临时视图，用于后面演示SQL查询
+// 注册为临时视图，用于后面演示 SQL 查询
 empDF.createOrReplaceTempView("emp")
 empDF.show()
 ```
 
-> 注：emp.json可以从本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources)目录下载。
+> 注：emp.json 可以从本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources) 目录下载。
 
 ### 1.2 count
 
@@ -54,7 +54,7 @@ empDF.select(countDistinct("deptno")).show()
 
 ### 1.4 approx_count_distinct 
 
-通常在使用大型数据集时，你可能关注的只是近似值而不是准确值，这时可以使用approx_count_distinct函数，并可以使用第二个参数指定最大允许误差。
+通常在使用大型数据集时，你可能关注的只是近似值而不是准确值，这时可以使用 approx_count_distinct 函数，并可以使用第二个参数指定最大允许误差。
 
 ```scala
 empDF.select(approx_count_distinct ("ename",0.1)).show()
@@ -62,7 +62,7 @@ empDF.select(approx_count_distinct ("ename",0.1)).show()
 
 ### 1.5 first & last 
 
-获取DataFrame中指定列的第一个值或者最后一个值。
+获取 DataFrame 中指定列的第一个值或者最后一个值。
 
 ```scala
 empDF.select(first("ename"),last("job")).show()
@@ -70,7 +70,7 @@ empDF.select(first("ename"),last("job")).show()
 
 ### 1.6 min & max
 
-获取DataFrame中指定列的最小值或者最大值。
+获取 DataFrame 中指定列的最小值或者最大值。
 
 ```scala
 empDF.select(min("sal"),max("sal")).show()
@@ -95,7 +95,7 @@ empDF.select(avg("sal")).show()
 
 ### 1.9 数学函数
 
-Spark SQL中还支持多种数学聚合函数，用于通常的数学计算，以下是一些常用的例子：
+Spark SQL 中还支持多种数学聚合函数，用于通常的数学计算，以下是一些常用的例子：
 
 ```scala
 // 1.计算总体方差、均方差、总体标准差、样本标准差
@@ -129,7 +129,7 @@ scala>  empDF.agg(collect_set("job"), collect_list("ename")).show()
 
 ```scala
 empDF.groupBy("deptno", "job").count().show()
-//等价SQL
+//等价 SQL
 spark.sql("SELECT deptno, job, count(*) FROM emp GROUP BY deptno, job").show()
 
 输出：
@@ -154,7 +154,7 @@ spark.sql("SELECT deptno, job, count(*) FROM emp GROUP BY deptno, job").show()
 empDF.groupBy("deptno").agg(count("ename").alias("人数"), sum("sal").alias("总工资")).show()
 // 等价语法
 empDF.groupBy("deptno").agg("ename"->"count","sal"->"sum").show()
-// 等价SQL
+// 等价 SQL
 spark.sql("SELECT deptno, count(ename) ,sum(sal) FROM emp GROUP BY deptno").show()
 
 输出：
@@ -171,10 +171,10 @@ spark.sql("SELECT deptno, count(ename) ,sum(sal) FROM emp GROUP BY deptno").show
 
 ## 三、自定义聚合函数
 
-Scala提供了两种自定义聚合函数的方法，分别如下：
+Scala 提供了两种自定义聚合函数的方法，分别如下：
 
-- 有类型的自定义聚合函数，主要适用于DataSet；
-- 无类型的自定义聚合函数，主要适用于DataFrame。
+- 有类型的自定义聚合函数，主要适用于 DataSet；
+- 无类型的自定义聚合函数，主要适用于 DataFrame。
 
 以下分别使用两种方式来自定义一个求平均值的聚合函数，这里以计算员工平均工资为例。两种自定义方式分别如下：
 
@@ -184,7 +184,7 @@ Scala提供了两种自定义聚合函数的方法，分别如下：
 import org.apache.spark.sql.expressions.Aggregator
 import org.apache.spark.sql.{Encoder, Encoders, SparkSession, functions}
 
-// 1.定义员工类,对于可能存在null值的字段需要使用Option进行包装
+// 1.定义员工类,对于可能存在 null 值的字段需要使用 Option 进行包装
 case class Emp(ename: String, comm: scala.Option[Double], deptno: Long, empno: Long,
                hiredate: String, job: String, mgr: scala.Option[Long], sal: Double)
 
@@ -193,7 +193,7 @@ case class SumAndCount(var sum: Double, var count: Long)
 
 /* 3.自定义聚合函数
  * @IN  聚合操作的输入类型
- * @BUF reduction操作输出值的类型
+ * @BUF reduction 操作输出值的类型
  * @OUT 聚合操作的输出类型
  */
 object MyAverage extends Aggregator[Emp, SumAndCount, Double] {
@@ -201,14 +201,14 @@ object MyAverage extends Aggregator[Emp, SumAndCount, Double] {
     // 4.用于聚合操作的的初始零值
     override def zero: SumAndCount = SumAndCount(0, 0)
     
-    // 5.同一分区中的reduce操作
+    // 5.同一分区中的 reduce 操作
     override def reduce(avg: SumAndCount, emp: Emp): SumAndCount = {
         avg.sum += emp.sal
         avg.count += 1
         avg
     }
 
-    // 6.不同分区中的merge操作
+    // 6.不同分区中的 merge 操作
     override def merge(avg1: SumAndCount, avg2: SumAndCount): SumAndCount = {
         avg1.sum += avg2.sum
         avg1.count += avg2.count
@@ -234,12 +234,12 @@ object SparkSqlApp {
         import spark.implicits._
         val ds = spark.read.json("file/emp.json").as[Emp]
 
-        // 10.使用内置avg()函数和自定义函数分别进行计算，验证自定义函数是否正确
+        // 10.使用内置 avg() 函数和自定义函数分别进行计算，验证自定义函数是否正确
         val myAvg = ds.select(MyAverage.toColumn.name("average_sal")).first()
         val avg = ds.select(functions.avg(ds.col("sal"))).first().get(0)
 
-        println("自定义average函数 : " + myAvg)
-        println("内置的average函数 : " + avg)
+        println("自定义 average 函数 : " + myAvg)
+        println("内置的 average 函数 : " + avg)
     }
 }
 ```
@@ -250,10 +250,10 @@ object SparkSqlApp {
 
 
 
-关于`zero`,`reduce`,`merge`,`finish`方法的作用在上图都有说明，这里解释一下中间类型和输出类型的编码转换，这个写法比较固定，基本上就是两种情况：
+关于 `zero`,`reduce`,`merge`,`finish` 方法的作用在上图都有说明，这里解释一下中间类型和输出类型的编码转换，这个写法比较固定，基本上就是两种情况：
 
-- 自定义类型Case Class或者元组就使用`Encoders.product`方法；
-- 基本类型就使用其对应名称的方法，如`scalaByte `，`scalaFloat`，`scalaShort`等，示例如下：
+- 自定义类型 Case Class 或者元组就使用 `Encoders.product` 方法；
+- 基本类型就使用其对应名称的方法，如 `scalaByte `，`scalaFloat`，`scalaShort` 等，示例如下：
 
 ```scala
 override def bufferEncoder: Encoder[SumAndCount] = Encoders.product
@@ -283,7 +283,7 @@ object MyAverage extends UserDefinedAggregateFunction {
   // 3.聚合操作输出参数的类型
   def dataType: DataType = DoubleType
 
-  // 4.此函数是否始终在相同输入上返回相同的输出,通常为true
+  // 4.此函数是否始终在相同输入上返回相同的输出,通常为 true
   def deterministic: Boolean = true
 
   // 5.定义零值
@@ -292,7 +292,7 @@ object MyAverage extends UserDefinedAggregateFunction {
     buffer(1) = 0L
   }
 
-  // 6.同一分区中的reduce操作
+  // 6.同一分区中的 reduce 操作
   def update(buffer: MutableAggregationBuffer, input: Row): Unit = {
     if (!input.isNullAt(0)) {
       buffer(0) = buffer.getLong(0) + input.getLong(0)
@@ -300,7 +300,7 @@ object MyAverage extends UserDefinedAggregateFunction {
     }
   }
 
-  // 7.不同分区中的merge操作
+  // 7.不同分区中的 merge 操作
   def merge(buffer1: MutableAggregationBuffer, buffer2: Row): Unit = {
     buffer1(0) = buffer1.getLong(0) + buffer2.getLong(0)
     buffer1(1) = buffer1.getLong(1) + buffer2.getLong(1)
@@ -326,8 +326,8 @@ object SparkSqlApp {
     val myAvg = spark.sql("SELECT myAverage(sal) as avg_sal FROM emp").first()
     val avg = spark.sql("SELECT avg(sal) as avg_sal FROM emp").first()
 
-    println("自定义average函数 : " + myAvg)
-    println("内置的average函数 : " + avg)
+    println("自定义 average 函数 : " + myAvg)
+    println("内置的 average 函数 : " + avg)
   }
 }
 ```

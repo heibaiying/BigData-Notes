@@ -29,7 +29,7 @@
 
 ## 一、基本命令
 
-打开Hbase Shell：
+打开 Hbase Shell：
 
 ```shell
 # hbase shell
@@ -68,7 +68,7 @@ list
 
 #### 2.2 创建表
 
- **命令格式**： create '表名称', '列族名称1','列族名称2','列名称N'
+ **命令格式**： create '表名称', '列族名称 1','列族名称 2','列名称 N'
 
 ```shell
 # 创建一张名为Student的表,包含基本信息（baseInfo）、学校信息（schoolInfo）两个列族
@@ -85,7 +85,7 @@ describe 'Student'
 
 #### 2.4 表的启用/禁用
 
-enable和disable可以启用/禁用这个表,is_enabled和is_disabled来检查表是否被禁用
+enable 和 disable 可以启用/禁用这个表,is_enabled 和 is_disabled 来检查表是否被禁用
 
 ```shell
 # 禁用表
@@ -136,7 +136,7 @@ alter 'Student', {NAME => 'teacherInfo', METHOD => 'delete'}
 
 #### 3.3 更改列族存储版本的限制
 
-默认情况下，列族只存储一个版本的数据，如果需要存储多个版本的数据，则需要修改列族的属性。修改后可通过`desc`命令查看。
+默认情况下，列族只存储一个版本的数据，如果需要存储多个版本的数据，则需要修改列族的属性。修改后可通过 `desc` 命令查看。
 
 ```shell
 alter 'Student',{NAME=>'baseInfo',VERSIONS=>3}
@@ -194,13 +194,13 @@ delete 'Student','rowkey3','baseInfo:name'
 
 ## 四、查询
 
-hbase中访问数据有两种基本的方式：
+hbase 中访问数据有两种基本的方式：
 
-+ 按指定rowkey获取数据：get方法；
++ 按指定 rowkey 获取数据：get 方法；
 
-+ 按指定条件获取数据：scan方法。
++ 按指定条件获取数据：scan 方法。
 
-`scan`可以设置begin和end参数来访问一个范围内所有的数据。get本质上就是begin和end相等的一种特殊的scan。
+`scan` 可以设置 begin 和 end 参数来访问一个范围内所有的数据。get 本质上就是 begin 和 end 相等的一种特殊的 scan。
 
 #### 4.1Get查询
 
@@ -232,9 +232,9 @@ scan 'Student', {COLUMN=>'baseInfo'}
 scan 'Student', {COLUMNS=> 'baseInfo:birthday'}
 ```
 
-除了列`（COLUMNS）`修饰词外，HBase还支持`Limit`（限制查询结果行数），`STARTROW`（`ROWKEY`起始行，会先根据这个`key`定位到`region`，再向后扫描）、`STOPROW`(结束行)、`TIMERANGE`（限定时间戳范围）、`VERSIONS`（版本数）、和`FILTER`（按条件过滤行）等。
+除了列 `（COLUMNS）` 修饰词外，HBase 还支持 `Limit`（限制查询结果行数），`STARTROW`（`ROWKEY` 起始行，会先根据这个 `key` 定位到 `region`，再向后扫描）、`STOPROW`(结束行)、`TIMERANGE`（限定时间戳范围）、`VERSIONS`（版本数）、和 `FILTER`（按条件过滤行）等。
 
-如下代表从`rowkey2`这个`rowkey`开始，查找下两个行的最新3个版本的name列的数据：
+如下代表从 `rowkey2` 这个 `rowkey` 开始，查找下两个行的最新 3 个版本的 name 列的数据：
 
 ```shell
 scan 'Student', {COLUMNS=> 'baseInfo:name',STARTROW => 'rowkey2',STOPROW => 'wrowkey4',LIMIT=>2, VERSIONS=>3}
@@ -242,32 +242,32 @@ scan 'Student', {COLUMNS=> 'baseInfo:name',STARTROW => 'rowkey2',STOPROW => 'wro
 
 #### 4.5  条件过滤
 
-Filter可以设定一系列条件来进行过滤。如我们要查询值等于24的所有数据：
+Filter 可以设定一系列条件来进行过滤。如我们要查询值等于 24 的所有数据：
 
 ```shell
 scan 'Student', FILTER=>"ValueFilter(=,'binary:24')"
 ```
 
-值包含yale的所有数据：
+值包含 yale 的所有数据：
 
 ```shell
 scan 'Student', FILTER=>"ValueFilter(=,'substring:yale')"
 ```
 
-列名中的前缀为birth的：
+列名中的前缀为 birth 的：
 
 ```shell
 scan 'Student', FILTER=>"ColumnPrefixFilter('birth')"
 ```
 
-FILTER中支持多个过滤条件通过括号、AND和OR进行组合：
+FILTER 中支持多个过滤条件通过括号、AND 和 OR 进行组合：
 
 ```shell
 # 列名中的前缀为birth且列值中包含1998的数据
 scan 'Student', FILTER=>"ColumnPrefixFilter('birth') AND ValueFilter ValueFilter(=,'substring:1998')"
 ```
 
-`PrefixFilter`用于对Rowkey的前缀进行判断：
+`PrefixFilter` 用于对 Rowkey 的前缀进行判断：
 
 ```shell
 scan 'Student', FILTER=>"PrefixFilter('wr')"

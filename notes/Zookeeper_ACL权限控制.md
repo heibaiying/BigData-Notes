@@ -20,13 +20,13 @@
 
 ## 一、前言
 
-为了避免存储在Zookeeper上的数据被其他程序或者人为误修改，Zookeeper提供了ACL(Access Control Lists)进行权限控制。只有拥有对应权限的用户才可以对节点进行增删改查等操作。下文分别介绍使用原生的Shell命令和Apache Curator客户端进行权限设置。
+为了避免存储在 Zookeeper 上的数据被其他程序或者人为误修改，Zookeeper 提供了 ACL(Access Control Lists) 进行权限控制。只有拥有对应权限的用户才可以对节点进行增删改查等操作。下文分别介绍使用原生的 Shell 命令和 Apache Curator 客户端进行权限设置。
 
 ## 二、使用Shell进行权限管理
 
 ### 2.1 设置与查看权限
 
-想要给某个节点设置权限(ACL)，有以下两个可选的命令：
+想要给某个节点设置权限 (ACL)，有以下两个可选的命令：
 
 ```shell
  # 1.给已有节点赋予权限
@@ -44,9 +44,9 @@ getAcl path
 
 ### 2.2 权限组成
 
-Zookeeper的权限由[scheme : id :permissions]三部分组成，其中Schemes和Permissions内置的可选项分别如下：
+Zookeeper 的权限由[scheme : id :permissions]三部分组成，其中 Schemes 和 Permissions 内置的可选项分别如下：
 
-**Permissions可选项**：
+**Permissions 可选项**：
 
 - **CREATE**：允许创建子节点；
 - **READ**：允许从节点获取数据并列出其子节点；
@@ -54,19 +54,19 @@ Zookeeper的权限由[scheme : id :permissions]三部分组成，其中Schemes�
 - **DELETE**：允许删除子节点；
 - **ADMIN**：允许为节点设置权限。  
 
-**Schemes可选项**：
+**Schemes 可选项**：
 
-- **world**：默认模式，所有客户端都拥有指定的权限。world下只有一个id选项，就是anyone，通常组合写法为`world:anyone:[permissons]`；
-- **auth**：只有经过认证的用户才拥有指定的权限。通常组合写法为`auth:user:password:[permissons]`，使用这种模式时，你需要先进行登录，之后采用auth模式设置权限时，`user`和`password`都将使用登录的用户名和密码；
-- **digest**：只有经过认证的用户才拥有指定的权限。通常组合写法为`auth:user:BASE64(SHA1(password)):[permissons]`，这种形式下的密码必须通过SHA1和BASE64进行双重加密；
-- **ip**：限制只有特定IP的客户端才拥有指定的权限。通常组成写法为`ip:182.168.0.168:[permissions]`；
-- **super**：代表超级管理员，拥有所有的权限，需要修改Zookeeper启动脚本进行配置。
+- **world**：默认模式，所有客户端都拥有指定的权限。world 下只有一个 id 选项，就是 anyone，通常组合写法为 `world:anyone:[permissons]`；
+- **auth**：只有经过认证的用户才拥有指定的权限。通常组合写法为 `auth:user:password:[permissons]`，使用这种模式时，你需要先进行登录，之后采用 auth 模式设置权限时，`user` 和 `password` 都将使用登录的用户名和密码；
+- **digest**：只有经过认证的用户才拥有指定的权限。通常组合写法为 `auth:user:BASE64(SHA1(password)):[permissons]`，这种形式下的密码必须通过 SHA1 和 BASE64 进行双重加密；
+- **ip**：限制只有特定 IP 的客户端才拥有指定的权限。通常组成写法为 `ip:182.168.0.168:[permissions]`；
+- **super**：代表超级管理员，拥有所有的权限，需要修改 Zookeeper 启动脚本进行配置。
 
 
 
 ### 2.3 添加认证信息
 
-可以使用如下所示的命令为当前Session添加用户认证信息，等价于登录操作。
+可以使用如下所示的命令为当前 Session 添加用户认证信息，等价于登录操作。
 
 ```shell
 # 格式
@@ -82,7 +82,7 @@ addauth digest heibai:root
 
 #### 1. world模式
 
-world是一种默认的模式，即创建时如果不指定权限，则默认的权限就是world。
+world 是一种默认的模式，即创建时如果不指定权限，则默认的权限就是 world。
 
 ```shell
 [zk: localhost:2181(CONNECTED) 32] create /hadoop 123
@@ -103,13 +103,13 @@ Authentication is not valid : /hadoop     # 权限不足
 [zk: localhost:2181(CONNECTED) 36] addauth digest heibai:heibai  # 登录
 [zk: localhost:2181(CONNECTED) 37] setAcl /hadoop auth::cdrwa    # 设置权限
 [zk: localhost:2181(CONNECTED) 38] getAcl /hadoop                # 获取权限
-'digest,'heibai:sCxtVJ1gPG8UW/jzFHR0A1ZKY5s=   #用户名和密码(密码经过加密处理)，注意返回的权限类型是digest
+'digest,'heibai:sCxtVJ1gPG8UW/jzFHR0A1ZKY5s=   #用户名和密码 (密码经过加密处理)，注意返回的权限类型是 digest
 : cdrwa
 
 #用户名和密码都是使用登录的用户名和密码，即使你在创建权限时候进行指定也是无效的
-[zk: localhost:2181(CONNECTED) 39] setAcl /hadoop auth:root:root:cdrwa    #指定用户名和密码为root
+[zk: localhost:2181(CONNECTED) 39] setAcl /hadoop auth:root:root:cdrwa    #指定用户名和密码为 root
 [zk: localhost:2181(CONNECTED) 40] getAcl /hadoop
-'digest,'heibai:sCxtVJ1gPG8UW/jzFHR0A1ZKY5s=  #无效，使用的用户名和密码依然还是heibai
+'digest,'heibai:sCxtVJ1gPG8UW/jzFHR0A1ZKY5s=  #无效，使用的用户名和密码依然还是 heibai
 : cdrwa
 
 ```
@@ -119,15 +119,15 @@ Authentication is not valid : /hadoop     # 权限不足
 ```shell
 [zk:44] create /spark "spark" digest:heibai:sCxtVJ1gPG8UW/jzFHR0A1ZKY5s=:cdrwa  #指定用户名和加密后的密码
 [zk:45] getAcl /spark  #获取权限
-'digest,'heibai:sCxtVJ1gPG8UW/jzFHR0A1ZKY5s=   # 返回的权限类型是digest
+'digest,'heibai:sCxtVJ1gPG8UW/jzFHR0A1ZKY5s=   # 返回的权限类型是 digest
 : cdrwa
 ```
 
-到这里你可以发现使用`auth`模式设置的权限和使用`digest`模式设置的权限，在最终结果上，得到的权限模式都是`digest`。某种程度上，你可以把`auth`模式理解成是`digest`模式的一种简便实现。因为在`digest`模式下，每次设置都需要书写用户名和加密后的密码，这是比较繁琐的，采用`auth`模式就可以避免这种麻烦。
+到这里你可以发现使用 `auth` 模式设置的权限和使用 `digest` 模式设置的权限，在最终结果上，得到的权限模式都是 `digest`。某种程度上，你可以把 `auth` 模式理解成是 `digest` 模式的一种简便实现。因为在 `digest` 模式下，每次设置都需要书写用户名和加密后的密码，这是比较繁琐的，采用 `auth` 模式就可以避免这种麻烦。
 
 #### 4. ip模式
 
-限定只有特定的ip才能访问。
+限定只有特定的 ip 才能访问。
 
 ```shell
 [zk: localhost:2181(CONNECTED) 46] create  /hive "hive" ip:192.168.0.108:cdrwa  
@@ -135,11 +135,11 @@ Authentication is not valid : /hadoop     # 权限不足
 Authentication is not valid : /hive  # 当前主机已经不能访问
 ```
 
-这里可以看到当前主机已经不能访问，想要能够再次访问，可以使用对应IP的客户端，或使用下面介绍的`super`模式。
+这里可以看到当前主机已经不能访问，想要能够再次访问，可以使用对应 IP 的客户端，或使用下面介绍的 `super` 模式。
 
 #### 5. super模式
 
-需要修改启动脚本`zkServer.sh`，并在指定位置添加超级管理员账户和密码信息：
+需要修改启动脚本 `zkServer.sh`，并在指定位置添加超级管理员账户和密码信息：
 
 ```shell
 "-Dzookeeper.DigestAuthenticationProvider.superDigest=heibai:sCxtVJ1gPG8UW/jzFHR0A1ZKY5s=" 
@@ -147,12 +147,12 @@ Authentication is not valid : /hive  # 当前主机已经不能访问
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-super.png"/> </div>
 
-修改完成后需要使用`zkServer.sh restart`重启服务，此时再次访问限制IP的节点：
+修改完成后需要使用 `zkServer.sh restart` 重启服务，此时再次访问限制 IP 的节点：
 
 ```shell
 [zk: localhost:2181(CONNECTED) 0] get /hive  #访问受限
 Authentication is not valid : /hive
-[zk: localhost:2181(CONNECTED) 1] addauth digest heibai:heibai  # 登录(添加认证信息)
+[zk: localhost:2181(CONNECTED) 1] addauth digest heibai:heibai  # 登录 (添加认证信息)
 [zk: localhost:2181(CONNECTED) 2] get /hive  #成功访问
 hive
 cZxid = 0x158
@@ -176,7 +176,7 @@ numChildren = 0
 
 ```xml
 <dependencies>
-    <!--Apache Curator相关依赖-->
+    <!--Apache Curator 相关依赖-->
     <dependency>
         <groupId>org.apache.curator</groupId>
         <artifactId>curator-framework</artifactId>
@@ -216,7 +216,7 @@ public class AclOperation {
     public void prepare() {
         RetryPolicy retryPolicy = new RetryNTimes(3, 5000);
         client = CuratorFrameworkFactory.builder()
-                .authorization("digest", "heibai:123456".getBytes()) //等价于addauth命令
+                .authorization("digest", "heibai:123456".getBytes()) //等价于 addauth 命令
                 .connectString(zkServerPath)
                 .sessionTimeoutMs(10000).retryPolicy(retryPolicy)
                 .namespace("workspace").build();

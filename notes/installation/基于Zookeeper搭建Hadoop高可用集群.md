@@ -40,7 +40,7 @@ HDFS 高可用架构主要由以下组件所构成：
 
 目前 Hadoop 支持使用 Quorum Journal Manager (QJM) 或 Network File System (NFS) 作为共享的存储系统，这里以 QJM 集群为例进行说明：Active NameNode 首先把 EditLog 提交到 JournalNode 集群，然后 Standby NameNode 再从 JournalNode 集群定时同步 EditLog，当 Active NameNode  宕机后， Standby  NameNode 在确认元数据完全同步之后就可以对外提供服务。
 
-需要说明的是向 JournalNode 集群写入 EditLog 是遵循 “过半写入则成功” 的策略，所以你至少要有3个 JournalNode 节点，当然你也可以继续增加节点数量，但是应该保证节点总数是奇数。同时如果有 2N+1 台 JournalNode，那么根据过半写的原则，最多可以容忍有 N 台 JournalNode 节点挂掉。
+需要说明的是向 JournalNode 集群写入 EditLog 是遵循 “过半写入则成功” 的策略，所以你至少要有 3 个 JournalNode 节点，当然你也可以继续增加节点数量，但是应该保证节点总数是奇数。同时如果有 2N+1 台 JournalNode，那么根据过半写的原则，最多可以容忍有 N 台 JournalNode 节点挂掉。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-QJM-同步机制.png"/> </div>
 
@@ -70,7 +70,7 @@ YARN ResourceManager 的高可用与 HDFS NameNode 的高可用类似，但是 R
 
 ## 二、集群规划
 
-按照高可用的设计目标：需要保证至少有两个 NameNode (一主一备)  和 两个 ResourceManager (一主一备)  ，同时为满足“过半写入则成功”的原则，需要至少要有3个 JournalNode 节点。这里使用三台主机进行搭建，集群规划如下：
+按照高可用的设计目标：需要保证至少有两个 NameNode (一主一备)  和 两个 ResourceManager (一主一备)  ，同时为满足“过半写入则成功”的原则，需要至少要有 3 个 JournalNode 节点。这里使用三台主机进行搭建，集群规划如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop高可用集群规划.png"/> </div>
 
@@ -78,9 +78,9 @@ YARN ResourceManager 的高可用与 HDFS NameNode 的高可用类似，但是 R
 
 ## 三、前置条件
 
-+ 所有服务器都安装有JDK，安装步骤可以参见：[Linux下JDK的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/JDK%E5%AE%89%E8%A3%85.md)；
-+ 搭建好ZooKeeper集群，搭建步骤可以参见：[Zookeeper单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper单机环境和集群环境搭建.md)
-+ 所有服务器之间都配置好SSH免密登录。
++ 所有服务器都安装有 JDK，安装步骤可以参见：[Linux 下 JDK 的安装](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/JDK%E5%AE%89%E8%A3%85.md)；
++ 搭建好 ZooKeeper 集群，搭建步骤可以参见：[Zookeeper 单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper 单机环境和集群环境搭建.md)
++ 所有服务器之间都配置好 SSH 免密登录。
 
 
 
@@ -88,7 +88,7 @@ YARN ResourceManager 的高可用与 HDFS NameNode 的高可用类似，但是 R
 
 ### 4.1 下载并解压
 
-下载Hadoop。这里我下载的是CDH版本Hadoop，下载地址为：http://archive.cloudera.com/cdh5/cdh/5/
+下载 Hadoop。这里我下载的是 CDH 版本 Hadoop，下载地址为：http://archive.cloudera.com/cdh5/cdh/5/
 
 ```shell
 # tar -zvxf hadoop-2.6.0-cdh5.15.2.tar.gz 
@@ -96,7 +96,7 @@ YARN ResourceManager 的高可用与 HDFS NameNode 的高可用类似，但是 R
 
 ### 4.2 配置环境变量
 
-编辑`profile`文件：
+编辑 `profile` 文件：
 
 ```shell
 # vim /etc/profile
@@ -109,7 +109,7 @@ export HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
 export  PATH=${HADOOP_HOME}/bin:$PATH
 ```
 
-执行`source`命令，使得配置立即生效：
+执行 `source` 命令，使得配置立即生效：
 
 ```shell
 # source /etc/profile
@@ -117,7 +117,7 @@ export  PATH=${HADOOP_HOME}/bin:$PATH
 
 ### 4.3 修改配置
 
-进入`${HADOOP_HOME}/etc/hadoop`目录下，修改配置文件。各个配置文件内容如下：
+进入 `${HADOOP_HOME}/etc/hadoop` 目录下，修改配置文件。各个配置文件内容如下：
 
 #### 1. hadoop-env.sh
 
@@ -131,22 +131,22 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
 ```xml
 <configuration>
     <property>
-        <!-- 指定namenode的hdfs协议文件系统的通信地址 -->
+        <!-- 指定 namenode 的 hdfs 协议文件系统的通信地址 -->
         <name>fs.defaultFS</name>
         <value>hdfs://hadoop001:8020</value>
     </property>
     <property>
-        <!-- 指定hadoop集群存储临时文件的目录 -->
+        <!-- 指定 hadoop 集群存储临时文件的目录 -->
         <name>hadoop.tmp.dir</name>
         <value>/home/hadoop/tmp</value>
     </property>
     <property>
-        <!-- ZooKeeper集群的地址 -->
+        <!-- ZooKeeper 集群的地址 -->
         <name>ha.zookeeper.quorum</name>
         <value>hadoop001:2181,hadoop002:2181,hadoop002:2181</value>
     </property>
     <property>
-        <!-- ZKFC连接到ZooKeeper超时时长 -->
+        <!-- ZKFC 连接到 ZooKeeper 超时时长 -->
         <name>ha.zookeeper.session-timeout.ms</name>
         <value>10000</value>
     </property>
@@ -158,17 +158,17 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
 ```xml
 <configuration>
     <property>
-        <!-- 指定HDFS副本的数量 -->
+        <!-- 指定 HDFS 副本的数量 -->
         <name>dfs.replication</name>
         <value>3</value>
     </property>
     <property>
-        <!-- namenode节点数据（即元数据）的存放位置，可以指定多个目录实现容错，多个目录用逗号分隔 -->
+        <!-- namenode 节点数据（即元数据）的存放位置，可以指定多个目录实现容错，多个目录用逗号分隔 -->
         <name>dfs.namenode.name.dir</name>
         <value>/home/hadoop/namenode/data</value>
     </property>
     <property>
-        <!-- datanode节点数据（即数据块）的存放位置 -->
+        <!-- datanode 节点数据（即数据块）的存放位置 -->
         <name>dfs.datanode.data.dir</name>
         <value>/home/hadoop/datanode/data</value>
     </property>
@@ -178,57 +178,57 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
         <value>mycluster</value>
     </property>
     <property>
-        <!-- NameNode ID列表-->
+        <!-- NameNode ID 列表-->
         <name>dfs.ha.namenodes.mycluster</name>
         <value>nn1,nn2</value>
     </property>
     <property>
-        <!-- nn1的RPC通信地址 -->
+        <!-- nn1 的 RPC 通信地址 -->
         <name>dfs.namenode.rpc-address.mycluster.nn1</name>
         <value>hadoop001:8020</value>
     </property>
     <property>
-        <!-- nn2的RPC通信地址 -->
+        <!-- nn2 的 RPC 通信地址 -->
         <name>dfs.namenode.rpc-address.mycluster.nn2</name>
         <value>hadoop002:8020</value>
     </property>
     <property>
-        <!-- nn1的http通信地址 -->
+        <!-- nn1 的 http 通信地址 -->
         <name>dfs.namenode.http-address.mycluster.nn1</name>
         <value>hadoop001:50070</value>
     </property>
     <property>
-        <!-- nn2的http通信地址 -->
+        <!-- nn2 的 http 通信地址 -->
         <name>dfs.namenode.http-address.mycluster.nn2</name>
         <value>hadoop002:50070</value>
     </property>
     <property>
-        <!-- NameNode元数据在JournalNode上的共享存储目录 -->
+        <!-- NameNode 元数据在 JournalNode 上的共享存储目录 -->
         <name>dfs.namenode.shared.edits.dir</name>
         <value>qjournal://hadoop001:8485;hadoop002:8485;hadoop003:8485/mycluster</value>
     </property>
     <property>
-        <!-- Journal Edit Files的存储目录 -->
+        <!-- Journal Edit Files 的存储目录 -->
         <name>dfs.journalnode.edits.dir</name>
         <value>/home/hadoop/journalnode/data</value>
     </property>
     <property>
-        <!-- 配置隔离机制，确保在任何给定时间只有一个NameNode处于活动状态 -->
+        <!-- 配置隔离机制，确保在任何给定时间只有一个 NameNode 处于活动状态 -->
         <name>dfs.ha.fencing.methods</name>
         <value>sshfence</value>
     </property>
     <property>
-        <!-- 使用sshfence机制时需要ssh免密登录 -->
+        <!-- 使用 sshfence 机制时需要 ssh 免密登录 -->
         <name>dfs.ha.fencing.ssh.private-key-files</name>
         <value>/root/.ssh/id_rsa</value>
     </property>
     <property>
-        <!-- SSH超时时间 -->
+        <!-- SSH 超时时间 -->
         <name>dfs.ha.fencing.ssh.connect-timeout</name>
         <value>30000</value>
     </property>
     <property>
-        <!-- 访问代理类，用于确定当前处于Active状态的NameNode -->
+        <!-- 访问代理类，用于确定当前处于 Active 状态的 NameNode -->
         <name>dfs.client.failover.proxy.provider.mycluster</name>
         <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
     </property>
@@ -245,57 +245,57 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
 ```xml
 <configuration>
     <property>
-        <!--配置NodeManager上运行的附属服务。需要配置成mapreduce_shuffle后才可以在Yarn上运行MapReduce程序。-->
+        <!--配置 NodeManager 上运行的附属服务。需要配置成 mapreduce_shuffle 后才可以在 Yarn 上运行 MapReduce 程序。-->
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property>
     <property>
-        <!-- 是否启用日志聚合(可选) -->
+        <!-- 是否启用日志聚合 (可选) -->
         <name>yarn.log-aggregation-enable</name>
         <value>true</value>
     </property>
     <property>
-        <!-- 聚合日志的保存时间(可选) -->
+        <!-- 聚合日志的保存时间 (可选) -->
         <name>yarn.log-aggregation.retain-seconds</name>
         <value>86400</value>
     </property>
     <property>
-        <!-- 启用RM HA -->
+        <!-- 启用 RM HA -->
         <name>yarn.resourcemanager.ha.enabled</name>
         <value>true</value>
     </property>
     <property>
-        <!-- RM集群标识 -->
+        <!-- RM 集群标识 -->
         <name>yarn.resourcemanager.cluster-id</name>
         <value>my-yarn-cluster</value>
     </property>
     <property>
-        <!-- RM的逻辑ID列表 -->
+        <!-- RM 的逻辑 ID 列表 -->
         <name>yarn.resourcemanager.ha.rm-ids</name>
         <value>rm1,rm2</value>
     </property>
     <property>
-        <!-- RM1的服务地址 -->
+        <!-- RM1 的服务地址 -->
         <name>yarn.resourcemanager.hostname.rm1</name>
         <value>hadoop002</value>
     </property>
     <property>
-        <!-- RM2的服务地址 -->
+        <!-- RM2 的服务地址 -->
         <name>yarn.resourcemanager.hostname.rm2</name>
         <value>hadoop003</value>
     </property>
     <property>
-        <!-- RM1 Web应用程序的地址 -->
+        <!-- RM1 Web 应用程序的地址 -->
         <name>yarn.resourcemanager.webapp.address.rm1</name>
         <value>hadoop002:8088</value>
     </property>
     <property>
-        <!-- RM2 Web应用程序的地址 -->
+        <!-- RM2 Web 应用程序的地址 -->
         <name>yarn.resourcemanager.webapp.address.rm2</name>
         <value>hadoop003:8088</value>
     </property>
     <property>
-        <!-- ZooKeeper集群的地址 -->
+        <!-- ZooKeeper 集群的地址 -->
         <name>yarn.resourcemanager.zk-address</name>
         <value>hadoop001:2181,hadoop002:2181,hadoop003:2181</value>
     </property>
@@ -317,7 +317,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
 ```xml
 <configuration>
     <property>
-        <!--指定mapreduce作业运行在yarn上-->
+        <!--指定 mapreduce 作业运行在 yarn 上-->
         <name>mapreduce.framework.name</name>
         <value>yarn</value>
     </property>
@@ -326,7 +326,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
 
 #### 5. slaves
 
-配置所有从属节点的主机名或IP地址，每行一个。所有从属节点上的`DataNode`服务和`NodeManager`服务都会被启动。
+配置所有从属节点的主机名或 IP 地址，每行一个。所有从属节点上的 `DataNode` 服务和 `NodeManager` 服务都会被启动。
 
 ```properties
 hadoop001
@@ -336,7 +336,7 @@ hadoop003
 
 ### 4.4 分发程序
 
-将Hadoop安装包分发到其他两台服务器，分发后建议在这两台服务器上也配置一下Hadoop的环境变量。
+将 Hadoop 安装包分发到其他两台服务器，分发后建议在这两台服务器上也配置一下 Hadoop 的环境变量。
 
 ```shell
 # 将安装包分发到hadoop002
@@ -351,7 +351,7 @@ scp -r /usr/app/hadoop-2.6.0-cdh5.15.2/  hadoop003:/usr/app/
 
 ### 5.1 启动ZooKeeper
 
-分别到三台服务器上启动ZooKeeper服务：
+分别到三台服务器上启动 ZooKeeper 服务：
 
 ```ssh
  zkServer.sh start
@@ -359,7 +359,7 @@ scp -r /usr/app/hadoop-2.6.0-cdh5.15.2/  hadoop003:/usr/app/
 
 ### 5.2 启动Journalnode
 
-分别到三台服务器的的`${HADOOP_HOME}/sbin`目录下，启动`journalnode`进程：
+分别到三台服务器的的 `${HADOOP_HOME}/sbin` 目录下，启动 `journalnode` 进程：
 
 ```shell
 hadoop-daemon.sh start journalnode
@@ -367,13 +367,13 @@ hadoop-daemon.sh start journalnode
 
 ### 5.3 初始化NameNode
 
-在`hadop001`上执行`NameNode`初始化命令：
+在 `hadop001` 上执行 `NameNode` 初始化命令：
 
 ```
 hdfs namenode -format
 ```
 
-执行初始化命令后，需要将`NameNode`元数据目录的内容，复制到其他未格式化的`NameNode`上。元数据存储目录就是我们在`hdfs-site.xml`中使用`dfs.namenode.name.dir`属性指定的目录。这里我们需要将其复制到`hadoop002`上：
+执行初始化命令后，需要将 `NameNode` 元数据目录的内容，复制到其他未格式化的 `NameNode` 上。元数据存储目录就是我们在 `hdfs-site.xml` 中使用 `dfs.namenode.name.dir` 属性指定的目录。这里我们需要将其复制到 `hadoop002` 上：
 
 ```shell
  scp -r /home/hadoop/namenode/data hadoop002:/home/hadoop/namenode/
@@ -381,7 +381,7 @@ hdfs namenode -format
 
 ### 5.4 初始化HA状态
 
-在任意一台`NameNode`上使用以下命令来初始化ZooKeeper中的HA状态：
+在任意一台 `NameNode` 上使用以下命令来初始化 ZooKeeper 中的 HA 状态：
 
 ```shell
 hdfs zkfc -formatZK
@@ -389,7 +389,7 @@ hdfs zkfc -formatZK
 
 ### 5.5 启动HDFS
 
-进入到`hadoop001`的`${HADOOP_HOME}/sbin`目录下，启动HDFS。此时`hadoop001`和`hadoop002`上的`NameNode`服务，和三台服务器上的`DataNode`服务都会被启动：
+进入到 `hadoop001` 的 `${HADOOP_HOME}/sbin` 目录下，启动 HDFS。此时 `hadoop001` 和 `hadoop002` 上的 `NameNode` 服务，和三台服务器上的 `DataNode` 服务都会被启动：
 
 ```shell
 start-dfs.sh
@@ -397,13 +397,13 @@ start-dfs.sh
 
 ### 5.6 启动YARN
 
-进入到`hadoop002`的`${HADOOP_HOME}/sbin`目录下，启动YARN。此时`hadoop002`上的`ResourceManager`服务，和三台服务器上的`NodeManager`服务都会被启动：
+进入到 `hadoop002` 的 `${HADOOP_HOME}/sbin` 目录下，启动 YARN。此时 `hadoop002` 上的 `ResourceManager` 服务，和三台服务器上的 `NodeManager` 服务都会被启动：
 
 ```SHEll
 start-yarn.sh
 ```
 
-需要注意的是，这个时候`hadoop003`上的`ResourceManager`服务通常是没有启动的，需要手动启动：
+需要注意的是，这个时候 `hadoop003` 上的 `ResourceManager` 服务通常是没有启动的，需要手动启动：
 
 ```shell
 yarn-daemon.sh start resourcemanager
@@ -447,13 +447,13 @@ yarn-daemon.sh start resourcemanager
 
 ### 6.2 查看Web UI
 
-HDFS和YARN的端口号分别为`50070`和`8080`，界面应该如下：
+HDFS 和 YARN 的端口号分别为 `50070` 和 `8080`，界面应该如下：
 
-此时hadoop001上的`NameNode`处于可用状态：
+此时 hadoop001 上的 `NameNode` 处于可用状态：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop高可用集群1.png"/> </div>
 
-而hadoop002上的`NameNode`则处于备用状态：
+而 hadoop002 上的 `NameNode` 则处于备用状态：
 
 <br/>
 
@@ -461,7 +461,7 @@ HDFS和YARN的端口号分别为`50070`和`8080`，界面应该如下：
 
 <br/>
 
-hadoop002上的`ResourceManager`处于可用状态：
+hadoop002 上的 `ResourceManager` 处于可用状态：
 
 <br/>
 
@@ -469,7 +469,7 @@ hadoop002上的`ResourceManager`处于可用状态：
 
 <br/>
 
-hadoop003上的`ResourceManager`则处于备用状态：
+hadoop003 上的 `ResourceManager` 则处于备用状态：
 
 <br/>
 
@@ -477,7 +477,7 @@ hadoop003上的`ResourceManager`则处于备用状态：
 
 <br/>
 
-同时界面上也有`Journal Manager`的相关信息：
+同时界面上也有 `Journal Manager` 的相关信息：
 
 <br/>
 
@@ -485,21 +485,21 @@ hadoop003上的`ResourceManager`则处于备用状态：
 
 ## 七、集群的二次启动
 
-上面的集群初次启动涉及到一些必要初始化操作，所以过程略显繁琐。但是集群一旦搭建好后，想要再次启用它是比较方便的，步骤如下（首选需要确保ZooKeeper集群已经启动）：
+上面的集群初次启动涉及到一些必要初始化操作，所以过程略显繁琐。但是集群一旦搭建好后，想要再次启用它是比较方便的，步骤如下（首选需要确保 ZooKeeper 集群已经启动）：
 
-在` hadoop001`启动 HDFS，此时会启动所有与 HDFS 高可用相关的服务，包括 NameNode，DataNode 和 JournalNode：
+在 ` hadoop001` 启动 HDFS，此时会启动所有与 HDFS 高可用相关的服务，包括 NameNode，DataNode 和 JournalNode：
 
 ```shell
 start-dfs.sh
 ```
 
-在`hadoop002`启动YARN：
+在 `hadoop002` 启动 YARN：
 
 ```SHEll
 start-yarn.sh
 ```
 
-这个时候`hadoop003`上的`ResourceManager`服务通常还是没有启动的，需要手动启动：
+这个时候 `hadoop003` 上的 `ResourceManager` 服务通常还是没有启动的，需要手动启动：
 
 ```shell
 yarn-daemon.sh start resourcemanager
@@ -516,7 +516,7 @@ yarn-daemon.sh start resourcemanager
 + [HDFS High Availability Using the Quorum Journal Manager](https://hadoop.apache.org/docs/r3.1.2/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html)
 + [ResourceManager High Availability](https://hadoop.apache.org/docs/r3.1.2/hadoop-yarn/hadoop-yarn-site/ResourceManagerHA.html)
 
-关于Hadoop高可用原理的详细分析，推荐阅读：
+关于 Hadoop 高可用原理的详细分析，推荐阅读：
 
 [Hadoop NameNode 高可用 (High Availability) 实现解析](https://www.ibm.com/developerworks/cn/opensource/os-cn-hadoop-name-node/index.html)
 

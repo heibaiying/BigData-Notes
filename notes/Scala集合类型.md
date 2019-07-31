@@ -13,7 +13,7 @@
 
 ## 一、集合简介
 
-Scala中拥有多种集合类型，主要分为可变的和不可变的集合两大类：
+Scala 中拥有多种集合类型，主要分为可变的和不可变的集合两大类：
 
 + **可变集合**： 可以被修改。即可以更改，添加，删除集合中的元素；
 
@@ -21,7 +21,7 @@ Scala中拥有多种集合类型，主要分为可变的和不可变的集合两
 
 ## 二、集合结构
 
-Scala中的大部分集合类都存在三类变体，分别位于`scala.collection`, `scala.collection.immutable`, `scala.collection.mutable`包中。还有部分集合类位于`scala.collection.generic`包下。
+Scala 中的大部分集合类都存在三类变体，分别位于 `scala.collection`, `scala.collection.immutable`, `scala.collection.mutable` 包中。还有部分集合类位于 `scala.collection.generic` 包下。
 
 - **scala.collection.immutable** ：包是中的集合是不可变的；
 - **scala.collection.mutable** ：包中的集合是可变的；
@@ -33,7 +33,7 @@ val mutableSet = collection.mutable.SortedSet(1, 2, 3, 4, 5)
 val immutableSet = collection.immutable.SortedSet(1, 2, 3, 4, 5)
 ```
 
-如果你仅写了`Set` 而没有加任何前缀也没有进行任何`import`，则Scala默认采用不可变集合类。
+如果你仅写了 `Set` 而没有加任何前缀也没有进行任何 `import`，则 Scala 默认采用不可变集合类。
 
 ```scala
 scala> Set(1,2,3,4,5)
@@ -42,31 +42,31 @@ res0: scala.collection.immutable.Set[Int] = Set(5, 1, 2, 3, 4)
 
 ### 3.1 scala.collection
 
-scala.collection包中所有集合如下图：
+scala.collection 包中所有集合如下图：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-collection.png"/> </div>
 
 ### 3.2 scala.collection.mutable
 
-scala.collection.mutable包中所有集合如下图：
+scala.collection.mutable 包中所有集合如下图：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-collection-m.png"/> </div>
 
 ### 3.2 scala.collection.immutable
 
-scala.collection.immutable包中所有集合如下图：
+scala.collection.immutable 包中所有集合如下图：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-collection-imm.png"/> </div>
 
 ## 三、Trait Traversable
 
-Scala中所有集合的顶层实现是`Traversable` 。它唯一的抽象方法是`foreach`：
+Scala 中所有集合的顶层实现是 `Traversable` 。它唯一的抽象方法是 `foreach`：
 
 ```scala
 def foreach[U](f: Elem => U)
 ```
 
-实现`Traversable`的集合类只需要实现这个抽象方法，其他方法可以从`Traversable`继承。`Traversable`中的所有可用方法如下：
+实现 `Traversable` 的集合类只需要实现这个抽象方法，其他方法可以从 `Traversable` 继承。`Traversable` 中的所有可用方法如下：
 
 | **方法**                            | **作用**                                                     |
 | ----------------------------------- | ------------------------------------------------------------ |
@@ -86,7 +86,7 @@ def foreach[U](f: Elem => U)
 | `xs.toIndexedSeq`                   | 将集合转化为一个 IndexedSeq                                  |
 | `xs.toStream`                       | 将集合转化为一个延迟计算的流                                 |
 | `xs.toSet`                          | 将集合转化为一个 Set                                         |
-| `xs.toMap`                          | 将一个（key, value）对的集合转化为一个Map。 如果当前集合的元素类型不是（key, value）对形式， 则报静态类型错误。 |
+| `xs.toMap`                          | 将一个（key, value）对的集合转化为一个 Map。 如果当前集合的元素类型不是（key, value）对形式， 则报静态类型错误。 |
 | **Copying:**                        |                                                              |
 | `xs copyToBuffer buf`               | 拷贝集合中所有元素到缓存 buf                                 |
 | `xs copyToArray(arr,s,n)`           | 从索引 s 开始，将集合中最多 n 个元素复制到数组 arr。 最后两个参数是可选的。 |
@@ -105,8 +105,8 @@ def foreach[U](f: Elem => U)
 | `xs.tail`                           | 除了第一个元素之外的其他元素组成的集合                       |
 | `xs.init`                           | 除了最后一个元素之外的其他元素组成的集合                     |
 | `xs slice (from, to)`               | 返回给定索引范围之内的元素组成的集合 （包含 from 位置的元素但不包含 to 位置的元素） |
-| `xs take n`                         | 返回 xs 的前n个元素组成的集合（如果无序，则返回任意n个元素） |
-| `xs drop n`                         | 返回 xs 的后n个元素组成的集合（如果无序，则返回任意n个元素） |
+| `xs take n`                         | 返回 xs 的前 n 个元素组成的集合（如果无序，则返回任意 n 个元素） |
+| `xs drop n`                         | 返回 xs 的后 n 个元素组成的集合（如果无序，则返回任意 n 个元素） |
 | `xs takeWhile p`                    | 从第一个元素开始查找满足条件 p 的元素， 直到遇到一个不满足条件的元素，返回所有遍历到的值。 |
 | `xs dropWhile p`                    | 从第一个元素开始查找满足条件 p 的元素， 直到遇到一个不满足条件的元素，返回所有未遍历到的值。 |
 | `xs filter p`                       | 返回满足条件 p 的所有元素的集合                              |
@@ -114,7 +114,7 @@ def foreach[U](f: Elem => U)
 | `xs filterNot p`                    | 返回不满足条件 p 的所有元素组成的集合                        |
 | **Subdivisions:**                   |                                                              |
 | `xs splitAt n`                      | 在给定位置拆分集合，返回一个集合对 (xs take n, xs drop n)    |
-| `xs span p`                         | 根据给定条件拆分集合，返回一个集合对(xs takeWhile p, xs dropWhile p)。即遍历元素，直到遇到第一个不符合条件的值则结束遍历，将遍历到的值和未遍历到的值分别放入两个集合返回。 |
+| `xs span p`                         | 根据给定条件拆分集合，返回一个集合对 (xs takeWhile p, xs dropWhile p)。即遍历元素，直到遇到第一个不符合条件的值则结束遍历，将遍历到的值和未遍历到的值分别放入两个集合返回。 |
 | `xs partition p`                    | 按照筛选条件对元素进行分组                                   |
 | `xs groupBy f`                      | 根据鉴别器函数 f 将 xs 划分为集合映射                        |
 | **Element Conditions:**             |                                                              |
@@ -139,7 +139,7 @@ def foreach[U](f: Elem => U)
 | `xs.stringPrefix`                   | 返回 xs.toString 字符串开头的集合名称                        |
 | **Views:**                          |                                                              |
 | `xs.view`                           | 生成 xs 的视图                                               |
-| `xs view (from, to)`                | 生成 xs上指定索引范围内元素的视图                            |
+| `xs view (from, to)`                | 生成 xs 上指定索引范围内元素的视图                            |
 
 
 
@@ -169,12 +169,12 @@ res5: String = [1-2-3]
 
 ## 四、Trait Iterable
 
-Scala中所有的集合都直接或者间接实现了`Iterable`特质，`Iterable`拓展自`Traversable`，并额外定义了部分方法：
+Scala 中所有的集合都直接或者间接实现了 `Iterable` 特质，`Iterable` 拓展自 `Traversable`，并额外定义了部分方法：
 
 | **方法**               | **作用**                                                     |
 | ---------------------- | ------------------------------------------------------------ |
 | **Abstract Method:**   |                                                              |
-| `xs.iterator`          | 返回一个迭代器，用于遍历 xs 中的元素， 与foreach遍历元素的顺序相同。 |
+| `xs.iterator`          | 返回一个迭代器，用于遍历 xs 中的元素， 与 foreach 遍历元素的顺序相同。 |
 | **Other Iterators:**   |                                                              |
 | `xs grouped size`      | 返回一个固定大小的迭代器                                     |
 | `xs sliding size`      | 返回一个固定大小的滑动窗口的迭代器                           |
@@ -238,14 +238,14 @@ res8: Boolean = false
 
 | 操作符                                                       | 描述                                              | 集合类型              |
 | ------------------------------------------------------------ | ------------------------------------------------- | --------------------- |
-| coll(k)<br/>即coll.apply(k)                                  | 获取指定位置的元素                                | Seq, Map              |
+| coll(k)<br/>即 coll.apply(k)                                  | 获取指定位置的元素                                | Seq, Map              |
 | coll :+ elem<br/>elem +: coll                                | 向集合末尾或者集合头增加元素                      | Seq                   |
 | coll + elem<br/>coll + (e1, e2, ...)                         | 追加元素                                          | Seq, Map              |
 | coll - elem<br/>coll - (e1, e2, ...)                         | 删除元素                                          | Set, Map, ArrayBuffer |
 | coll ++ coll2<br/>coll2 ++: coll                             | 合并集合                                          | Iterable              |
-| coll -- coll2                                                | 移除coll中包含的coll2中的元素                     | Set, Map, ArrayBuffer |
-| elem :: lst<br/>lst2 :: lst                                  | 把指定列表(lst2)或者元素(elem)添加到列表(lst)头部 | List                  |
-| list ::: list2                                               | 合并List                                          | List                  |
+| coll -- coll2                                                | 移除 coll 中包含的 coll2 中的元素                     | Set, Map, ArrayBuffer |
+| elem :: lst<br/>lst2 :: lst                                  | 把指定列表 (lst2) 或者元素 (elem) 添加到列表 (lst) 头部 | List                  |
+| list ::: list2                                               | 合并 List                                          | List                  |
 | set \| set2<br/>set & set2<br/>set &~ set2                   | 并集、交集、差集                                  | Set                   |
 | coll += elem<br/>coll += (e1, e2, ...)<br/>coll ++= coll2<br/>coll -= elem<br/>coll -= (e1, e2, ...)<br/>coll --= coll2 | 添加或者删除元素，并将修改后的结果赋值给集合本身  | 可变集合              |
 | elem +=: coll<br/>coll2 ++=: coll                            | 在集合头部追加元素或集合                          | ArrayBuffer           |

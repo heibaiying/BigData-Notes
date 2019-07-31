@@ -21,7 +21,7 @@
 
 ## 一、 简介
 
-想要使用HDFS API，需要导入依赖`hadoop-client`。如果是CDH版本的Hadoop，还需要额外指明其仓库地址：
+想要使用 HDFS API，需要导入依赖 `hadoop-client`。如果是 CDH 版本的 Hadoop，还需要额外指明其仓库地址：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -42,7 +42,7 @@
     </properties>
 
 
-    <!---配置CDH仓库地址-->
+    <!---配置 CDH 仓库地址-->
     <repositories>
         <repository>
             <id>cloudera</id>
@@ -75,7 +75,7 @@
 
 ### 2.1 FileSystem
 
-FileSystem是所有HDFS操作的主入口。由于之后的每个单元测试都需要用到它，这里使用`@Before`注解进行标注。
+FileSystem 是所有 HDFS 操作的主入口。由于之后的每个单元测试都需要用到它，这里使用 `@Before` 注解进行标注。
 
 ```java
 private static final String HDFS_PATH = "hdfs://192.168.0.106:8020";
@@ -86,7 +86,7 @@ private static FileSystem fileSystem;
 public void prepare() {
     try {
         Configuration configuration = new Configuration();
-        // 这里我启动的是单节点的Hadoop,所以副本系数设置为1,默认值为3
+        // 这里我启动的是单节点的 Hadoop,所以副本系数设置为 1,默认值为 3
         configuration.set("dfs.replication", "1");
         fileSystem = FileSystem.get(new URI(HDFS_PATH), configuration, HDFS_USER);
     } catch (IOException e) {
@@ -122,7 +122,7 @@ public void mkDir() throws Exception {
 
 ### 2.3 创建指定权限的目录
 
-`FsPermission(FsAction u, FsAction g, FsAction o)` 的三个参数分别对应：创建者权限，同组其他用户权限，其他用户权限，权限值定义在`FsAction`枚举类中。
+`FsPermission(FsAction u, FsAction g, FsAction o)` 的三个参数分别对应：创建者权限，同组其他用户权限，其他用户权限，权限值定义在 `FsAction` 枚举类中。
 
 ```java
 @Test
@@ -178,7 +178,7 @@ public void readToString() throws Exception {
 }
 ```
 
-`inputStreamToString`是一个自定义方法，代码如下：
+`inputStreamToString` 是一个自定义方法，代码如下：
 
 ```java
 /**
@@ -228,8 +228,8 @@ public void rename() throws Exception {
 public void delete() throws Exception {
     /*
      *  第二个参数代表是否递归删除
-     *    +  如果path是一个目录且递归删除为true, 则删除该目录及其中所有文件;
-     *    +  如果path是一个目录但递归删除为false,则会则抛出异常。
+     *    +  如果 path 是一个目录且递归删除为 true, 则删除该目录及其中所有文件;
+     *    +  如果 path 是一个目录但递归删除为 false,则会则抛出异常。
      */
     boolean result = fileSystem.delete(new Path("/hdfs-api/test/b.txt"), true);
     System.out.println(result);
@@ -268,7 +268,7 @@ public void copyFromLocalFile() throws Exception {
 
                   public void progress() {
                      fileCount++;
-                     // progress方法每上传大约64KB的数据后就会被调用一次
+                     // progress 方法每上传大约 64KB 的数据后就会被调用一次
                      System.out.println("上传进度：" + (fileCount * 64 * 1024 / fileSize) * 100 + " %");
                    }
                 });
@@ -288,11 +288,11 @@ public void copyToLocalFile() throws Exception {
     Path src = new Path("/hdfs-api/test/kafka.tgz");
     Path dst = new Path("D:\\app\\");
     /*
-     * 第一个参数控制下载完成后是否删除源文件,默认是true,即删除;
-     * 最后一个参数表示是否将RawLocalFileSystem用作本地文件系统;
-     * RawLocalFileSystem默认为false,通常情况下可以不设置,
-     * 但如果你在执行时候抛出NullPointerException异常,则代表你的文件系统与程序可能存在不兼容的情况(window下常见),
-     * 此时可以将RawLocalFileSystem设置为true
+     * 第一个参数控制下载完成后是否删除源文件,默认是 true,即删除;
+     * 最后一个参数表示是否将 RawLocalFileSystem 用作本地文件系统;
+     * RawLocalFileSystem 默认为 false,通常情况下可以不设置,
+     * 但如果你在执行时候抛出 NullPointerException 异常,则代表你的文件系统与程序可能存在不兼容的情况 (window 下常见),
+     * 此时可以将 RawLocalFileSystem 设置为 true
      */
     fileSystem.copyToLocalFile(false, src, dst, true);
 }
@@ -306,13 +306,13 @@ public void copyToLocalFile() throws Exception {
 public void listFiles() throws Exception {
     FileStatus[] statuses = fileSystem.listStatus(new Path("/hdfs-api"));
     for (FileStatus fileStatus : statuses) {
-        //fileStatus的toString方法被重写过，直接打印可以看到所有信息
+        //fileStatus 的 toString 方法被重写过，直接打印可以看到所有信息
         System.out.println(fileStatus.toString());
     }
 }
 ```
 
-`FileStatus`中包含了文件的基本信息，比如文件路径，是否是文件夹，修改时间，访问时间，所有者，所属组，文件权限，是否是符号链接等，输出内容示例如下：
+`FileStatus` 中包含了文件的基本信息，比如文件路径，是否是文件夹，修改时间，访问时间，所有者，所属组，文件权限，是否是符号链接等，输出内容示例如下：
 
 ```properties
 FileStatus{
@@ -373,13 +373,13 @@ public void getFileBlockLocations() throws Exception {
 }
 ```
 
-块输出信息有三个值，分别是文件的起始偏移量(offset)，文件大小(length)，块所在的主机名(hosts)。
+块输出信息有三个值，分别是文件的起始偏移量 (offset)，文件大小 (length)，块所在的主机名 (hosts)。
 
 ```
 0,57028557,hadoop001
 ```
 
-这里我上传的文件只有57M(小于128M)，且程序中设置了副本系数为1，所有只有一个块信息。
+这里我上传的文件只有 57M(小于 128M)，且程序中设置了副本系数为 1，所有只有一个块信息。
 
 <br/>
 

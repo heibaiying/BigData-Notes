@@ -17,8 +17,8 @@
 
 项目主要依赖如下，有两个地方需要注意：
 
-+ 这里由于我服务器上安装的是CDH版本的Hadoop，在导入依赖时引入的也是CDH版本的依赖，需要使用`<repository>`标签指定CDH的仓库地址；
-+ `hadoop-common`、`hadoop-client`、`hadoop-hdfs`均需要排除`slf4j-log4j12`依赖，原因是`storm-core`中已经有该依赖，不排除的话有JAR包冲突的风险；
++ 这里由于我服务器上安装的是 CDH 版本的 Hadoop，在导入依赖时引入的也是 CDH 版本的依赖，需要使用 `<repository>` 标签指定 CDH 的仓库地址；
++ `hadoop-common`、`hadoop-client`、`hadoop-hdfs` 均需要排除 `slf4j-log4j12` 依赖，原因是 `storm-core` 中已经有该依赖，不排除的话有 JAR 包冲突的风险；
 
 ```xml
 <properties>
@@ -38,7 +38,7 @@
         <artifactId>storm-core</artifactId>
         <version>${storm.version}</version>
     </dependency>
-    <!--Storm整合HDFS依赖-->
+    <!--Storm 整合 HDFS 依赖-->
     <dependency>
         <groupId>org.apache.storm</groupId>
         <artifactId>storm-hdfs</artifactId>
@@ -140,7 +140,7 @@ Hadoop	Spark	HBase	Storm
 
 ### 1.4 将数据存储到HDFS
 
-这里HDFS的地址和数据存储路径均使用了硬编码，在实际开发中可以通过外部传参指定，这样程序更为灵活。
+这里 HDFS 的地址和数据存储路径均使用了硬编码，在实际开发中可以通过外部传参指定，这样程序更为灵活。
 
 ```java
 public class DataToHdfsApp {
@@ -150,24 +150,24 @@ public class DataToHdfsApp {
 
     public static void main(String[] args) {
 
-        // 指定Hadoop的用户名 如果不指定,则在HDFS创建目录时候有可能抛出无权限的异常(RemoteException: Permission denied)
+        // 指定 Hadoop 的用户名 如果不指定,则在 HDFS 创建目录时候有可能抛出无权限的异常 (RemoteException: Permission denied)
         System.setProperty("HADOOP_USER_NAME", "root");
 
-        // 定义输出字段(Field)之间的分隔符
+        // 定义输出字段 (Field) 之间的分隔符
         RecordFormat format = new DelimitedRecordFormat()
                 .withFieldDelimiter("|");
 
-        // 同步策略: 每100个tuples之后就会把数据从缓存刷新到HDFS中
+        // 同步策略: 每 100 个 tuples 之后就会把数据从缓存刷新到 HDFS 中
         SyncPolicy syncPolicy = new CountSyncPolicy(100);
 
-        // 文件策略: 每个文件大小上限1M,超过限定时,创建新文件并继续写入
+        // 文件策略: 每个文件大小上限 1M,超过限定时,创建新文件并继续写入
         FileRotationPolicy rotationPolicy = new FileSizeRotationPolicy(1.0f, Units.MB);
 
         // 定义存储路径
         FileNameFormat fileNameFormat = new DefaultFileNameFormat()
                 .withPath("/storm-hdfs/");
 
-        // 定义HdfsBolt
+        // 定义 HdfsBolt
         HdfsBolt hdfsBolt = new HdfsBolt()
                 .withFsUrl("hdfs://hadoop001:8020")
                 .withFileNameFormat(fileNameFormat)
@@ -176,14 +176,14 @@ public class DataToHdfsApp {
                 .withSyncPolicy(syncPolicy);
 
 
-        // 构建Topology
+        // 构建 Topology
         TopologyBuilder builder = new TopologyBuilder();
         builder.setSpout(DATA_SOURCE_SPOUT, new DataSourceSpout());
         // save to HDFS
         builder.setBolt(HDFS_BOLT, hdfsBolt, 1).shuffleGrouping(DATA_SOURCE_SPOUT);
 
 
-        // 如果外部传参cluster则代表线上环境启动,否则代表本地启动
+        // 如果外部传参 cluster 则代表线上环境启动,否则代表本地启动
         if (args.length > 0 && args[0].equals("cluster")) {
             try {
                 StormSubmitter.submitTopology("ClusterDataToHdfsApp", new Config(), builder.createTopology());
@@ -201,13 +201,13 @@ public class DataToHdfsApp {
 
 ### 1.5 启动测试
 
-可以用直接使用本地模式运行，也可以打包后提交到服务器集群运行。本仓库提供的源码默认采用`maven-shade-plugin`进行打包，打包命令如下：
+可以用直接使用本地模式运行，也可以打包后提交到服务器集群运行。本仓库提供的源码默认采用 `maven-shade-plugin` 进行打包，打包命令如下：
 
 ```shell
 # mvn clean package -D maven.test.skip=true
 ```
 
-运行后，数据会存储到HDFS的`/storm-hdfs`目录下。使用以下命令可以查看目录内容：
+运行后，数据会存储到 HDFS 的 `/storm-hdfs` 目录下。使用以下命令可以查看目录内容：
 
 ```shell
 # 查看目录内容
@@ -226,7 +226,7 @@ hadoop fs -tail -f /strom-hdfs/文件名
 
 ### 2.1 项目结构
 
-集成用例： 进行词频统计并将最后的结果存储到HBase，项目主要结构如下：
+集成用例： 进行词频统计并将最后的结果存储到 HBase，项目主要结构如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/WordCountToHBaseApp.png"/> </div>
 
@@ -246,7 +246,7 @@ hadoop fs -tail -f /strom-hdfs/文件名
             <artifactId>storm-core</artifactId>
             <version>${storm.version}</version>
         </dependency>
-        <!--Storm整合HBase依赖-->
+        <!--Storm 整合 HBase 依赖-->
         <dependency>
             <groupId>org.apache.storm</groupId>
             <artifactId>storm-hbase</artifactId>
@@ -389,7 +389,7 @@ public class CountBolt extends BaseRichBolt {
 
 ```java
 /**
- * 进行词频统计 并将统计结果存储到HBase中
+ * 进行词频统计 并将统计结果存储到 HBase 中
  */
 public class WordCountToHBaseApp {
 
@@ -400,31 +400,31 @@ public class WordCountToHBaseApp {
 
     public static void main(String[] args) {
 
-        // storm的配置
+        // storm 的配置
         Config config = new Config();
 
-        // HBase的配置
+        // HBase 的配置
         Map<String, Object> hbConf = new HashMap<>();
         hbConf.put("hbase.rootdir", "hdfs://hadoop001:8020/hbase");
         hbConf.put("hbase.zookeeper.quorum", "hadoop001:2181");
 
-        // 将HBase的配置传入Storm的配置中
+        // 将 HBase 的配置传入 Storm 的配置中
         config.put("hbase.conf", hbConf);
 
-        // 定义流数据与HBase中数据的映射
+        // 定义流数据与 HBase 中数据的映射
         SimpleHBaseMapper mapper = new SimpleHBaseMapper()
                 .withRowKeyField("word")
                 .withColumnFields(new Fields("word","count"))
                 .withColumnFamily("info");
 
         /*
-         * 给HBaseBolt传入表名、数据映射关系、和HBase的配置信息
+         * 给 HBaseBolt 传入表名、数据映射关系、和 HBase 的配置信息
          * 表需要预先创建: create 'WordCount','info'
          */
         HBaseBolt hbase = new HBaseBolt("WordCount", mapper)
                 .withConfigKey("hbase.conf");
 
-        // 构建Topology
+        // 构建 Topology
         TopologyBuilder builder = new TopologyBuilder();
         builder.setSpout(DATA_SOURCE_SPOUT, new DataSourceSpout(),1);
         // split
@@ -435,7 +435,7 @@ public class WordCountToHBaseApp {
         builder.setBolt(HBASE_BOLT, hbase, 1).shuffleGrouping(COUNT_BOLT);
 
 
-        // 如果外部传参cluster则代表线上环境启动,否则代表本地启动
+        // 如果外部传参 cluster 则代表线上环境启动,否则代表本地启动
         if (args.length > 0 && args[0].equals("cluster")) {
             try {
                 StormSubmitter.submitTopology("ClusterWordCountToRedisApp", config, builder.createTopology());
@@ -453,13 +453,13 @@ public class WordCountToHBaseApp {
 
 ### 2.7 启动测试
 
-可以用直接使用本地模式运行，也可以打包后提交到服务器集群运行。本仓库提供的源码默认采用`maven-shade-plugin`进行打包，打包命令如下：
+可以用直接使用本地模式运行，也可以打包后提交到服务器集群运行。本仓库提供的源码默认采用 `maven-shade-plugin` 进行打包，打包命令如下：
 
 ```shell
 # mvn clean package -D maven.test.skip=true
 ```
 
-运行后，数据会存储到HBase的`WordCount`表中。使用以下命令查看表的内容：
+运行后，数据会存储到 HBase 的 `WordCount` 表中。使用以下命令查看表的内容：
 
 ```shell
 hbase >  scan 'WordCount'
@@ -471,7 +471,7 @@ hbase >  scan 'WordCount'
 
 ### 2.8 withCounterFields
 
-在上面的用例中我们是手动编码来实现词频统计，并将最后的结果存储到HBase中。其实也可以在构建`SimpleHBaseMapper`的时候通过`withCounterFields`指定count字段，被指定的字段会自动进行累加操作，这样也可以实现词频统计。需要注意的是withCounterFields指定的字段必须是Long类型，不能是String类型。
+在上面的用例中我们是手动编码来实现词频统计，并将最后的结果存储到 HBase 中。其实也可以在构建 `SimpleHBaseMapper` 的时候通过 `withCounterFields` 指定 count 字段，被指定的字段会自动进行累加操作，这样也可以实现词频统计。需要注意的是 withCounterFields 指定的字段必须是 Long 类型，不能是 String 类型。
 
 ```java
 SimpleHBaseMapper mapper = new SimpleHBaseMapper() 

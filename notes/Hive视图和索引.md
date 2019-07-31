@@ -11,7 +11,7 @@
 
 ### 1.1 简介
 
-Hive 中的视图和RDBMS中视图的概念一致，都是一组数据的逻辑表示，本质上就是一条SELECT语句的结果集。视图是纯粹的逻辑对象，没有关联的存储(Hive 3.0.0引入的物化视图除外)，当查询引用视图时，Hive可以将视图的定义与查询结合起来，例如将查询中的过滤器推送到视图中。
+Hive 中的视图和 RDBMS 中视图的概念一致，都是一组数据的逻辑表示，本质上就是一条 SELECT 语句的结果集。视图是纯粹的逻辑对象，没有关联的存储 (Hive 3.0.0 引入的物化视图除外)，当查询引用视图时，Hive 可以将视图的定义与查询结合起来，例如将查询中的过滤器推送到视图中。
 
 ### 1.2 创建视图
 
@@ -23,19 +23,19 @@ CREATE VIEW [IF NOT EXISTS] [db_name.]view_name   -- 视图名称
   AS SELECT ...;
 ```
 
-在Hive中可以使用`CREATE VIEW`创建视图，如果已存在具有相同名称的表或视图，则会抛出异常，建议使用`IF NOT EXISTS`预做判断。在使用视图时候需要注意以下事项：
+在 Hive 中可以使用 `CREATE VIEW` 创建视图，如果已存在具有相同名称的表或视图，则会抛出异常，建议使用 `IF NOT EXISTS` 预做判断。在使用视图时候需要注意以下事项：
 
-- 视图是只读的，不能用作LOAD / INSERT / ALTER的目标；
+- 视图是只读的，不能用作 LOAD / INSERT / ALTER 的目标；
 
 - 在创建视图时候视图就已经固定，对基表的后续更改（如添加列）将不会反映在视图；
 
 - 删除基表并不会删除视图，需要手动删除视图；
 
-- 视图可能包含ORDER BY和LIMIT子句。如果引用视图的查询语句也包含这类子句，其执行优先级低于视图对应字句。例如，视图`custom_view`指定LIMIT 5，查询语句为`select * from custom_view  LIMIT 10`，此时结果最多返回5行。
+- 视图可能包含 ORDER BY 和 LIMIT 子句。如果引用视图的查询语句也包含这类子句，其执行优先级低于视图对应字句。例如，视图 `custom_view` 指定 LIMIT 5，查询语句为 `select * from custom_view  LIMIT 10`，此时结果最多返回 5 行。
 
-- 创建视图时，如果未提供列名，则将从SELECT语句中自动派生列名；
+- 创建视图时，如果未提供列名，则将从 SELECT 语句中自动派生列名；
 
-- 创建视图时，如果SELECT语句中包含其他表达式，例如x + y，则列名称将以\_C0，\_C1等形式生成；
+- 创建视图时，如果 SELECT 语句中包含其他表达式，例如 x + y，则列名称将以\_C0，\_C1 等形式生成；
 
   ```sql
   CREATE VIEW  IF NOT EXISTS custom_view AS SELECT empno, empno+deptno , 1+2 FROM emp;
@@ -105,18 +105,18 @@ ALTER VIEW custom_view SET TBLPROPERTIES ('create'='heibaiying','date'='2019-05-
 
 ### 2.1 简介
 
-Hive在0.7.0引入了索引的功能，索引的设计目标是提高表某些列的查询速度。如果没有索引，带有谓词的查询（如'WHERE table1.column = 10'）会加载整个表或分区并处理所有行。但是如果column存在索引，则只需要加载和处理文件的一部分。
+Hive 在 0.7.0 引入了索引的功能，索引的设计目标是提高表某些列的查询速度。如果没有索引，带有谓词的查询（如'WHERE table1.column = 10'）会加载整个表或分区并处理所有行。但是如果 column 存在索引，则只需要加载和处理文件的一部分。
 
 ### 2.2 索引原理
 
-在指定列上建立索引，会产生一张索引表（表结构如下），里面的字段包括：索引列的值、该值对应的HDFS文件路径、该值在文件中的偏移量。在查询涉及到索引字段时，首先到索引表查找索引列值对应的HDFS文件路径及偏移量，这样就避免了全表扫描。
+在指定列上建立索引，会产生一张索引表（表结构如下），里面的字段包括：索引列的值、该值对应的 HDFS 文件路径、该值在文件中的偏移量。在查询涉及到索引字段时，首先到索引表查找索引列值对应的 HDFS 文件路径及偏移量，这样就避免了全表扫描。
 
 ```properties
 +--------------+----------------+----------+--+
 |   col_name   |   data_type    | comment     |
 +--------------+----------------+----------+--+
 | empno        | int            |  建立索引的列  |   
-| _bucketname  | string         |  HDFS文件路径  |
+| _bucketname  | string         |  HDFS 文件路径  |
 | _offsets     | array<bigint>  |  偏移量       |
 +--------------+----------------+----------+--+
 ```
@@ -162,7 +162,7 @@ DROP INDEX [IF EXISTS] index_name ON table_name;
 ALTER INDEX index_name ON table_name [PARTITION partition_spec] REBUILD;
 ```
 
-重建索引。如果指定了PARTITION，则仅重建该分区的索引。
+重建索引。如果指定了 PARTITION，则仅重建该分区的索引。
 
 
 
@@ -170,7 +170,7 @@ ALTER INDEX index_name ON table_name [PARTITION partition_spec] REBUILD;
 
 ### 3.1 创建索引
 
-在emp表上针对`empno`字段创建名为`emp_index`,索引数据存储在`emp_index_table`索引表中
+在 emp 表上针对 `empno` 字段创建名为 `emp_index`,索引数据存储在 `emp_index_table` 索引表中
 
 ```sql
 create index emp_index on table emp(empno) as  
@@ -187,13 +187,13 @@ in table emp_index_table ;
 alter index emp_index on emp rebuild; 
 ```
 
-Hive会启动MapReduce作业去建立索引，建立好后查看索引表数据如下。三个表字段分别代表：索引列的值、该值对应的HDFS文件路径、该值在文件中的偏移量。
+Hive 会启动 MapReduce 作业去建立索引，建立好后查看索引表数据如下。三个表字段分别代表：索引列的值、该值对应的 HDFS 文件路径、该值在文件中的偏移量。
 
 <div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-index-table.png"/> </div>
 
 ### 3.3 自动使用索引
 
-默认情况下，虽然建立了索引，但是Hive在查询时候是不会自动去使用索引的，需要开启相关配置。开启配置后，涉及到索引列的查询就会使用索引功能去优化查询。
+默认情况下，虽然建立了索引，但是 Hive 在查询时候是不会自动去使用索引的，需要开启相关配置。开启配置后，涉及到索引列的查询就会使用索引功能去优化查询。
 
 ```sql
 SET hive.input.format=org.apache.hadoop.hive.ql.io.HiveInputFormat;
@@ -215,14 +215,14 @@ SHOW INDEX ON emp;
 
 ## 四、索引的缺陷
 
-索引表最主要的一个缺陷在于：索引表无法自动rebuild，这也就意味着如果表中有数据新增或删除，则必须手动rebuild，重新执行MapReduce作业，生成索引表数据。
+索引表最主要的一个缺陷在于：索引表无法自动 rebuild，这也就意味着如果表中有数据新增或删除，则必须手动 rebuild，重新执行 MapReduce 作业，生成索引表数据。
 
-同时按照[官方文档](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Indexing)的说明，Hive会从3.0开始移除索引功能，主要基于以下两个原因：
+同时按照[官方文档](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Indexing) 的说明，Hive 会从 3.0 开始移除索引功能，主要基于以下两个原因：
 
-- 具有自动重写的物化视图(Materialized View)可以产生与索引相似的效果（Hive 2.3.0增加了对物化视图的支持，在3.0之后正式引入）。
+- 具有自动重写的物化视图 (Materialized View) 可以产生与索引相似的效果（Hive 2.3.0 增加了对物化视图的支持，在 3.0 之后正式引入）。
 - 使用列式存储文件格式（Parquet，ORC）进行存储时，这些格式支持选择性扫描，可以跳过不需要的文件或块。
 
-> ORC内置的索引功能可以参阅这篇文章：[Hive性能优化之ORC索引–Row Group Index vs Bloom Filter Index](http://lxw1234.com/archives/2016/04/632.htm)
+> ORC 内置的索引功能可以参阅这篇文章：[Hive 性能优化之 ORC 索引–Row Group Index vs Bloom Filter Index](http://lxw1234.com/archives/2016/04/632.htm)
 
 
 
@@ -232,5 +232,5 @@ SHOW INDEX ON emp;
 
 1. [Create/Drop/Alter View](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-Create/Drop/AlterView)
 2. [Materialized views](https://cwiki.apache.org/confluence/display/Hive/Materialized+views)
-3. [Hive索引](http://lxw1234.com/archives/2015/05/207.htm)
+3. [Hive 索引](http://lxw1234.com/archives/2015/05/207.htm)
 4. [Overview of Hive Indexes](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Indexing)

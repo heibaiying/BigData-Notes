@@ -22,17 +22,17 @@
 ### 1.1 构造Map
 
 ```scala
-// 初始化一个空map
+// 初始化一个空 map
 val scores01 = new HashMap[String, Int]
 
-// 从指定的值初始化Map（方式一）
+// 从指定的值初始化 Map（方式一）
 val scores02 = Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
 
-// 从指定的值初始化Map（方式二）
+// 从指定的值初始化 Map（方式二）
 val scores03 = Map(("hadoop", 10), ("spark", 20), ("storm", 30))
 ```
 
-采用上面方式得到的都是不可变Map(immutable map)，想要得到可变Map(mutable map)，则需要使用：
+采用上面方式得到的都是不可变 Map(immutable map)，想要得到可变 Map(mutable map)，则需要使用：
 
 ```scala
 val scores04 = scala.collection.mutable.Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
@@ -45,7 +45,7 @@ object ScalaApp extends App {
 
   val scores = Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
 
-  // 1.获取指定key对应的值
+  // 1.获取指定 key 对应的值
   println(scores("hadoop"))
 
   // 2. 如果对应的值不存在则使用默认值
@@ -55,17 +55,17 @@ object ScalaApp extends App {
 
 ### 1.3 新增/修改/删除值
 
-可变Map允许进行新增、修改、删除等操作。
+可变 Map 允许进行新增、修改、删除等操作。
 
 ```scala
 object ScalaApp extends App {
 
   val scores = scala.collection.mutable.Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
 
-  // 1.如果key存在则更新
+  // 1.如果 key 存在则更新
   scores("hadoop") = 100
 
-  // 2.如果key不存在则新增
+  // 2.如果 key 不存在则新增
   scores("flink") = 40
 
   // 3.可以通过 += 来进行多个更新或新增操作
@@ -84,7 +84,7 @@ object ScalaApp extends App {
 (hive,50)
 ```
 
-不可变Map不允许进行新增、修改、删除等操作，但是允许由不可变Map产生新的Map。
+不可变 Map 不允许进行新增、修改、删除等操作，但是允许由不可变 Map 产生新的 Map。
 
 ```scala
 object ScalaApp extends App {
@@ -125,14 +125,14 @@ object ScalaApp extends App {
 
 ### 1.5 yield关键字
 
-可以使用`yield`关键字从现有Map产生新的Map。
+可以使用 `yield` 关键字从现有 Map 产生新的 Map。
 
 ```scala
 object ScalaApp extends App {
 
   val scores = Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
 
-  // 1.将scores中所有的值扩大10倍
+  // 1.将 scores 中所有的值扩大 10 倍
   val newScore = for ((key, value) <- scores) yield (key, value * 10)
   for (elem <- newScore) { println(elem) }
 
@@ -155,16 +155,16 @@ object ScalaApp extends App {
 
 ### 1.6 其他Map结构
 
-在使用Map时候，如果不指定，默认使用的是HashMap，如果想要使用`TreeMap`或者`LinkedHashMap`，则需要显式的指定。
+在使用 Map 时候，如果不指定，默认使用的是 HashMap，如果想要使用 `TreeMap` 或者 `LinkedHashMap`，则需要显式的指定。
 
 ```scala
 object ScalaApp extends App {
 
-  // 1.使用TreeMap,按照键的字典序进行排序
+  // 1.使用 TreeMap,按照键的字典序进行排序
   val scores01 = scala.collection.mutable.TreeMap("B" -> 20, "A" -> 10, "C" -> 30)
   for (elem <- scores01) {println(elem)}
 
-  // 2.使用LinkedHashMap,按照键值对的插入顺序进行排序
+  // 2.使用 LinkedHashMap,按照键值对的插入顺序进行排序
   val scores02 = scala.collection.mutable.LinkedHashMap("B" -> 20, "A" -> 10, "C" -> 30)
   for (elem <- scores02) {println(elem)}
 }
@@ -192,7 +192,7 @@ object ScalaApp extends App {
   // 2. 判断是否为空
   println(scores.isEmpty)
 
-  // 3. 判断是否包含特定的key
+  // 3. 判断是否包含特定的 key
   println(scores.contains("A"))
 
 }
@@ -208,10 +208,10 @@ object ScalaApp extends App {
 
   val scores = Map("hadoop" -> 10, "spark" -> 20, "storm" -> 30)
 
-  // scala map转java map
+  // scala map 转 java map
   val javaMap: util.Map[String, Int] = JavaConverters.mapAsJavaMap(scores)
 
-  // java map转scala map
+  // java map 转 scala map
   val scalaMap: mutable.Map[String, Int] = JavaConverters.mapAsScalaMap(javaMap)
   
   for (elem <- scalaMap) {println(elem)}
@@ -255,9 +255,9 @@ object ScalaApp extends App {
    val array01 = Array("hadoop", "spark", "storm")
   val array02 = Array(10, 20, 30)
     
-  // 1.zip方法得到的是多个tuple组成的数组
+  // 1.zip 方法得到的是多个 tuple 组成的数组
   val tuples: Array[(String, Int)] = array01.zip(array02)
-  // 2.也可以在zip后调用toMap方法转换为Map
+  // 2.也可以在 zip 后调用 toMap 方法转换为 Map
   val map: Map[String, Int] = array01.zip(array02).toMap
     
   for (elem <- tuples) { println(elem) }
@@ -278,5 +278,5 @@ object ScalaApp extends App {
 
 ## 参考资料
 
-1. Martin Odersky . Scala编程(第3版)[M] . 电子工业出版社 . 2018-1-1  
-2. 凯.S.霍斯特曼  . 快学Scala(第2版)[M] . 电子工业出版社 . 2017-7
+1. Martin Odersky . Scala 编程 (第 3 版)[M] . 电子工业出版社 . 2018-1-1  
+2. 凯.S.霍斯特曼  . 快学 Scala(第 2 版)[M] . 电子工业出版社 . 2017-7

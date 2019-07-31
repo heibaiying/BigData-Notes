@@ -20,20 +20,20 @@
 
 ## 一、简介
 
-下图为Strom的运行流程图，在开发Storm流处理程序时，我们需要采用内置或自定义实现`spout`(数据源)和`bolt`(处理单元)，并通过`TopologyBuilder`将它们之间进行关联，形成`Topology`。
+下图为 Strom 的运行流程图，在开发 Storm 流处理程序时，我们需要采用内置或自定义实现 `spout`(数据源) 和 `bolt`(处理单元)，并通过 `TopologyBuilder` 将它们之间进行关联，形成 `Topology`。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spout-bolt.png"/> </div>
 
 ## 二、IComponent接口
 
-`IComponent`接口定义了Topology中所有组件(spout/bolt)的公共方法，自定义的spout或bolt必须直接或间接实现这个接口。
+`IComponent` 接口定义了 Topology 中所有组件 (spout/bolt) 的公共方法，自定义的 spout 或 bolt 必须直接或间接实现这个接口。
 
 ```java
 public interface IComponent extends Serializable {
 
     /**
      * 声明此拓扑的所有流的输出模式。
-     * @param declarer这用于声明输出流id，输出字段以及每个输出流是否是直接流（direct stream）
+     * @param declarer 这用于声明输出流 id，输出字段以及每个输出流是否是直接流（direct stream）
      */
     void declareOutputFields(OutputFieldsDeclarer declarer);
 
@@ -50,48 +50,48 @@ public interface IComponent extends Serializable {
 
 ### 3.1 ISpout接口
 
-自定义的spout需要实现`ISpout`接口，它定义了spout的所有可用方法：
+自定义的 spout 需要实现 `ISpout` 接口，它定义了 spout 的所有可用方法：
 
 ```java
 public interface ISpout extends Serializable {
     /**
      * 组件初始化时候被调用
      *
-     * @param conf ISpout的配置
-     * @param context 应用上下文，可以通过其获取任务ID和组件ID，输入和输出信息等。
-     * @param collector  用来发送spout中的tuples，它是线程安全的，建议保存为此spout对象的实例变量
+     * @param conf ISpout 的配置
+     * @param context 应用上下文，可以通过其获取任务 ID 和组件 ID，输入和输出信息等。
+     * @param collector  用来发送 spout 中的 tuples，它是线程安全的，建议保存为此 spout 对象的实例变量
      */
     void open(Map conf, TopologyContext context, SpoutOutputCollector collector);
 
     /**
-     * ISpout将要被关闭的时候调用。但是其不一定会被执行，如果在集群环境中通过kill -9 杀死进程时其就无法被执行。
+     * ISpout 将要被关闭的时候调用。但是其不一定会被执行，如果在集群环境中通过 kill -9 杀死进程时其就无法被执行。
      */
     void close();
     
     /**
-     * 当ISpout从停用状态激活时被调用
+     * 当 ISpout 从停用状态激活时被调用
      */
     void activate();
     
     /**
-     * 当ISpout停用时候被调用
+     * 当 ISpout 停用时候被调用
      */
     void deactivate();
 
     /**
-     * 这是一个核心方法，主要通过在此方法中调用collector将tuples发送给下一个接收器，这个方法必须是非阻塞的。     
-     * nextTuple/ack/fail/是在同一个线程中执行的，所以不用考虑线程安全方面。当没有tuples发出时应该让
-     * nextTuple休眠(sleep)一下，以免浪费CPU。
+     * 这是一个核心方法，主要通过在此方法中调用 collector 将 tuples 发送给下一个接收器，这个方法必须是非阻塞的。     
+     * nextTuple/ack/fail/是在同一个线程中执行的，所以不用考虑线程安全方面。当没有 tuples 发出时应该让
+     * nextTuple 休眠 (sleep) 一下，以免浪费 CPU。
      */
     void nextTuple();
 
     /**
-     * 通过msgId进行tuples处理成功的确认，被确认后的tuples不会再次被发送
+     * 通过 msgId 进行 tuples 处理成功的确认，被确认后的 tuples 不会再次被发送
      */
     void ack(Object msgId);
 
     /**
-     * 通过msgId进行tuples处理失败的确认，被确认后的tuples会再次被发送进行处理
+     * 通过 msgId 进行 tuples 处理失败的确认，被确认后的 tuples 会再次被发送进行处理
      */
     void fail(Object msgId);
 }
@@ -99,11 +99,11 @@ public interface ISpout extends Serializable {
 
 ### 3.2 BaseRichSpout抽象类
 
-**通常情况下，我们实现自定义的Spout时不会直接去实现`ISpout`接口，而是继承`BaseRichSpout`。**`BaseRichSpout`继承自`BaseCompont`，同时实现了`IRichSpout`接口。
+**通常情况下，我们实现自定义的 Spout 时不会直接去实现 `ISpout` 接口，而是继承 `BaseRichSpout`。**`BaseRichSpout` 继承自 `BaseCompont`，同时实现了 `IRichSpout` 接口。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-baseRichSpout.png"/> </div>
 
-`IRichSpout`接口继承自`ISpout`和`IComponent`,自身并没有定义任何方法：
+`IRichSpout` 接口继承自 `ISpout` 和 `IComponent`,自身并没有定义任何方法：
 
 ```java
 public interface IRichSpout extends ISpout, IComponent {
@@ -111,7 +111,7 @@ public interface IRichSpout extends ISpout, IComponent {
 }
 ```
 
-`BaseComponent`抽象类空实现了`IComponent`中`getComponentConfiguration`方法：
+`BaseComponent` 抽象类空实现了 `IComponent` 中 `getComponentConfiguration` 方法：
 
 ```java
 public abstract class BaseComponent implements IComponent {
@@ -122,7 +122,7 @@ public abstract class BaseComponent implements IComponent {
 }
 ```
 
-`BaseRichSpout`继承自`BaseCompont`类并实现了`IRichSpout`接口，并且空实现了其中部分方法：
+`BaseRichSpout` 继承自 `BaseCompont` 类并实现了 `IRichSpout` 接口，并且空实现了其中部分方法：
 
 ```java
 public abstract class BaseRichSpout extends BaseComponent implements IRichSpout {
@@ -143,45 +143,45 @@ public abstract class BaseRichSpout extends BaseComponent implements IRichSpout 
 }
 ```
 
-通过这样的设计，我们在继承`BaseRichSpout`实现自定义spout时，就只有三个方法必须实现：
+通过这样的设计，我们在继承 `BaseRichSpout` 实现自定义 spout 时，就只有三个方法必须实现：
 
-+ **open** ： 来源于ISpout，可以通过此方法获取用来发送tuples的`SpoutOutputCollector`；
-+ **nextTuple** ：来源于ISpout，必须在此方法内部发送tuples；
-+ **declareOutputFields** ：来源于IComponent，声明发送的tuples的名称，这样下一个组件才能知道如何接受。
++ **open** ： 来源于 ISpout，可以通过此方法获取用来发送 tuples 的 `SpoutOutputCollector`；
++ **nextTuple** ：来源于 ISpout，必须在此方法内部发送 tuples；
++ **declareOutputFields** ：来源于 IComponent，声明发送的 tuples 的名称，这样下一个组件才能知道如何接受。
 
 
 
 ## 四、Bolt
 
-bolt接口的设计与spout的类似：
+bolt 接口的设计与 spout 的类似：
 
 ### 4.1 IBolt 接口
 
 ```java
  /**
-  * 在客户端计算机上创建的IBolt对象。会被被序列化到topology中（使用Java序列化）,并提交给集群的主机（Nimbus）。  
-  * Nimbus启动workers反序列化对象，调用prepare，然后开始处理tuples。
+  * 在客户端计算机上创建的 IBolt 对象。会被被序列化到 topology 中（使用 Java 序列化）,并提交给集群的主机（Nimbus）。  
+  * Nimbus 启动 workers 反序列化对象，调用 prepare，然后开始处理 tuples。
  */
 
 public interface IBolt extends Serializable {
     /**
      * 组件初始化时候被调用
      *
-     * @param conf storm中定义的此bolt的配置
-     * @param context 应用上下文，可以通过其获取任务ID和组件ID，输入和输出信息等。
-     * @param collector  用来发送spout中的tuples，它是线程安全的，建议保存为此spout对象的实例变量
+     * @param conf storm 中定义的此 bolt 的配置
+     * @param context 应用上下文，可以通过其获取任务 ID 和组件 ID，输入和输出信息等。
+     * @param collector  用来发送 spout 中的 tuples，它是线程安全的，建议保存为此 spout 对象的实例变量
      */
     void prepare(Map stormConf, TopologyContext context, OutputCollector collector);
 
     /**
-     * 处理单个tuple输入。
+     * 处理单个 tuple 输入。
      * 
-     * @param Tuple对象包含关于它的元数据（如来自哪个组件/流/任务）
+     * @param Tuple 对象包含关于它的元数据（如来自哪个组件/流/任务）
      */
     void execute(Tuple input);
 
     /**
-     * IBolt将要被关闭的时候调用。但是其不一定会被执行，如果在集群环境中通过kill -9 杀死进程时其就无法被执行。
+     * IBolt 将要被关闭的时候调用。但是其不一定会被执行，如果在集群环境中通过 kill -9 杀死进程时其就无法被执行。
      */
     void cleanup();
 ```
@@ -190,11 +190,11 @@ public interface IBolt extends Serializable {
 
 ### 4.2 BaseRichBolt抽象类
 
-同样的，在实现自定义bolt时，通常是继承`BaseRichBolt`抽象类来实现。`BaseRichBolt`继承自`BaseComponent`抽象类并实现了`IRichBolt`接口。
+同样的，在实现自定义 bolt 时，通常是继承 `BaseRichBolt` 抽象类来实现。`BaseRichBolt` 继承自 `BaseComponent` 抽象类并实现了 `IRichBolt` 接口。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-baseRichbolt.png"/> </div>
 
-`IRichBolt`接口继承自`IBolt`和`IComponent`,自身并没有定义任何方法：
+`IRichBolt` 接口继承自 `IBolt` 和 `IComponent`,自身并没有定义任何方法：
 
 ```
 public interface IRichBolt extends IBolt, IComponent {
@@ -202,11 +202,11 @@ public interface IRichBolt extends IBolt, IComponent {
 }
 ```
 
-通过这样的设计，在继承`BaseRichBolt`实现自定义bolt时，就只需要实现三个必须的方法：
+通过这样的设计，在继承 `BaseRichBolt` 实现自定义 bolt 时，就只需要实现三个必须的方法：
 
-- **prepare**： 来源于IBolt，可以通过此方法获取用来发送tuples的`OutputCollector`；
-- **execute**：来源于IBolt，处理tuples和发送处理完成的tuples；
-- **declareOutputFields** ：来源于IComponent，声明发送的tuples的名称，这样下一个组件才能知道如何接收。
+- **prepare**： 来源于 IBolt，可以通过此方法获取用来发送 tuples 的 `OutputCollector`；
+- **execute**：来源于 IBolt，处理 tuples 和发送处理完成的 tuples；
+- **declareOutputFields** ：来源于 IComponent，声明发送的 tuples 的名称，这样下一个组件才能知道如何接收。
 
 
 
@@ -214,7 +214,7 @@ public interface IRichBolt extends IBolt, IComponent {
 
 ### 5.1 案例简介
 
-这里我们使用自定义的`DataSourceSpout`产生词频数据，然后使用自定义的`SplitBolt`和`CountBolt`来进行词频统计。
+这里我们使用自定义的 `DataSourceSpout` 产生词频数据，然后使用自定义的 `SplitBolt` 和 `CountBolt` 来进行词频统计。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-word-count-p.png"/> </div>
 
@@ -273,7 +273,7 @@ public class DataSourceSpout extends BaseRichSpout {
 }
 ```
 
-上面类使用`productData`方法来产生模拟数据，产生数据的格式如下：
+上面类使用 `productData` 方法来产生模拟数据，产生数据的格式如下：
 
 ```properties
 Spark	HBase
@@ -351,7 +351,7 @@ public class CountBolt extends BaseRichBolt {
 
 #### 5.  LocalWordCountApp
 
-通过TopologyBuilder将上面定义好的组件进行串联形成 Topology，并提交到本地集群（LocalCluster）运行。通常在开发中，可先用本地模式进行测试，测试完成后再提交到服务器集群运行。
+通过 TopologyBuilder 将上面定义好的组件进行串联形成 Topology，并提交到本地集群（LocalCluster）运行。通常在开发中，可先用本地模式进行测试，测试完成后再提交到服务器集群运行。
 
 ```java
 public class LocalWordCountApp {
@@ -367,7 +367,7 @@ public class LocalWordCountApp {
         //  指明将 SplitBolt 的数据发送到 CountBolt 中 处理
         builder.setBolt("CountBolt", new CountBolt()).shuffleGrouping("SplitBolt");
 
-        // 创建本地集群用于测试 这种模式不需要本机安装storm,直接运行该Main方法即可
+        // 创建本地集群用于测试 这种模式不需要本机安装 storm,直接运行该 Main 方法即可
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("LocalWordCountApp",
                 new Config(), builder.createTopology());
@@ -380,7 +380,7 @@ public class LocalWordCountApp {
 
 #### 6. 运行结果
 
-启动`WordCountApp`的main方法即可运行，采用本地模式Storm会自动在本地搭建一个集群，所以启动的过程会稍慢一点，启动成功后即可看到输出日志。
+启动 `WordCountApp` 的 main 方法即可运行，采用本地模式 Storm 会自动在本地搭建一个集群，所以启动的过程会稍慢一点，启动成功后即可看到输出日志。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-word-count-console.png"/> </div>
 
@@ -390,9 +390,9 @@ public class LocalWordCountApp {
 
 ### 6.1 代码更改
 
-提交到服务器的代码和本地代码略有不同，提交到服务器集群时需要使用`StormSubmitter`进行提交。主要代码如下：
+提交到服务器的代码和本地代码略有不同，提交到服务器集群时需要使用 `StormSubmitter` 进行提交。主要代码如下：
 
-> 为了结构清晰，这里新建ClusterWordCountApp类来演示集群模式的提交。实际开发中可以将两种模式的代码写在同一个类中，通过外部传参来决定启动何种模式。
+> 为了结构清晰，这里新建 ClusterWordCountApp 类来演示集群模式的提交。实际开发中可以将两种模式的代码写在同一个类中，通过外部传参来决定启动何种模式。
 
 ```java
 public class ClusterWordCountApp {
@@ -408,7 +408,7 @@ public class ClusterWordCountApp {
         //  指明将 SplitBolt 的数据发送到 CountBolt 中 处理
         builder.setBolt("CountBolt", new CountBolt()).shuffleGrouping("SplitBolt");
 
-        // 使用StormSubmitter提交Topology到服务器集群
+        // 使用 StormSubmitter 提交 Topology 到服务器集群
         try {
             StormSubmitter.submitTopology("ClusterWordCountApp",  new Config(), builder.createTopology());
         } catch (AlreadyAliveException | InvalidTopologyException | AuthorizationException e) {
@@ -421,7 +421,7 @@ public class ClusterWordCountApp {
 
 ### 6.2 打包上传
 
-打包后上传到服务器任意位置，这里我打包后的名称为`storm-word-count-1.0.jar`
+打包后上传到服务器任意位置，这里我打包后的名称为 `storm-word-count-1.0.jar`
 
 ```shell
 # mvn clean package -Dmaven.test.skip=true
@@ -429,14 +429,14 @@ public class ClusterWordCountApp {
 
 ### 6.3 提交Topology
 
-使用以下命令提交Topology到集群：
+使用以下命令提交 Topology 到集群：
 
 ```shell
 # 命令格式: storm jar jar包位置 主类的全路径 ...可选传参
 storm jar /usr/appjar/storm-word-count-1.0.jar  com.heibaiying.wordcount.ClusterWordCountApp
 ```
 
-出现`successfully`则代表提交成功：
+出现 `successfully` 则代表提交成功：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-submit-success.png"/> </div>
 
@@ -454,7 +454,7 @@ storm kill ClusterWordCountApp -w 3
 
 ### 6.5 查看Topology与停止Topology（界面方式）
 
-使用UI界面同样也可进行停止操作，进入WEB UI界面（8080端口），在`Topology Summary`中点击对应Topology 即可进入详情页面进行操作。
+使用 UI 界面同样也可进行停止操作，进入 WEB UI 界面（8080 端口），在 `Topology Summary` 中点击对应 Topology 即可进入详情页面进行操作。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-ui-actions.png"/> </div>
 
@@ -470,13 +470,13 @@ storm kill ClusterWordCountApp -w 3
 
 ### mvn package的局限性
 
-在上面的步骤中，我们没有在POM中配置任何插件，就直接使用`mvn package`进行项目打包，这对于没有使用外部依赖包的项目是可行的。但如果项目中使用了第三方JAR包，就会出现问题，因为`package`打包后的JAR中是不含有依赖包的，如果此时你提交到服务器上运行，就会出现找不到第三方依赖的异常。
+在上面的步骤中，我们没有在 POM 中配置任何插件，就直接使用 `mvn package` 进行项目打包，这对于没有使用外部依赖包的项目是可行的。但如果项目中使用了第三方 JAR 包，就会出现问题，因为 `package` 打包后的 JAR 中是不含有依赖包的，如果此时你提交到服务器上运行，就会出现找不到第三方依赖的异常。
 
-这时候可能大家会有疑惑，在我们的项目中不是使用了`storm-core`这个依赖吗？其实上面之所以我们能运行成功，是因为在Storm的集群环境中提供了这个JAR包，在安装目录的lib目录下：
+这时候可能大家会有疑惑，在我们的项目中不是使用了 `storm-core` 这个依赖吗？其实上面之所以我们能运行成功，是因为在 Storm 的集群环境中提供了这个 JAR 包，在安装目录的 lib 目录下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-lib.png"/> </div>
 
-为了说明这个问题我在Maven中引入了一个第三方的JAR包，并修改产生数据的方法：
+为了说明这个问题我在 Maven 中引入了一个第三方的 JAR 包，并修改产生数据的方法：
 
 ```xml
 <dependency>
@@ -486,7 +486,7 @@ storm kill ClusterWordCountApp -w 3
 </dependency>
 ```
 
-`StringUtils.join()`这个方法在`commons.lang3`和`storm-core`中都有，原来的代码无需任何更改，只需要在`import`时指明使用`commons.lang3`。
+`StringUtils.join()` 这个方法在 `commons.lang3` 和 `storm-core` 中都有，原来的代码无需任何更改，只需要在 `import` 时指明使用 `commons.lang3`。
 
 ```java
 import org.apache.commons.lang3.StringUtils;
@@ -499,15 +499,15 @@ private String productData() {
 }
 ```
 
-此时直接使用`mvn clean package`打包运行，就会抛出下图的异常。因此这种直接打包的方式并不适用于实际的开发，因为实际开发中通常都是需要第三方的JAR包。
+此时直接使用 `mvn clean package` 打包运行，就会抛出下图的异常。因此这种直接打包的方式并不适用于实际的开发，因为实际开发中通常都是需要第三方的 JAR 包。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-package-error.png"/> </div>
 
 
 
-想把依赖包一并打入最后的JAR中，maven提供了两个插件来实现，分别是`maven-assembly-plugin`和`maven-shade-plugin`。鉴于本篇文章篇幅已经比较长，且关于Storm打包还有很多需要说明的地方，所以关于Storm的打包方式单独整理至下一篇文章：
+想把依赖包一并打入最后的 JAR 中，maven 提供了两个插件来实现，分别是 `maven-assembly-plugin` 和 `maven-shade-plugin`。鉴于本篇文章篇幅已经比较长，且关于 Storm 打包还有很多需要说明的地方，所以关于 Storm 的打包方式单独整理至下一篇文章：
 
-[Storm三种打包方式对比分析](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm三种打包方式对比分析.md)
+[Storm 三种打包方式对比分析](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Storm 三种打包方式对比分析.md)
 
 ## 参考资料
 

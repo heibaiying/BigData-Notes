@@ -21,11 +21,11 @@
 
 ## 一、基本依赖
 
-Curator是Netflix公司开源的一个Zookeeper客户端，目前由Apache进行维护。与Zookeeper原生客户端相比，Curator的抽象层次更高，功能也更加丰富，是目前Zookeeper使用范围最广的Java客户端。本篇文章主要讲解其基本使用，项目采用Maven构建，以单元测试的方法进行讲解，相关依赖如下：
+Curator 是 Netflix 公司开源的一个 Zookeeper 客户端，目前由 Apache 进行维护。与 Zookeeper 原生客户端相比，Curator 的抽象层次更高，功能也更加丰富，是目前 Zookeeper 使用范围最广的 Java 客户端。本篇文章主要讲解其基本使用，项目采用 Maven 构建，以单元测试的方法进行讲解，相关依赖如下：
 
 ```xml
 <dependencies>
-    <!--Curator相关依赖-->
+    <!--Curator 相关依赖-->
     <dependency>
         <groupId>org.apache.curator</groupId>
         <artifactId>curator-framework</artifactId>
@@ -58,7 +58,7 @@ Curator是Netflix公司开源的一个Zookeeper客户端，目前由Apache进行
 
 ### 2.1 创建客户端实例
 
-这里使用`@Before`在单元测试执行前创建客户端实例，并使用`@After`在单元测试后关闭客户端连接。
+这里使用 `@Before` 在单元测试执行前创建客户端实例，并使用 `@After` 在单元测试后关闭客户端连接。
 
 ```java
 public class BasicOperation {
@@ -74,7 +74,7 @@ public class BasicOperation {
         client = CuratorFrameworkFactory.builder()
         .connectString(zkServerPath)
         .sessionTimeoutMs(10000).retryPolicy(retryPolicy)
-        .namespace("workspace").build();  //指定命名空间后，client的所有路径操作都会以/workspace开头
+        .namespace("workspace").build();  //指定命名空间后，client 的所有路径操作都会以/workspace 开头
         client.start();
     }
 
@@ -89,14 +89,14 @@ public class BasicOperation {
 
 ### 2.2 重试策略
 
-在连接Zookeeper时，Curator提供了多种重试策略以满足各种需求，所有重试策略均继承自`RetryPolicy`接口，如下图：
+在连接 Zookeeper 时，Curator 提供了多种重试策略以满足各种需求，所有重试策略均继承自 `RetryPolicy` 接口，如下图：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/curator-retry-policy.png"/> </div>
 
 这些重试策略类主要分为以下两类：
 
 + **RetryForever** ：代表一直重试，直到连接成功；
-+ **SleepingRetry** ： 基于一定间隔时间的重试。这里以其子类`ExponentialBackoffRetry`为例说明，其构造器如下：
++ **SleepingRetry** ： 基于一定间隔时间的重试。这里以其子类 `ExponentialBackoffRetry` 为例说明，其构造器如下：
 
 ```java
 /**
@@ -133,7 +133,7 @@ public void createNodes() throws Exception {
 }
 ```
 
-创建时可以指定节点类型，这里的节点类型和Zookeeper原生的一致，全部类型定义在枚举类`CreateMode`中：
+创建时可以指定节点类型，这里的节点类型和 Zookeeper 原生的一致，全部类型定义在枚举类 `CreateMode` 中：
 
 ```java
 public enum CreateMode {
@@ -161,7 +161,7 @@ public void getNode() throws Exception {
 }
 ```
 
-如上所示，节点信息被封装在`Stat`类中，其主要属性如下：
+如上所示，节点信息被封装在 `Stat` 类中，其主要属性如下：
 
 ```java
 public class Stat implements Record {
@@ -184,15 +184,15 @@ public class Stat implements Record {
 
 | **状态属性**   | **说明**                                                     |
 | -------------- | ------------------------------------------------------------ |
-| czxid          | 数据节点创建时的事务ID                                       |
+| czxid          | 数据节点创建时的事务 ID                                       |
 | ctime          | 数据节点创建时的时间                                         |
-| mzxid          | 数据节点最后一次更新时的事务ID                               |
+| mzxid          | 数据节点最后一次更新时的事务 ID                               |
 | mtime          | 数据节点最后一次更新时的时间                                 |
-| pzxid          | 数据节点的子节点最后一次被修改时的事务ID                     |
+| pzxid          | 数据节点的子节点最后一次被修改时的事务 ID                     |
 | cversion       | 子节点的更改次数                                             |
 | version        | 节点数据的更改次数                                           |
-| aversion       | 节点的ACL的更改次数                                          |
-| ephemeralOwner | 如果节点是临时节点，则表示创建该节点的会话的SessionID；如果节点是持久节点，则该属性值为0 |
+| aversion       | 节点的 ACL 的更改次数                                          |
+| ephemeralOwner | 如果节点是临时节点，则表示创建该节点的会话的 SessionID；如果节点是持久节点，则该属性值为 0 |
 | dataLength     | 数据内容的长度                                               |
 | numChildren    | 数据节点当前的子节点个数                                     |
 
@@ -216,7 +216,7 @@ public void getChildrenNodes() throws Exception {
 @Test
 public void updateNode() throws Exception {
     byte[] newData = "defg".getBytes();
-    client.setData().withVersion(0)     // 传入版本号，如果版本号错误则拒绝更新操作,并抛出BadVersion异常
+    client.setData().withVersion(0)     // 传入版本号，如果版本号错误则拒绝更新操作,并抛出 BadVersion 异常
             .forPath(nodePath, newData);
 }
 ```
@@ -229,7 +229,7 @@ public void deleteNodes() throws Exception {
     client.delete()
             .guaranteed()                // 如果删除失败，那么在会继续执行，直到成功
             .deletingChildrenIfNeeded()  // 如果有子节点，则递归删除
-            .withVersion(0)              // 传入版本号，如果版本号错误则拒绝删除操作,并抛出BadVersion异常
+            .withVersion(0)              // 传入版本号，如果版本号错误则拒绝删除操作,并抛出 BadVersion 异常
             .forPath(nodePath);
 }
 ```
@@ -239,7 +239,7 @@ public void deleteNodes() throws Exception {
 ```java
 @Test
 public void existNode() throws Exception {
-    // 如果节点存在则返回其状态信息如果不存在则为null
+    // 如果节点存在则返回其状态信息如果不存在则为 null
     Stat stat = client.checkExists().forPath(nodePath + "aa/bb/cc");
     System.out.println("节点是否存在:" + !(stat == null));
 }
@@ -251,7 +251,7 @@ public void existNode() throws Exception {
 
 ### 3.1 创建一次性监听
 
-和Zookeeper原生监听一样，使用`usingWatcher`注册的监听是一次性的，即监听只会触发一次，触发后就销毁。示例如下：
+和 Zookeeper 原生监听一样，使用 `usingWatcher` 注册的监听是一次性的，即监听只会触发一次，触发后就销毁。示例如下：
 
 ```java
 @Test
@@ -267,14 +267,14 @@ public void DisposableWatch() throws Exception {
 
 ### 3.2 创建永久监听
 
-Curator还提供了创建永久监听的API，其使用方式如下：
+Curator 还提供了创建永久监听的 API，其使用方式如下：
 
 ```java
 @Test
 public void permanentWatch() throws Exception {
-    // 使用NodeCache包装节点，对其注册的监听作用于节点，且是永久性的
+    // 使用 NodeCache 包装节点，对其注册的监听作用于节点，且是永久性的
     NodeCache nodeCache = new NodeCache(client, nodePath);
-    // 通常设置为true, 代表创建nodeCache时,就去获取对应节点的值并缓存
+    // 通常设置为 true, 代表创建 nodeCache 时,就去获取对应节点的值并缓存
     nodeCache.start(true);
     nodeCache.getListenable().addListener(new NodeCacheListener() {
         public void nodeChanged() {
@@ -291,7 +291,7 @@ public void permanentWatch() throws Exception {
 
 ### 3.3 监听子节点
 
-这里以监听`/hadoop`下所有子节点为例，实现方式如下：
+这里以监听 `/hadoop` 下所有子节点为例，实现方式如下：
 
 ```scala
 @Test
@@ -300,10 +300,10 @@ public void permanentChildrenNodesWatch() throws Exception {
     // 第三个参数代表除了节点状态外，是否还缓存节点内容
     PathChildrenCache childrenCache = new PathChildrenCache(client, "/hadoop", true);
     /*
-         * StartMode代表初始化方式:
+         * StartMode 代表初始化方式:
          *    NORMAL: 异步初始化
          *    BUILD_INITIAL_CACHE: 同步初始化
-         *    POST_INITIALIZED_EVENT: 异步并通知,初始化之后会触发INITIALIZED事件
+         *    POST_INITIALIZED_EVENT: 异步并通知,初始化之后会触发 INITIALIZED 事件
          */
     childrenCache.start(StartMode.POST_INITIALIZED_EVENT);
 
@@ -315,10 +315,10 @@ public void permanentChildrenNodesWatch() throws Exception {
         public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) {
             switch (event.getType()) {
                 case INITIALIZED:
-                System.out.println("childrenCache初始化完成");
+                System.out.println("childrenCache 初始化完成");
                 break;
                 case CHILD_ADDED:
-                // 需要注意的是: 即使是之前已经存在的子节点，也会触发该监听，因为会把该子节点加入childrenCache缓存中
+                // 需要注意的是: 即使是之前已经存在的子节点，也会触发该监听，因为会把该子节点加入 childrenCache 缓存中
                 System.out.println("增加子节点:" + event.getData().getPath());
                 break;
                 case CHILD_REMOVED:

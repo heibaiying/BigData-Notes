@@ -13,7 +13,7 @@
 
 ## 一、条件表达式if
 
-Scala中的if/else语法结构与Java中的一样，唯一不同的是，Scala中的if表达式是有返回值的。
+Scala 中的 if/else 语法结构与 Java 中的一样，唯一不同的是，Scala 中的 if 表达式是有返回值的。
 
 ```scala
 object ScalaApp extends App {
@@ -25,13 +25,13 @@ object ScalaApp extends App {
 }
 ```
 
-在Java中，每行语句都需要使用`;`表示结束，但是在Scala中并不需要。除非你在单行语句中写了多行代码。
+在 Java 中，每行语句都需要使用 `;` 表示结束，但是在 Scala 中并不需要。除非你在单行语句中写了多行代码。
 
 
 
 ## 二、块表达式
 
-在Scala中，可以使用`{}`块包含一系列表达式，块中最后一个表达式的值就是块的值。
+在 Scala 中，可以使用 `{}` 块包含一系列表达式，块中最后一个表达式的值就是块的值。
 
 ```scala
 object ScalaApp extends App {
@@ -45,7 +45,7 @@ object ScalaApp extends App {
 // 输出： 6
 ```
 
-如果块中的最后一个表达式没有返回值，则块的返回值是Unit类型。
+如果块中的最后一个表达式没有返回值，则块的返回值是 Unit 类型。
 
 ```scala
 scala> val result ={ val a = 1 + 1; val b = 2 + 2 }
@@ -56,7 +56,7 @@ result: Unit = ()
 
 ## 三、循环表达式while
 
-Scala和大多数语言一样，支持`while`和`do ... while`表达式。
+Scala 和大多数语言一样，支持 `while` 和 `do ... while` 表达式。
 
 ```scala
 object ScalaApp extends App {
@@ -79,7 +79,7 @@ object ScalaApp extends App {
 
 ## 四、循环表达式for
 
-for循环的基本使用如下：
+for 循环的基本使用如下：
 
 ```scala
 object ScalaApp extends App {
@@ -96,7 +96,7 @@ object ScalaApp extends App {
 }
 ```
 
-除了基本使用外，还可以使用`yield`关键字从for循环中产生Vector，这称为for推导式。
+除了基本使用外，还可以使用 `yield` 关键字从 for 循环中产生 Vector，这称为 for 推导式。
 
 ```scala
 scala> for (i <- 1 to 10) yield i * 6
@@ -107,7 +107,7 @@ res1: scala.collection.immutable.IndexedSeq[Int] = Vector(6, 12, 18, 24, 30, 36,
 
 ## 五、异常处理try
 
-和Java中一样，支持`try...catch...finally`语句。
+和 Java 中一样，支持 `try...catch...finally` 语句。
 
 ```scala
 import java.io.{FileNotFoundException, FileReader}
@@ -126,13 +126,13 @@ object ScalaApp extends App {
 }
 ```
 
-这里需要注意的是因为finally语句一定会被执行，所以不要在该语句中返回值，否则返回值会被作为整个try语句的返回值，如下：
+这里需要注意的是因为 finally 语句一定会被执行，所以不要在该语句中返回值，否则返回值会被作为整个 try 语句的返回值，如下：
 
 ```scala
 scala> def g():Int = try return 1 finally  return  2
 g: ()Int
 
-// 方法g()总会返回2
+// 方法 g() 总会返回 2
 scala> g()
 res3: Int = 2
 ```
@@ -141,7 +141,7 @@ res3: Int = 2
 
 ## 六、条件选择表达式match
 
-match类似于java中的switch语句。
+match 类似于 java 中的 switch 语句。
 
 ```scala
 object ScalaApp extends App {
@@ -160,11 +160,11 @@ object ScalaApp extends App {
 
 ```
 
-但是与Java中的switch有以下三点不同：
+但是与 Java 中的 switch 有以下三点不同：
 
-+ Scala中的case语句支持任何类型；而Java中case语句仅支持整型、枚举和字符串常量；
-+ Scala中每个分支语句后面不需要写break，因为在case语句中break是隐含的，默认就有；
-+ 在Scala中match语句是有返回值的，而Java中switch语句是没有返回值的。如下：
++ Scala 中的 case 语句支持任何类型；而 Java 中 case 语句仅支持整型、枚举和字符串常量；
++ Scala 中每个分支语句后面不需要写 break，因为在 case 语句中 break 是隐含的，默认就有；
++ 在 Scala 中 match 语句是有返回值的，而 Java 中 switch 语句是没有返回值的。如下：
 
 ```scala
 object ScalaApp extends App {
@@ -188,13 +188,13 @@ object ScalaApp extends App {
 
 ## 七、没有break和continue
 
-额外注意一下：Scala中并不支持Java中的break和continue关键字。
+额外注意一下：Scala 中并不支持 Java 中的 break 和 continue 关键字。
 
 
 
 ## 八、输入与输出
 
-在Scala中可以使用print、println、printf打印输出，这与Java中是一样的。如果需要从控制台中获取输入，则可以使用`StdIn`中定义的各种方法。
+在 Scala 中可以使用 print、println、printf 打印输出，这与 Java 中是一样的。如果需要从控制台中获取输入，则可以使用 `StdIn` 中定义的各种方法。
 
 ```scala
 val name = StdIn.readLine("Your name: ")
@@ -207,5 +207,5 @@ println(s"Hello, ${name}! Next year, you will be ${age + 1}.")
 
 ## 参考资料
 
-1. Martin Odersky . Scala编程(第3版)[M] . 电子工业出版社 . 2018-1-1  
-2. 凯.S.霍斯特曼  . 快学Scala(第2版)[M] . 电子工业出版社 . 2017-7
+1. Martin Odersky . Scala 编程 (第 3 版)[M] . 电子工业出版社 . 2018-1-1  
+2. 凯.S.霍斯特曼  . 快学 Scala(第 2 版)[M] . 电子工业出版社 . 2017-7

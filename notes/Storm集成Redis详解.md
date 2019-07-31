@@ -10,7 +10,7 @@
 
 ## 一、简介
 
-Storm-Redis提供了Storm与Redis的集成支持，你只需要引入对应的依赖即可使用：
+Storm-Redis 提供了 Storm 与 Redis 的集成支持，你只需要引入对应的依赖即可使用：
 
 ```xml
 <dependency>
@@ -21,13 +21,13 @@ Storm-Redis提供了Storm与Redis的集成支持，你只需要引入对应的�
 </dependency> 
 ```
 
-Storm-Redis使用Jedis为Redis客户端，并提供了如下三个基本的Bolt实现：
+Storm-Redis 使用 Jedis 为 Redis 客户端，并提供了如下三个基本的 Bolt 实现：
 
-+ **RedisLookupBolt**：从Redis中查询数据；
-+ **RedisStoreBolt**：存储数据到Redis；
++ **RedisLookupBolt**：从 Redis 中查询数据；
++ **RedisStoreBolt**：存储数据到 Redis；
 + **RedisFilterBolt** : 查询符合条件的数据；
 
-`RedisLookupBolt`、`RedisStoreBolt`、`RedisFilterBolt `均继承自`AbstractRedisBolt`抽象类。我们可以通过继承该抽象类，实现自定义RedisBolt，进行功能的拓展。
+`RedisLookupBolt`、`RedisStoreBolt`、`RedisFilterBolt ` 均继承自 `AbstractRedisBolt` 抽象类。我们可以通过继承该抽象类，实现自定义 RedisBolt，进行功能的拓展。
 
 
 
@@ -35,7 +35,7 @@ Storm-Redis使用Jedis为Redis客户端，并提供了如下三个基本的Bolt�
 
 ### 2.1 项目结构
 
-这里首先给出一个集成案例：进行词频统计并将最后的结果存储到Redis。项目结构如下：
+这里首先给出一个集成案例：进行词频统计并将最后的结果存储到 Redis。项目结构如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-wordcounttoredis.png"/> </div>
 
@@ -194,11 +194,11 @@ public class CountBolt extends BaseRichBolt {
 
 ### 2.6 WordCountStoreMapper
 
-实现RedisStoreMapper接口，定义tuple与Redis中数据的映射关系：即需要指定tuple中的哪个字段为key，哪个字段为value，并且存储到Redis的何种数据结构中。
+实现 RedisStoreMapper 接口，定义 tuple 与 Redis 中数据的映射关系：即需要指定 tuple 中的哪个字段为 key，哪个字段为 value，并且存储到 Redis 的何种数据结构中。
 
 ```java
 /**
- * 定义tuple与Redis中数据的映射关系
+ * 定义 tuple 与 Redis 中数据的映射关系
  */
 public class  WordCountStoreMapper implements RedisStoreMapper {
     private RedisDataTypeDescription description;
@@ -230,7 +230,7 @@ public class  WordCountStoreMapper implements RedisStoreMapper {
 
 ```java
 /**
- * 进行词频统计 并将统计结果存储到Redis中
+ * 进行词频统计 并将统计结果存储到 Redis 中
  */
 public class WordCountToRedisApp {
 
@@ -257,7 +257,7 @@ public class WordCountToRedisApp {
         RedisStoreBolt storeBolt = new RedisStoreBolt(poolConfig, storeMapper);
         builder.setBolt(STORE_BOLT, storeBolt).shuffleGrouping(COUNT_BOLT);
 
-        // 如果外部传参cluster则代表线上环境启动否则代表本地启动
+        // 如果外部传参 cluster 则代表线上环境启动否则代表本地启动
         if (args.length > 0 && args[0].equals("cluster")) {
             try {
                 StormSubmitter.submitTopology("ClusterWordCountToRedisApp", new Config(), builder.createTopology());
@@ -275,13 +275,13 @@ public class WordCountToRedisApp {
 
 ### 2.8 启动测试
 
-可以用直接使用本地模式运行，也可以打包后提交到服务器集群运行。本仓库提供的源码默认采用`maven-shade-plugin`进行打包，打包命令如下：
+可以用直接使用本地模式运行，也可以打包后提交到服务器集群运行。本仓库提供的源码默认采用 `maven-shade-plugin` 进行打包，打包命令如下：
 
 ```shell
 # mvn clean package -D maven.test.skip=true
 ```
 
-启动后，查看Redis中的数据：
+启动后，查看 Redis 中的数据：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/store-redis-manager.png"/> </div>
 
@@ -291,13 +291,13 @@ public class WordCountToRedisApp {
 
 ### 3.1 AbstractRedisBolt
 
-`RedisLookupBolt`、`RedisStoreBolt`、`RedisFilterBolt `均继承自`AbstractRedisBolt`抽象类，和我们自定义实现Bolt一样，`AbstractRedisBolt`间接继承自`BaseRichBolt`。
+`RedisLookupBolt`、`RedisStoreBolt`、`RedisFilterBolt ` 均继承自 `AbstractRedisBolt` 抽象类，和我们自定义实现 Bolt 一样，`AbstractRedisBolt` 间接继承自 `BaseRichBolt`。
 
 
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-abstractRedisBolt.png"/> </div>
 
-`AbstractRedisBolt`中比较重要的是prepare方法，在该方法中通过外部传入的jedis连接池配置( jedisPoolConfig/jedisClusterConfig) 创建用于管理Jedis实例的容器`JedisCommandsInstanceContainer`。
+`AbstractRedisBolt` 中比较重要的是 prepare 方法，在该方法中通过外部传入的 jedis 连接池配置 ( jedisPoolConfig/jedisClusterConfig) 创建用于管理 Jedis 实例的容器 `JedisCommandsInstanceContainer`。
 
 ```java
 public abstract class AbstractRedisBolt extends BaseTickTupleAwareRichBolt {
@@ -328,7 +328,7 @@ public abstract class AbstractRedisBolt extends BaseTickTupleAwareRichBolt {
 }
 ```
 
-`JedisCommandsInstanceContainer`的`build()`方法如下，实际上就是创建JedisPool或JedisCluster并传入容器中。
+`JedisCommandsInstanceContainer` 的 `build()` 方法如下，实际上就是创建 JedisPool 或 JedisCluster 并传入容器中。
 
 ```java
 public static JedisCommandsInstanceContainer build(JedisPoolConfig config) {
@@ -344,9 +344,9 @@ public static JedisCommandsInstanceContainer build(JedisPoolConfig config) {
 
 ### 3.2 RedisStoreBolt和RedisLookupBolt
 
-`RedisStoreBolt`中比较重要的是process方法，该方法主要从storeMapper中获取传入key/value的值，并按照其存储类型`dataType`调用jedisCommand的对应方法进行存储。
+`RedisStoreBolt` 中比较重要的是 process 方法，该方法主要从 storeMapper 中获取传入 key/value 的值，并按照其存储类型 `dataType` 调用 jedisCommand 的对应方法进行存储。
 
-RedisLookupBolt 的实现基本类似，从lookupMapper中获取传入的key值，并进行查询操作。
+RedisLookupBolt 的实现基本类似，从 lookupMapper 中获取传入的 key 值，并进行查询操作。
 
 ```java
 public class RedisStoreBolt extends AbstractRedisBolt {
@@ -438,7 +438,7 @@ public class RedisStoreBolt extends AbstractRedisBolt {
 
 ### 3.3 JedisCommands
 
-JedisCommands接口中定义了所有的 Redis 客户端命令，它有以下三个实现类，分别是Jedis、JedisCluster、ShardedJedis。Strom中主要使用前两种实现类，具体调用哪一个实现类来执行命令，由传入的是jedisPoolConfig还是jedisClusterConfig来决定。
+JedisCommands 接口中定义了所有的 Redis 客户端命令，它有以下三个实现类，分别是 Jedis、JedisCluster、ShardedJedis。Strom 中主要使用前两种实现类，具体调用哪一个实现类来执行命令，由传入的是 jedisPoolConfig 还是 jedisClusterConfig 来决定。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-jedicCommands.png"/> </div>
 
@@ -452,13 +452,13 @@ RedisMapper 和 TupleMapper 定义了 tuple 和 Redis 中的数据如何进行�
 
 TupleMapper 主要定义了两个方法：
 
-+ getKeyFromTuple(ITuple tuple)： 从tuple中获取那个字段作为Key；
++ getKeyFromTuple(ITuple tuple)： 从 tuple 中获取那个字段作为 Key；
 
-+ getValueFromTuple(ITuple tuple)：从tuple中获取那个字段作为Value；
++ getValueFromTuple(ITuple tuple)：从 tuple 中获取那个字段作为 Value；
 
 #### 2. RedisMapper
 
-定义了获取数据类型的方法`getDataTypeDescription()`,RedisDataTypeDescription中RedisDataType枚举类定义了所有可用的Redis数据类型：
+定义了获取数据类型的方法 `getDataTypeDescription()`,RedisDataTypeDescription 中 RedisDataType 枚举类定义了所有可用的 Redis 数据类型：
 
 ```java
 public class RedisDataTypeDescription implements Serializable { 
@@ -470,16 +470,16 @@ public class RedisDataTypeDescription implements Serializable {
 
 #### 3. RedisStoreMapper
 
-RedisStoreMapper继承TupleMapper和RedisMapper接口，用于数据存储时，没有定义额外方法。
+RedisStoreMapper 继承 TupleMapper 和 RedisMapper 接口，用于数据存储时，没有定义额外方法。
 
 #### 4. RedisLookupMapper
 
-RedisLookupMapper继承TupleMapper和RedisMapper接口：
+RedisLookupMapper 继承 TupleMapper 和 RedisMapper 接口：
 
-+ 定义了declareOutputFields方法，声明输出的字段。
-+ 定义了toTuple方法，将查询结果组装为Storm的Values的集合，并用于发送。
++ 定义了 declareOutputFields 方法，声明输出的字段。
++ 定义了 toTuple 方法，将查询结果组装为 Storm 的 Values 的集合，并用于发送。
 
-下面的例子表示从输入`Tuple`的获取`word`字段作为key，使用`RedisLookupBolt`进行查询后，将key和查询结果value组装为values并发送到下一个处理单元。
+下面的例子表示从输入 `Tuple` 的获取 `word` 字段作为 key，使用 `RedisLookupBolt` 进行查询后，将 key 和查询结果 value 组装为 values 并发送到下一个处理单元。
 
 ```java
 class WordCountRedisLookupMapper implements RedisLookupMapper {
@@ -523,7 +523,7 @@ class WordCountRedisLookupMapper implements RedisLookupMapper {
 
 #### 5. RedisFilterMapper
 
-RedisFilterMapper继承TupleMapper和RedisMapper接口，用于查询数据时，定义了declareOutputFields方法，声明输出的字段。如下面的实现：
+RedisFilterMapper 继承 TupleMapper 和 RedisMapper 接口，用于查询数据时，定义了 declareOutputFields 方法，声明输出的字段。如下面的实现：
 
 ```java
 @Override
@@ -537,7 +537,7 @@ public void declareOutputFields(OutputFieldsDeclarer declarer) {
 
 ### 4.1 实现原理
 
-自定义RedisBolt：主要利用Redis中哈希结构的`hincrby key field`命令进行词频统计。在Redis中`hincrby`的执行效果如下。hincrby可以将字段按照指定的值进行递增，如果该字段不存在的话，还会新建该字段，并赋值为0。通过这个命令可以非常轻松的实现词频统计功能。
+自定义 RedisBolt：主要利用 Redis 中哈希结构的 `hincrby key field` 命令进行词频统计。在 Redis 中 `hincrby` 的执行效果如下。hincrby 可以将字段按照指定的值进行递增，如果该字段不存在的话，还会新建该字段，并赋值为 0。通过这个命令可以非常轻松的实现词频统计功能。
 
 ```shell
 redis>  HSET myhash field 5
@@ -559,7 +559,7 @@ redis>
 
 ```java
 /**
- * 自定义RedisBolt 利用Redis的哈希数据结构的hincrby key field命令进行词频统计
+ * 自定义 RedisBolt 利用 Redis 的哈希数据结构的 hincrby key field 命令进行词频统计
  */
 public class RedisCountStoreBolt extends AbstractRedisBolt {
 
@@ -609,7 +609,7 @@ public class RedisCountStoreBolt extends AbstractRedisBolt {
 
 ```java
 /**
- * 利用自定义的RedisBolt实现词频统计
+ * 利用自定义的 RedisBolt 实现词频统计
  */
 public class CustomRedisCountApp {
 
@@ -632,7 +632,7 @@ public class CustomRedisCountApp {
         RedisCountStoreBolt countStoreBolt = new RedisCountStoreBolt(poolConfig, storeMapper);
         builder.setBolt(STORE_BOLT, countStoreBolt).shuffleGrouping(SPLIT_BOLT);
 
-        // 如果外部传参cluster则代表线上环境启动,否则代表本地启动
+        // 如果外部传参 cluster 则代表线上环境启动,否则代表本地启动
         if (args.length > 0 && args[0].equals("cluster")) {
             try {
                 StormSubmitter.submitTopology("ClusterCustomRedisCountApp", new Config(), builder.createTopology());

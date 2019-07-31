@@ -18,24 +18,24 @@ LOAD DATA [LOCAL] INPATH 'filepath' [OVERWRITE]
 INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
 ```
 
-- `LOCAL`关键字代表从本地文件系统加载文件，省略则代表从HDFS上加载文件：
-+ 从本地文件系统加载文件时， `filepath`可以是绝对路径也可以是相对路径(建议使用绝对路径)；
+- `LOCAL` 关键字代表从本地文件系统加载文件，省略则代表从 HDFS 上加载文件：
++ 从本地文件系统加载文件时， `filepath` 可以是绝对路径也可以是相对路径 (建议使用绝对路径)；
   
-+ 从HDFS加载文件时候，`filepath`为文件完整的URL地址：如`hdfs://namenode:port/user/hive/project/ data1`
++ 从 HDFS 加载文件时候，`filepath` 为文件完整的 URL 地址：如 `hdfs://namenode:port/user/hive/project/ data1`
   
-- `filepath`可以是文件路径(在这种情况下Hive会将文件移动到表中)，也可以目录路径(在这种情况下，Hive会将该目录中的所有文件移动到表中)；
+- `filepath` 可以是文件路径 (在这种情况下 Hive 会将文件移动到表中)，也可以目录路径 (在这种情况下，Hive 会将该目录中的所有文件移动到表中)；
 
-- 如果使用OVERWRITE关键字，则将删除目标表（或分区）的内容，使用新的数据填充；不使用此关键字，则数据以追加的方式加入；
+- 如果使用 OVERWRITE 关键字，则将删除目标表（或分区）的内容，使用新的数据填充；不使用此关键字，则数据以追加的方式加入；
 
 - 加载的目标可以是表或分区。如果是分区表，则必须指定加载数据的分区；
 
-- 加载文件的格式必须与建表时使用` STORED AS`指定的存储格式相同。
+- 加载文件的格式必须与建表时使用 ` STORED AS` 指定的存储格式相同。
 
 > 使用建议：
 >
-> **不论是本地路径还是URL都建议使用完整的**。虽然可以使用不完整的URL地址，此时Hive将使用hadoop中的fs.default.name配置来推断地址，但是为避免不必要的错误，建议使用完整的本地路径或URL地址；
+> **不论是本地路径还是 URL 都建议使用完整的**。虽然可以使用不完整的 URL 地址，此时 Hive 将使用 hadoop 中的 fs.default.name 配置来推断地址，但是为避免不必要的错误，建议使用完整的本地路径或 URL 地址；
 >
-> **加载对象是分区表时建议显示指定分区**。在Hive 3.0之后，内部将加载(LOAD)重写为INSERT AS SELECT，此时如果不指定分区，INSERT AS SELECT将假设最后一组列是分区列，如果该列不是表定义的分区，它将抛出错误。为避免错误，还是建议显示指定分区。
+> **加载对象是分区表时建议显示指定分区**。在 Hive 3.0 之后，内部将加载 (LOAD) 重写为 INSERT AS SELECT，此时如果不指定分区，INSERT AS SELECT 将假设最后一组列是分区列，如果该列不是表定义的分区，它将抛出错误。为避免错误，还是建议显示指定分区。
 
 ### 1.2 示例
 
@@ -55,15 +55,15 @@ INTO TABLE tablename [PARTITION (partcol1=val1, partcol2=val2 ...)]
     ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t";
 ```
 
-从HDFS上加载数据到分区表：
+从 HDFS 上加载数据到分区表：
 
 ```sql
 LOAD DATA  INPATH "hdfs://hadoop001:8020/mydir/emp.txt" OVERWRITE INTO TABLE emp_ptn PARTITION (deptno=20);
 ```
 
-> emp.txt文件可在本仓库的resources目录中下载
+> emp.txt 文件可在本仓库的 resources 目录中下载
 
-加载后表中数据如下,分区列deptno全部赋值成20：
+加载后表中数据如下,分区列 deptno 全部赋值成 20：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-ptn.png"/> </div>
 
@@ -79,15 +79,15 @@ INSERT INTO TABLE tablename1 [PARTITION (partcol1=val1, partcol2=val2 ...)]
 select_statement1 FROM from_statement;
 ```
 
-+ Hive 0.13.0开始，建表时可以通过使用TBLPROPERTIES（“immutable”=“true”）来创建不可变表(immutable table) ，如果不可以变表中存在数据，则INSERT INTO失败。（注：INSERT OVERWRITE的语句不受`immutable`属性的影响）;
++ Hive 0.13.0 开始，建表时可以通过使用 TBLPROPERTIES（“immutable”=“true”）来创建不可变表 (immutable table) ，如果不可以变表中存在数据，则 INSERT INTO 失败。（注：INSERT OVERWRITE 的语句不受 `immutable` 属性的影响）;
 
 + 可以对表或分区执行插入操作。如果表已分区，则必须通过指定所有分区列的值来指定表的特定分区；
 
-+ 从Hive 1.1.0开始，TABLE关键字是可选的；
++ 从 Hive 1.1.0 开始，TABLE 关键字是可选的；
 
-+ 从Hive 1.2.0开始 ，可以采用INSERT INTO tablename(z，x，c1)指明插入列；
++ 从 Hive 1.2.0 开始 ，可以采用 INSERT INTO tablename(z，x，c1) 指明插入列；
 
-+ 可以将SELECT语句的查询结果插入多个表（或分区），称为多表插入。语法如下：
++ 可以将 SELECT 语句的查询结果插入多个表（或分区），称为多表插入。语法如下：
 
   ```sql
   FROM from_statement
@@ -107,22 +107,22 @@ INSERT INTO TABLE tablename PARTITION (partcol1[=val1], partcol2[=val2] ...)
 select_statement FROM from_statement;
 ```
 
-在向分区表插入数据时候，分区列名是必须的，但是列值是可选的。如果给出了分区列值，我们将其称为静态分区，否则它是动态分区。动态分区列必须在SELECT语句的列中最后指定，并且与它们在PARTITION()子句中出现的顺序相同。
+在向分区表插入数据时候，分区列名是必须的，但是列值是可选的。如果给出了分区列值，我们将其称为静态分区，否则它是动态分区。动态分区列必须在 SELECT 语句的列中最后指定，并且与它们在 PARTITION() 子句中出现的顺序相同。
 
-注意：Hive 0.9.0之前的版本动态分区插入是默认禁用的，而0.9.0之后的版本则默认启用。以下是动态分区的相关配置：
+注意：Hive 0.9.0 之前的版本动态分区插入是默认禁用的，而 0.9.0 之后的版本则默认启用。以下是动态分区的相关配置：
 
 | 配置                                       | 默认值   | 说明                                                         |
 | ------------------------------------------ | -------- | ------------------------------------------------------------ |
-| `hive.exec.dynamic.partition`              | `true`   | 需要设置为true才能启用动态分区插入                           |
-| `hive.exec.dynamic.partition.mode`         | `strict` | 在严格模式(strict)下，用户必须至少指定一个静态分区，以防用户意外覆盖所有分区，在非严格模式下，允许所有分区都是动态的 |
-| `hive.exec.max.dynamic.partitions.pernode` | 100      | 允许在每个mapper/reducer节点中创建的最大动态分区数           |
+| `hive.exec.dynamic.partition`              | `true`   | 需要设置为 true 才能启用动态分区插入                           |
+| `hive.exec.dynamic.partition.mode`         | `strict` | 在严格模式 (strict) 下，用户必须至少指定一个静态分区，以防用户意外覆盖所有分区，在非严格模式下，允许所有分区都是动态的 |
+| `hive.exec.max.dynamic.partitions.pernode` | 100      | 允许在每个 mapper/reducer 节点中创建的最大动态分区数           |
 | `hive.exec.max.dynamic.partitions`         | 1000     | 允许总共创建的最大动态分区数                                 |
-| `hive.exec.max.created.files`              | 100000   | 作业中所有mapper/reducer创建的HDFS文件的最大数量             |
+| `hive.exec.max.created.files`              | 100000   | 作业中所有 mapper/reducer 创建的 HDFS 文件的最大数量             |
 | `hive.error.on.empty.partition`            | `false`  | 如果动态分区插入生成空结果，是否抛出异常                     |
 
 ### 2.3 示例
 
-1. 新建emp表，作为查询对象表
+1. 新建 emp 表，作为查询对象表
 
 ```sql
 CREATE TABLE emp(
@@ -136,26 +136,26 @@ CREATE TABLE emp(
     deptno INT)
     ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t";
     
- -- 加载数据到emp表中 这里直接从本地加载
+ -- 加载数据到 emp 表中 这里直接从本地加载
 load data local inpath "/usr/file/emp.txt" into table emp;
 ```
-​	完成后`emp`表中数据如下：
+​	完成后 `emp` 表中数据如下：
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp.png"/> </div>
 
-2. 为清晰演示，先清空`emp_ptn`表中加载的数据：
+2. 为清晰演示，先清空 `emp_ptn` 表中加载的数据：
 
 ```sql
 TRUNCATE TABLE emp_ptn;
 ```
 
-3. 静态分区演示：从`emp`表中查询部门编号为20的员工数据，并插入`emp_ptn`表中，语句如下：
+3. 静态分区演示：从 `emp` 表中查询部门编号为 20 的员工数据，并插入 `emp_ptn` 表中，语句如下：
 
 ```sql
 INSERT OVERWRITE TABLE emp_ptn PARTITION (deptno=20) 
 SELECT empno,ename,job,mgr,hiredate,sal,comm FROM emp WHERE deptno=20;
 ```
 
-​	完成后`emp_ptn`表中数据如下：
+​	完成后 `emp_ptn` 表中数据如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-deptno-20.png"/> </div>
 
@@ -165,12 +165,12 @@ SELECT empno,ename,job,mgr,hiredate,sal,comm FROM emp WHERE deptno=20;
 -- 由于我们只有一个分区，且还是动态分区，所以需要关闭严格默认。因为在严格模式下，用户必须至少指定一个静态分区
 set hive.exec.dynamic.partition.mode=nonstrict;
 
--- 动态分区   此时查询语句的最后一列为动态分区列，即deptno
+-- 动态分区   此时查询语句的最后一列为动态分区列，即 deptno
 INSERT OVERWRITE TABLE emp_ptn PARTITION (deptno) 
 SELECT empno,ename,job,mgr,hiredate,sal,comm,deptno FROM emp WHERE deptno=30;
 ```
 
-​	完成后`emp_ptn`表中数据如下：
+​	完成后 `emp_ptn` 表中数据如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-deptno-20-30.png"/> </div>
 
@@ -184,8 +184,8 @@ VALUES ( value [, value ...] )
 ```
 
 + 使用时必须为表中的每个列都提供值。不支持只向部分列插入值（可以为缺省值的列提供空值来消除这个弊端）；
-+ 如果目标表表支持ACID及其事务管理器，则插入后自动提交；
-+ 不支持支持复杂类型(array, map, struct, union)的插入。
++ 如果目标表表支持 ACID 及其事务管理器，则插入后自动提交；
++ 不支持支持复杂类型 (array, map, struct, union) 的插入。
 
 
 
@@ -193,7 +193,7 @@ VALUES ( value [, value ...] )
 
 ### 4.1 语法
 
-更新和删除的语法比较简单，和关系型数据库一致。需要注意的是这两个操作都只能在支持ACID的表，也就是事务表上才能执行。
+更新和删除的语法比较简单，和关系型数据库一致。需要注意的是这两个操作都只能在支持 ACID 的表，也就是事务表上才能执行。
 
 ```sql
 -- 更新
@@ -207,7 +207,7 @@ DELETE FROM tablename [WHERE expression]
 
 **1. 修改配置**
 
-首先需要更改`hive-site.xml`，添加如下配置，开启事务支持，配置完成后需要重启Hive服务。
+首先需要更改 `hive-site.xml`，添加如下配置，开启事务支持，配置完成后需要重启 Hive 服务。
 
 ```xml
 <property>
@@ -238,11 +238,11 @@ DELETE FROM tablename [WHERE expression]
 
 **2. 创建测试表**
 
-创建用于测试的事务表，建表时候指定属性`transactional = true`则代表该表是事务表。需要注意的是，按照[官方文档](https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions)的说明，目前Hive中的事务表有以下限制：
+创建用于测试的事务表，建表时候指定属性 `transactional = true` 则代表该表是事务表。需要注意的是，按照[官方文档](https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions) 的说明，目前 Hive 中的事务表有以下限制：
 
-+ 必须是buckets Table;
-+ 仅支持ORC文件格式；
-+ 不支持LOAD DATA ...语句。
++ 必须是 buckets Table;
++ 仅支持 ORC 文件格式；
++ 不支持 LOAD DATA ...语句。
 
 ```sql
 CREATE TABLE emp_ts(  
@@ -259,7 +259,7 @@ TBLPROPERTIES ("transactional"="true");
 INSERT INTO TABLE emp_ts  VALUES (1,"ming"),(2,"hong");
 ```
 
-插入数据依靠的是MapReduce作业，执行成功后数据如下：
+插入数据依靠的是 MapReduce 作业，执行成功后数据如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-ts.png"/> </div>
 
@@ -273,7 +273,7 @@ UPDATE emp_ts SET ename = "lan"  WHERE  empno=1;
 DELETE FROM emp_ts WHERE empno=2;
 ```
 
-更新和删除数据依靠的也是MapReduce作业，执行成功后数据如下：
+更新和删除数据依靠的也是 MapReduce 作业，执行成功后数据如下：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-ts-2.png"/> </div>
 
@@ -288,11 +288,11 @@ INSERT OVERWRITE [LOCAL] DIRECTORY directory1
   SELECT ... FROM ...
 ```
 
-+ OVERWRITE关键字表示输出文件存在时，先删除后再重新写入；
++ OVERWRITE 关键字表示输出文件存在时，先删除后再重新写入；
 
-+ 和Load语句一样，建议无论是本地路径还是URL地址都使用完整的；
++ 和 Load 语句一样，建议无论是本地路径还是 URL 地址都使用完整的；
 
-+ 写入文件系统的数据被序列化为文本，其中列默认由^A分隔，行由换行符分隔。如果列不是基本类型，则将其序列化为JSON格式。其中行分隔符不允许自定义，但列分隔符可以自定义，如下：
++ 写入文件系统的数据被序列化为文本，其中列默认由^A 分隔，行由换行符分隔。如果列不是基本类型，则将其序列化为 JSON 格式。其中行分隔符不允许自定义，但列分隔符可以自定义，如下：
 
   ```sql
   -- 定义列分隔符为'\t' 
@@ -306,7 +306,7 @@ INSERT OVERWRITE [LOCAL] DIRECTORY directory1
 
 ### 5.2 示例
 
-这里我们将上面创建的`emp_ptn`表导出到本地文件系统，语句如下：
+这里我们将上面创建的 `emp_ptn` 表导出到本地文件系统，语句如下：
 
 ```sql
 INSERT OVERWRITE LOCAL DIRECTORY '/usr/file/ouput'

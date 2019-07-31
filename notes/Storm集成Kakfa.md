@@ -9,12 +9,12 @@
 
 ## 一、整合说明
 
-Storm官方对Kafka的整合分为两个版本，官方说明文档分别如下：
+Storm 官方对 Kafka 的整合分为两个版本，官方说明文档分别如下：
 
-+ [Storm Kafka Integration](http://storm.apache.org/releases/2.0.0-SNAPSHOT/storm-kafka.html) : 主要是针对0.8.x版本的Kafka提供整合支持；
-+  [Storm Kafka Integration (0.10.x+)]() : 包含Kafka 新版本的 consumer API，主要对Kafka 0.10.x +提供整合支持。
++ [Storm Kafka Integration](http://storm.apache.org/releases/2.0.0-SNAPSHOT/storm-kafka.html) : 主要是针对 0.8.x 版本的 Kafka 提供整合支持；
++  [Storm Kafka Integration (0.10.x+)]() : 包含 Kafka 新版本的 consumer API，主要对 Kafka 0.10.x + 提供整合支持。
 
-这里我服务端安装的Kafka版本为2.2.0(Released Mar 22, 2019) ，按照官方0.10.x+的整合文档进行整合，不适用于0.8.x版本的Kafka。
+这里我服务端安装的 Kafka 版本为 2.2.0(Released Mar 22, 2019) ，按照官方 0.10.x+ 的整合文档进行整合，不适用于 0.8.x 版本的 Kafka。
 
 ## 二、写入数据到Kafka
 
@@ -111,7 +111,7 @@ Hadoop	Spark	HBase	Storm
 
 ```java
 /**
- * 写入数据到Kafka中
+ * 写入数据到 Kafka 中
  */
 public class WritingToKafkaApp {
 
@@ -123,11 +123,11 @@ public class WritingToKafkaApp {
 
         TopologyBuilder builder = new TopologyBuilder();
 
-        // 定义Kafka生产者属性
+        // 定义 Kafka 生产者属性
         Properties props = new Properties();
         /*
-         * 指定broker的地址清单，清单里不需要包含所有的broker地址，生产者会从给定的broker里查找其他broker的信息。
-         * 不过建议至少要提供两个broker的信息作为容错。
+         * 指定 broker 的地址清单，清单里不需要包含所有的 broker 地址，生产者会从给定的 broker 里查找其他 broker 的信息。
+         * 不过建议至少要提供两个 broker 的信息作为容错。
          */
         props.put("bootstrap.servers", BOOTSTRAP_SERVERS);
         /*
@@ -166,11 +166,11 @@ public class WritingToKafkaApp {
 
 ### 2.5 测试准备工作
 
-进行测试前需要启动Kakfa：
+进行测试前需要启动 Kakfa：
 
 #### 1. 启动Kakfa
 
-Kafka的运行依赖于zookeeper，需要预先启动，可以启动Kafka内置的zookeeper,也可以启动自己安装的：
+Kafka 的运行依赖于 zookeeper，需要预先启动，可以启动 Kafka 内置的 zookeeper,也可以启动自己安装的：
 
 ```shell
 # zookeeper启动命令
@@ -180,7 +180,7 @@ bin/zkServer.sh start
 bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
-启动单节点kafka用于测试：
+启动单节点 kafka 用于测试：
 
 ```shell
 # bin/kafka-server-start.sh config/server.properties
@@ -206,7 +206,7 @@ bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 --replication-fac
 
 ### 2.6 测试
 
-可以用直接使用本地模式运行，也可以打包后提交到服务器集群运行。本仓库提供的源码默认采用`maven-shade-plugin`进行打包，打包命令如下：
+可以用直接使用本地模式运行，也可以打包后提交到服务器集群运行。本仓库提供的源码默认采用 `maven-shade-plugin` 进行打包，打包命令如下：
 
 ```shell
 # mvn clean package -D maven.test.skip=true
@@ -228,7 +228,7 @@ bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 --replication-fac
 
 ```java
 /**
- * 从Kafka中读取数据
+ * 从 Kafka 中读取数据
  */
 public class ReadingFromKafkaApp {
 
@@ -241,7 +241,7 @@ public class ReadingFromKafkaApp {
         builder.setSpout("kafka_spout", new KafkaSpout<>(getKafkaSpoutConfig(BOOTSTRAP_SERVERS, TOPIC_NAME)), 1);
         builder.setBolt("bolt", new LogConsoleBolt()).shuffleGrouping("kafka_spout");
 
-        // 如果外部传参cluster则代表线上环境启动,否则代表本地启动
+        // 如果外部传参 cluster 则代表线上环境启动,否则代表本地启动
         if (args.length > 0 && args[0].equals("cluster")) {
             try {
                 StormSubmitter.submitTopology("ClusterReadingFromKafkaApp", new Config(), builder.createTopology());
@@ -257,11 +257,11 @@ public class ReadingFromKafkaApp {
 
     private static KafkaSpoutConfig<String, String> getKafkaSpoutConfig(String bootstrapServers, String topic) {
         return KafkaSpoutConfig.builder(bootstrapServers, topic)
-                // 除了分组ID,以下配置都是可选的。分组ID必须指定,否则会抛出InvalidGroupIdException异常
+                // 除了分组 ID,以下配置都是可选的。分组 ID 必须指定,否则会抛出 InvalidGroupIdException 异常
                 .setProp(ConsumerConfig.GROUP_ID_CONFIG, "kafkaSpoutTestGroup")
                 // 定义重试策略
                 .setRetry(getRetryService())
-                // 定时提交偏移量的时间间隔,默认是15s
+                // 定时提交偏移量的时间间隔,默认是 15s
                 .setOffsetCommitPeriodMs(10_000)
                 .build();
     }
@@ -279,7 +279,7 @@ public class ReadingFromKafkaApp {
 
 ```java
 /**
- * 打印从Kafka中获取的数据
+ * 打印从 Kafka 中获取的数据
  */
 public class LogConsoleBolt extends BaseRichBolt {
 
@@ -294,7 +294,7 @@ public class LogConsoleBolt extends BaseRichBolt {
         try {
             String value = input.getStringByField("value");
             System.out.println("received from kafka : "+ value);
-            // 必须ack,否则会重复消费kafka中的消息
+            // 必须 ack,否则会重复消费 kafka 中的消息
             collector.ack(input);
         }catch (Exception e){
             e.printStackTrace();
@@ -309,11 +309,11 @@ public class LogConsoleBolt extends BaseRichBolt {
 }
 ```
 
-这里从`value`字段中获取kafka输出的值数据。
+这里从 `value` 字段中获取 kafka 输出的值数据。
 
-在开发中，我们可以通过继承`RecordTranslator`接口定义了Kafka中Record与输出流之间的映射关系，可以在构建`KafkaSpoutConfig`的时候通过构造器或者`setRecordTranslator()`方法传入，并最后传递给具体的`KafkaSpout`。
+在开发中，我们可以通过继承 `RecordTranslator` 接口定义了 Kafka 中 Record 与输出流之间的映射关系，可以在构建 `KafkaSpoutConfig` 的时候通过构造器或者 `setRecordTranslator()` 方法传入，并最后传递给具体的 `KafkaSpout`。
 
-默认情况下使用内置的`DefaultRecordTranslator`，其源码如下，`FIELDS`中 定义了tuple中所有可用的字段：主题，分区，偏移量，消息键，值。
+默认情况下使用内置的 `DefaultRecordTranslator`，其源码如下，`FIELDS` 中 定义了 tuple 中所有可用的字段：主题，分区，偏移量，消息键，值。
 
 ```java
 public class DefaultRecordTranslator<K, V> implements RecordTranslator<K, V> {
@@ -350,7 +350,7 @@ public class DefaultRecordTranslator<K, V> implements RecordTranslator<K, V> {
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-kafka-producer.png"/> </div>
 
-本地运行的项目接收到从Kafka发送过来的数据：
+本地运行的项目接收到从 Kafka 发送过来的数据：
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-kafka-receiver.png"/> </div>
 
