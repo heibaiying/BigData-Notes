@@ -24,6 +24,7 @@
 这里搭建一个 3 节点的 Hadoop 集群，其中三台主机均部署 `DataNode` 和 `NodeManager` 服务，但只有 hadoop001 上部署 `NameNode` 和 `ResourceManager` 服务。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop集群规划.png"/> </div>
+
 ## 二、前置条件
 
 Hadoop 的运行依赖 JDK，需要预先安装。其安装步骤单独整理至：
