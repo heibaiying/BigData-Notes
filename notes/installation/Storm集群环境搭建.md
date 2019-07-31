@@ -26,6 +26,7 @@
 这里搭建一个 3 节点的 Storm 集群：三台主机上均部署 `Supervisor` 和 `LogViewer` 服务。同时为了保证高可用，除了在 hadoop001 上部署主 `Nimbus` 服务外，还在 hadoop002 上部署备用的 `Nimbus` 服务。`Nimbus` 服务由 Zookeeper 集群进行协调管理，如果主 `Nimbus` 不可用，则备用 `Nimbus` 会成为新的主 `Nimbus`。
 
 <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-集群规划.png"/> </div>
+
 ## 二、前置条件
 
 Storm 运行依赖于 Java 7+ 和 Python 2.6.6 +，所以需要预先安装这两个软件。同时为了保证高可用，这里我们不采用 Storm 内置的 Zookeeper，而采用外置的 Zookeeper 集群。由于这三个软件在多个框架中都有依赖，其安装步骤单独整理至 ：
