@@ -3,8 +3,6 @@
 <nav>
 <a href="#一安装-Scala-插件">一、安装 Scala 插件</a><br/>
 <a href="#二Flink-项目初始化">二、Flink 项目初始化</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-使用官方脚本构建">2.1 使用官方脚本构建</a><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-使用-IDEA-构建">2.2 使用 IDEA 构建</a><br/>
 <a href="#三项目结构">三、项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-项目结构">3.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-主要依赖">3.2 主要依赖</a><br/>
@@ -52,14 +50,14 @@ $ curl https://flink.apache.org/q/quickstart.sh | bash -s 1.9.0
 ```shell
 PACKAGE=quickstart
 
-mvn archetype:generate								\
-  -DarchetypeGroupId=org.apache.flink				\
-  -DarchetypeArtifactId=flink-quickstart-java		\
-  -DarchetypeVersion=${1:-1.8.0}							\
-  -DgroupId=org.myorg.quickstart					\
-  -DartifactId=$PACKAGE								\
-  -Dversion=0.1										\
-  -Dpackage=org.myorg.quickstart					\
+mvn archetype:generate \
+  -DarchetypeGroupId=org.apache.flink \
+  -DarchetypeArtifactId=flink-quickstart-java \
+  -DarchetypeVersion=${1:-1.8.0} \
+  -DgroupId=org.myorg.quickstart \
+  -DartifactId=$PACKAGE	\
+  -Dversion=0.1 \
+  -Dpackage=org.myorg.quickstart \
   -DinteractiveMode=false
 ```
 
@@ -70,9 +68,11 @@ mvn archetype:generate								\
 如果你使用的是开发工具是 IDEA ，可以直接在项目创建页面选择 Maven Flink Archetype 进行项目初始化：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-maven.png"/> </div>
+
 如果你的 IDEA 没有上述 Archetype， 可以通过点击右上角的 `ADD ARCHETYPE` ，来进行添加，依次填入所需信息，这些信息都可以从上述的 `archetype:generate ` 语句中获取。点击  `OK` 保存后，该 Archetype 就会一直存在于你的 IDEA 中，之后每次创建项目时，只需要直接选择该 Archetype 即可：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-maven-new.png"/> </div>
+
 选中 Flink Archetype ，然后点击 `NEXT` 按钮，之后的所有步骤都和正常的 Maven 工程相同。
 
 ## 三、项目结构
@@ -187,7 +187,7 @@ object StreamingJob {
 </profiles>
 ```
 
-在 id 为 add-dependencies-for-IDEA 的 profile 中，所有的核心依赖都被标识为 compile，此时你可以无需改动任何代码，只需要在 IDEA 的 Maven 面板中勾选该 profile，即可直接在 IDEA 中运行 Flink 项目：
+在 id 为 `add-dependencies-for-IDEA` 的 profile 中，所有的核心依赖都被标识为 compile，此时你可以无需改动任何代码，只需要在 IDEA 的 Maven 面板中勾选该 profile，即可直接在 IDEA 中运行 Flink 项目：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-maven-profile.png"/> </div>
 
