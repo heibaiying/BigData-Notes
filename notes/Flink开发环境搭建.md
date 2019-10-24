@@ -9,7 +9,7 @@
 <a href="#四词频统计案例">四、词频统计案例</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-批处理示例">4.1 批处理示例</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-流处理示例">4.2 流处理示例</a><br/>
-<a href="#四使用-Scala-Shell">四、使用 Scala Shell</a><br/>
+<a href="#五使用-Scala-Shell">五、使用 Scala Shell</a><br/>
 </nav>
 
 ## 一、安装 Scala 插件
@@ -260,7 +260,7 @@ nc -lk 9999
 
 之后输入测试数据即可观察到流处理程序的处理情况。
 
-## 四、使用 Scala Shell
+## 五、使用 Scala Shell
 
 对于日常的 Demo 项目，如果你不想频繁地启动 IDEA 来观察测试结果，可以像 Spark 一样，直接使用 Scala Shell 来运行程序，这对于日常的学习来说，效果更加直观，也更省时。Flink 安装包的下载地址如下：
 
