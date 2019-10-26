@@ -18,8 +18,19 @@
 
 package com.heibaiying;
 
+import org.apache.flink.api.common.functions.FlatMapFunction;
+import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.operators.DataSource;
+import org.apache.flink.api.java.operators.FlatMapOperator;
+import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.util.Collector;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Skeleton for a Flink Batch Job.
@@ -35,11 +46,9 @@ public class BatchJob {
 
     public static void main(String[] args) throws Exception {
 
-        final String rootPath = "D:\\BigData-Notes\\code\\Flink\\flink-basis-java\\src\\main\\resources\\";
         // set up the batch execution environment
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
-        DataSource<String> readTextFile = env.readTextFile(rootPath + "log4j.properties");
-        readTextFile.print();
+        env.execute("Flink Batch Java API Skeleton");
     }
 }
