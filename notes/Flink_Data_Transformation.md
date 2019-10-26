@@ -176,10 +176,10 @@ split.select("even").print();
 project 主要用于获取  tuples 中的指定字段集，示例如下：
 
 ```java
-DataStreamSource<Tuple3<String, Integer, String>> tuple3DataStreamSource = env.fromElements(
+DataStreamSource<Tuple3<String, Integer, String>> streamSource = env.fromElements(
                                                                          new Tuple3<>("li", 22, "2018-09-23"),
                                                                          new Tuple3<>("ming", 33, "2020-09-23"));
-tuple3DataStreamSource.project(0,2).print();
+streamSource.project(0,2).print();
 
 // 输出
 (li,2018-09-23)
