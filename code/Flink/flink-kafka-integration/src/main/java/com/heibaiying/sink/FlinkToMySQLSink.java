@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-public class FlinkToMySQL extends RichSinkFunction<Employee> {
+public class FlinkToMySQLSink extends RichSinkFunction<Employee> {
 
     private PreparedStatement stmt;
     private Connection conn;
@@ -16,7 +16,7 @@ public class FlinkToMySQL extends RichSinkFunction<Employee> {
     @Override
     public void open(Configuration parameters) throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://192.168.200.229:3306/employees?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false", "root", "123456");
+        conn = DriverManager.getConnection("jdbc:mysql://192.168.0.229:3306/employees?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false", "root", "123456");
         String sql = "insert into emp(name, age, birthday) values(?, ?, ?)";
         stmt = conn.prepareStatement(sql);
     }

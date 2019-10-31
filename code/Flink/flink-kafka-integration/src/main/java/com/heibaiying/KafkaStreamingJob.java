@@ -20,7 +20,7 @@ public class KafkaStreamingJob {
 
         // 1.指定Kafka的相关配置属性
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "192.168.200.229:9092");
+        properties.setProperty("bootstrap.servers", "192.168.200.0:9092");
 
         // 2.接收Kafka上的数据
         DataStream<String> stream = env
@@ -35,7 +35,9 @@ public class KafkaStreamingJob {
         };
         // 4. 定义Flink Kafka生产者
         FlinkKafkaProducer<String> kafkaProducer = new FlinkKafkaProducer<>("flink-stream-out-topic",
-                kafkaSerializationSchema, properties, FlinkKafkaProducer.Semantic.AT_LEAST_ONCE, 5);
+                kafkaSerializationSchema,
+                properties,
+                FlinkKafkaProducer.Semantic.AT_LEAST_ONCE, 5);
         // 5. 将接收到输入元素*2后写出到Kafka
         stream.map((MapFunction<String, String>) value -> value + value).addSink(kafkaProducer);
         env.execute("Flink Streaming");

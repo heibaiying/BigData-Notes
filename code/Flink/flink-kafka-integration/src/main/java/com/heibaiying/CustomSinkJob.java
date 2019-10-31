@@ -1,7 +1,7 @@
 package com.heibaiying;
 
 import com.heibaiying.bean.Employee;
-import com.heibaiying.sink.FlinkToMySQL;
+import com.heibaiying.sink.FlinkToMySQLSink;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
@@ -17,7 +17,7 @@ public class CustomSinkJob {
                 new Employee("hei", 10, date),
                 new Employee("bai", 20, date),
                 new Employee("ying", 30, date));
-        streamSource.addSink(new FlinkToMySQL());
+        streamSource.addSink(new FlinkToMySQLSink());
         env.execute();
     }
 }
