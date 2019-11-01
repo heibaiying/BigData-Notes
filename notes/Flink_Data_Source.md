@@ -25,7 +25,7 @@ env.readTextFile(filePath).print();
 
 **2. readFile(fileInputFormat, path)** ：按照指定格式读取文件。
 
-**3. readFile(inputFormat, filePath, watchType, interval, typeInformation) **：按照指定格式周期性的读取文件。其中各个参数的含义如下：
+**3. readFile(inputFormat, filePath, watchType, interval, typeInformation)**：按照指定格式周期性的读取文件。其中各个参数的含义如下：
 
 + **inputFormat**：数据流的输入格式。
 + **filePath**：文件路径，可以是本地文件系统上的路径，也可以是 HDFS 上的文件路径。
