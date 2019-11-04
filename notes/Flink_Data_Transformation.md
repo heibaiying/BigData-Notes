@@ -220,7 +220,6 @@ ReScale 这个单词具有重新缩放的意义，其对应的操作也是如此
 
 
 
-
 ### 3.4 Broadcasting [DataStream → DataStream]
 
 将数据分发到所有分区上。通常用于小数据集与大数据集进行关联的情况下，此时可以将小数据集广播到所有分区上，避免频繁的跨分区关联，通过 broadcast 方法进行实现：
@@ -282,7 +281,7 @@ someStream.map(...).disableChaining();
 
 ### 4.3 slotSharingGroup
 
-slot 是任务管理器  (TaskManager) 所拥有资源的固定子集，每个操作 (operation) 的子任务 (sub task) 都需要获取 slot 来执行计算，但有的操作是资源密集型的，有的则是 CPU 密集型的，为了更好地利用资源，Flink 允许不同操作的子任务被部署到同一 slot 中。slotSharingGroup 用于设置操作的 slot 共享组 (slot sharing group) ，Flink 会将具有相同 slot 共享组的操作放到同一个 slot 中 。示例如下：
+slot 是任务管理器  (TaskManager) 所拥有资源的固定子集，每个操作 (operation) 的子任务 (sub task) 都需要获取 slot 来执行计算，但每个操作所需要资源的大小都是不相同的，为了更好地利用资源，Flink 允许不同操作的子任务被部署到同一 slot 中。slotSharingGroup 用于设置操作的 slot 共享组 (slot sharing group) ，Flink 会将具有相同 slot 共享组的操作放到同一个 slot 中 。示例如下：
 
 ```java
 someStream.filter(...).slotSharingGroup("slotSharingGroupName");
