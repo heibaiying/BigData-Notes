@@ -22,7 +22,7 @@
 
 ### 1.1  Topologies（拓扑）
 
-一个完整的 Storm 流处理程序被称为 Storm topology(拓扑)。它是一个是由 `Spouts` 和 `Bolts` 通过 `Stream` 连接起来的有向无环图，Storm 会保持每个提交到集群的 topology 持续地运行，从而处理源源不断的数据流，直到你将主动其杀死 (kill) 为止。
+一个完整的 Storm 流处理程序被称为 Storm topology(拓扑)。它是一个是由 `Spouts` 和 `Bolts` 通过 `Stream` 连接起来的有向无环图，Storm 会保持每个提交到集群的 topology 持续地运行，从而处理源源不断的数据流，直到你将其主动杀死 (kill) 为止。
 
 ### 1.2  Streams（流）
 
