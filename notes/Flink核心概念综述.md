@@ -26,14 +26,14 @@ Apache Flink 诞生于柏林工业大学的一个研究性项目，原名 Strato
 
 Flink 有界数据流和无界数据流：
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-bounded-unbounded.png"/> </div>
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-bounded-unbounded.png"/> </div>
 
 
 
 
 Spark Streaming 数据流的拆分：
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/streaming-flow.png"/> </div>
+<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/streaming-flow.png"/> </div>
 
 
 
@@ -42,7 +42,7 @@ Spark Streaming 数据流的拆分：
 
 Flink 采用分层的架构设计，从而保证各层在功能和职责上的清晰。如下图所示，由上而下分别是 API & Libraries 层、Runtime 核心层以及物理部署层：
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-stack.png"/> </div>
+<div align="center"> <img width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-stack.png"/> </div>
 
 
 
