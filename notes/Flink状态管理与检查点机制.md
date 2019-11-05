@@ -21,7 +21,7 @@
 
 相对于其他流计算框架，Flink 一个比较重要的特性就是其支持有状态计算。即你可以将中间的计算结果进行保存，并提供给后续的计算使用：
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-stateful-stream.png"/> </div>
+<div align="center"> <img width="500px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-stateful-stream.png"/> </div>
 
 
 
@@ -31,7 +31,7 @@
 
 算子状态 (Operator State)：顾名思义，状态是和算子进行绑定的，一个算子的状态不能被其他算子所访问到。官方文档上对 Operator State 的解释是：*each operator state is bound to one parallel operator instance*，所以更为确切的说一个算子状态是与一个并发的算子实例所绑定的，即假设算子的并行度是 2，那么其应有两个对应的算子状态：
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-operator-state.png"/> </div>
+<div align="center"> <img width="500px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-operator-state.png"/> </div>
 
 
 
