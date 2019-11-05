@@ -99,10 +99,6 @@ Stateful Stream Processing 是最低级别的抽象，它通过 Process Function
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-application-submission.png"/> </div>
 
 
-染病
-
-
-
 ### 4.2  Task & SubTask
 
 上面我们提到：TaskManagers 实际执行的是 SubTask，而不是 Task，这里解释一下两者的区别：
@@ -110,8 +106,6 @@ Stateful Stream Processing 是最低级别的抽象，它通过 Process Function
 在执行分布式计算时，Flink 将可以链接的操作 (operators) 链接到一起，这就是 Task。之所以这样做， 是为了减少线程间切换和缓冲而导致的开销，在降低延迟的同时可以提高整体的吞吐量。 但不是所有的 operator 都可以被链接，如下 keyBy 等操作会导致网络 shuffle 和重分区，因此其就不能被链接，只能被单独作为一个 Task。  简单来说，一个 Task 就是一个可以链接的最小的操作链 (Operator Chains) 。如下图，source 和 map 算子被链接到一块，因此整个作业就只有三个 Task：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-task-subtask.png"/> </div>
-
-
 
 
 解释完 Task ，我们在解释一下什么是 SubTask，其准确的翻译是： *A subtask is one parallel slice of a task*，即一个 Task 可以按照其并行度拆分为多个 SubTask。如上图，source & map 具有两个并行度，KeyBy 具有两个并行度，Sink 具有一个并行度，因此整个虽然只有 3 个 Task，但是却有 5 个 SubTask。Jobmanager 负责定义和拆分这些 SubTask，并将其交给 Taskmanagers 来执行，每个 SubTask 都是一个单独的线程。
