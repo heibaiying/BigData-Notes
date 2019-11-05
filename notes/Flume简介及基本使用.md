@@ -35,7 +35,7 @@ Apache Flume 是一个分布式，高可用的数据收集系统。它可以从�
 
 **1. Event**
 
-`Evnet` 是 Flume NG 数据传输的基本单元。类似于 JMS 和消息系统中的消息。一个 `Evnet` 由标题和正文组成：前者是键/值映射，后者是任意字节数组。
+`Event` 是 Flume NG 数据传输的基本单元。类似于 JMS 和消息系统中的消息。一个 `Event` 由标题和正文组成：前者是键/值映射，后者是任意字节数组。
 
 **2. Source** 
 
@@ -50,7 +50,7 @@ Apache Flume 是一个分布式，高可用的数据收集系统。它可以从�
 
 **4. Sink**
 
-`Sink` 的主要功能从 `Channel` 中读取 `Evnet`，并将其存入外部存储系统或将其转发到下一个 `Source`，成功后再从 `Channel` 中移除 `Event`。
+`Sink` 的主要功能从 `Channel` 中读取 `Event`，并将其存入外部存储系统或将其转发到下一个 `Source`，成功后再从 `Channel` 中移除 `Event`。
 
 **5. Agent**
 
