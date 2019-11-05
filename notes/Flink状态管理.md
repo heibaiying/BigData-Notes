@@ -121,7 +121,7 @@ descriptor.enableTimeToLive(ttlConfig);
 
 - **ListState**：存储列表类型的状态。
 - **UnionListState**：存储列表类型的状态，与 ListState 的区别在于：如果并行度发生变化，ListState 会将该算子的所有并发的状态实例进行汇总，然后均分给新的 Task；而 UnionListState 只是将所有并发的状态实例汇总起来，具体的划分行为则由用户进行定义。
-- **BroadcastState**：用于广播算子状态。
+- **BroadcastState**：用于广播的算子状态。
 
 这里我们继续沿用上面的例子，假设此时我们不需要区分监控数据的类型，只要有监控数据超过阈值并达到指定的次数后，就进行报警，代码如下：
 

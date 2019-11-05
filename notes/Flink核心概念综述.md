@@ -61,34 +61,28 @@ Stateful Stream Processing 是最低级别的抽象，它通过 Process Function
 
 按照上面的介绍，Flink 核心架构的第二层是 Runtime 层， 该层采用标准的 Master - Slave 结构， 其中，Master 部分又包含了三个核心组件：Dispatcher、ResourceManager 和 JobManager，而 Slave 则主要是 TaskManager 进程。它们的功能分别如下：
 
-- **JobManagers** (也称为 *masters*) ： 整个作业 (Job) 的主要管理者，负责调度任务 (tasks)、协调检查点 (checkpoints) 、协调故障恢复等。每个 Job 至少有一个 JobManager；高可用部署下可以有多个 JobManagers，其中一个作为 *leader*，其余的则处于 *standby* 状态。
-- **TaskManagers** (也称为 *workers*) ：负责子任务 (subtasks) 的执行。每个 Job 至少会有一个 TaskManager。
-- **Dispatcher**：负责接收客户端的作业，并启动 JobManager。
-- **ResourceManager** ：负责集群资源的协调和管理。
+- **JobManagers** (也称为 *masters*) ：JobManagers 接收由 Dispatcher 传递过来的执行程序，该执行程序包含了作业图 (JobGraph)，逻辑数据流图 (logical dataflow graph) 及其所有的 classes 文件以及第三方类库 (libraries) 等等 。紧接着 JobManagers 会将 JobGraph 转换为执行图 (ExecutionGraph)，然后向 ResourceManager 申请资源来执行该任务，一旦申请到资源，就将执行图分发给对应的 TaskManagers 。因此每个作业 (Job) 至少有一个 JobManager；高可用部署下可以有多个 JobManagers，其中一个作为 *leader*，其余的则处于 *standby* 状态。
+- **TaskManagers** (也称为 *workers*) : TaskManagers 负责实际的子任务 (subtasks) 的执行，每个 TaskManagers 都拥有一定数量的 slots。Slot 是一组固定大小的资源的合集 (如计算能力，存储空间)。TaskManagers 启动后，会将其所拥有的 slots 注册到 ResourceManager 上，由 ResourceManager 进行统一管理。
+- **Dispatcher**：负责接收客户端提交的执行程序，并传递给 JobManager 。除此之外，它还提供了一个 WEB UI 界面，用于监控作业的执行情况。
+- **ResourceManager** ：负责管理 slots 并协调集群资源。ResourceManager 接收来自 JobManager 的资源请求，并将存在空闲 slots 的 TaskManagers 分配给 JobManager 执行任务。Flink 基于不同的部署平台，如 YARN , Mesos，K8s 等提供了不同的资源管理器，当 TaskManagers 没有足够的 slots 来执行任务时，它会向第三方平台发起会话来请求额外的资源。
 
-以 Standalone 模式为例，它们之间的运行流程如下：
+![flink-application-submission](D:\BigData-Notes\pictures\flink-application-submission.png)染病
 
-![flink-standalone-cluster](D:\BigData-Notes\pictures\flink-standalone-cluster.jpg)
 
-+ 用户通过 Client 将作业 ( Job) 提交给 Master 时，此时需要先经过 Dispatcher；
-+ 当 Dispatcher 收到客户端的请求之后，会生成一个 JobManager，接着 JobManager 进程向 ResourceManager 申请资源来启动 TaskManager；
-+ TaskManager 启动之后，它需要将自己注册到 ResourceManager 上。注册完成后， JobManager 再将具体的 Task 任务分发给这个 TaskManager 去执行。
 
 ### 4.2  Task & SubTask
 
-在上面我们提到 JobManagers 负责管理的是 Task ，而 TaskManagers 负责执行的则是 SubTask，这里解释一下任务 Task 和子任务 SubTask 两者间的关系：
+上面我们提到：TaskManagers 实际执行的是 SubTask，而不是 Task，这里解释一下两者的区别：
 
 在执行分布式计算时，Flink 将可以链接的操作 (operators) 链接到一起，这就是 Task。之所以这样做， 是为了减少线程间切换和缓冲而导致的开销，在降低延迟的同时可以提高整体的吞吐量。 但不是所有的 operator 都可以被链接，如下 keyBy 等操作会导致网络 shuffle 和重分区，因此其就不能被链接，只能被单独作为一个 Task。  简单来说，一个 Task 就是一个可以链接的最小的操作链 (Operator Chains) 。如下图，source 和 map 算子被链接到一块，因此整个作业就只有三个 Task：
 
 ![flink-task-subtask](D:\BigData-Notes\pictures\flink-task-subtask.png)
 
-解释完 Task ，我们在解释一下什么是 SubTask，其准确的翻译是：  *A subtask is one parallel slice of a task*，即一个 Task 可以按照其并行度拆分为多个 SubTask。如上图，source & map 具有两个并行度，KeyBy 具有两个并行度，Sink 具有一个并行度，因此整个虽然只有 3 个 Task，但是却有 5 个 SubTask，每个 SubTask 都是一个单独的线程。
-
-Jobmanager 负责定义和拆分这些 SubTask，并将其交给 Taskmanagers 来执行。想要成功执行这些任务，Taskmanagers 还必须要具备运行这些 SubTask 所需要的计算资源和内存资源。
+解释完 Task ，我们在解释一下什么是 SubTask，其准确的翻译是： *A subtask is one parallel slice of a task*，即一个 Task 可以按照其并行度拆分为多个 SubTask。如上图，source & map 具有两个并行度，KeyBy 具有两个并行度，Sink 具有一个并行度，因此整个虽然只有 3 个 Task，但是却有 5 个 SubTask。Jobmanager 负责定义和拆分这些 SubTask，并将其交给 Taskmanagers 来执行，每个 SubTask 都是一个单独的线程。
 
 ### 4.3  资源管理
 
-ResourceManager 对资源的管理是以 Slot 为单位的，Slot 是一组固定大小的资源的合集。 在上面的过程中，JobManager 进程向 ResourceManager 申请资源来启动 TaskManager，申请的就是 Slot 资源，此时上面 5 个 SubTasks 与 Slots 的对应情况则可能如下：
+理解了 SubTasks ，我们再来看看其与 Slots 的对应情况。一种可能的分配情况如下：
 
 ![flink-tasks-slots](D:\BigData-Notes\pictures\flink-tasks-slots.png)
 
@@ -112,7 +106,7 @@ Flink 的所有组件都基于 Actor System 来进行通讯。Actor system是多
 
 ## 五、Flink 的优点
 
-最后来介绍一下 Flink 的优点：
+最后基于上面的介绍，来总结一下 Flink 的优点：
 
 + Flink 是基于事件驱动 (Event-driven) 的应用，能够同时支持流处理和批处理；
 + 基于内存的计算，能够保证高吞吐和低延迟，具有优越的性能表现；
@@ -130,7 +124,6 @@ Flink 的所有组件都基于 Actor System 来进行通讯。Actor system是多
 + [Dataflow Programming Model](https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/programming-model.html)
 + [Distributed Runtime Environment](https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/runtime.html)
 +  [Component Stack](https://ci.apache.org/projects/flink/flink-docs-release-1.9/internals/components.html)
-+ [Flink on Yarn/K8s 原理剖析及实践]( https://www.infoq.cn/article/UFeFrdqSlqI3HyRHbPNm )
 + Fabian Hueske , Vasiliki Kalavri . 《Stream Processing with Apache Flink》.  O'Reilly Media .  2019-4-30 
 
 

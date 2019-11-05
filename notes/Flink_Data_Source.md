@@ -13,7 +13,7 @@
 
 ## 一、内置 Data Source
 
-Flink Data Source 用于定义 Flink 程序的数据来源，Flink 官方内置提供了多种数据获取方法，用于帮助开发者简单快速地构建输入流，具体如下：
+Flink Data Source 用于定义 Flink 程序的数据来源，Flink 官方提供了多种数据获取方法，用于帮助开发者简单快速地构建输入流，具体如下：
 
 ### 1.1 基于文件构建
 
@@ -29,7 +29,7 @@ env.readTextFile(filePath).print();
 
 + **inputFormat**：数据流的输入格式。
 + **filePath**：文件路径，可以是本地文件系统上的路径，也可以是 HDFS 上的文件路径。
-+ **watchType**：读取方式，它有两个可选值，分别是 `FileProcessingMode.PROCESS_ONCE` 和 `FileProcessingMode.PROCESS_CONTINUOUSLY`：前者表示对指定路径上的数据只读取一次，然后退出；后者表示对路径进行定期扫描从而可以获取到新的数据。需要注意的是如果 watchType 被设置为 `PROCESS_CONTINUOUSLY`，那么当文件被修改时，其所有的内容 (包含原有的内容和新增的内容) 都将被重新处理，因此这会打破 Flink 的  *exactly-once* 语义。
++ **watchType**：读取方式，它有两个可选值，分别是 `FileProcessingMode.PROCESS_ONCE` 和 `FileProcessingMode.PROCESS_CONTINUOUSLY`：前者表示对指定路径上的数据只读取一次，然后退出；后者表示对路径进行定期地扫描和读取。需要注意的是如果 watchType 被设置为 `PROCESS_CONTINUOUSLY`，那么当文件被修改时，其所有的内容 (包含原有的内容和新增的内容) 都将被重新处理，因此这会打破 Flink 的 *exactly-once* 语义。
 + **interval**：定期扫描的时间间隔。
 + **typeInformation**：输入流中元素的类型。
 
@@ -102,7 +102,7 @@ Flink 提供了 socketTextStream 方法用于构建基于 Socket 的数据流，
 - **hostname**：主机名；
 - **port**：端口号，设置为 0 时，表示端口号自动分配；
 - **delimiter**：用于分隔每条记录的分隔符；
-- **maxRetry**：当 Socket 临时关闭时，程序的最大重试间隔，单位为秒。设置为 0 时表示不进行重试；设置为负值则表示一直重试。使用示例如下：
+- **maxRetry**：当 Socket 临时关闭时，程序的最大重试间隔，单位为秒。设置为 0 时表示不进行重试；设置为负值则表示一直重试。示例如下：
 
 ```shell
  env.socketTextStream("192.168.0.229", 9999, "\n", 3).print();
@@ -151,7 +151,6 @@ Exception in thread "main" java.lang.IllegalArgumentException: Source: 1 is not 
 如果你想要实现具有并行度的输入流，则需要实现 ParallelSourceFunction 或 RichParallelSourceFunction 接口，其与 SourceFunction 的关系如下图： 
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-RichParallelSourceFunction.png"/> </div>
-
 ParallelSourceFunction 直接继承自 ParallelSourceFunction，具有并行度的功能。RichParallelSourceFunction 则继承自 AbstractRichFunction，同时实现了 ParallelSourceFunction 接口，所以其除了具有并行度的功能外，还提供了额外的与生命周期相关的方法，如 open() ，closen() 。
 
 ## 三、Streaming Connectors
@@ -267,11 +266,9 @@ bin/kafka-console-producer.sh --broker-list hadoop001:9092 --topic flink-stream-
 在 Producer 上输入任意测试数据，之后观察程序控制台的输出：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-kafka-datasource-producer.png"/> </div>
-
 程序控制台的输出如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-kafka-datasource-console.png"/> </div>
-
 可以看到已经成功接收并打印出相关的数据。
 
 

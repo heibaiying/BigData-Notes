@@ -20,7 +20,7 @@ public class KafkaStreamingJob {
 
         // 1.指定Kafka的相关配置属性
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "192.168.200.0:9092");
+        properties.setProperty("bootstrap.servers", "192.168.0.229:9092");
 
         // 2.接收Kafka上的数据
         DataStream<String> stream = env

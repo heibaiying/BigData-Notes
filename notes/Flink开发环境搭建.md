@@ -17,7 +17,6 @@
 Flink 分别提供了基于 Java 语言和 Scala 语言的 API ，如果想要使用 Scala 语言来开发 Flink 程序，可以通过在 IDEA 中安装 Scala 插件来提供语法提示，代码高亮等功能。打开 IDEA , 依次点击 `File => settings => plugins` 打开插件安装页面，搜索 Scala 插件并进行安装，安装完成后，重启 IDEA 即可生效。  
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-plugin.png"/> </div>
-
 ## 二、Flink 项目初始化
 
 ### 2.1 使用官方脚本构建
@@ -68,7 +67,6 @@ mvn archetype:generate \
 如果你使用的是开发工具是 IDEA ，可以直接在项目创建页面选择 Maven Flink Archetype 进行项目初始化：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-maven.png"/> </div>
-
 如果你的 IDEA 没有上述 Archetype， 可以通过点击右上角的 `ADD ARCHETYPE` ，来进行添加，依次填入所需信息，这些信息都可以从上述的 `archetype:generate ` 语句中获取。点击  `OK` 保存后，该 Archetype 就会一直存在于你的 IDEA 中，之后每次创建项目时，只需要直接选择该 Archetype 即可：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-maven-new.png"/> </div>
@@ -81,7 +79,6 @@ mvn archetype:generate \
 创建完成后的自动生成的项目结构如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-basis-project.png"/> </div>
-
 其中 BatchJob 为批处理的样例代码，源码如下：
 
 ```scala
@@ -145,7 +142,6 @@ object StreamingJob {
 需要特别注意的以上依赖的 `scope` 标签全部被标识为 provided ，这意味着这些依赖都不会被打入最终的 JAR 包。因为 Flink 的安装包中已经提供了这些依赖，位于其 lib 目录下，名为  `flink-dist_*.jar`  ，它包含了 Flink 的所有核心类和依赖：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-lib.png"/> </div>
- 
  `scope` 标签被标识为 provided 会导致你在 IDEA 中启动项目时会抛出 ClassNotFoundException 异常。基于这个原因，在使用 IDEA 创建项目时还自动生成了以下 profile 配置：
 
 ```xml
@@ -189,7 +185,6 @@ object StreamingJob {
 在 id 为 `add-dependencies-for-IDEA` 的 profile 中，所有的核心依赖都被标识为 compile，此时你可以无需改动任何代码，只需要在 IDEA 的 Maven 面板中勾选该 profile，即可直接在 IDEA 中运行 Flink 项目：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-maven-profile.png"/> </div>
-
 ## 四、词频统计案例
 
 项目创建完成后，可以先书写一个简单的词频统计的案例来尝试运行 Flink 项目，以下以 Scala 语言为例，分别介绍流处理程序和批处理程序的编程示例：
@@ -226,7 +221,6 @@ d,d
 本机不需要配置其他任何的 Flink 环境，直接运行 Main 方法即可，结果如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-word-count.png"/> </div>
-
 ### 4.2 流处理示例
 
 ```scala
@@ -271,7 +265,6 @@ https://flink.apache.org/downloads.html
 Flink 大多数版本都提供有 Scala 2.11 和 Scala 2.12 两个版本的安装包可供下载：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-download.png"/> </div>
-
 下载完成后进行解压即可，Scala Shell 位于安装目录的 bin 目录下，直接使用以下命令即可以本地模式启动：
 
 ```shell
@@ -281,8 +274,7 @@ Flink 大多数版本都提供有 Scala 2.11 和 Scala 2.12 两个版本的安�
 命令行启动完成后，其已经提供了批处理 （benv 和 btenv）和流处理（senv 和 stenv）的运行环境，可以直接运行 Scala Flink 程序，示例如下：
 
 <div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-scala-shell.png"/> </div>
-
-最后说明一个常见的异常：这里我使用的 Flink 版本为 1.9.1，启动时会抛出如下异常。这里因为按照官方的说明，目前所有 Scala 2.12 版本的安装包暂时都不支持 Scala Shell，所以如果想要使用 Scala Shell，只能选择 Scala 2.11 版本的安装包。 
+最后解释一个常见的异常：这里我使用的 Flink 版本为 1.9.1，启动时会抛出如下异常。这里因为按照官方的说明，目前所有 Scala 2.12 版本的安装包暂时都不支持 Scala Shell，所以如果想要使用 Scala Shell，只能选择 Scala 2.11 版本的安装包。 
 
 ```shell
 [root@hadoop001 bin]# ./start-scala-shell.sh local
