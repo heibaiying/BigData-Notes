@@ -1,4 +1,21 @@
 # Flink Standalone Cluster
+<nav>
+<a href="#一部署模式">一、部署模式</a><br/>
+<a href="#二单机模式">二、单机模式</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-安装部署">2.1 安装部署</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-作业提交">2.2 作业提交</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-停止作业">2.3 停止作业</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-停止-Flink">2.4 停止 Flink </a><br/>
+<a href="#三Standalone-Cluster">三、Standalone Cluster</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-前置条件">3.1 前置条件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-搭建步骤">3.2 搭建步骤</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-可选配置">3.3 可选配置</a><br/>
+<a href="#四Standalone-Cluster-HA">四、Standalone Cluster HA</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-前置条件">4.1 前置条件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-搭建步骤">4.2 搭建步骤</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-常见异常">4.3 常见异常</a><br/>
+</nav>
+
 
 ## 一、部署模式
 
@@ -32,7 +49,9 @@ bin/start-cluster.sh
 
 Flink 提供了 WEB 界面用于直观的管理 Flink 集群，访问端口为 `8081`：
 
-![flink-dashboard](D:\BigData-Notes\pictures\flink-dashboard.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-dashboard.png"/> </div>
+
+
 
 Flink 的 WEB UI 界面支持大多数常用功能，如提交作业，取消作业，查看各个节点运行情况，查看作业执行情况等，大家可以在部署完成后，进入该页面进行详细的浏览。
 
@@ -64,11 +83,15 @@ a a b b c c c a e
 
 可以通过 WEB UI 的控制台查看作业统运行情况：
 
-![flink-socket-wordcount](D:\BigData-Notes\pictures\flink-socket-wordcount.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-socket-wordcount.png"/> </div>
+
+
 
 也可以通过 WEB 控制台查看到统计结果：
 
-![flink-socket-wordcount-stdout](D:\BigData-Notes\pictures\flink-socket-wordcount-stdout.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-socket-wordcount-stdout.png"/> </div>
+
+
 
 ### 2.3 停止作业
 
@@ -99,15 +122,15 @@ bin/stop-cluster.sh
 
 
 
-## 二、Standalone Cluster
+## 三、Standalone Cluster
 
 Standalone Cluster 模式是 Flink 自带的一种集群模式，具体配置步骤如下：
 
-### 2.1 前置条件
+### 3.1 前置条件
 
 使用该模式前，需要确保所有服务器间都已经配置好 SSH 免密登录服务。这里我以三台服务器为例，主机名分别为 hadoop001，hadoop002，hadoop003 , 其中 hadoop001 为 master 节点，其余两台为 slave 节点，搭建步骤如下：
 
-### 2.2 搭建步骤
+### 3.2 搭建步骤
 
 修改 `conf/flink-conf.yaml` 中 jobmanager 节点的通讯地址为 hadoop001:
 
@@ -137,11 +160,13 @@ bin/start-cluster.sh
 
 此时控制台输出如下：
 
-![flink-start-cluster-shell](D:\BigData-Notes\pictures\flink-start-cluster-shell.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-start-cluster-shell.png"/> </div>
+
+
 
 启动完成后可以使用 `Jps` 命令或者通过 WEB 界面来查看是否启动成功。
 
-### 2.3 可选配置
+### 3.3 可选配置
 
 除了上面介绍的 *jobmanager.rpc.address* 是必选配置外，Flink h还支持使用其他可选参数来优化集群性能，主要如下：
 
@@ -153,11 +178,11 @@ bin/start-cluster.sh
 
 更多配置可以参考 Flink 的官方手册：[Configuration](https://ci.apache.org/projects/flink/flink-docs-release-1.9/ops/config.html)
 
-## 三、Standalone Cluster HA
+## 四、Standalone Cluster HA
 
 上面我们配置的 Standalone 集群实际上只有一个 JobManager，此时是存在单点故障的，所以官方提供了 Standalone Cluster HA 模式来实现集群高可用。
 
-### 3.1 前置条件
+### 4.1 前置条件
 
 在 Standalone Cluster HA 模式下，集群可以由多个 JobManager，但只有一个处于 active 状态，其余的则处于备用状态，Flink 使用 ZooKeeper 来选举出 Active JobManager，并依赖其来提供一致性协调服务，所以需要预先安装 ZooKeeper 。
 
@@ -166,7 +191,7 @@ bin/start-cluster.sh
 + [Hadoop 集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Hadoop集群环境搭建.md)
 + [Zookeeper 单机环境和集群环境搭建](https://github.com/heibaiying/BigData-Notes/blob/master/notes/installation/Zookeeper单机环境和集群环境搭建.md) 
 
-### 3.2 搭建步骤
+### 4.2 搭建步骤
 
 修改 `conf/flink-conf.yaml` 文件，增加如下配置：
 
@@ -198,15 +223,19 @@ bin/start-cluster.sh
 
 此时输出如下：
 
-![flink-standalone-cluster-ha](D:\BigData-Notes\pictures\flink-standalone-cluster-ha.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-standalone-cluster-ha.png"/> </div>
+
+
 
 可以看到集群已经以 HA 的模式启动，此时还需要在各个节点上使用 `jps` 命令来查看进程是否启动成功，正常情况如下：
 
-![flink-standalone-cluster-jps](D:\BigData-Notes\pictures\flink-standalone-cluster-jps.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-standalone-cluster-jps.png"/> </div>
+
+
 
 只有 hadoop001 和 hadoop002 的 JobManager 进程，hadoop002 和 hadoop003 上的 TaskManager 进程都已经完全启动，才表示 Standalone Cluster HA 模式搭建成功。
 
-### 3.3 常见异常
+### 4.3 常见异常
 
 如果进程没有启动，可以通过查看 `log` 目录下的日志来定位错误，常见的一个错误如下：
 
@@ -226,7 +255,9 @@ the classpath/dependencies.
 
 可以看到是因为在 classpath 目录下找不到 Hadoop 的相关依赖，此时需要检查是否在环境变量中配置了 Hadoop 的安装路径，如果路径已经配置但仍然存在上面的问题，可以从 [Flink 官网](https://flink.apache.org/downloads.html)下载对应版本的 Hadoop 组件包：
 
-![flink-optional-components](D:\BigData-Notes\pictures\flink-optional-components.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-optional-components.png"/> </div>
+
+
 
 下载完成后，将该 JAR 包上传至**所有** Flink 安装目录的 `lib` 目录即可。
 

@@ -3,6 +3,8 @@
 <nav>
 <a href="#一安装-Scala-插件">一、安装 Scala 插件</a><br/>
 <a href="#二Flink-项目初始化">二、Flink 项目初始化</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-使用官方脚本构建">2.1 使用官方脚本构建</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-使用-IDEA-构建">2.2 使用 IDEA 构建</a><br/>
 <a href="#三项目结构">三、项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-项目结构">3.1 项目结构</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-主要依赖">3.2 主要依赖</a><br/>
@@ -11,6 +13,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-流处理示例">4.2 流处理示例</a><br/>
 <a href="#五使用-Scala-Shell">五、使用 Scala Shell</a><br/>
 </nav>
+
+
 
 ## 一、安装 Scala 插件
 

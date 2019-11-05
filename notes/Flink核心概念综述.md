@@ -1,4 +1,22 @@
 # Flink 核心概念综述
+<nav>
+<a href="#一Flink-简介">一、Flink 简介</a><br/>
+<a href="#二Flink-核心架构">二、Flink 核心架构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-API--Libraries-层">2.1 API & Libraries 层</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-Runtime-核心层">2.2 Runtime 核心层</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-物理部署层">2.3 物理部署层</a><br/>
+<a href="#三Flink-分层-API">三、Flink 分层 API</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-SQL--Table-API">3.1 SQL & Table API</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-DataStream--DataSet-API">3.2 DataStream & DataSet API</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-Stateful-Stream-Processing">3.3 Stateful Stream Processing</a><br/>
+<a href="#四Flink-集群架构">四、Flink 集群架构</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41--核心组件">4.1  核心组件</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42--Task--SubTask">4.2  Task & SubTask</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43--资源管理">4.3  资源管理</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#44-组件通讯">4.4 组件通讯</a><br/>
+<a href="#五Flink-的优点">五、Flink 的优点</a><br/>
+</nav>
+
 
 ## 一、Flink 简介
 
@@ -8,17 +26,26 @@ Apache Flink 诞生于柏林工业大学的一个研究性项目，原名 Strato
 
 Flink 有界数据流和无界数据流：
 
-![flink-bounded-unbounded](D:\BigData-Notes\pictures\flink-bounded-unbounded.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-bounded-unbounded.png"/> </div>
+
+
+
 
 Spark Streaming 数据流的拆分：
 
-![streaming-flow](D:\BigData-Notes\pictures\streaming-flow.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/streaming-flow.png"/> </div>
+
+
+
 
 ## 二、Flink 核心架构
 
 Flink 采用分层的架构设计，从而保证各层在功能和职责上的清晰。如下图所示，由上而下分别是 API & Libraries 层、Runtime 核心层以及物理部署层：
 
-![flink-stack](D:\BigData-Notes\pictures\flink-stack.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-stack.png"/> </div>
+
+
+
 
 ### 2.1 API & Libraries 层
 
@@ -39,7 +66,10 @@ Flink 的物理部署层，用于支持在不同平台上部署运行 Flink 应�
 
 在上面介绍的 API & Libraries 这一层，Flink 又进行了更为具体的划分。具体如下：
 
-![flink-api-stack](D:\BigData-Notes\pictures\flink-api-stack.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-api-stack.png"/> </div>
+
+
+
 
 按照如上的层次结构，API 的一致性由下至上依次递增，接口的表现能力由下至上依次递减，各层的核心功能如下：
 
@@ -66,7 +96,10 @@ Stateful Stream Processing 是最低级别的抽象，它通过 Process Function
 - **Dispatcher**：负责接收客户端提交的执行程序，并传递给 JobManager 。除此之外，它还提供了一个 WEB UI 界面，用于监控作业的执行情况。
 - **ResourceManager** ：负责管理 slots 并协调集群资源。ResourceManager 接收来自 JobManager 的资源请求，并将存在空闲 slots 的 TaskManagers 分配给 JobManager 执行任务。Flink 基于不同的部署平台，如 YARN , Mesos，K8s 等提供了不同的资源管理器，当 TaskManagers 没有足够的 slots 来执行任务时，它会向第三方平台发起会话来请求额外的资源。
 
-![flink-application-submission](D:\BigData-Notes\pictures\flink-application-submission.png)染病
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-application-submission.png"/> </div>
+
+
+染病
 
 
 
@@ -76,7 +109,10 @@ Stateful Stream Processing 是最低级别的抽象，它通过 Process Function
 
 在执行分布式计算时，Flink 将可以链接的操作 (operators) 链接到一起，这就是 Task。之所以这样做， 是为了减少线程间切换和缓冲而导致的开销，在降低延迟的同时可以提高整体的吞吐量。 但不是所有的 operator 都可以被链接，如下 keyBy 等操作会导致网络 shuffle 和重分区，因此其就不能被链接，只能被单独作为一个 Task。  简单来说，一个 Task 就是一个可以链接的最小的操作链 (Operator Chains) 。如下图，source 和 map 算子被链接到一块，因此整个作业就只有三个 Task：
 
-![flink-task-subtask](D:\BigData-Notes\pictures\flink-task-subtask.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-task-subtask.png"/> </div>
+
+
+
 
 解释完 Task ，我们在解释一下什么是 SubTask，其准确的翻译是： *A subtask is one parallel slice of a task*，即一个 Task 可以按照其并行度拆分为多个 SubTask。如上图，source & map 具有两个并行度，KeyBy 具有两个并行度，Sink 具有一个并行度，因此整个虽然只有 3 个 Task，但是却有 5 个 SubTask。Jobmanager 负责定义和拆分这些 SubTask，并将其交给 Taskmanagers 来执行，每个 SubTask 都是一个单独的线程。
 
@@ -84,17 +120,26 @@ Stateful Stream Processing 是最低级别的抽象，它通过 Process Function
 
 理解了 SubTasks ，我们再来看看其与 Slots 的对应情况。一种可能的分配情况如下：
 
-![flink-tasks-slots](D:\BigData-Notes\pictures\flink-tasks-slots.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-tasks-slots.png"/> </div>
+
+
+
 
 这时每个 SubTask 线程运行在一个独立的 TaskSlot， 它们共享所属的 TaskManager 进程的TCP 连接（通过多路复用技术）和心跳信息 (heartbeat messages)，从而可以降低整体的性能开销。此时看似是最好的情况，但是每个操作需要的资源都是不尽相同的，这里假设该作业 keyBy 操作所需资源的数量比 Sink 多很多 ，那么此时 Sink 所在 Slot 的资源就没有得到有效的利用。
 
 基于这个原因，Flink 允许多个 subtasks 共享 slots，即使它们是不同 tasks 的 subtasks，但只要它们来自同一个 Job 就可以。假设上面 souce & map 和 keyBy 的并行度调整为 6，而 Slot 的数量不变，此时情况如下：
 
-![flink-subtask-slots](D:\BigData-Notes\pictures\flink-subtask-slots.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-subtask-slots.png"/> </div>
+
+
+
 
 可以看到一个 Task Slot 中运行了多个 SubTask 子任务，此时每个子任务仍然在一个独立的线程中执行，只不过共享一组 Sot 资源而已。那么 Flink 到底如何确定一个 Job 至少需要多少个 Slot 呢？Flink 对于这个问题的处理很简单，默认情况一个 Job 所需要的 Slot 的数量就等于其 Operation 操作的最高并行度。如下， A，B，D 操作的并行度为 4，而 C，E 操作的并行度为 2，那么此时整个 Job 就需要至少四个 Slots 来完成。通过这个机制，Flink 就可以不必去关心一个 Job 到底会被拆分为多少个 Tasks 和 SubTasks。
 
-![flink-task-parallelism](D:\BigData-Notes\pictures\flink-task-parallelism.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-task-parallelism.png"/> </div>
+
+
+
 
  
 
@@ -102,7 +147,10 @@ Stateful Stream Processing 是最低级别的抽象，它通过 Process Function
 
 Flink 的所有组件都基于 Actor System 来进行通讯。Actor system是多种角色的 actor 的容器，它提供调度，配置，日志记录等多种服务，并包含一个可以启动所有 actor 的线程池，如果 actor 是本地的，则消息通过共享内存进行共享，但如果 actor 是远程的，则通过 RPC 的调用来传递消息。
 
-![flink-process](D:\BigData-Notes\pictures\flink-process.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-process.png"/> </div>
+
+
+
 
 ## 五、Flink 的优点
 

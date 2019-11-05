@@ -2,12 +2,28 @@
 <nav>
 <a href="#一Transformations-分类">一、Transformations 分类</a><br/>
 <a href="#二DataStream-Transformations">二、DataStream Transformations</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-Map-[DataStream-→-DataStream]">2.1 Map [DataStream → DataStream] </a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-FlatMap-[DataStream-→-DataStream]">2.2 FlatMap [DataStream → DataStream]</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-Filter-[DataStream-→-DataStream]">2.3 Filter [DataStream → DataStream]</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-KeyBy-和-Reduce">2.4 KeyBy 和 Reduce</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25-Aggregations-[KeyedStream-→-DataStream]">2.5 Aggregations [KeyedStream → DataStream]</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-Union-[DataStream*-→-DataStream]">2.6 Union [DataStream* → DataStream]</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#27-Connect-[DataStreamDataStream-→-ConnectedStreams]">2.7 Connect [DataStream,DataStream → ConnectedStreams]</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#28-Split-和-Select">2.8 Split 和 Select</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#29-project-[DataStream-→-DataStream]">2.9 project [DataStream → DataStream]</a><br/>
 <a href="#三物理分区">三、物理分区</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-Random-partitioning-[DataStream-→-DataStream]">3.1 Random partitioning [DataStream → DataStream]</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-Rebalancing-[DataStream-→-DataStream]">3.2 Rebalancing [DataStream → DataStream]</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-Rescaling-[DataStream-→-DataStream]">3.3 Rescaling [DataStream → DataStream]</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-Broadcasting-[DataStream-→-DataStream]">3.4 Broadcasting [DataStream → DataStream]</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#35-Custom-partitioning-[DataStream-→-DataStream]">3.5 Custom partitioning [DataStream → DataStream]</a><br/>
 <a href="#四任务链和资源组">四、任务链和资源组</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-startNewChain">4.1 startNewChain</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-disableChaining">4.2 disableChaining</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#43-slotSharingGroup">4.3 slotSharingGroup</a><br/>
 </nav>
+
+
 
 ## 一、Transformations 分类
 

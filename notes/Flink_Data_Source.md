@@ -5,11 +5,15 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#12-基于集合构建">1.2 基于集合构建</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#13--基于-Socket-构建">1.3  基于 Socket 构建</a><br/>
 <a href="#二自定义-Data-Source">二、自定义 Data Source</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-SourceFunction">2.1 SourceFunction</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-ParallelSourceFunction-和-RichParallelSourceFunction">2.2 ParallelSourceFunction 和 RichParallelSourceFunction</a><br/>
 <a href="#三Streaming-Connectors">三、Streaming Connectors</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-内置连接器">3.1 内置连接器</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-整合-Kakfa">3.2 整合 Kakfa</a><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-整合测试">3.3 整合测试</a><br/>
 </nav>
+
+
 
 ## 一、内置 Data Source
 

@@ -1,10 +1,29 @@
 # Flink 状态管理
+<nav>
+<a href="#一状态分类">一、状态分类</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-算子状态">2.1 算子状态</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-键控状态">2.2 键控状态</a><br/>
+<a href="#二状态编程">二、状态编程</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-键控状态">2.1 键控状态</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-状态有效期">2.2 状态有效期</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-算子状态">2.3 算子状态</a><br/>
+<a href="#三检查点机制">三、检查点机制</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-CheckPoints">3.1 CheckPoints</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-开启检查点">3.2 开启检查点</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-保存点机制">3.3 保存点机制</a><br/>
+<a href="#四状态后端">四、状态后端</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#41-状态管理器分类">4.1 状态管理器分类</a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#42-配置方式">4.2 配置方式</a><br/>
+</nav>
+
 
 ## 一、状态分类
 
 相对于其他流计算框架，Flink 一个比较重要的特性就是其支持有状态计算。即你可以将中间的计算结果进行保存，并提供给后续的计算使用：
 
-![flink-stateful-stream](D:\BigData-Notes\pictures\flink-stateful-stream.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-stateful-stream.png"/> </div>
+
+
 
 具体而言，Flink 又将状态 (State) 分为 Keyed State 与 Operator State：
 
@@ -12,13 +31,17 @@
 
 算子状态 (Operator State)：顾名思义，状态是和算子进行绑定的，一个算子的状态不能被其他算子所访问到。官方文档上对 Operator State 的解释是：*each operator state is bound to one parallel operator instance*，所以更为确切的说一个算子状态是与一个并发的算子实例所绑定的，即假设算子的并行度是 2，那么其应有两个对应的算子状态：
 
-![flink-operator-state](D:\BigData-Notes\pictures\flink-operator-state.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-operator-state.png"/> </div>
+
+
 
 ### 2.2 键控状态
 
 键控状态 (Keyed State) ：是一种特殊的算子状态，即状态是根据 key 值进行区分的，Flink 会为每类键值维护一个状态实例。如下图所示，每个颜色代表不同 key 值，对应四个不同的状态实例。需要注意的是键控状态只能在 `KeyedStream` 上进行使用，我们可以通过 `stream.keyBy(...)` 来得到 `KeyedStream` 。
 
-![flink-keyed-state](D:\BigData-Notes\pictures\flink-keyed-state.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-keyed-state.png"/> </div>
+
+
 
 ## 二、状态编程
 
@@ -95,7 +118,9 @@ env.execute("Managed Keyed State");
 
 输出如下结果如下：
 
-![flink-state-management](D:\BigData-Notes\pictures\flink-state-management.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-state-management.png"/> </div>
+
+
 
 ### 2.2 状态有效期
 
@@ -207,11 +232,15 @@ env.execute("Managed Keyed State");
 
 此时输出如下：
 
-![flink-operator-state-para1](D:\BigData-Notes\pictures\flink-operator-state-para1.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-operator-state-para1.png"/> </div>
+
+
 
 在上面的调用代码中，我们将程序的并行度设置为 1，可以看到三次输出中状态实例的 hashcode 全是一致的，证明它们都同一个状态实例。假设将并行度设置为 2，此时输出如下：
 
-![flink-operator-state-para2](D:\BigData-Notes\pictures\flink-operator-state-para2.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-operator-state-para2.png"/> </div>
+
+
 
 可以看到此时两次输出中状态实例的 hashcode 是不一致的，代表它们不是同一个状态实例，这也就是上文提到的，一个算子状态是与一个并发的算子实例所绑定的。同时这里只输出两次，是因为在并发处理的情况下，线程 1 可能拿到 5 个非正常值，线程 2 可能拿到 4 个非正常值，因为要大于 3 次才能输出，所以在这种情况下就会出现只输出两条记录的情况，所以需要将程序的并行度设置为 1。
 
@@ -221,7 +250,9 @@ env.execute("Managed Keyed State");
 
 为了使 Flink 的状态具有良好的容错性，Flink 提供了检查点机制 (CheckPoints)  。通过检查点机制，Flink 定期在数据流上生成 checkpoint barrier ，当某个算子收到 barrier 时，即会基于当前状态生成一份快照，然后再将该 barrier 传递到下游算子，下游算子接收到该 barrier 后，也基于当前状态生成一份快照，依次传递直至到最后的 Sink 算子上。当出现异常后，Flink 就可以根据最近的一次的快照数据将所有算子恢复到先前的状态。
 
-![flink-stream-barriers](D:\BigData-Notes\pictures\flink-stream-barriers.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-stream-barriers.png"/> </div>
+
+
 
 
 
@@ -266,7 +297,9 @@ bin/flink savepoint :jobId [:targetDirectory]
 
 默认情况下，所有的状态都存储在 JVM 的堆内存中，在状态数据过多的情况下，这种方式很有可能导致内存溢出，因此 Flink 该提供了其它方式来存储状态数据，这些存储方式统一称为状态后端 (或状态管理器)：
 
-![flink-checkpoints-backend](D:\BigData-Notes\pictures\flink-checkpoints-backend.png)
+<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flink-checkpoints-backend.png"/> </div>
+
+
 
 主要有以下三种：
 
