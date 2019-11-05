@@ -171,10 +171,10 @@ bin/start-cluster.sh
 除了上面介绍的 *jobmanager.rpc.address* 是必选配置外，Flink h还支持使用其他可选参数来优化集群性能，主要如下：
 
 - **jobmanager.heap.size**：JobManager 的 JVM 堆内存大小，默认为 1024m 。
-- **taskmanager.heap.size**：：Taskmanager 的 JVM 堆内存大小，默认为 1024m 。
+- **taskmanager.heap.size**：Taskmanager 的 JVM 堆内存大小，默认为 1024m 。
 - **taskmanager.numberOfTaskSlots**：Taskmanager 上 slots 的数量，通常设置为 CPU 核心的数量，或其一半。
-- **parallelism.default：** 任务默认的并行度。
-- **io.tmp.dirs：**存储临时文件的路径，如果没有配置，则默认采用服务器的临时目录，如 LInux 的 `/tmp` 目录。
+- **parallelism.default**：任务默认的并行度。
+- **io.tmp.dirs**：存储临时文件的路径，如果没有配置，则默认采用服务器的临时目录，如 LInux 的 `/tmp` 目录。
 
 更多配置可以参考 Flink 的官方手册：[Configuration](https://ci.apache.org/projects/flink/flink-docs-release-1.9/ops/config.html)
 
