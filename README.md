@@ -41,7 +41,7 @@
   </table>
 <br/>
 
->**离线版本使用说明**：为方便大家查看，本仓库新增离线版本。Clone 到本地后，使用 Markdown 阅读器即可查看，我个人使用的是 [Typora]( https://www.typora.io/ ) 。离线版本的导航页为：*OFFLINE-README.md*  ,  按住 `Ctrl` 键并点击目录 ，即可打开对应文章。
+>**离线版本使用说明**：为方便大家查看，本仓库新增离线版本。Clone 到本地后，使用 Markdown 阅读器即可查看，我个人使用的是 [Typora]( https://www.typora.io/ ) 。离线版本的导航页为 : *OFFLINE-README.md* ，按住 `Ctrl` 键并点击目录，即可打开对应文章。
 
 
 
