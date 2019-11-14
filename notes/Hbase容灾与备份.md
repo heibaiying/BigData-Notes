@@ -79,7 +79,7 @@ hbase org.apache.hadoop.hbase.mapreduce.CopyTable \
 # hbase org.apache.hadoop.hbase.mapreduce.CopyTable --help
 ```
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-copy-table.png"/> </div>
+<div align="center"> <img  src="../pictures/hbase-copy-table.png"/> </div>
 
 
 

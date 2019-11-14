@@ -61,7 +61,7 @@ Scala 的运行依赖于 JDK，Scala 2.12.x 需要 JDK 1.8+。
 
 IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。打开 IDEA，依次点击 **File** => **settings**=> **plugins** 选项卡，搜索 Scala 插件 (如下图)。找到插件后进行安装，并重启 IDEA 使得安装生效。
 
-<div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-plugin.png"/> </div>
+<div align="center"> <img width="700px" src="../pictures/idea-scala-plugin.png"/> </div>
 
 
 
@@ -69,7 +69,7 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 在 IDEA 中依次点击 **File** => **New** => **Project** 选项卡，然后选择创建 `Scala—IDEA` 工程：
 
-<div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-newproject-scala.png"/> </div>
+<div align="center"> <img  width="700px"   src="../pictures/idea-newproject-scala.png"/> </div>
 
 
 
@@ -79,7 +79,7 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 此时看到 `Scala SDK` 为空，依次点击 `Create` => `Download` ，选择所需的版本后，点击 `OK` 按钮进行下载，下载完成点击 `Finish` 进入工程。
 
-<div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-select.png"/> </div>
+<div align="center"> <img  width="700px"  src="../pictures/idea-scala-select.png"/> </div>
 
 
 
@@ -89,13 +89,13 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 这里我的系统是 Windows，下载 msi 版本的安装包后，一直点击下一步进行安装，安装完成后会自动配置好环境变量。
 
-<div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-other-resources.png"/> </div>
+<div align="center"> <img  width="700px"   src="../pictures/scala-other-resources.png"/> </div>
 
 
 
 由于安装时已经自动配置好环境变量，所以 IDEA 会自动选择对应版本的 SDK。
 
-<div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-2.1.8.png"/> </div>
+<div align="center"> <img  width="700px"  src="../pictures/idea-scala-2.1.8.png"/> </div>
 
 
 
@@ -103,7 +103,7 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 在工程 `src` 目录上右击 **New** => **Scala class** 创建 `Hello.scala`。输入代码如下，完成后点击运行按钮，成功运行则代表搭建成功。
 
-<div align="center"> <img  width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-hello-world.png"/> </div>
+<div align="center"> <img  width="700px"   src="../pictures/scala-hello-world.png"/> </div>
 
 
 
@@ -113,7 +113,7 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 在日常的开发中，由于对应软件（如 Spark）的版本切换，可能导致需要切换 Scala 的版本，则可以在 `Project Structures` 中的 `Global Libraries` 选项卡中进行切换。
 
-<div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/idea-scala-change.png"/> </div>
+<div align="center"> <img  width="700px"  src="../pictures/idea-scala-change.png"/> </div>
 
 
 
@@ -123,7 +123,7 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 采用 `msi` 方式安装，程序会自动配置好环境变量。此时可以直接使用命令行工具：
 
-<div align="center"> <img  width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/scala-shell.png"/> </div>
+<div align="center"> <img  width="700px"  src="../pictures/scala-shell.png"/> </div>
 
 
 

@@ -37,7 +37,7 @@ Hadoop 采用 MapReduce 处理数据，而 MapReduce 主要是对数据进行批
 
 Spark Streaming 并不是真正意义上的流处理框架。 Spark Streaming 接收实时输入的数据流，并将数据拆分为一系列批次，然后进行微批处理。只不过 Spark Streaming 能够将数据流进行极小粒度的拆分，使得其能够得到接近于流处理的效果，但其本质上还是批处理（或微批处理）。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/streaming-flow.png"/> </div>
+<div align="center"> <img  src="../pictures/streaming-flow.png"/> </div>
 
 #### 1.4 Strom 与 Flink对比
 
@@ -64,7 +64,7 @@ storm 和 Flink 都是真正意义上的实时计算框架。其对比如下：
 
 在流处理之前，数据通常存储在数据库或文件系统中，应用程序根据需要查询或计算数据，这就是传统的静态数据处理架构。Hadoop 采用 HDFS 进行数据存储，采用 MapReduce 进行数据查询或分析，这就是典型的静态数据处理架构。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/01_data_at_rest_infrastructure.png"/> </div>
+<div align="center"> <img  src="../pictures/01_data_at_rest_infrastructure.png"/> </div>
 
 
 
@@ -74,7 +74,7 @@ storm 和 Flink 都是真正意义上的实时计算框架。其对比如下：
 
 接收和发送数据流并执行应用程序或分析逻辑的系统称为**流处理器**。流处理器的基本职责是确保数据有效流动，同时具备可扩展性和容错能力，Storm 和 Flink 就是其代表性的实现。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/02_stream_processing_infrastructure.png"/> </div>
+<div align="center"> <img  src="../pictures/02_stream_processing_infrastructure.png"/> </div>
 
 
 

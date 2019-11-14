@@ -34,7 +34,7 @@ MapReduce 作业通过将输入的数据集拆分为独立的块，这些块由 
 
 这里以词频统计为例进行说明，MapReduce 处理的流程如下：
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/mapreduceProcess.png"/> </div>
+<div align="center"> <img width="600px" src="../pictures/mapreduceProcess.png"/> </div>
 
 1. **input** : 读取文本文件；
 
@@ -50,7 +50,7 @@ MapReduce 编程模型中 `splitting` 和 `shuffing` 操作都是由框架实现
 
 ## 三、combiner & partitioner
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/Detailed-Hadoop-MapReduce-Data-Flow-14.png"/> </div>
+<div align="center"> <img width="600px" src="../pictures/Detailed-Hadoop-MapReduce-Data-Flow-14.png"/> </div>
 
 ### 3.1 InputFormat & RecordReaders 
 
@@ -68,11 +68,11 @@ MapReduce 编程模型中 `splitting` 和 `shuffing` 操作都是由框架实现
 
 不使用 combiner 的情况：
 
-<div align="center"> <img  width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/mapreduce-without-combiners.png"/> </div>
+<div align="center"> <img  width="600px"  src="../pictures/mapreduce-without-combiners.png"/> </div>
 
 使用 combiner 的情况：
 
-<div align="center"> <img width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/mapreduce-with-combiners.png"/> </div>
+<div align="center"> <img width="600px"  src="../pictures/mapreduce-with-combiners.png"/> </div>
 
 
 
@@ -145,7 +145,7 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritabl
 
 `WordCountMapper` 对应下图的 Mapping 操作：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-code-mapping.png"/> </div>
+<div align="center"> <img  src="../pictures/hadoop-code-mapping.png"/> </div>
 
 
 
@@ -187,7 +187,7 @@ public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritab
 
 如下图，`shuffling` 的输出是 reduce 的输入。这里的 key 是每个单词，values 是一个可迭代的数据类型，类似 `(1,1,1,...)`。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-code-reducer.png"/> </div>
+<div align="center"> <img  src="../pictures/hadoop-code-reducer.png"/> </div>
 
 ### 4.4 WordCountApp
 
@@ -290,7 +290,7 @@ hadoop fs -ls /wordcount/output/WordCountApp
 hadoop fs -cat /wordcount/output/WordCountApp/part-r-00000
 ```
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-wordcountapp.png"/> </div>
+<div align="center"> <img  src="../pictures/hadoop-wordcountapp.png"/> </div>
 
 
 
@@ -311,11 +311,11 @@ job.setCombinerClass(WordCountReducer.class);
 
 没有加入 `combiner` 的打印日志：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-no-combiner.png"/> </div>
+<div align="center"> <img  src="../pictures/hadoop-no-combiner.png"/> </div>
 
 加入 `combiner` 后的打印日志如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-combiner.png"/> </div>
+<div align="center"> <img  src="../pictures/hadoop-combiner.png"/> </div>
 
 这里我们只有一个输入文件并且小于 128M，所以只有一个 Map 进行处理。可以看到经过 combiner 后，records 由 `3519` 降低为 `6`(样本中单词种类就只有 6 种)，在这个用例中 combiner 就能极大地降低需要传输的数据量。
 
@@ -368,7 +368,7 @@ job.setNumReduceTasks(WordCountDataUtils.WORD_LIST.size());
 
 执行结果如下，分别生成 6 个文件，每个文件中为对应单词的统计结果：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-wordcountcombinerpartition.png"/> </div>
+<div align="center"> <img  src="../pictures/hadoop-wordcountcombinerpartition.png"/> </div>
 
 
 

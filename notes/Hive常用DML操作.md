@@ -65,7 +65,7 @@ LOAD DATA  INPATH "hdfs://hadoop001:8020/mydir/emp.txt" OVERWRITE INTO TABLE emp
 
 加载后表中数据如下,分区列 deptno 全部赋值成 20：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-ptn.png"/> </div>
+<div align="center"> <img  src="../pictures/hive-emp-ptn.png"/> </div>
 
 ## 二、查询结果插入到表
 
@@ -140,7 +140,7 @@ CREATE TABLE emp(
 load data local inpath "/usr/file/emp.txt" into table emp;
 ```
 ​	完成后 `emp` 表中数据如下：
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp.png"/> </div>
+<div align="center"> <img  src="../pictures/hive-emp.png"/> </div>
 
 2. 为清晰演示，先清空 `emp_ptn` 表中加载的数据：
 
@@ -157,7 +157,7 @@ SELECT empno,ename,job,mgr,hiredate,sal,comm FROM emp WHERE deptno=20;
 
 ​	完成后 `emp_ptn` 表中数据如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-deptno-20.png"/> </div>
+<div align="center"> <img  src="../pictures/hive-emp-deptno-20.png"/> </div>
 
 4. 接着演示动态分区：
 
@@ -172,7 +172,7 @@ SELECT empno,ename,job,mgr,hiredate,sal,comm,deptno FROM emp WHERE deptno=30;
 
 ​	完成后 `emp_ptn` 表中数据如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-deptno-20-30.png"/> </div>
+<div align="center"> <img  src="../pictures/hive-emp-deptno-20-30.png"/> </div>
 
 
 
@@ -261,7 +261,7 @@ INSERT INTO TABLE emp_ts  VALUES (1,"ming"),(2,"hong");
 
 插入数据依靠的是 MapReduce 作业，执行成功后数据如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-ts.png"/> </div>
+<div align="center"> <img  src="../pictures/hive-emp-ts.png"/> </div>
 
 **4. 测试更新和删除**
 
@@ -275,7 +275,7 @@ DELETE FROM emp_ts WHERE empno=2;
 
 更新和删除数据依靠的也是 MapReduce 作业，执行成功后数据如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-emp-ts-2.png"/> </div>
+<div align="center"> <img  src="../pictures/hive-emp-ts-2.png"/> </div>
 
 
 ## 五、查询结果写出到文件系统
@@ -317,7 +317,7 @@ SELECT * FROM emp_ptn;
 
 导出结果如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-ouput.png"/> </div>
+<div align="center"> <img  src="../pictures/hive-ouput.png"/> </div>
 
 
 

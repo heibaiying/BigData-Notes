@@ -17,7 +17,7 @@
 
 以实时流处理项目为例，由于采集的数据量可能存在峰值和峰谷，假设是一个电商项目，那么峰值通常出现在秒杀时，这时如果直接将 Flume 聚合后的数据输入到 Storm 等分布式计算框架中，可能就会超过集群的处理能力，这时采用 Kafka 就可以起到削峰的作用。Kafka 天生为大数据场景而设计，具有高吞吐的特性，能很好地抗住峰值数据的冲击。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-kafka.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-kafka.png"/> </div>
 
 
 
@@ -109,8 +109,8 @@ flume-ng agent \
 
 向监听的 `/tmp/kafka.log     ` 文件中追加内容，查看 Kafka 消费者的输出：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-kafka-01.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-kafka-01.png"/> </div>
 
 可以看到 `flume-kafka` 主题的消费端已经收到了对应的消息：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-kafka-2.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-kafka-2.png"/> </div>

@@ -30,7 +30,7 @@
 
 ### 2.1 项目结构
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spring-mybatis-phoenix.png"/> </div>
+<div align="center"> <img  src="../pictures/spring-mybatis-phoenix.png"/> </div>
 
 ### 2.2 主要依赖
 
@@ -221,7 +221,7 @@ public class PopulationDaoTest {
 
 ### 3.1 项目结构
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spring-boot-mybatis-phoenix.png"/> </div>
+<div align="center"> <img  src="../pictures/spring-boot-mybatis-phoenix.png"/> </div>
 
 ### 3.2 主要依赖
 

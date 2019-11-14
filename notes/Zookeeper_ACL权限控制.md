@@ -145,7 +145,7 @@ Authentication is not valid : /hive  # 当前主机已经不能访问
 "-Dzookeeper.DigestAuthenticationProvider.superDigest=heibai:sCxtVJ1gPG8UW/jzFHR0A1ZKY5s=" 
 ```
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-super.png"/> </div>
+<div align="center"> <img  src="../pictures/zookeeper-super.png"/> </div>
 
 修改完成后需要使用 `zkServer.sh restart` 重启服务，此时再次访问限制 IP 的节点：
 

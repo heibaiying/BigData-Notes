@@ -23,7 +23,7 @@ Apache Flume 是一个分布式，高可用的数据收集系统。它可以从�
 
 
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-architecture.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-architecture.png"/> </div>
 
 ### 2.1 基本架构
 
@@ -80,7 +80,7 @@ Flume 支持多种架构模式，分别介绍如下
 
 
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-multi-agent-flow.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-multi-agent-flow.png"/> </div>
 
 <br/>
 
@@ -88,7 +88,7 @@ Flume 支持跨越多个 Agent 的数据传递，这要求前一个 Agent 的 Si
 
 ### 3.2 Consolidation
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-consolidation.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-consolidation.png"/> </div>
 
 
 
@@ -98,7 +98,7 @@ Flume 支持跨越多个 Agent 的数据传递，这要求前一个 Agent 的 Si
 
 ### 3.3 Multiplexing the flow
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-multiplexing-the-flow.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-multiplexing-the-flow.png"/> </div>
 
 Flume 支持从一个 Source 向多个 Channel，也就是向多个 Sink 传递事件，这个操作称之为 `Fan Out`(扇出)。默认情况下 `Fan Out` 是向所有的 Channel 复制 `Event`，即所有 Channel 收到的数据都是相同的。同时 Flume 也支持在 `Source` 上自定义一个复用选择器 (multiplexing selector) 来实现自定义的路由规则。
 
@@ -201,11 +201,11 @@ flume-ng agent \
 
 向文件中追加数据：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-example-1.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-example-1.png"/> </div>
 
 控制台的显示：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-example-2.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-example-2.png"/> </div>
 
 
 
@@ -263,7 +263,7 @@ flume-ng agent \
 # cp log.txt logs/
 ```
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-example-3.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-example-3.png"/> </div>
 
 查看上传到 HDFS 上的文件内容与本地是否一致：
 
@@ -271,7 +271,7 @@ flume-ng agent \
 # hdfs dfs -cat /flume/events/19-04-09/13/log.txt.1554788567801
 ```
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-example-4.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-example-4.png"/> </div>
 
 
 
@@ -362,14 +362,14 @@ flume-ng agent \
 
 这里建议按以上顺序启动，原因是 `avro.source` 会先与端口进行绑定，这样 `avro sink` 连接时才不会报无法连接的异常。但是即使不按顺序启动也是没关系的，`sink` 会一直重试，直至建立好连接。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-retry.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-retry.png"/> </div>
 
 #### 4.测试
 
 向文件 `tmp/log.txt` 中追加内容：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-example-8.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-example-8.png"/> </div>
 
 可以看到已经从 8888 端口监听到内容，并成功输出到控制台：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/flume-example-9.png"/> </div>
+<div align="center"> <img  src="../pictures/flume-example-9.png"/> </div>

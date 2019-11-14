@@ -41,7 +41,7 @@ CREATE VIEW [IF NOT EXISTS] [db_name.]view_name   -- 视图名称
   CREATE VIEW  IF NOT EXISTS custom_view AS SELECT empno, empno+deptno , 1+2 FROM emp;
   ```
 
-  <div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-1-2-view.png"/> </div>
+  <div align="center"> <img  src="../pictures/hive-1-2-view.png"/> </div>
 
 
 
@@ -95,7 +95,7 @@ table_properties:
 ALTER VIEW custom_view SET TBLPROPERTIES ('create'='heibaiying','date'='2019-05-05');
 ```
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-view-properties.png"/> </div>
+<div align="center"> <img width="600px" src="../pictures/hive-view-properties.png"/> </div>
 
 
 
@@ -189,7 +189,7 @@ alter index emp_index on emp rebuild;
 
 Hive 会启动 MapReduce 作业去建立索引，建立好后查看索引表数据如下。三个表字段分别代表：索引列的值、该值对应的 HDFS 文件路径、该值在文件中的偏移量。
 
-<div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-index-table.png"/> </div>
+<div align="center"> <img width="700px" src="../pictures/hive-index-table.png"/> </div>
 
 ### 3.3 自动使用索引
 
@@ -207,7 +207,7 @@ SET hive.optimize.index.filter.compact.minsize=0;
 SHOW INDEX ON emp;
 ```
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-index-show.png"/> </div>
+<div align="center"> <img  src="../pictures/hive-index-show.png"/> </div>
 
 
 

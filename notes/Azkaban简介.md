@@ -32,7 +32,7 @@ Azkaban 产生于 LinkedIn，并经过多年生产环境的检验，它具备以
 
 Azkaban 的设计理念是在保证功能实现的基础上兼顾易用性，其页面风格清晰明朗，下面是其 WEB UI 界面：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-web.png"/> </div>
+<div align="center"> <img  src="../pictures/azkaban-web.png"/> </div>
 
 ## 二、Azkaban 和 Oozie
 

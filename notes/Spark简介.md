@@ -28,7 +28,7 @@ Apache Spark 具有以下特点：
 + 丰富的部署模式：支持本地模式和自带的集群模式，也支持在 Hadoop，Mesos，Kubernetes 上运行；
 + 多数据源支持：支持访问 HDFS，Alluxio，Cassandra，HBase，Hive 以及数百个其他数据源中的数据。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/future-of-spark.png"/> </div>
+<div align="center"> <img width="600px" src="../pictures/future-of-spark.png"/> </div>
 
 ## 三、集群架构
 
@@ -41,7 +41,7 @@ Apache Spark 具有以下特点：
 | Executor        | 位于工作节点上的应用进程，负责执行计算任务并且将输出数据保存到内存或者磁盘中 |
 | Task            | 被发送到 Executor 中的工作单元                                 |
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群模式.png"/> </div>
+<div align="center"> <img src="../pictures/spark-集群模式.png"/> </div>
 
 **执行过程**：
 
@@ -53,7 +53,7 @@ Apache Spark 具有以下特点：
 
 Spark 基于 Spark Core 扩展了四个核心组件，分别用于满足不同领域的计算需求。
 
-<div align="center"> <img  width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-stack.png"/> </div>
+<div align="center"> <img  width="600px" src="../pictures/spark-stack.png"/> </div>
 
 ### 3.1 Spark  SQL
 
@@ -69,11 +69,11 @@ Spark SQL 主要用于结构化数据的处理。其具有以下特点：
 
 Spark Streaming 主要用于快速构建可扩展，高吞吐量，高容错的流处理程序。支持从 HDFS，Flume，Kafka，Twitter 和 ZeroMQ 读取数据，并进行处理。
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-arch.png"/> </div>
+<div align="center"> <img width="600px" src="../pictures/spark-streaming-arch.png"/> </div>
 
  Spark Streaming 的本质是微批处理，它将数据流进行极小粒度的拆分，拆分为多个批处理，从而达到接近于流处理的效果。
 
-<div align="center"> <img width="600px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-flow.png"/> </div>
+<div align="center"> <img width="600px"   src="../pictures/spark-streaming-flow.png"/> </div>
 
 
 

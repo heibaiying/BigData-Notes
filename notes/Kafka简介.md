@@ -32,7 +32,7 @@ Kafka 的消息通过 Topics(主题) 进行分类，一个主题可以被分为�
 
 由于一个 Topic 包含多个分区，因此无法在整个 Topic 范围内保证消息的顺序性，但可以保证消息在单个分区内的顺序性。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-topic.png"/> </div>
+<div align="center"> <img  src="../pictures/kafka-topic.png"/> </div>
 
 ### 2.3 Producers And Consumers
 
@@ -44,11 +44,11 @@ Kafka 的消息通过 Topics(主题) 进行分类，一个主题可以被分为�
 
 消费者是消费者群组的一部分，消费者负责消费消息。消费者可以订阅一个或者多个主题，并按照消息生成的顺序来读取它们。消费者通过检查消息的偏移量 (offset) 来区分读取过的消息。偏移量是一个不断递增的数值，在创建消息时，Kafka 会把它添加到其中，在给定的分区里，每个消息的偏移量都是唯一的。消费者把每个分区最后读取的偏移量保存在 Zookeeper 或 Kafka 上，如果消费者关闭或者重启，它还可以重新获取该偏移量，以保证读取状态不会丢失。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-producer-consumer.png"/> </div>
+<div align="center"> <img  src="../pictures/kafka-producer-consumer.png"/> </div>
 
 一个分区只能被同一个消费者群组里面的一个消费者读取，但可以被不同消费者群组中所组成的多个消费者共同读取。多个消费者群组中消费者共同读取同一个主题时，彼此之间互不影响。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka消费者.png"/> </div>
+<div align="center"> <img  src="../pictures/kafka消费者.png"/> </div>
 
 ### 2.4 Brokers And Clusters 
 
@@ -58,7 +58,7 @@ Broker 是集群 (Cluster) 的组成部分。每一个集群都会选举出一�
 
 在集群中，一个分区 (Partition) 从属一个 Broker，该 Broker 被称为分区的首领 (Leader)。一个分区可以分配给多个 Brokers，这个时候会发生分区复制。这种复制机制为分区提供了消息冗余，如果有一个 Broker 失效，其他 Broker 可以接管领导权。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-cluster.png"/> </div>
+<div align="center"> <img  src="../pictures/kafka-cluster.png"/> </div>
 
 
 

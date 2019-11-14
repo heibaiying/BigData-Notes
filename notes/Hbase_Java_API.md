@@ -410,7 +410,7 @@ public class HBaseUtilsTest {
 
 2.x 版本相比于 1.x 废弃了一部分方法，关于废弃的方法在源码中都会指明新的替代方法，比如，在 2.x 中创建表时：`HTableDescriptor` 和 `HColumnDescriptor` 等类都标识为废弃，取而代之的是使用 `TableDescriptorBuilder` 和 `ColumnFamilyDescriptorBuilder` 来定义表和列族。
 
-<div align="center"> <img width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/deprecated.png"/> </div>
+<div align="center"> <img width="700px"  src="../pictures/deprecated.png"/> </div>
 
 
 
@@ -715,11 +715,11 @@ Connection 是一个集群连接，封装了与多台服务器（Matser/Region S
 + **HBase Master** ：主要用于执行 HBaseAdmin 接口的一些操作，例如建表等；
 + **HBase RegionServer** ：用于读、写数据。
 
-<div align="center"> <img width="700px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-arc.png"/> </div>
+<div align="center"> <img width="700px"  src="../pictures/hbase-arc.png"/> </div>
 
 Connection 对象和实际的 Socket 连接之间的对应关系如下图：
 
-<div align="center"> <img width="700px"   src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-connection.png"/> </div>
+<div align="center"> <img width="700px"   src="../pictures/hbase-connection.png"/> </div>
 
 > 上面两张图片引用自博客：[连接 HBase 的正确姿势](https://yq.aliyun.com/articles/581702?spm=a2c4e.11157919.spm-cont-list.1.146c27aeFxoMsN%20%E8%BF%9E%E6%8E%A5HBase%E7%9A%84%E6%AD%A3%E7%A1%AE%E5%A7%BF%E5%8A%BF)
 

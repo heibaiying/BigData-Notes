@@ -180,8 +180,8 @@ echo "3" > /usr/local/zookeeper-cluster/data/myid
 
 启动后使用 `zkServer.sh status` 查看集群各个节点状态。如图所示：三个节点进程均启动成功，并且 hadoop002 为 leader 节点，hadoop001 和 hadoop003 为 follower 节点。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-hadoop001.png"/> </div>
+<div align="center"> <img src="../../pictures/zookeeper-hadoop001.png"/> </div>
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-hadoop002.png"/> </div>
+<div align="center"> <img src="../../pictures/zookeeper-hadoop002.png"/> </div>
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/zookeeper-hadoop003.png"/> </div>
+<div align="center"> <img src="../../pictures/zookeeper-hadoop003.png"/> </div>

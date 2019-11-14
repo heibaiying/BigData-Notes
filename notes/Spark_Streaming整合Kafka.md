@@ -310,7 +310,7 @@ bin/kafka-console-producer.sh --broker-list hadoop001:9092 --topic spark-streami
 
 从控制台输出中可以看到数据流已经被成功接收，由于采用 `kafka-console-producer.sh` 发送的数据默认是没有 key 的，所以 key 值为 null。同时从输出中也可以看到在程序中指定的 `groupId` 和程序自动分配的 `clientId`。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-straming-kafka-console.png"/> </div>
+<div align="center"> <img  src="../pictures/spark-straming-kafka-console.png"/> </div>
 
 
 

@@ -37,7 +37,7 @@ Azkaban 3.70.0 编译需要依赖 `gradle-4.6-all.zip`。Gradle 是一个项目�
 
 需要注意的是不同版本的 Azkaban 依赖 Gradle 版本不同，可以在解压后的 `/gradle/wrapper/gradle-wrapper.properties` 文件查看
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-gradle-wrapper.png"/> </div>
+<div align="center"> <img  src="../../pictures/azkaban-gradle-wrapper.png"/> </div>
 
 在编译时程序会自动去图中所示的地址进行下载，但是下载速度很慢。为避免影响编译过程，建议先手动下载至 `/gradle/wrapper/` 目录下：
 
@@ -47,7 +47,7 @@ Azkaban 3.70.0 编译需要依赖 `gradle-4.6-all.zip`。Gradle 是一个项目�
 
 然后修改配置文件 `gradle-wrapper.properties` 中的 `distributionUrl` 属性，指明使用本地的 gradle。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-gradle-wrapper-2.png"/> </div>
+<div align="center"> <img  src="../../pictures/azkaban-gradle-wrapper-2.png"/> </div>
 
 #### 3. Git
 
@@ -100,7 +100,7 @@ tar -zxvf  azkaban-solo-server-3.70.0.tar.gz
 
 这一步不是必须的。但是因为 Azkaban 默认采用的时区是 `America/Los_Angeles`，如果你的调度任务中有定时任务的话，就需要进行相应的更改，这里我更改为常用的 `Asia/Shanghai`
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-setting.png"/> </div>
+<div align="center"> <img  src="../../pictures/azkaban-setting.png"/> </div>
 
 ### 2.3 启动
 
@@ -114,11 +114,11 @@ tar -zxvf  azkaban-solo-server-3.70.0.tar.gz
 
 验证方式一：使用 `jps` 命令查看是否有 `AzkabanSingleServer` 进程：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/akaban-jps.png"/> </div>
+<div align="center"> <img  src="../../pictures/akaban-jps.png"/> </div>
 <br/>
 
 验证方式二：访问 8081 端口，查看 Web UI 界面，默认的登录名密码都是 `azkaban`，如果需要修改或新增用户，可以在 `conf/azkaban-users.xml ` 文件中进行配置：
 
-<div align="center"> <img width="700px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-web-ui.png"/> </div>
+<div align="center"> <img width="700px" src="../../pictures/azkaban-web-ui.png"/> </div>
 
 

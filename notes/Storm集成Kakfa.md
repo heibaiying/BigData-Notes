@@ -20,7 +20,7 @@ Storm 官方对 Kafka 的整合分为两个版本，官方说明文档分别如�
 
 ### 2.1 项目结构
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/writetokafka.png"/> </div>
+<div align="center"> <img  src="../pictures/writetokafka.png"/> </div>
 
 ### 2.2 项目主要依赖
 
@@ -214,7 +214,7 @@ bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 --replication-fac
 
 启动后，消费者监听情况如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/strom-kafka-consumer.png"/> </div>
+<div align="center"> <img  src="../pictures/strom-kafka-consumer.png"/> </div>
 
 
 
@@ -222,7 +222,7 @@ bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 --replication-fac
 
 ### 3.1 项目结构
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/readfromkafka.png"/> </div>
+<div align="center"> <img  src="../pictures/readfromkafka.png"/> </div>
 
 ### 3.2  ReadingFromKafkaApp
 
@@ -348,11 +348,11 @@ public class DefaultRecordTranslator<K, V> implements RecordTranslator<K, V> {
 # bin/kafka-console-producer.sh --broker-list hadoop001:9092 --topic storm-topic
 ```
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-kafka-producer.png"/> </div>
+<div align="center"> <img  src="../pictures/storm-kafka-producer.png"/> </div>
 
 本地运行的项目接收到从 Kafka 发送过来的数据：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/storm-kafka-receiver.png"/> </div>
+<div align="center"> <img  src="../pictures/storm-kafka-receiver.png"/> </div>
 
 
 

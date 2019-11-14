@@ -38,7 +38,7 @@
 show databases;
 ```
 
-<div align="center"> <img width='700px' src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-show-database.png"/> </div>
+<div align="center"> <img width='700px' src="../pictures/hive-show-database.png"/> </div>
 
 ### 1.2 使用数据库
 
@@ -161,7 +161,7 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name     --�
 
 使用 `desc format  emp_external` 命令可以查看表的详细信息如下：
 
-<div align="center"> <img width='700px' src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-external-table.png"/> </div>
+<div align="center"> <img width='700px' src="../pictures/hive-external-table.png"/> </div>
 
 ### 2.4 分区表
 
@@ -292,7 +292,7 @@ load data local inpath "/usr/file/emp.txt" into table emp;
 
 加载后可查询表中数据：
 
-<div align="center"> <img width='700px' src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hive-select-emp.png"/> </div>
+<div align="center"> <img width='700px' src="../pictures/hive-select-emp.png"/> </div>
 
 
 

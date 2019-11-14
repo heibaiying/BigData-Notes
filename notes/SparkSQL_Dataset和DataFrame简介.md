@@ -27,7 +27,7 @@ Spark SQL 是 Spark 中的一个子模块，主要用于操作结构化数据。
 + 支持优化器，列式存储和代码生成等特性；
 + 支持扩展并能保证容错。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sql-hive-arch.png"/> </div>
+<div align="center"> <img src="../pictures/sql-hive-arch.png"/> </div>
 
 ## 二、DataFrame & DataSet 
 
@@ -46,7 +46,7 @@ Spark SQL 是 Spark 中的一个子模块，主要用于操作结构化数据。
 
 DataFrame 和 RDDs 最主要的区别在于一个面向的是结构化数据，一个面向的是非结构化数据，它们内部的数据结构如下：
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-dataFrame+RDDs.png"/> </div>
+<div align="center"> <img src="../pictures/spark-dataFrame+RDDs.png"/> </div>
 
 DataFrame 内部的有明确 Scheme 结构，即列名、列字段类型都是已知的，这带来的好处是可以减少数据读取以及更好地优化执行计划，从而保证查询效率。
 
@@ -64,7 +64,7 @@ Dataset 也是分布式的数据集合，在 Spark 1.6 版本被引入，它集�
 
 
 
-<div align="center"> <img width="600px" src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-unifed.png"/> </div>
+<div align="center"> <img width="600px" src="../pictures/spark-unifed.png"/> </div>
 
 ### 2.4 静态类型与运行时类型安全
 
@@ -76,11 +76,11 @@ Dataset 也是分布式的数据集合，在 Spark 1.6 版本被引入，它集�
 
 以上这些最终都被解释成关于类型安全图谱，对应开发中的语法和分析错误。在图谱中，Dataset 最严格，但对于开发者来说效率最高。
 
-<div align="center"> <img  width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-运行安全.png"/> </div>
+<div align="center"> <img  width="600px"  src="../pictures/spark-运行安全.png"/> </div>
 
 上面的描述可能并没有那么直观，下面的给出一个 IDEA 中代码编译的示例：
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-运行时类型安全.png"/> </div>
+<div align="center"> <img src="../pictures/spark-运行时类型安全.png"/> </div>
 
 这里一个可能的疑惑是 DataFrame 明明是有确定的 Scheme 结构 (即列名、列字段类型都是已知的)，但是为什么还是无法对列名进行推断和错误判断，这是因为 DataFrame 是 Untyped 的。
 
@@ -106,7 +106,7 @@ val dataSet: Dataset[Person] = spark.read.json("people.json").as[Person]
 + 相比于 DataFrame 而言，DataSet 是强类型的 (Typed)，有着更为严格的静态类型检查；
 + DataSets、DataFrames、SQL 的底层都依赖了 RDDs API，并对外提供结构化的访问接口。
 
-<div align="center"> <img  width="600px"  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-structure-api.png"/> </div>
+<div align="center"> <img  width="600px"  src="../pictures/spark-structure-api.png"/> </div>
 
 
 
@@ -123,7 +123,7 @@ DataFrame、DataSet 和 Spark SQL 的实际执行流程都是相同的：
 
 执行的第一个阶段是将用户代码转换成一个逻辑计划。它首先将用户代码转换成 `unresolved logical plan`(未解决的逻辑计划)，之所以这个计划是未解决的，是因为尽管您的代码在语法上是正确的，但是它引用的表或列可能不存在。 Spark 使用 `analyzer`(分析器) 基于 `catalog`(存储的所有表和 `DataFrames` 的信息) 进行解析。解析失败则拒绝执行，解析成功则将结果传给 `Catalyst` 优化器 (`Catalyst Optimizer`)，优化器是一组规则的集合，用于优化逻辑计划，通过谓词下推等方式进行优化，最终输出优化后的逻辑执行计划。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-Logical-Planning.png"/> </div>
+<div align="center"> <img src="../pictures/spark-Logical-Planning.png"/> </div>
 
 
 
@@ -131,7 +131,7 @@ DataFrame、DataSet 和 Spark SQL 的实际执行流程都是相同的：
 
 得到优化后的逻辑计划后，Spark 就开始了物理计划过程。 它通过生成不同的物理执行策略，并通过成本模型来比较它们，从而选择一个最优的物理计划在集群上面执行的。物理规划的输出结果是一系列的 RDDs 和转换关系 (transformations)。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-Physical-Planning.png"/> </div>
+<div align="center"> <img src="../pictures/spark-Physical-Planning.png"/> </div>
 
 ### 4.3 执行
 

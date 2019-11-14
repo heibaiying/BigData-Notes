@@ -36,7 +36,7 @@ Kafka 使用 Zookeeper 来维护集群成员 (brokers) 的信息。每个 broker
 
 Kafka 的主题被分为多个分区 ，分区是 Kafka 最基本的存储单位。每个分区可以有多个副本 (可以在创建主题时使用 ` replication-factor` 参数进行指定)。其中一个副本是首领副本 (Leader replica)，所有的事件都直接发送给首领副本；其他副本是跟随者副本 (Follower replica)，需要通过复制来保持与首领副本数据一致，当首领副本不可用时，其中一个跟随者副本将成为新首领。 
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-cluster.png"/> </div>
+<div align="center"> <img src="../pictures/kafka-cluster.png"/> </div>
 
 ### 2.2 ISR机制
 
@@ -49,7 +49,7 @@ Kafka 的主题被分为多个分区 ，分区是 Kafka 最基本的存储单位
 
 这里给出一个主题创建的示例：使用 `--replication-factor` 指定副本系数为 3，创建成功后使用 `--describe ` 命令可以看到分区 0 的有 0,1,2 三个副本，且三个副本都在 ISR 列表中，其中 1 为首领副本。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-分区副本.png"/> </div>
+<div align="center"> <img src="../pictures/kafka-分区副本.png"/> </div>
 
 ### 2.3 不完全的首领选举
 
@@ -77,13 +77,13 @@ Kafka 在生产者上有一个可选的参数 ack，该参数指定了必须要�
 
 如果在定时请求的时间间隔内发生的分区副本的选举，则意味着原来缓存的信息可能已经过时了，此时还有可能会收到 `Not a Leader for Partition` 的错误响应，这种情况下客户端会再次求发出元数据请求，然后刷新本地缓存，之后再去正确的 broker 上执行对应的操作，过程如下图：
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-元数据请求.png"/> </div>
+<div align="center"> <img src="../pictures/kafka-元数据请求.png"/> </div>
 
 ### 3.2 数据可见性
 
 需要注意的是，并不是所有保存在分区首领上的数据都可以被客户端读取到，为了保证数据一致性，只有被所有同步副本 (ISR 中所有副本) 都保存了的数据才能被客户端读取到。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-数据可见性.png"/> </div>
+<div align="center"> <img src="../pictures/kafka-数据可见性.png"/> </div>
 
 ### 3.3 零拷贝
 
@@ -100,13 +100,13 @@ Socket.send(buffer)
 
 这一过程实际上发生了四次数据拷贝。首先通过系统调用将文件数据读入到内核态 Buffer（DMA 拷贝），然后应用程序将内存态 Buffer 数据读入到用户态 Buffer（CPU 拷贝），接着用户程序通过 Socket 发送数据时将用户态 Buffer 数据拷贝到内核态 Buffer（CPU 拷贝），最后通过 DMA 拷贝将数据拷贝到 NIC Buffer。同时，还伴随着四次上下文切换，如下图所示：
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-BIO.png"/> </div>
+<div align="center"> <img src="../pictures/kafka-BIO.png"/> </div>
 
 #### sendfile和transferTo实现零拷贝
 
 Linux 2.4+ 内核通过 `sendfile` 系统调用，提供了零拷贝。数据通过 DMA 拷贝到内核态 Buffer 后，直接通过 DMA 拷贝到 NIC Buffer，无需 CPU 拷贝。这也是零拷贝这一说法的来源。除了减少数据拷贝外，因为整个读文件到网络发送由一个 `sendfile` 调用完成，整个过程只有两次上下文切换，因此大大提高了性能。零拷贝过程如下图所示：
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-零拷贝.png"/> </div>
+<div align="center"> <img src="../pictures/kafka-零拷贝.png"/> </div>
 
 从具体实现来看，Kafka 的数据传输通过 TransportLayer 来完成，其子类 `PlaintextTransportLayer` 的 `transferFrom` 方法通过调用 Java NIO 中 FileChannel 的 `transferTo` 方法实现零拷贝，如下所示：
 
@@ -151,7 +151,7 @@ Exception: Replication factor: 3 larger than available brokers: 1.
 
 通常保存在磁盘上的数据格式与生产者发送过来消息格式是一样的。 如果生产者发送的是压缩过的消息，那么同一个批次的消息会被压缩在一起，被当作“包装消息”进行发送 (格式如下所示) ，然后保存到磁盘上。之后消费者读取后再自己解压这个包装消息，获取每条消息的具体信息。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/kafka-compress-message.png"/> </div>
+<div align="center"> <img src="../pictures/kafka-compress-message.png"/> </div>
 
 
 

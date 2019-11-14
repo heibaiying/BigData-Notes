@@ -28,7 +28,7 @@ sc.parallelize(data).foreach(x => counter += x)
 
 counter 最后的结果是 0，导致这个问题的主要原因是闭包。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-累加器1.png"/> </div>
+<div align="center"> <img src="../pictures/spark-累加器1.png"/> </div>
 
 
 
@@ -59,13 +59,13 @@ val addMore = (x: Int) => x + more
 累加器的原理实际上很简单：就是将每个副本变量的最终值传回 Driver，由 Driver 聚合后得到最终值，并更新原始变量。
 
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-集群模式.png"/> </div>
+<div align="center"> <img src="../pictures/spark-集群模式.png"/> </div>
 
 ### 2.2 使用累加器
 
 `SparkContext` 中定义了所有创建累加器的方法，需要注意的是：被中横线划掉的累加器方法在 Spark 2.0.0 之后被标识为废弃。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-累加器方法.png"/> </div>
+<div align="center"> <img src="../pictures/spark-累加器方法.png"/> </div>
 
 使用示例和执行结果分别如下：
 
@@ -78,7 +78,7 @@ sc.parallelize(data).foreach(x => accum.add(x))
 accum.value
 ```
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-累加器2.png"/> </div>
+<div align="center"> <img src="../pictures/spark-累加器2.png"/> </div>
 
 
 

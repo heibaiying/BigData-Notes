@@ -198,7 +198,7 @@ azkaban-flow-version: 2.0
 
 ### 3.2 打包上传
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-simple.png"/> </div>
+<div align="center"> <img  src="../pictures/azkaban-simple.png"/> </div>
 
 
 
@@ -206,7 +206,7 @@ azkaban-flow-version: 2.0
 
 由于在 1.0 版本中已经介绍过 Web UI 的使用，这里就不再赘述。对于 1.0 和 2.0 版本，只有配置方式有所不同，其他上传执行的方式都是相同的。执行结果如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-simle-result.png"/> </div>
+<div align="center"> <img  src="../pictures/azkaban-simle-result.png"/> </div>
 
 ## 四、多任务调度
 
@@ -281,11 +281,11 @@ nodes:
 
 内嵌流的 DAG 图如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-embeded-flow.png"/> </div>
+<div align="center"> <img  src="../pictures/azkaban-embeded-flow.png"/> </div>
 
 执行情况如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/azkaban-embeded-success.png"/> </div>
+<div align="center"> <img  src="../pictures/azkaban-embeded-success.png"/> </div>
 
 
 

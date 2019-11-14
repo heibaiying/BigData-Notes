@@ -62,7 +62,7 @@ storm storm flink azkaban
 
 此时控制台输出如下，可以看到已经接收到数据并按行进行了词频统计。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-word-count-v1.png"/> </div>
+<div align="center"> <img  src="../pictures/spark-streaming-word-count-v1.png"/> </div>
 <br/>
 
 下面针对示例代码进行讲解：
@@ -105,7 +105,7 @@ streamingContext.fileStream[KeyClass, ValueClass, InputFormatClass](dataDirector
 
 DStream 是 Spark Streaming 提供的基本抽象。它表示连续的数据流。在内部，DStream 由一系列连续的 RDD 表示。所以从本质上而言，应用于 DStream 的任何操作都会转换为底层 RDD 上的操作。例如，在示例代码中 flatMap 算子的操作实际上是作用在每个 RDDs 上 (如下图)。因为这个原因，所以 DStream 能够支持 RDD 大部分的*transformation*算子。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-dstream-ops.png"/> </div>
+<div align="center"> <img  src="../pictures/spark-streaming-dstream-ops.png"/> </div>
 
 ### 2.2 updateStateByKey
 
@@ -167,7 +167,7 @@ storm storm flink azkaban
 
 此时控制台输出如下，所有输入都被进行了词频累计：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-word-count-v2.png"/> </div>
+<div align="center"> <img  src="../pictures/spark-streaming-word-count-v2.png"/> </div>
 同时在输出日志中还可以看到检查点操作的相关信息：
 
 ```shell
@@ -323,7 +323,7 @@ storm storm flink azkaban
 
 使用 Redis Manager 查看写入结果 (如下图),可以看到与使用 `updateStateByKey` 算子得到的计算结果相同。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/spark-streaming-word-count-v3.png"/> </div>  
+<div align="center"> <img  src="../pictures/spark-streaming-word-count-v3.png"/> </div>  
 <br/>
 
 > 本片文章所有源码见本仓库：[spark-streaming-basis](https://github.com/heibaiying/BigData-Notes/tree/master/code/spark/spark-streaming-basis)

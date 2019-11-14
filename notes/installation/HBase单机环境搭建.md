@@ -106,7 +106,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201
 
 验证方式二 ：访问 HBaseWeb UI 页面，默认端口为 `16010` 。
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-web-ui.png"/> </div>
+<div align="center"> <img src="../../pictures/hbase-web-ui.png"/> </div>
 
 
 ## 三、伪集群模式安装（Pseudo-Distributed）
@@ -224,4 +224,4 @@ hadoop001
 
 验证方式二 ：访问 HBase Web UI 界面，需要注意的是 1.2 版本的 HBase 的访问端口为 `60010`
 
-<div align="center"> <img src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hbase-60010.png"/> </div>
+<div align="center"> <img src="../../pictures/hbase-60010.png"/> </div>

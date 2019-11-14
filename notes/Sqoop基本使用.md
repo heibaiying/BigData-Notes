@@ -25,7 +25,7 @@
 # sqoop help
 ```
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-help.png"/> </div>
+<div align="center"> <img  src="../pictures/sqoop-help.png"/> </div>
 
 <br/>
 
@@ -50,7 +50,7 @@ sqoop list-databases \
 --password root
 ```
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-list-databases.png"/> </div>
+<div align="center"> <img  src="../pictures/sqoop-list-databases.png"/> </div>
 
 <br/>
 
@@ -92,7 +92,7 @@ sqoop import \
 + 添加 `-- autoreset-to-one-mapper` 参数，代表只启动一个 `map task`，即不并行执行；
 + 若仍希望并行执行，则可以使用 `--split-by <column-name>` 指明拆分数据的参考列。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-map-task.png"/> </div>
+<div align="center"> <img  src="../pictures/sqoop-map-task.png"/> </div>
 
 #### 2. 导入验证
 
@@ -105,7 +105,7 @@ hadoop fs -text  /sqoop/part-m-00000
 
 查看 HDFS 导入目录,可以看到表中数据被分为 3 部分进行存储，这是由指定的并行度决定的。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop_hdfs_ls.png"/> </div>
+<div align="center"> <img  src="../pictures/sqoop_hdfs_ls.png"/> </div>
 
 <br/>
 
@@ -170,11 +170,11 @@ sqoop import \
  hive> SELECT * FROM sqoop_test.help_keyword;
 ```
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop_hive_tables.png"/> </div>
+<div align="center"> <img  src="../pictures/sqoop_hive_tables.png"/> </div>
 
 #### 3. 可能出现的问题
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop_hive_error.png"/> </div>
+<div align="center"> <img  src="../pictures/sqoop_hive_error.png"/> </div>
 
 <br/>
 
@@ -203,11 +203,11 @@ hive> desc formatted help_keyword;
 
 `Location` 属性为其存储位置：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-hive-location.png"/> </div>
+<div align="center"> <img  src="../pictures/sqoop-hive-location.png"/> </div>
 
 这里可以查看一下这个目录，文件结构如下：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop-hive-hdfs.png"/> </div>
+<div align="center"> <img  src="../pictures/sqoop-hive-hdfs.png"/> </div>
 
 #### 3.2 执行导出命令
 
@@ -265,7 +265,7 @@ hbase> desc 'help_keyword_hbase'
 
 使用 `scan` 查看表数据：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/sqoop_hbase.png"/> </div>
+<div align="center"> <img  src="../pictures/sqoop_hbase.png"/> </div>
 
 
 

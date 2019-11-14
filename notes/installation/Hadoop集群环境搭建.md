@@ -23,7 +23,7 @@
 
 这里搭建一个 3 节点的 Hadoop 集群，其中三台主机均部署 `DataNode` 和 `NodeManager` 服务，但只有 hadoop001 上部署 `NameNode` 和 `ResourceManager` 服务。
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop集群规划.png"/> </div>
+<div align="center"> <img  src="../../pictures/hadoop集群规划.png"/> </div>
 
 ## 二、前置条件
 
@@ -210,17 +210,17 @@ start-yarn.sh
 
 在每台服务器上使用 `jps` 命令查看服务进程，或直接进入 Web-UI 界面进行查看，端口为 `50070`。可以看到此时有三个可用的 `Datanode`：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-集群环境搭建.png"/> </div>
+<div align="center"> <img  src="../../pictures/hadoop-集群环境搭建.png"/> </div>
 <BR/>
 
 点击 `Live Nodes` 进入，可以看到每个 `DataNode` 的详细情况：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-集群搭建2.png"/> </div>
+<div align="center"> <img  src="../../pictures/hadoop-集群搭建2.png"/> </div>
 <BR/>
 
 接着可以查看 Yarn 的情况，端口号为 `8088` ：
 
-<div align="center"> <img  src="https://github.com/heibaiying/BigData-Notes/blob/master/pictures/hadoop-集群搭建3.png"/> </div>
+<div align="center"> <img  src="../../pictures/hadoop-集群搭建3.png"/> </div>
 
 
 ## 五、提交服务到集群
