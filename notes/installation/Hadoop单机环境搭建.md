@@ -67,6 +67,8 @@ ssh-keygen -t rsa
 
 下载 Hadoop 安装包，这里我下载的是 CDH 版本的，下载地址为：http://archive.cloudera.com/cdh5/cdh/5/
 
+http://archive.cloudera.com/cdh5/cdh/5/hadoop-2.6.0-cdh5.15.2.tar.gz
+
 ```shell
 # 解压
 tar -zvxf hadoop-2.6.0-cdh5.15.2.tar.gz 
