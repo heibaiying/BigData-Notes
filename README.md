@@ -2,10 +2,10 @@
 
 
 
-<div align="center"> <img width="470px" src="pictures/bigdata-notes-icon.png"/> </div>
+<div align="center"> <img width="414px" src="pictures/bigdata-notes-icon.png"/> </div>
 <br/>
 
-> **大数据入门指南 ( 2019 )**
+**大数据入门指南**
 
 
 
@@ -14,9 +14,9 @@
       <th><img width="50px" src="pictures/hadoop.jpg"></th>
       <th><img width="50px" src="pictures/hive.jpg"></th>
       <th><img width="50px" src="pictures/spark.jpg"></th>
-       <th><img width="50px" src="pictures/storm.png"></th>
-         <th><img width="50px" src="pictures/flink.png"></th>
-         <th><img width="50px" src="pictures/hbase.png"></th>
+      <th><img width="50px" src="pictures/storm.png"></th>
+      <th><img width="50px" src="pictures/flink.png"></th>
+      <th><img width="50px" src="pictures/hbase.png"></th>
       <th><img width="50px" src="pictures/kafka.png"></th>
       <th><img width="50px" src="pictures/zookeeper.jpg"></th>
       <th><img width="50px" src="pictures/flume.png"></th>
@@ -40,6 +40,8 @@
     </tr>
   </table>
 <br/>
+
+**有对前后台开发感兴趣的小伙伴，欢迎关注我的新仓库：[Full-Stack-Notes](https://github.com/heibaiying/Full-Stack-Notes) ！**
 
 ## :black_nib: 前  言
 
@@ -197,7 +199,6 @@
 
 <br>
 
-<div align="center"> <img width="300px" src="pictures/blog-logo.png"/> </div>
-<br>
+<div align="center"> <img width="200px" src="pictures/blog-logo.png"/> </div>
 
-<div align="center"> <a  href = "https://blog.csdn.net/m0_37809146">欢迎关注我的博客：https://blog.csdn.net/m0_37809146</a> </div>
+<div align="center"> <a  href = "">欢迎关注我的博客：https://blog.csdn.net/m0_37809146</a> </div>
