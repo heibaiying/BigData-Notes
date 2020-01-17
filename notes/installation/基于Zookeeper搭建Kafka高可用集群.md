@@ -53,7 +53,7 @@ server.3=127.0.0.1:2289:3389
 
 > 如果是多台服务器，则集群中每个节点通讯端口和选举端口可相同，IP 地址修改为每个节点所在主机 IP 即可。
 
-zookeeper02 配置，与 zookeeper01 相比，只有 `dataLogDir` 和 `dataLogDir` 不同：
+zookeeper02 配置，与 zookeeper01 相比，只有 `dataLogDir`、`dataLogDir` 和 `clientPort` 不同：
 
 ```shell
 tickTime=2000
@@ -68,7 +68,7 @@ server.2=127.0.0.1:2288:3388
 server.3=127.0.0.1:2289:3389
 ```
 
-zookeeper03 配置，与 zookeeper01，02 相比，也只有 `dataLogDir` 和 `dataLogDir` 不同：
+zookeeper03 配置，与 zookeeper01，02 相比，也只有 `dataLogDir`、`dataLogDir` 和 `clientPort` 不同：
 
 ```shell
 tickTime=2000
