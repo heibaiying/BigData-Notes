@@ -47,7 +47,7 @@
 	</a> 
 </div>
 
-<div align="center"> 有对前后台开发感兴趣的小伙伴，欢迎关注我的新仓库：<a  href = "https://blog.csdn.net/m0_37809146"> Full-Stack-Notes</a> ! </div>
+<div align="center"> 有对前后台开发感兴趣的小伙伴，欢迎关注我的新仓库：<a  href = "https://github.com/heibaiying/Full-Stack-Notes"> Full-Stack-Notes</a> ! </div>
 <br/>
 
 ## :black_nib: 前  言
