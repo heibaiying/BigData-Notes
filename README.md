@@ -41,7 +41,14 @@
   </table>
 <br/>
 
-**有对前后台开发感兴趣的小伙伴，欢迎关注我的新仓库：[Full-Stack-Notes](https://github.com/heibaiying/Full-Stack-Notes) ！**
+<div align="center">
+	<a href = "https://github.com/heibaiying/Full-Stack-Notes"> 
+	<img width="500px" src="pictures/full-stack-notes.png"/> 
+	</a> 
+</div>
+
+<div align="center"> 有对前后台开发感兴趣的小伙伴，欢迎关注我的新仓库：<a  href = "https://blog.csdn.net/m0_37809146"> Full-Stack-Notes</a> ! </div>
+<br/>
 
 ## :black_nib: 前  言
 
@@ -198,6 +205,9 @@
 
 <br>
 
-<div align="center"> <img width="200px" src="pictures/blog-logo.png"/> </div>
-
+<div align="center">
+	<a href = "https://blog.csdn.net/m0_37809146"> 
+	<img width="200px" src="pictures/blog-logo.png"/> 
+	</a> 
+</div>
 <div align="center"> <a  href = "https://blog.csdn.net/m0_37809146"> 欢迎关注我的博客：https://blog.csdn.net/m0_37809146</a> </div>
