@@ -194,7 +194,7 @@ SELECT deptno,SUM(sal) FROM emp GROUP BY deptno HAVING SUM(sal)>9000;
 
 ### 2.9 DISTRIBUTE BY
 
-如果想要把具有相同 Key 值的数据分发到同一个 Reducer 进行处理，这就需要使用 DISTRIBUTE BY 字句。需要注意的是，DISTRIBUTE BY 虽然能保证具有相同 Key 值的数据分发到同一个 Reducer，但是不能保证数据在 Reducer 上是有序的。情况如下：
+如果想要把具有相同 Key 值的数据分发到同一个 Reducer 进行处理，这可以使用 DISTRIBUTE BY 字句。需要注意的是，DISTRIBUTE BY 虽然能把具有相同 Key 值的数据分发到同一个 Reducer，但是不能保证数据在 Reducer 上是有序的。情况如下：
 
 把以下 5 个数据发送到两个 Reducer 上进行处理：
 
