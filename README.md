@@ -43,7 +43,7 @@
 
 <div align="center">
 	<a href = "https://github.com/heibaiying/Full-Stack-Notes"> 
-	<img width="500px" src="pictures/full-stack-notes.png"/> 
+	<img width="500px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/full-stack-notes.png"/> 
 	</a> 
 </div>
 
