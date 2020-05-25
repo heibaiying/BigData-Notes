@@ -57,17 +57,17 @@ Observer 协处理器类似于关系型数据库中的触发器，当发生某�
 
 以上四种类型的 Observer 协处理器均继承自 `Coprocessor` 接口，这四个接口中分别定义了所有可用的钩子方法，以便在对应方法前后执行特定的操作。通常情况下，我们并不会直接实现上面接口，而是继承其 Base 实现类，Base 实现类只是简单空实现了接口中的方法，这样我们在实现自定义的协处理器时，就不必实现所有方法，只需要重写必要方法即可。
 
-<div align="center"> <img  src="../pictures/hbase-coprocessor.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-coprocessor.png"/> </div>
 
 这里以 `RegionObservers ` 为例，其接口类中定义了所有可用的钩子方法，下面截取了部分方法的定义，多数方法都是成对出现的，有 `pre` 就有 `post`：
 
-<div align="center"> <img  src="../pictures/RegionObserver.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/RegionObserver.png"/> </div>
 
 </br>
 
 #### 4. 执行流程
 
-<div align="center"> <img  src="../pictures/RegionObservers-works.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/RegionObservers-works.png"/> </div>
 
 + 客户端发出 put 请求
 + 该请求被分派给合适的 RegionServer 和 region
@@ -384,7 +384,7 @@ hadoop fs -put /usr/app/hbase-observer-coprocessor-1.0-SNAPSHOT.jar /hbase
 hadoop fs -ls /hbase
 ```
 
-<div align="center"> <img  src="../pictures/hbase-cp-hdfs.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-cp-hdfs.png"/> </div>
 
 ### 6.5 加载协处理器
 
@@ -413,7 +413,7 @@ hbase >  desc 'magazine'
 
 协处理器出现在 `TABLE_ATTRIBUTES` 属性中则代表加载成功，如下图：
 
-<div align="center"> <img  src="../pictures/hbase-cp-load.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-cp-load.png"/> </div>
 
 ### 6.6 测试加载结果
 
@@ -428,7 +428,7 @@ hbase > get 'magazine','rowkey1','article:content'
 
 可以看到对于指定列的值已经执行了 append 操作：
 
-<div align="center"> <img  src="../pictures/hbase-cp-helloworld.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-cp-helloworld.png"/> </div>
 
 插入一组对照数据：
 
@@ -441,7 +441,7 @@ hbase > get 'magazine','rowkey1','article:author'
 
 可以看到对于正常的列还是执行 update 操作:
 
-<div align="center"> <img  src="../pictures/hbase-cp-lisi.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-cp-lisi.png"/> </div>
 
 ### 6.7 卸载协处理器
 1. 卸载协处理器前需要先禁用表
@@ -467,7 +467,7 @@ hbase >  enable 'magazine'
 hbase >  desc 'magazine'
 ```
 
-<div align="center"> <img  src="../pictures/hbase-co-unload.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-co-unload.png"/> </div>
 
 ### 6.8 测试卸载结果
 
@@ -479,7 +479,7 @@ hbase > put 'magazine', 'rowkey1','article:content','Hello'
 hbase > get 'magazine','rowkey1','article:content'
 ```
 
-<div align="center"> <img  src="../pictures/hbase-unload-test.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-unload-test.png"/> </div>
 
 
 

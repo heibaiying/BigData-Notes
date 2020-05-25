@@ -27,7 +27,7 @@
 
 其次 `Phoenix` 的性能表现也非常优异，`Phoenix` 查询引擎会将 SQL 查询转换为一个或多个 HBase Scan，通过并行执行来生成标准的 JDBC 结果集。它通过直接使用 HBase API 以及协处理器和自定义过滤器，可以为小型数据查询提供毫秒级的性能，为千万行数据的查询提供秒级的性能。同时 Phoenix 还拥有二级索引等 HBase 不具备的特性，因为以上的优点，所以 `Phoenix` 成为了 HBase 最优秀的 SQL 中间层。
 
-<div align="center"> <img width="600px"  src="../pictures/Phoenix-hadoop.png"/> </div>
+<div align="center"> <img width="600px"  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/Phoenix-hadoop.png"/> </div>
 
 
 ## 二、Phoenix安装
@@ -85,7 +85,7 @@ start-hbase.sh
 
 启动后则进入了 Phoenix 交互式 SQL 命令行，可以使用 `!table` 或 `!tables` 查看当前所有表的信息
 
-<div align="center"> <img  src="../pictures/phoenix-shell.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/phoenix-shell.png"/> </div>
 
 
 ## 三、Phoenix 简单使用
@@ -100,10 +100,10 @@ CREATE TABLE IF NOT EXISTS us_population (
       CONSTRAINT my_pk PRIMARY KEY (state, city));
 ```
 
-<div align="center"> <img  src="../pictures/Phoenix-create-table.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/Phoenix-create-table.png"/> </div>
 新建的表会按照特定的规则转换为 HBase 上的表，关于表的信息，可以通过 Hbase Web UI 进行查看：
 
-<div align="center"> <img  src="../pictures/hbase-web-ui-phoenix.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-web-ui-phoenix.png"/> </div>
 ### 3.2 插入数据
 
 Phoenix 中插入数据采用的是 `UPSERT` 而不是 `INSERT`,因为 Phoenix 并没有更新操作，插入相同主键的数据就视为更新，所以 `UPSERT` 就相当于 `UPDATE`+`INSERT`
@@ -128,14 +128,14 @@ UPSERT INTO us_population VALUES('CA','San Jose',912332);
 UPSERT INTO us_population VALUES('NY','New York',999999);
 ```
 
-<div align="center"> <img  src="../pictures/Phoenix-update.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/Phoenix-update.png"/> </div>
 ### 3.4 删除数据
 
 ```sql
 DELETE FROM us_population WHERE city='Dallas';
 ```
 
-<div align="center"> <img  src="../pictures/Phoenix-delete.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/Phoenix-delete.png"/> </div>
 ### 3.5 查询数据
 
 ```sql
@@ -145,7 +145,7 @@ GROUP BY state
 ORDER BY sum(population) DESC;
 ```
 
-<div align="center"> <img  src="../pictures/Phoenix-select.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/Phoenix-select.png"/> </div>
 
 
 ### 3.6 退出命令
@@ -191,7 +191,7 @@ ORDER BY sum(population) DESC;
 
 如果是普通项目，则可以从 Phoenix 解压目录下找到对应的 JAR 包，然后手动引入：
 
-<div align="center"> <img  src="../pictures/phoenix-core-jar.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/phoenix-core-jar.png"/> </div>
 ### 4.2 简单的Java API实例
 
 ```java
@@ -231,7 +231,7 @@ public class PhoenixJavaApi {
 
 结果如下：
 
-<div align="center"> <img  src="../pictures/Phoenix-java-api-result.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/Phoenix-java-api-result.png"/> </div>
 
 
 实际的开发中我们通常都是采用第三方框架来操作数据库，如 `mybatis`，`Hibernate`，`Spring Data` 等。关于 Phoenix 与这些框架的整合步骤参见下一篇文章：[Spring/Spring Boot + Mybatis + Phoenix](https://github.com/heibaiying/BigData-Notes/blob/master/notes/Spring+Mybtais+Phoenix整合.md)

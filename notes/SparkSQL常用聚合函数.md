@@ -246,7 +246,7 @@ object SparkSqlApp {
 
 自定义聚合函数需要实现的方法比较多，这里以绘图的方式来演示其执行流程，以及每个方法的作用：
 
-<div align="center"> <img src="../pictures/spark-sql-自定义函数.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-sql-自定义函数.png"/> </div>
 
 
 

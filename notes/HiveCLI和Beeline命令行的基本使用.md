@@ -55,7 +55,7 @@ usage: hive
 hive -e 'select * from emp';
 ```
 
-<div align="center"> <img width='700px' src="../pictures/hive-e.png"/> </div>
+<div align="center"> <img width='700px' src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hive-e.png"/> </div>
 
 
 
@@ -129,7 +129,7 @@ hive >  select ${hivevar:j} from emp;
 
 结果如下：
 
-<div align="center"> <img width='700px' src="../pictures/hive-n-j.png"/> </div>
+<div align="center"> <img width='700px' src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hive-n-j.png"/> </div>
 
 ## 二、Beeline 
 

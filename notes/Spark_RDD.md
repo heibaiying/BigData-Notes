@@ -85,7 +85,7 @@ val dataRDD = sc.parallelize(data,2)
 
 执行结果如下：
 
-<div align="center"> <img src="../pictures/scala-分区数.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/scala-分区数.png"/> </div>
 
 ### 2.2 引用外部存储系统中的数据集
 
@@ -176,7 +176,7 @@ Spark 会自动监视每个节点上的缓存使用情况，并按照最近最�
 
 在 Spark 中，一个任务对应一个分区，通常不会跨分区操作数据。但如果遇到 `reduceByKey` 等操作，Spark 必须从所有分区读取数据，并查找所有键的所有值，然后汇总在一起以计算每个键的最终结果 ，这称为 `Shuffle`。
 
-<div align="center"> <img width="600px" src="../pictures/spark-reducebykey.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-reducebykey.png"/> </div>
 
 
 
@@ -203,7 +203,7 @@ RDD 和它的父 RDD(s) 之间的依赖关系分为两种不同的类型：
 
 如下图，每一个方框表示一个 RDD，带有颜色的矩形表示分区：
 
-<div align="center"> <img width="600px" src="../pictures/spark-窄依赖和宽依赖.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-窄依赖和宽依赖.png"/> </div>
 
 
 
@@ -221,7 +221,7 @@ RDD(s) 及其之间的依赖关系组成了 DAG(有向无环图)，DAG 定义了
 + 对于窄依赖，由于分区的依赖关系是确定的，其转换操作可以在同一个线程执行，所以可以划分到同一个执行阶段；
 + 对于宽依赖，由于 Shuffle 的存在，只能在父 RDD(s) 被 Shuffle 处理完成后，才能开始接下来的计算，因此遇到宽依赖就需要重新划分阶段。
 
-<div align="center"> <img width="600px" height="600px" src="../pictures/spark-DAG.png"/> </div>
+<div align="center"> <img width="600px" height="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-DAG.png"/> </div>
 
 
 

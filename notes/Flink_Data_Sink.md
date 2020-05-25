@@ -163,7 +163,7 @@ bin/kafka-console-consumer.sh --bootstrap-server hadoop001:9092 --topic flink-st
 
 在 Kafka 生产者上发送消息到 Flink 程序，观察 Flink 程序转换后的输出情况，具体如下：
 
-<div align="center"> <img src="../pictures/flink-kafka-producer-consumer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-kafka-producer-consumer.png"/> </div>
 
 
 可以看到 Kafka 生成者发出的数据已经被 Flink 程序正常接收到，并经过转换后又输出到 Kafka 对应的 Topic 上。
@@ -172,7 +172,7 @@ bin/kafka-console-consumer.sh --bootstrap-server hadoop001:9092 --topic flink-st
 
 除了使用内置的第三方连接器外，Flink 还支持使用自定义的 Sink 来满足多样化的输出需求。想要实现自定义的 Sink ，需要直接或者间接实现 SinkFunction 接口。通常情况下，我们都是实现其抽象类 RichSinkFunction，相比于 SinkFunction ，其提供了更多的与生命周期相关的方法。两者间的关系如下：
 
-<div align="center"> <img src="../pictures/flink-richsink.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-richsink.png"/> </div>
 
 
 这里我们以自定义一个 FlinkToMySQLSink 为例，将计算结果写出到 MySQL 数据库中，具体步骤如下：
@@ -251,7 +251,7 @@ env.execute();
 
 启动程序，观察数据库写入情况：
 
-<div align="center"> <img src="../pictures/flink-mysql-sink.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-mysql-sink.png"/> </div>
 
 
 数据库成功写入，代表自定义 Sink 整合成功。

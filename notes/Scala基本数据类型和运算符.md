@@ -205,7 +205,7 @@ res15: Int = 3
 
 Int 类中包含了多个重载的 `+` 方法，用于分别接收不同类型的参数。
 
-<div align="center"> <img  src="../pictures/scala-int+.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/scala-int+.png"/> </div>
 
 ### 3.2 逻辑运算符
 
@@ -234,7 +234,7 @@ res10: Int = 1
 
 操作符的优先级如下：优先级由上至下，逐级递减。
 
-<div align="center"> <img src="../pictures/scala-操作符优先级.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/scala-操作符优先级.png"/> </div>
 
 在表格中某个字符的优先级越高，那么以这个字符打头的方法就拥有更高的优先级。如 `+` 的优先级大于 `<`，也就意味则 `+` 的优先级大于以 `<` 开头的 `<<`，所以 `2<<2+2` , 实际上等价于 `2<<(2+2)` :
 

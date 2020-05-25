@@ -42,13 +42,13 @@ Zookeeper 致力于为那些高吞吐的大型分布式系统提供一个高性�
 
 Zookeeper 通过树形结构来存储数据，它由一系列被称为 ZNode 的数据节点组成，类似于常见的文件系统。不过和常见的文件系统不同，Zookeeper 将数据全量存储在内存中，以此来实现高吞吐，减少访问延迟。
 
-<div align="center"> <img  src="../pictures/zookeeper-zknamespace.jpg"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/zookeeper-zknamespace.jpg"/> </div>
 
 ### 2.2 目标二：构建集群
 
 可以由一组 Zookeeper 服务构成 Zookeeper 集群，集群中每台机器都会单独在内存中维护自身的状态，并且每台机器之间都保持着通讯，只要集群中有半数机器能够正常工作，那么整个集群就可以正常提供服务。
 
-<div align="center"> <img  src="../pictures/zookeeper-zkservice.jpg"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/zookeeper-zkservice.jpg"/> </div>
 
 ### 2.3 目标三：顺序访问
 
@@ -127,7 +127,7 @@ ZAB 协议是 Zookeeper 专门设计的一种支持崩溃恢复的原子广播�
 
 Zookeeper 使用一个单一的主进程来接收并处理客户端的所有事务请求，并采用原子广播协议将数据状态的变更以事务 Proposal 的形式广播到所有的副本进程上去。如下图：
 
-<div align="center"> <img  src="../pictures/zookeeper-zkcomponents.jpg"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/zookeeper-zkcomponents.jpg"/> </div>
 
 具体流程如下：
 
@@ -147,7 +147,7 @@ ZAB 协议的消息广播过程使用的是原子广播协议。在整个消息�
 
 Leader 服务会为每一个 Follower 服务器分配一个单独的队列，然后将事务 Proposal 依次放入队列中，并根据 FIFO(先进先出) 的策略进行消息发送。Follower 服务在接收到 Proposal 后，会将其以事务日志的形式写入本地磁盘中，并在写入成功后反馈给 Leader 一个 Ack 响应。当 Leader 接收到超过半数 Follower 的 Ack 响应后，就会广播一个 Commit 消息给所有的 Follower 以通知其进行事务提交，之后 Leader 自身也会完成对事务的提交。而每一个 Follower 则在接收到 Commit 消息后，完成事务的提交。
 
-<div align="center"> <img  src="../pictures/zookeeper-brocast.jpg"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/zookeeper-brocast.jpg"/> </div>
 
 
 

@@ -21,13 +21,13 @@ Sqoop 是一个常用的数据迁移工具，主要用于在不同存储系统�
 
 其原理是将执行命令转化成 MapReduce 作业来实现数据的迁移，如下图：
 
-<div align="center"> <img  src="../pictures/sqoop-tool.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/sqoop-tool.png"/> </div>
 
 ## 二、安装
 
 版本选择：目前 Sqoop 有 Sqoop 1 和 Sqoop 2 两个版本，但是截至到目前，官方并不推荐使用 Sqoop 2，因为其与 Sqoop 1 并不兼容，且功能还没有完善，所以这里优先推荐使用 Sqoop 1。
 
-<div align="center"> <img  src="../pictures/sqoop-version-selected.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/sqoop-version-selected.png"/> </div>
 
 
 
@@ -92,7 +92,7 @@ export ZOOCFGDIR=/usr/app/zookeeper-3.4.13/conf
 
 将 MySQL 驱动包拷贝到 Sqoop 安装目录的 `lib` 目录下, 驱动包的下载地址为 https://dev.mysql.com/downloads/connector/j/  。在本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources) 目录下我也上传了一份，有需要的话可以自行下载。
 
-<div align="center"> <img  src="../pictures/sqoop-mysql-jar.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/sqoop-mysql-jar.png"/> </div>
 
 
 
@@ -106,7 +106,7 @@ export ZOOCFGDIR=/usr/app/zookeeper-3.4.13/conf
 
 出现对应的版本信息则代表配置成功：
 
-<div align="center"> <img  src="../pictures/sqoop-version.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/sqoop-version.png"/> </div>
 
 这里出现的两个 `Warning` 警告是因为我们本身就没有用到 `HCatalog` 和 `Accumulo`，忽略即可。Sqoop 在启动时会去检查环境变量中是否有配置这些软件，如果想去除这些警告，可以修改 `bin/configure-sqoop`，注释掉不必要的检查。
 

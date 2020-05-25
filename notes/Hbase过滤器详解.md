@@ -30,7 +30,7 @@
 
 Hbase 提供了种类丰富的过滤器（filter）来提高数据处理的效率，用户可以通过内置或自定义的过滤器来对数据进行过滤，所有的过滤器都在服务端生效，即谓词下推（predicate push down）。这样可以保证过滤掉的数据不会被传送到客户端，从而减轻网络传输和客户端处理的压力。
 
-<div align="center"> <img  src="../pictures/hbase-fliter.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-fliter.png"/> </div>
 
 
 
@@ -62,7 +62,7 @@ setFilter(Filter filter)
   }
 ```
 
-FilterBase 的所有子类过滤器如下：<div align="center"> <img  src="../pictures/hbase-filterbase-subclass.png"/> </div>
+FilterBase 的所有子类过滤器如下：<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-filterbase-subclass.png"/> </div>
 
 > 说明：上图基于当前时间点（2019.4）最新的 Hbase-2.1.4 ，下文所有说明均基于此版本。
 
@@ -117,7 +117,7 @@ public enum CompareOperator {
 
 所有比较器均继承自 `ByteArrayComparable` 抽象类，常用的有以下几种：
 
-<div align="center"> <img  src="../pictures/hbase-bytearraycomparable.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-bytearraycomparable.png"/> </div>
 
 - **BinaryComparator**  : 使用 `Bytes.compareTo(byte []，byte [])` 按字典序比较指定的字节数组。
 - **BinaryPrefixComparator** : 按字典序与指定的字节数组进行比较，但只比较到这个字节数组的长度。
@@ -137,7 +137,7 @@ public enum CompareOperator {
 
 比较过滤器共有五个（Hbase 1.x 版本和 2.x 版本相同），见下图：
 
-<div align="center"> <img  src="../pictures/hbase-compareFilter.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-compareFilter.png"/> </div>
 
 + **RowFilter** ：基于行键来过滤数据；
 + **FamilyFilterr** ：基于列族来过滤数据；

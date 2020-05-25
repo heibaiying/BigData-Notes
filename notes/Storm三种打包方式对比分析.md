@@ -176,7 +176,7 @@ maven-assembly-plugin 是官方文档中介绍的打包方法，来源于官方�
 
 打包后会同时生成两个 JAR 包，其中后缀为 `jar-with-dependencies` 是含有第三方依赖的 JAR 包，后缀是由 `assembly.xml` 中 `<id>` 标签指定的，可以自定义修改。提交该 JAR 到集群环境即可直接使用。
 
-<div align="center"> <img  src="../pictures/storm-jar.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-jar.png"/> </div>
 
 
 
@@ -276,7 +276,7 @@ maven-assembly-plugin 是官方文档中介绍的打包方法，来源于官方�
 
 打包后会生成两个 JAR 包，提交到服务器集群时使用 ` 非 original` 开头的 JAR。
 
-<div align="center"> <img  src="../pictures/storm-jar2.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-jar2.png"/> </div>
 
 ## 五、结论
 
@@ -288,7 +288,7 @@ maven-assembly-plugin 是官方文档中介绍的打包方法，来源于官方�
 
 无论采用任何打包方式，都必须排除集群环境中已经提供的 storm jars。这里比较典型的是 storm-core，其在安装目录的 lib 目录下已经存在。
 
-<div align="center"> <img  src="../pictures/storm-lib.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-lib.png"/> </div>
 
 
 
@@ -306,7 +306,7 @@ jar:file:/usr/appjar/storm-hdfs-integration-1.0.jar!/defaults.yaml]
         ... 39 more
 ```
 
-<div align="center"> <img  src="../pictures/storm-jar-complie-error.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-jar-complie-error.png"/> </div>
 
 
 

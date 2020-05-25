@@ -23,7 +23,7 @@
 
 一个典型的 Hbase Table 表如下：
 
-<div align="center"> <img  src="../pictures/hbase-webtable.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-webtable.png"/> </div>
 
 ### 1.1 Row Key (行键)
 
@@ -79,15 +79,15 @@ HBase 中通过 `row key` 和 `column` 确定的为一个存储单元称为 `Cel
 
 HBase Table 中的所有行按照 `Row Key` 的字典序排列。HBase Tables 通过行键的范围 (row key range) 被水平切分成多个 `Region`, 一个 `Region` 包含了在 start key 和 end key 之间的所有行。
 
-<div align="center"> <img  src="../pictures/HBaseArchitecture-Blog-Fig2.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/HBaseArchitecture-Blog-Fig2.png"/> </div>
 
 每个表一开始只有一个 `Region`，随着数据不断增加，`Region` 会不断增大，当增大到一个阀值的时候，`Region` 就会等分为两个新的 `Region`。当 Table 中的行不断增多，就会有越来越多的 `Region`。
 
-<div align="center"> <img width="600px" src="../pictures/hbase-region-splite.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-region-splite.png"/> </div>
 
 `Region` 是 HBase 中**分布式存储和负载均衡的最小单元**。这意味着不同的 `Region` 可以分布在不同的 `Region Server` 上。但一个 `Region` 是不会拆分到多个 Server 上的。
 
-<div align="center"> <img width="600px" src="../pictures/hbase-region-dis.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-region-dis.png"/> </div>
 
 ### 2.2 Region Server
 
@@ -98,13 +98,13 @@ HBase Table 中的所有行按照 `Row Key` 的字典序排列。HBase Tables �
 - **MemStore**：写缓存。它存储尚未写入磁盘的新数据，并会在数据写入磁盘之前对其进行排序。每个 Region 上的每个列族都有一个 MemStore。
 - **HFile** ：将行数据按照 Key\Values 的形式存储在文件系统上。
 
-<div align="center"> <img  src="../pictures/hbase-Region-Server.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-Region-Server.png"/> </div>
 
 
 
 Region Server 存取一个子表时，会创建一个 Region 对象，然后对表的每个列族创建一个 `Store` 实例，每个 `Store` 会有 0 个或多个 `StoreFile` 与之对应，每个 `StoreFile` 则对应一个 `HFile`，HFile 就是实际存储在 HDFS 上的文件。
 
-<div align="center"> <img  src="../pictures/hbase-hadoop.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-hadoop.png"/> </div>
 
 
 
@@ -142,7 +142,7 @@ HBase 系统遵循 Master/Salve 架构，由三种不同类型的组件组成：
 
 2. Region Server 负责切分在运行过程中变得过大的 Region。
 
-<div align="center"> <img width="600px" src="../pictures/HBaseArchitecture-Blog-Fig1.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/HBaseArchitecture-Blog-Fig1.png"/> </div>
 
 ### 3.2 组件间的协作
 
@@ -154,7 +154,7 @@ HBase 系统遵循 Master/Salve 架构，由三种不同类型的组件组成：
 
 + 如果主 Master 未能定时发送心跳，则其持有的 Zookeeper 会话会过期，相应的临时节点也会被删除，这会触发定义在该节点上的 Watcher 事件，使得备用的 Master Servers 得到通知。所有备用的 Master Servers 在接到通知后，会再次去竞争性地创建临时节点，完成主 Master 的选举。
 
-<div align="center"> <img  src="../pictures/HBaseArchitecture-Blog-Fig5.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/HBaseArchitecture-Blog-Fig5.png"/> </div>
 
 
 
@@ -194,7 +194,7 @@ HBase 系统遵循 Master/Salve 架构，由三种不同类型的组件组成：
 
 注：`META` 表是 HBase 中一张特殊的表，它保存了所有 Region 的位置信息，META 表自己的位置信息则存储在 ZooKeeper 上。
 
-<div align="center"> <img  src="../pictures/HBaseArchitecture-Blog-Fig7.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/HBaseArchitecture-Blog-Fig7.png"/> </div>
 
 > 更为详细读取数据流程参考：
 >

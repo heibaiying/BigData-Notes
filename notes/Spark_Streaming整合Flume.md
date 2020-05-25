@@ -206,7 +206,7 @@ object PushBasedWordCount {
 
 使用 `mvn clean package` 命令打包后会生产以下两个 Jar 包，提交 ` 非 original` 开头的 Jar 即可。
 
-<div align="center"> <img src="../pictures/spark-streaming-flume-jar.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-streaming-flume-jar.png"/> </div>
 
 ### 2.5 启动服务和提交作业
 
@@ -232,11 +232,11 @@ spark-submit \
 
 这里使用 `echo` 命令模拟日志产生的场景，往日志文件中追加数据，然后查看程序的输出：
 
-<div align="center"> <img src="../pictures/spark-flume-input.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-flume-input.png"/> </div>
 
 Spark Streaming 程序成功接收到数据并打印输出：
 
-<div align="center"> <img src="../pictures/spark-flume-console.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-flume-console.png"/> </div>
 
 ### 2.7 注意事项
 
@@ -244,7 +244,7 @@ Spark Streaming 程序成功接收到数据并打印输出：
 
 这里需要注意的，不论你先启动 Spark 程序还是 Flume 程序，由于两者的启动都需要一定的时间，此时先启动的程序会短暂地抛出端口拒绝连接的异常，此时不需要进行任何操作，等待两个程序都启动完成即可。
 
-<div align="center"> <img src="../pictures/flume-retry.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flume-retry.png"/> </div>
 
 #### 2. 版本一致
 

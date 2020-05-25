@@ -2,7 +2,7 @@
 
 
 
-<div align="center"> <img width="414px" src="pictures/bigdata-notes-icon.png"/> </div>
+<div align="center"> <img width="414px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/bigdata-notes-icon.png"/> </div>
 <br/>
 
 **大数据入门指南**
@@ -11,18 +11,18 @@
 
 <table>
     <tr>
-      <th><img width="50px" src="pictures/hadoop.jpg"></th>
-      <th><img width="50px" src="pictures/hive.jpg"></th>
-      <th><img width="50px" src="pictures/spark.jpg"></th>
-      <th><img width="50px" src="pictures/storm.png"></th>
-      <th><img width="50px" src="pictures/flink.png"></th>
-      <th><img width="50px" src="pictures/hbase.png"></th>
-      <th><img width="50px" src="pictures/kafka.png"></th>
-      <th><img width="50px" src="pictures/zookeeper.jpg"></th>
-      <th><img width="50px" src="pictures/flume.png"></th>
-      <th><img width="50px" src="pictures/sqoop.png"></th>
-      <th><img width="50px" src="pictures/azkaban.png"></th>
-      <th><img width="50px" src="pictures/scala.jpg"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hadoop.jpg"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hive.jpg"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark.jpg"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm.png"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink.png"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase.png"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/kafka.png"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/zookeeper.jpg"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flume.png"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/sqoop.png"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/azkaban.png"></th>
+      <th><img width="50px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/scala.jpg"></th>
     </tr>
     <tr>
       <td align="center"><a href="#一hadoop">Hadoop</a></td>
@@ -207,7 +207,7 @@
 
 <div align="center">
 	<a href = "https://blog.csdn.net/m0_37809146"> 
-	<img width="200px" src="pictures/blog-logo.png"/> 
+	<img width="200px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/blog-logo.png"/> 
 	</a> 
 </div>
 <div align="center"> <a  href = "https://blog.csdn.net/m0_37809146"> 欢迎关注我的博客：https://blog.csdn.net/m0_37809146</a> </div>

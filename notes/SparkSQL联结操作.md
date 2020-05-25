@@ -68,7 +68,7 @@ Spark 中支持多种连接类型：
 
 其中内，外连接，笛卡尔积均与普通关系型数据库中的相同，如下图所示：
 
-<div align="center"> <img src="../pictures/sql-join.jpg"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/sql-join.jpg"/> </div>
 
 这里解释一下左半连接和左反连接，这两个连接等价于关系型数据库中的 `IN` 和 `NOT IN` 字句：
 
@@ -154,7 +154,7 @@ spark.sql("SELECT * FROM emp NATURAL JOIN dept").show()
 spark.sql("SELECT * FROM emp JOIN dept ON emp.deptno = dept.deptno").show()
 ```
 
-<div align="center"> <img src="../pictures/spark-sql-NATURAL-JOIN.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-sql-NATURAL-JOIN.png"/> </div>
 
 由于自然连接常常会产生不可预期的结果，所以并不推荐使用。
 
@@ -164,13 +164,13 @@ spark.sql("SELECT * FROM emp JOIN dept ON emp.deptno = dept.deptno").show()
 
 在对大表与大表之间进行连接操作时，通常都会触发 `Shuffle Join`，两表的所有分区节点会进行 `All-to-All` 的通讯，这种查询通常比较昂贵，会对网络 IO 会造成比较大的负担。
 
-<div align="center"> <img width="600px" src="../pictures/spark-Big-table–to–big-table.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-Big-table–to–big-table.png"/> </div>
 
 
 
 而对于大表和小表的连接操作，Spark 会在一定程度上进行优化，如果小表的数据量小于 Worker Node 的内存空间，Spark 会考虑将小表的数据广播到每一个 Worker Node，在每个工作节点内部执行连接计算，这可以降低网络的 IO，但会加大每个 Worker Node 的 CPU 负担。
 
-<div align="center"> <img  width="600px" src="../pictures/spark-Big-table–to–small-table.png"/> </div>
+<div align="center"> <img  width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-Big-table–to–small-table.png"/> </div>
 
 是否采用广播方式进行 `Join` 取决于程序内部对小表的判断，如果想明确使用广播方式进行 `Join`，则可以在 DataFrame API 中使用 `broadcast` 方法指定需要广播的小表：
 

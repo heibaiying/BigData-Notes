@@ -23,7 +23,7 @@ Time Windows 用于以时间为维度来进行数据聚合，具体分为以下�
 
 滚动窗口 (Tumbling Windows) 是指彼此之间没有重叠的窗口。例如：每隔1小时统计过去1小时内的商品点击量，那么 1 天就只能分为 24 个窗口，每个窗口彼此之间是不存在重叠的，具体如下：
 
-<div align="center"> <img width="600px" src="../pictures/flink-tumbling-windows.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-tumbling-windows.png"/> </div>
 
 
 这里我们以词频统计为例，给出一个具体的用例，代码如下：
@@ -46,7 +46,7 @@ env.execute("Flink Streaming");
 
 测试结果如下：
 
-<div align="center"> <img src="../pictures/flink-window-word-count.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-window-word-count.png"/> </div>
 
 
 
@@ -55,7 +55,7 @@ env.execute("Flink Streaming");
 
 滑动窗口用于滚动进行聚合分析，例如：每隔 6 分钟统计一次过去一小时内所有商品的点击量，那么统计窗口彼此之间就是存在重叠的，即 1天可以分为 240 个窗口。图示如下：
 
-<div align="center"> <img width="600px" src="../pictures/flink-sliding-windows.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-sliding-windows.png"/> </div>
 
 
 可以看到 window 1 - 4 这四个窗口彼此之间都存在着时间相等的重叠部分。想要实现滑动窗口，只需要在使用 timeWindow 方法时额外传递第二个参数作为滚动时间即可，具体如下：
@@ -69,7 +69,7 @@ timeWindow(Time.minutes(1),Time.seconds(3))
 
 当用户在进行持续浏览时，可能每时每刻都会有点击数据，例如在活动区间内，用户可能频繁的将某类商品加入和移除购物车，而你只想知道用户本次浏览最终的购物车情况，此时就可以在用户持有的会话结束后再进行统计。想要实现这类统计，可以通过 Session Windows 来进行实现。
 
-<div align="center"> <img width="600px" src="../pictures/flink-session-windows.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-session-windows.png"/> </div>
 
 
 具体的实现代码如下：
@@ -85,7 +85,7 @@ window(EventTimeSessionWindows.withGap(Time.seconds(10)))
 
 最后一个窗口是全局窗口， 全局窗口会将所有 key 相同的元素分配到同一个窗口中，其通常配合触发器 (trigger) 进行使用。如果没有相应触发器，则计算将不会被执行。
 
-<div align="center"> <img width="600px" src="../pictures/flink-non-windowed.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-non-windowed.png"/> </div>
 
 
 这里继续以上面词频统计的案例为例，示例代码如下：

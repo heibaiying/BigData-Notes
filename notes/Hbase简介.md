@@ -11,7 +11,7 @@
 
 HBase 是一个构建在 Hadoop 文件系统之上的面向列的数据库管理系统。
 
-<div align="center"> <img  src="../pictures/hbase.jpg"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase.jpg"/> </div>
 
 要想明白为什么产生 HBase，就需要先了解一下 Hadoop 存在的限制？Hadoop 可以通过 HDFS 来存储结构化、半结构甚至非结构化的数据，它是传统数据库的补充，是海量数据存储的最佳方法，它针对大文件的存储，批量访问和流式访问都做了优化，同时也通过多副本解决了容灾问题。
 
@@ -52,7 +52,7 @@ HBase 是一个面向 ` 列 ` 的数据库管理系统，这里更为确切的�
 + 该表具有两个列族，分别是 personal 和 office;
 + 其中列族 personal 拥有 name、city、phone 三个列，列族 office 拥有 tel、addres 两个列。
 
-<div align="center"> <img  src="../pictures/HBase_table-iteblog.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/HBase_table-iteblog.png"/> </div>
 
 > *图片引用自 : HBase 是列式存储数据库吗* *https://www.iteblog.com/archives/2498.html*
 

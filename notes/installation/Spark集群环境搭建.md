@@ -22,7 +22,7 @@
 
 这里搭建一个 3 节点的 Spark 集群，其中三台主机上均部署 `Worker` 服务。同时为了保证高可用，除了在 hadoop001 上部署主 `Master` 服务外，还在 hadoop002 和 hadoop003 上分别部署备用的 `Master` 服务，Master 服务由 Zookeeper 集群进行协调管理，如果主 `Master` 不可用，则备用 `Master` 会成为新的主 `Master`。
 
-<div align="center"> <img  src="../../pictures/spark集群规划.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark集群规划.png"/> </div>
 
 ## 二、前置条件
 
@@ -38,7 +38,7 @@
 
 下载所需版本的 Spark，官网下载地址：http://spark.apache.org/downloads.html
 
-<div align="center"> <img width="600px" src="../../pictures/spark-download.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-download.png"/> </div>
 
 
 
@@ -151,13 +151,13 @@ start-master.sh
 
 查看 Spark 的 Web-UI 页面，端口为 `8080`。此时可以看到 hadoop001 上的 Master 节点处于 `ALIVE` 状态，并有 3 个可用的 `Worker` 节点。
 
-<div align="center"> <img  src="../../pictures/spark-集群搭建1.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-集群搭建1.png"/> </div>
 
 而 hadoop002 和 hadoop003 上的 Master 节点均处于 `STANDBY` 状态，没有可用的 `Worker` 节点。
 
-<div align="center"> <img  src="../../pictures/spark-集群搭建2.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-集群搭建2.png"/> </div>
 
-<div align="center"> <img  src="../../pictures/spark-集群搭建3.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-集群搭建3.png"/> </div>
 
 
 
@@ -165,11 +165,11 @@ start-master.sh
 
 此时可以使用 `kill` 命令杀死 hadoop001 上的 `Master` 进程，此时备用 `Master` 会中会有一个再次成为 ` 主 Master`，我这里是 hadoop002，可以看到 hadoop2 上的 `Master` 经过 `RECOVERING` 后成为了新的主 `Master`，并且获得了全部可以用的 `Workers`。
 
-<div align="center"> <img  src="../../pictures/spark-集群搭建4.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-集群搭建4.png"/> </div>
 
 Hadoop002 上的 `Master` 成为主 `Master`，并获得了全部可以用的 `Workers`。
 
-<div align="center"> <img  src="../../pictures/spark-集群搭建5.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-集群搭建5.png"/> </div>
 
 此时如果你再在 hadoop001 上使用 `start-master.sh` 启动 Master 服务，那么其会作为备用 `Master` 存在。
 

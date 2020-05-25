@@ -9,7 +9,7 @@
 
 ### 1.1 项目结构
 
-<div align="center"> <img  src="../pictures/datasourcetohdfs.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/datasourcetohdfs.png"/> </div>
 
 > 本用例源码下载地址：[storm-hdfs-integration](https://github.com/heibaiying/BigData-Notes/tree/master/code/Storm/storm-hdfs-integration)
 
@@ -218,7 +218,7 @@ hadoop fs -tail -f /strom-hdfs/文件名
 
 
 
-<div align="center"> <img  src="../pictures/storm-hdfs-result.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-hdfs-result.png"/> </div>
 
 
 
@@ -228,7 +228,7 @@ hadoop fs -tail -f /strom-hdfs/文件名
 
 集成用例： 进行词频统计并将最后的结果存储到 HBase，项目主要结构如下：
 
-<div align="center"> <img  src="../pictures/WordCountToHBaseApp.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/WordCountToHBaseApp.png"/> </div>
 
 > 本用例源码下载地址：[storm-hbase-integration](https://github.com/heibaiying/BigData-Notes/tree/master/code/Storm/storm-hbase-integration)
 
@@ -465,7 +465,7 @@ public class WordCountToHBaseApp {
 hbase >  scan 'WordCount'
 ```
 
-<div align="center"> <img  src="../pictures/storm-hbase-result.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-hbase-result.png"/> </div>
 
 
 

@@ -21,7 +21,7 @@
 
 相对于其他流计算框架，Flink 一个比较重要的特性就是其支持有状态计算。即你可以将中间的计算结果进行保存，并提供给后续的计算使用：
 
-<div align="center"> <img width="500px" src="../pictures/flink-stateful-stream.png"/> </div>
+<div align="center"> <img width="500px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-stateful-stream.png"/> </div>
 
 
 
@@ -31,7 +31,7 @@
 
 算子状态 (Operator State)：顾名思义，状态是和算子进行绑定的，一个算子的状态不能被其他算子所访问到。官方文档上对 Operator State 的解释是：*each operator state is bound to one parallel operator instance*，所以更为确切的说一个算子状态是与一个并发的算子实例所绑定的，即假设算子的并行度是 2，那么其应有两个对应的算子状态：
 
-<div align="center"> <img width="500px" src="../pictures/flink-operator-state.png"/> </div>
+<div align="center"> <img width="500px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-operator-state.png"/> </div>
 
 
 
@@ -39,7 +39,7 @@
 
 键控状态 (Keyed State) ：是一种特殊的算子状态，即状态是根据 key 值进行区分的，Flink 会为每类键值维护一个状态实例。如下图所示，每个颜色代表不同 key 值，对应四个不同的状态实例。需要注意的是键控状态只能在 `KeyedStream` 上进行使用，我们可以通过 `stream.keyBy(...)` 来得到 `KeyedStream` 。
 
-<div align="center"> <img src="../pictures/flink-keyed-state.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-keyed-state.png"/> </div>
 
 
 
@@ -118,7 +118,7 @@ env.execute("Managed Keyed State");
 
 输出如下结果如下：
 
-<div align="center"> <img src="../pictures/flink-state-management.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-state-management.png"/> </div>
 
 
 
@@ -232,13 +232,13 @@ env.execute("Managed Keyed State");
 
 此时输出如下：
 
-<div align="center"> <img src="../pictures/flink-operator-state-para1.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-operator-state-para1.png"/> </div>
 
 
 
 在上面的调用代码中，我们将程序的并行度设置为 1，可以看到三次输出中状态实例的 hashcode 全是一致的，证明它们都同一个状态实例。假设将并行度设置为 2，此时输出如下：
 
-<div align="center"> <img src="../pictures/flink-operator-state-para2.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-operator-state-para2.png"/> </div>
 
 
 
@@ -250,7 +250,7 @@ env.execute("Managed Keyed State");
 
 为了使 Flink 的状态具有良好的容错性，Flink 提供了检查点机制 (CheckPoints)  。通过检查点机制，Flink 定期在数据流上生成 checkpoint barrier ，当某个算子收到 barrier 时，即会基于当前状态生成一份快照，然后再将该 barrier 传递到下游算子，下游算子接收到该 barrier 后，也基于当前状态生成一份快照，依次传递直至到最后的 Sink 算子上。当出现异常后，Flink 就可以根据最近的一次的快照数据将所有算子恢复到先前的状态。
 
-<div align="center"> <img src="../pictures/flink-stream-barriers.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-stream-barriers.png"/> </div>
 
 
 
@@ -297,7 +297,7 @@ bin/flink savepoint :jobId [:targetDirectory]
 
 默认情况下，所有的状态都存储在 JVM 的堆内存中，在状态数据过多的情况下，这种方式很有可能导致内存溢出，因此 Flink 该提供了其它方式来存储状态数据，这些存储方式统一称为状态后端 (或状态管理器)：
 
-<div align="center"> <img src="../pictures/flink-checkpoints-backend.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-checkpoints-backend.png"/> </div>
 
 
 

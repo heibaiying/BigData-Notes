@@ -122,7 +122,7 @@ trait Ordered[A] extends Any with java.lang.Comparable[A] {
 @inline implicit def intWrapper(x: Int)   = new runtime.RichInt(x)
 ```
 
-<div align="center"> <img src="../pictures/scala-richInt.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/scala-richInt.png"/> </div>
 
 要想解决传入数值无法进行比较的问题，可以使用视图界定。语法为 `T <% U`，代表 T 能够通过隐式转换转为 U，即允许 Int 型参数在无法进行比较的时候转换为 RichInt 类型。示例如下：
 
@@ -299,7 +299,7 @@ object ScalaApp extends App {
 
 为什么 Java 中要同时给出这两个比较接口，这是因为你要比较的对象不一定实现了 Comparable 接口，而你又想对其进行比较，这时候当然你可以修改代码实现 Comparable，但是如果这个类你无法修改 (如源码中的类)，这时候就可以使用外置的比较器。同样的问题在 Scala 中当然也会出现，所以 Scala 分别使用了 Ordering 和 Ordered 来继承它们。
 
-<div align="center"> <img src="../pictures/scala-ordered-ordering.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/scala-ordered-ordering.png"/> </div>
 
 
 

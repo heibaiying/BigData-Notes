@@ -154,7 +154,7 @@ Exception in thread "main" java.lang.IllegalArgumentException: Source: 1 is not 
 
 如果你想要实现具有并行度的输入流，则需要实现 ParallelSourceFunction 或 RichParallelSourceFunction 接口，其与 SourceFunction 的关系如下图： 
 
-<div align="center"> <img src="../pictures/flink-RichParallelSourceFunction.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-RichParallelSourceFunction.png"/> </div>
 ParallelSourceFunction 直接继承自 ParallelSourceFunction，具有并行度的功能。RichParallelSourceFunction 则继承自 AbstractRichFunction，同时实现了 ParallelSourceFunction 接口，所以其除了具有并行度的功能外，还提供了额外的与生命周期相关的方法，如 open() ，closen() 。
 
 ## 三、Streaming Connectors
@@ -269,10 +269,10 @@ bin/kafka-console-producer.sh --broker-list hadoop001:9092 --topic flink-stream-
 
 在 Producer 上输入任意测试数据，之后观察程序控制台的输出：
 
-<div align="center"> <img src="../pictures/flink-kafka-datasource-producer.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-kafka-datasource-producer.png"/> </div>
 程序控制台的输出如下：
 
-<div align="center"> <img src="../pictures/flink-kafka-datasource-console.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-kafka-datasource-console.png"/> </div>
 可以看到已经成功接收并打印出相关的数据。
 
 

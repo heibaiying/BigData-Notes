@@ -25,7 +25,7 @@
 
 这里搭建一个 3 节点的 Storm 集群：三台主机上均部署 `Supervisor` 和 `LogViewer` 服务。同时为了保证高可用，除了在 hadoop001 上部署主 `Nimbus` 服务外，还在 hadoop002 上部署备用的 `Nimbus` 服务。`Nimbus` 服务由 Zookeeper 集群进行协调管理，如果主 `Nimbus` 不可用，则备用 `Nimbus` 会成为新的主 `Nimbus`。
 
-<div align="center"> <img  src="../../pictures/storm-集群规划.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-集群规划.png"/> </div>
 
 ## 二、前置条件
 
@@ -150,18 +150,18 @@ nohup sh storm logviewer &
 
 使用 `jps` 查看进程，三台服务器的进程应该分别如下：
 
-<div align="center"> <img  src="../../pictures/storm-集群-shell.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-集群-shell.png"/> </div>
 
 
 <br/>
 
 访问 hadoop001 或 hadoop002 的 `8080` 端口，界面如下。可以看到有一主一备 2 个 `Nimbus` 和 3 个 `Supervisor`，并且每个 `Supervisor` 有四个 `slots`，即四个可用的 `worker` 进程，此时代表集群已经搭建成功。
 
-<div align="center"> <img  src="../../pictures/storm-集群搭建1.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-集群搭建1.png"/> </div>
 
 
 ## 五、高可用验证
 
 这里手动模拟主 `Nimbus` 异常的情况，在 hadoop001 上使用 `kill` 命令杀死 `Nimbus` 的线程，此时可以看到 hadoop001 上的 `Nimbus` 已经处于 `offline` 状态，而 hadoop002 上的 `Nimbus` 则成为新的 `Leader`。
 
-<div align="center"> <img  src="../../pictures/storm集群搭建2.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm集群搭建2.png"/> </div>

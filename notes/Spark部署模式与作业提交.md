@@ -67,7 +67,7 @@ spark-submit \
 
 `spark-examples_2.11-2.4.0.jar` 是 Spark 提供的测试用例包，`SparkPi` 用于计算 Pi 值，执行结果如下：
 
-<div align="center"> <img src="../pictures/spark-pi.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-pi.png"/> </div>
 
 
 
@@ -82,7 +82,7 @@ Standalone 是 Spark 提供的一种内置的集群模式，采用内置的资�
 
 
 
-<div align="center"> <img src="../pictures/spark-集群模式.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-集群模式.png"/> </div>
 
 ### 3.1 环境配置
 
@@ -131,7 +131,7 @@ hadoop002
 
 访问 8080 端口，查看 Spark 的 Web-UI 界面,，此时应该显示有两个有效的工作节点：
 
-<div align="center"> <img src="../pictures/spark-Standalone-web-ui.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-Standalone-web-ui.png"/> </div>
 
 ### 3.4 提交作业
 
@@ -166,13 +166,13 @@ Initial job has not accepted any resources;
 check your cluster UI to ensure that workers are registered and have sufficient resources
 ```
 
-<div align="center"> <img src="../pictures/spark-内存不足2.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-内存不足2.png"/> </div>
 
 <br/>
 
 这时候可以查看 Web UI，我这里是内存空间不足：提交命令中要求作业的 `executor-memory` 是 2G，但是实际的工作节点的 `Memory` 只有 1G，这时候你可以修改 `--executor-memory`，也可以修改 Woker 的 `Memory`，其默认值为主机所有可用内存值减去 1G。
 
-<div align="center"> <img src="../pictures/spark-内存不足.png"/> </div>   
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-内存不足.png"/> </div>   
 
 <br/>
 

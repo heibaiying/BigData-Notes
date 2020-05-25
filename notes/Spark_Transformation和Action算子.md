@@ -301,7 +301,7 @@ sc.parallelize(list,numSlices = 2).aggregateByKey(zeroValue = 0,numPartitions = 
 
 这里使用了 `numSlices = 2` 指定 aggregateByKey 父操作 parallelize 的分区数量为 2，其执行流程如下：
 
-<div align="center"> <img src="../pictures/spark-aggregateByKey.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-aggregateByKey.png"/> </div>
 
 基于同样的执行流程，如果 `numSlices = 1`，则意味着只有输入一个分区，则其最后一步 combOp 相当于是无效的，执行结果为：
 
@@ -328,7 +328,7 @@ sc.parallelize(list,numSlices = 6).aggregateByKey(zeroValue = 0,numPartitions = 
 ).getNumPartitions
 ```
 
-<div align="center"> <img src="../pictures/spark-getpartnum.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-getpartnum.png"/> </div>
 
 ## 二、Action
 

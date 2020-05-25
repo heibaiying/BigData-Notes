@@ -37,7 +37,7 @@ Storm-Redis 使用 Jedis 为 Redis 客户端，并提供了如下三个基本的
 
 这里首先给出一个集成案例：进行词频统计并将最后的结果存储到 Redis。项目结构如下：
 
-<div align="center"> <img  src="../pictures/storm-wordcounttoredis.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-wordcounttoredis.png"/> </div>
 
 > 用例源码下载地址：[storm-redis-integration](https://github.com/heibaiying/BigData-Notes/tree/master/code/Storm/storm-redis-integration)
 
@@ -283,7 +283,7 @@ public class WordCountToRedisApp {
 
 启动后，查看 Redis 中的数据：
 
-<div align="center"> <img  src="../pictures/store-redis-manager.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/store-redis-manager.png"/> </div>
 
 
 
@@ -295,7 +295,7 @@ public class WordCountToRedisApp {
 
 
 
-<div align="center"> <img  src="../pictures/storm-abstractRedisBolt.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-abstractRedisBolt.png"/> </div>
 
 `AbstractRedisBolt` 中比较重要的是 prepare 方法，在该方法中通过外部传入的 jedis 连接池配置 ( jedisPoolConfig/jedisClusterConfig) 创建用于管理 Jedis 实例的容器 `JedisCommandsInstanceContainer`。
 
@@ -440,13 +440,13 @@ public class RedisStoreBolt extends AbstractRedisBolt {
 
 JedisCommands 接口中定义了所有的 Redis 客户端命令，它有以下三个实现类，分别是 Jedis、JedisCluster、ShardedJedis。Strom 中主要使用前两种实现类，具体调用哪一个实现类来执行命令，由传入的是 jedisPoolConfig 还是 jedisClusterConfig 来决定。
 
-<div align="center"> <img  src="../pictures/storm-jedicCommands.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-jedicCommands.png"/> </div>
 
 ### 3.4 RedisMapper 和 TupleMapper
 
 RedisMapper 和 TupleMapper 定义了 tuple 和 Redis 中的数据如何进行映射转换。
 
-<div align="center"> <img  src="../pictures/storm-Redis-Mapper.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-Redis-Mapper.png"/> </div>
 
 #### 1. TupleMapper 
 
@@ -553,7 +553,7 @@ redis>
 
 ### 4.2 项目结构
 
-<div align="center"> <img  src="../pictures/CustomRedisCountApp.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/CustomRedisCountApp.png"/> </div>
 
 ### 4.3 自定义RedisBolt的代码实现
 

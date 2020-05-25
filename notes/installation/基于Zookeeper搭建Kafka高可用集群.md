@@ -137,7 +137,7 @@ echo "3" > /usr/local/zookeeper-cluster/data/03/myid
 
 使用 jps 查看进程，并且使用 `zkServer.sh status` 查看集群各个节点状态。如图三个节点进程均启动成功，并且两个节点为 follower 节点，一个节点为 leader 节点。
 
-<div align="center"> <img  src="../../pictures/zookeeper-cluster.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/zookeeper-cluster.png"/> </div>
 
 
 
@@ -229,7 +229,7 @@ bin/kafka-topics.sh --create --bootstrap-server hadoop001:9092 \
 bin/kafka-topics.sh --describe --bootstrap-server hadoop001:9092 --topic my-replicated-topic
 ```
 
-<div align="center"> <img src="../../pictures/kafka-cluster-shell.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/kafka-cluster-shell.png"/> </div>
 
 
 

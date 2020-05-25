@@ -38,7 +38,7 @@ ONBOOT=yes
 
 我的主机配置：
 
-<div align="center"> <img  src="../../pictures/ipconfig.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/ipconfig.png"/> </div>
 
 修改后完整配置如下：
 
@@ -81,13 +81,13 @@ ONBOOT=yes
 
 这里我是用的虚拟机是 virtualBox，开启多网卡配置方式如下：
 
-<div align="center"> <img  src="../../pictures/virtualbox-multi-network.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/virtualbox-multi-network.png"/> </div>
 
 ### 2. 查看网卡名称
 
 使用 `ifconfig`，查看第二块网卡名称，这里我的名称为 `enp0s8`：
 
-<div align="center"> <img  src="../../pictures/mutli-net-ip.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/mutli-net-ip.png"/> </div>
 
 ### 3. 配置第二块网卡
 
@@ -115,4 +115,4 @@ DEVICE=enp0s8
 
 使用时只需要根据所处的网络环境，勾选对应的网卡即可，不使用的网卡尽量不要勾选启动。
 
-<div align="center"> <img  src="../../pictures/virtualbox启用网络.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/virtualbox启用网络.png"/> </div>

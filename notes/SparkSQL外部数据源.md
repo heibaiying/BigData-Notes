@@ -350,7 +350,7 @@ jdbcDf.rdd.mapPartitionsWithIndex((index, iterator) => {
 
 执行结果如下：`help_keyword` 这张表只有 600 条左右的数据，本来数据应该均匀分布在 10 个分区，但是 0 分区里面却有 319 条数据，这是因为设置了下限，所有小于 300 的数据都会被限制在第一个分区，即 0 分区。同理所有大于 500 的数据被分配在 9 分区，即最后一个分区。
 
-<div align="center"> <img src="../pictures/spark-mysql-分区上下限.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-mysql-分区上下限.png"/> </div>
 
 ### 6.2 写入数据
 
@@ -405,7 +405,7 @@ df.write.mode("overwrite").partitionBy("deptno").save("/tmp/spark/partitions")
 
 输出结果如下：可以看到输出被按照部门编号分为三个子目录，子目录中才是对应的输出文件。
 
-<div align="center"> <img src="../pictures/spark-分区.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-分区.png"/> </div>
 
 ### 8.3 分桶写入
 

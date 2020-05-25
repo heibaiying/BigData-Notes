@@ -12,7 +12,7 @@
 
 官方下载地址：http://spark.apache.org/downloads.html ，选择 Spark 版本和对应的 Hadoop 版本后再下载：
 
-<div align="center"> <img width="600px" src="../../pictures/spark-download.png"/> </div>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-download.png"/> </div>
 
 解压安装包：
 
@@ -54,7 +54,7 @@ spark-shell --master local[2]
 - **local[k]**：启动 k 个工作线程；
 - **local[*]**：启动跟 cpu 数目相同的工作线程数。
 
-<div align="center"> <img src="../../pictures/spark-shell-local.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-shell-local.png"/> </div>
 
 <br/>
 
@@ -86,11 +86,11 @@ wordCounts.collect
 
 执行过程如下，可以看到已经输出了词频统计的结果：
 
-<div align="center"> <img  src="../../pictures/spark-shell.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-shell.png"/> </div>
 
 同时还可以通过 Web UI 查看作业的执行情况，访问端口为 `4040`：
 
-<div align="center"> <img  src="../../pictures/spark-shell-web-ui.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/spark-shell-web-ui.png"/> </div>
 
 
 
@@ -108,7 +108,7 @@ Scala 的运行依赖于 JDK，所以需要你本机有安装对应版本的 JDK
 
 IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。打开 IDEA，依次点击 **File** => **settings**=> **plugins** 选项卡，搜索 Scala 插件 (如下图)。找到插件后进行安装，并重启 IDEA 使得安装生效。
 
-<div align="center"> <img width="700px" src="../../pictures/idea-scala-plugin.png"/> </div>
+<div align="center"> <img width="700px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/idea-scala-plugin.png"/> </div>
 
 
 
@@ -116,7 +116,7 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 在 IDEA 中依次点击 **File** => **New** => **Project** 选项卡，然后选择创建 `Scala—IDEA` 工程：
 
-<div align="center"> <img  width="700px"   src="../../pictures/idea-newproject-scala.png"/> </div>
+<div align="center"> <img  width="700px"   src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/idea-newproject-scala.png"/> </div>
 
 
 
@@ -126,7 +126,7 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 此时看到 `Scala SDK` 为空，依次点击 `Create` => `Download` ，选择所需的版本后，点击 `OK` 按钮进行下载，下载完成点击 `Finish` 进入工程。
 
-<div align="center"> <img  width="700px"  src="../../pictures/idea-scala-select.png"/> </div>
+<div align="center"> <img  width="700px"  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/idea-scala-select.png"/> </div>
 
 
 
@@ -136,13 +136,13 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 这里我的系统是 Windows，下载 msi 版本的安装包后，一直点击下一步进行安装，安装完成后会自动配置好环境变量。
 
-<div align="center"> <img  width="700px"   src="../../pictures/scala-other-resources.png"/> </div>
+<div align="center"> <img  width="700px"   src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/scala-other-resources.png"/> </div>
 
 
 
 由于安装时已经自动配置好环境变量，所以 IDEA 会自动选择对应版本的 SDK。
 
-<div align="center"> <img  width="700px"  src="../../pictures/idea-scala-2.1.8.png"/> </div>
+<div align="center"> <img  width="700px"  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/idea-scala-2.1.8.png"/> </div>
 
 
 
@@ -150,7 +150,7 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 在工程 `src` 目录上右击 **New** => **Scala class** 创建 `Hello.scala`。输入代码如下，完成后点击运行按钮，成功运行则代表搭建成功。
 
-<div align="center"> <img  width="700px"   src="../../pictures/scala-hello-world.png"/> </div>
+<div align="center"> <img  width="700px"   src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/scala-hello-world.png"/> </div>
 
 
 
@@ -160,7 +160,7 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 在日常的开发中，由于对应软件（如 Spark）的版本切换，可能导致需要切换 Scala 的版本，则可以在 `Project Structures` 中的 `Global Libraries` 选项卡中进行切换。
 
-<div align="center"> <img  width="700px"  src="../../pictures/idea-scala-change.png"/> </div>
+<div align="center"> <img  width="700px"  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/idea-scala-change.png"/> </div>
 
 
 
@@ -170,7 +170,7 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 在 IDEA 中有时候重新打开项目后，右击并不会出现新建 `scala` 文件的选项，或者在编写时没有 Scala 语法提示，此时可以先删除 `Global Libraries` 中配置好的 SDK，之后再重新添加：
 
-<div align="center"> <img src="../../pictures/scala-sdk.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/scala-sdk.png"/> </div>
 
 
 

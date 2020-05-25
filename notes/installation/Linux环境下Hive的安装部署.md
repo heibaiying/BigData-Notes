@@ -98,7 +98,7 @@ HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
 
 将 MySQL 驱动包拷贝到 Hive 安装目录的 `lib` 目录下, MySQL 驱动的下载地址为：https://dev.mysql.com/downloads/connector/j/  , 在本仓库的[resources](https://github.com/heibaiying/BigData-Notes/tree/master/resources) 目录下我也上传了一份，有需要的可以自行下载。
 
-<div align="center"> <img  src="../../pictures/hive-mysql.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hive-mysql.png"/> </div>
 
 
 
@@ -123,11 +123,11 @@ HADOOP_HOME=/usr/app/hadoop-2.6.0-cdh5.15.2
 # hive
 ```
 
-<div align="center"> <img  src="../../pictures/hive-install-2.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hive-install-2.png"/> </div>
 
 在 Mysql 中也能看到 Hive 创建的库和存放元数据信息的表
 
-<div align="center"> <img  src="../../pictures/hive-mysql-tables.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hive-mysql-tables.png"/> </div>
 
 
 
@@ -178,4 +178,4 @@ Hive 内置了 HiveServer 和 HiveServer2 服务，两者都允许客户端使�
 # beeline -u jdbc:hive2://hadoop001:10000 -n root
 ```
 
-<div align="center"> <img src="../../pictures/hive-beeline-cli.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hive-beeline-cli.png"/> </div>

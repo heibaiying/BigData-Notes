@@ -28,7 +28,7 @@ Scala 中继承关系如下图：
 + Null 是所有引用类型的子类型，唯一实例是 null，可以将 null 赋值给除了值类型外的所有类型的变量;
 + Nothing 是所有类型的子类型。
 
-<div align="center"> <img src="../pictures/scala继承层次.png"/> </div>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/scala继承层次.png"/> </div>
 
 ### 1.2 extends & override
 
@@ -312,7 +312,7 @@ class InfoLogger extends Logger {
 
 Scala 支持在类定义的时混入 ` 父类 trait`，而在类实例化为具体对象的时候指明其实际使用的 ` 子类 trait`。示例如下：
 
-<div align="center"> <img  src="../pictures/scala带有特质的对象.png"/> </div>
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/scala带有特质的对象.png"/> </div>
 
 trait Logger：
 
