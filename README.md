@@ -75,7 +75,7 @@
 6. [Hive 常用 DDL 操作](notes/Hive常用DDL操作.md)
 7. [Hive 分区表和分桶表](notes/Hive分区表和分桶表.md)
 8. [Hive 视图和索引](notes/Hive视图和索引.md)
-9. [Hive常用 DML 操作](notes/Hive常用DML操作.md)
+9. [Hive 常用 DML 操作](notes/Hive常用DML操作.md)
 10. [Hive 数据查询详解](notes/Hive数据查询详解.md)
 
 ## 三、Spark
@@ -137,7 +137,7 @@
 4. [HBase 集群环境搭建](notes/installation/HBase集群环境搭建.md)
 5. [HBase 常用 Shell 命令](notes/Hbase_Shell.md)
 6. [HBase Java API](notes/Hbase_Java_API.md)
-7. [Hbase 过滤器详解](notes/Hbase过滤器详解.md)
+7. [HBase 过滤器详解](notes/Hbase过滤器详解.md)
 8. [HBase 协处理器详解](notes/Hbase协处理器详解.md)
 9. [HBase 容灾与备份](notes/Hbase容灾与备份.md)
 10. [HBase的 SQL 中间层 —— Phoenix](notes/Hbase的SQL中间层_Phoenix.md)
