@@ -43,10 +43,10 @@
 
 <div align="center">
 	<a href = "https://github.com/heibaiying/Full-Stack-Notes"> 
-	<img width="258px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin.jpg"/> 
+	<img width="150px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin.jpg"/> 
 	</a> 
 </div>
-<div align="center"> <strong> 如果想要离线阅读，可以在公众号上发送 “bigdata” 获取离线阅读版的《大数据入门指南》！ </strong> </div>
+<div align="center"> <strong> 如果想要离线阅读，可以在公众号上发送 “bigdata” 获取《大数据入门指南》离线阅读版！ </strong> </div>
 
 <br/>
 
