@@ -384,3 +384,6 @@ UPSERT INTO us_population VALUES('CA','San Diego',1255540);
 UPSERT INTO us_population VALUES('CA','San Jose',912332);
 ```
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

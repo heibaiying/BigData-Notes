@@ -194,3 +194,6 @@ hbase> restore_snapshot '快照名'
 
 1. [Online Apache HBase Backups with CopyTable](https://blog.cloudera.com/blog/2012/06/online-hbase-backups-with-copytable-2/)
 2. [Apache HBase ™ Reference Guide](http://hbase.apache.org/book.htm)
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

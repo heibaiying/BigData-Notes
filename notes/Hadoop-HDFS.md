@@ -174,3 +174,6 @@ HDFS 具有良好的跨平台移植性，这使得其他大数据计算框架都
 2. Tom White . hadoop 权威指南 [M] . 清华大学出版社 . 2017.
 3. [翻译经典 HDFS 原理讲解漫画](https://blog.csdn.net/hudiefenmu/article/details/37655491)
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

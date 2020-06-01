@@ -237,3 +237,6 @@ bin/kafka-topics.sh --describe --bootstrap-server hadoop001:9092 --topic my-repl
 
 
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

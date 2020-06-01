@@ -416,3 +416,6 @@ class Employee extends Person with InfoLogger with ErrorLogger {...}
 
 
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

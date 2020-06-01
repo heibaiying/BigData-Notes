@@ -86,3 +86,6 @@ Hbase 的表具有以下特点：
 
 
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

@@ -294,3 +294,6 @@ nodes:
 1. [Azkaban Flow 2.0 Design](https://github.com/azkaban/azkaban/wiki/Azkaban-Flow-2.0-Design)
 2. [Getting started with Azkaban Flow 2.0](https://github.com/azkaban/azkaban/wiki/Getting-started-with-Azkaban-Flow-2.0)
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

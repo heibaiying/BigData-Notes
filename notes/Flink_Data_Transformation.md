@@ -309,3 +309,6 @@ someStream.filter(...).slotSharingGroup("slotSharingGroupName");
 ## 参考资料
 
 Flink Operators： https://ci.apache.org/projects/flink/flink-docs-release-1.9/dev/stream/operators/ 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

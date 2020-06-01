@@ -488,3 +488,6 @@ hbase > get 'magazine','rowkey1','article:content'
 1. [Apache HBase Coprocessors](http://hbase.apache.org/book.html#cp)
 2. [Apache HBase Coprocessor Introduction](https://blogs.apache.org/hbase/entry/coprocessor_introduction)
 3. [HBase 高階知識](https://www.itread01.com/content/1546245908.html)
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

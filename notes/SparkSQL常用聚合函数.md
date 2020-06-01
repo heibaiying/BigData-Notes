@@ -337,3 +337,6 @@ object SparkSqlApp {
 ## 参考资料
 
 1. Matei Zaharia, Bill Chambers . Spark: The Definitive Guide[M] . 2018-02 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

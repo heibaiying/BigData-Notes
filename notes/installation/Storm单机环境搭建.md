@@ -79,3 +79,6 @@ nohup sh storm logviewer &
 验证方式二： 访问 8080 端口，查看 Web-UI 界面：
 
 <div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm-web-ui.png"/> </div>
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

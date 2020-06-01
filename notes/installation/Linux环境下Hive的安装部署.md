@@ -179,3 +179,6 @@ Hive 内置了 HiveServer 和 HiveServer2 服务，两者都允许客户端使�
 ```
 
 <div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hive-beeline-cli.png"/> </div>
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

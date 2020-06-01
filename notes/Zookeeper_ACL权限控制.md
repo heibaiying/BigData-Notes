@@ -281,3 +281,6 @@ public class AclOperation {
 ```
 
 > 完整源码见本仓库： https://github.com/heibaiying/BigData-Notes/tree/master/code/Zookeeper/curator
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

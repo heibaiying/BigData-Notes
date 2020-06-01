@@ -200,3 +200,6 @@ CREATE TABLE page_view(viewTime INT, userid BIGINT)
 3. [LanguageManual DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL)
 4. [LanguageManual Types](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types)
 5. [Managed vs. External Tables](https://cwiki.apache.org/confluence/display/Hive/Managed+vs.+External+Tables)
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

@@ -53,3 +53,6 @@ Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
 Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)
 
 ```
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

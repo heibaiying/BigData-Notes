@@ -239,3 +239,6 @@ public class PhoenixJavaApi {
 # 参考资料
 
 1. http://phoenix.apache.org/
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

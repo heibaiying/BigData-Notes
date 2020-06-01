@@ -333,3 +333,6 @@ storm storm flink azkaban
 ## 参考资料
 
 Spark 官方文档：http://spark.apache.org/docs/latest/streaming-programming-guide.html
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

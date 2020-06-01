@@ -319,3 +319,6 @@ bin/kafka-console-producer.sh --broker-list hadoop001:9092 --topic spark-streami
 ## 参考资料
 
 1. https://spark.apache.org/docs/latest/streaming-kafka-0-10-integration.html
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

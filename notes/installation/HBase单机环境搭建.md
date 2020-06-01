@@ -225,3 +225,6 @@ hadoop001
 验证方式二 ：访问 HBase Web UI 界面，需要注意的是 1.2 版本的 HBase 的访问端口为 `60010`
 
 <div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-60010.png"/> </div>
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

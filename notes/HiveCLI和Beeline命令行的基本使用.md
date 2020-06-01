@@ -277,3 +277,6 @@ Hive 可选的配置参数非常多，在用到时查阅官方文档即可[Admin
 1. [HiveServer2 Clients](https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients)
 2. [LanguageManual Cli](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Cli)
 3. [AdminManual Configuration](https://cwiki.apache.org/confluence/display/Hive/AdminManual+Configuration)
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

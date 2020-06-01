@@ -373,3 +373,6 @@ flume-ng agent \
 可以看到已经从 8888 端口监听到内容，并成功输出到控制台：
 
 <div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flume-example-9.png"/> </div>
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

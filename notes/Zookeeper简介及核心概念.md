@@ -205,3 +205,6 @@ Zookeeper 还能解决大多数分布式系统中的问题：
 
 
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

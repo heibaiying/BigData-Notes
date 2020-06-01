@@ -365,3 +365,6 @@ public class DefaultRecordTranslator<K, V> implements RecordTranslator<K, V> {
 ## 参考资料
 
 1. [Storm Kafka Integration (0.10.x+)](http://storm.apache.org/releases/2.0.0-SNAPSHOT/storm-kafka-client.html)
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

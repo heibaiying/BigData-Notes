@@ -302,3 +302,6 @@ Flink 大多数版本都提供有 Scala 2.11 和 Scala 2.12 两个版本的安�
 
 
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

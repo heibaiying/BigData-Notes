@@ -157,3 +157,6 @@ Task 是组成 Component 的代码单元。Topology 启动后，1 个 Component 
 3. [Understanding the Parallelism of a Storm Topology](http://storm.apache.org/releases/1.2.2/Understanding-the-parallelism-of-a-Storm-topology.html)
 4. [Storm nimbus 单节点宕机的处理](https://blog.csdn.net/daiyutage/article/details/52049519)
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

@@ -126,3 +126,6 @@ YARN 中的任务将其进度和状态 (包括 counter) 返回给应用管理器
 
    
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

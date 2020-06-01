@@ -443,3 +443,6 @@ scan.setFilter(filterList);
 ## 参考资料
 
 [HBase: The Definitive Guide _>  Chapter 4. Client API: Advanced Features](https://www.oreilly.com/library/view/hbase-the-definitive/9781449314682/ch04.html)
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

@@ -242,3 +242,6 @@ spark.sql("SELECT ename,job FROM global_temp.gemp").show()
 ## 参考资料
 
 [Spark SQL, DataFrames and Datasets Guide > Getting Started](https://spark.apache.org/docs/latest/sql-getting-started.html)
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

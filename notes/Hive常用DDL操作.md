@@ -448,3 +448,6 @@ SHOW CREATE TABLE ([db_name.]table_name|view_name);
 ## 参考资料
 
 [LanguageManual DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL)
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

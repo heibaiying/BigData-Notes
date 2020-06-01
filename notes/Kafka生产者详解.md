@@ -362,3 +362,6 @@ acks 参数指定了必须要有多少个分区副本收到消息，生产者才
 ## 参考资料
 
 1. Neha Narkhede, Gwen Shapira ,Todd Palino(著) , 薛命灯 (译) . Kafka 权威指南 . 人民邮电出版社 . 2017-12-26
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

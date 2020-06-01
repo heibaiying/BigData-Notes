@@ -103,3 +103,6 @@ sc.parallelize(broadcastVar.value).map(_ * 10).collect()
 
 [RDD Programming Guide](http://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-programming-guide)
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

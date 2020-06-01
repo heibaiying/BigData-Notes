@@ -122,3 +122,6 @@ tar -zxvf  azkaban-solo-server-3.70.0.tar.gz
 <div align="center"> <img width="700px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/azkaban-web-ui.png"/> </div>
 
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

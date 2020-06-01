@@ -263,3 +263,6 @@ Mode: standalone
 Node count: 167
 ```
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

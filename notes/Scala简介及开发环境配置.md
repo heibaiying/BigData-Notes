@@ -131,3 +131,6 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 1. Martin Odersky(著)，高宇翔 (译) . Scala 编程 (第 3 版)[M] . 电子工业出版社 . 2018-1-1 
 2. https://www.scala-lang.org/download/
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

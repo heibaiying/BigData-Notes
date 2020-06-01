@@ -176,3 +176,6 @@ IDEA 默认不支持 Scala 语言的开发，需要通过插件进行扩展。�
 
 **另外在 IDEA 中以本地模式运行 Spark 项目是不需要在本机搭建 Spark 和 Hadoop 环境的。**
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

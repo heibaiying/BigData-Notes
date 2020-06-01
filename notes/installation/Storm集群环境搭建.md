@@ -165,3 +165,6 @@ nohup sh storm logviewer &
 这里手动模拟主 `Nimbus` 异常的情况，在 hadoop001 上使用 `kill` 命令杀死 `Nimbus` 的线程，此时可以看到 hadoop001 上的 `Nimbus` 已经处于 `offline` 状态，而 hadoop002 上的 `Nimbus` 则成为新的 `Leader`。
 
 <div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/storm集群搭建2.png"/> </div>
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

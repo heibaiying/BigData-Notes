@@ -392,3 +392,6 @@ SET hive.exec.mode.local.auto=true;
 2. [LanguageManual Joins](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Joins)
 3. [LanguageManual GroupBy](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+GroupBy)
 4. [LanguageManual SortBy](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+SortBy)
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

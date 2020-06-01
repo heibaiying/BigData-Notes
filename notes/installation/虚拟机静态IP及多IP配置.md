@@ -116,3 +116,6 @@ DEVICE=enp0s8
 使用时只需要根据所处的网络环境，勾选对应的网卡即可，不使用的网卡尽量不要勾选启动。
 
 <div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/virtualbox启用网络.png"/> </div>
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

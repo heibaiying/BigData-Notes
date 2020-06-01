@@ -126,3 +126,6 @@ public WindowedStream<T, KEY, GlobalWindow> countWindow(long size, long slide) {
 ## 参考资料
 
 Flink Windows： https://ci.apache.org/projects/flink/flink-docs-release-1.9/dev/stream/operators/windows.html 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

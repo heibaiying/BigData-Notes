@@ -198,3 +198,6 @@ hadoop002 上的 HBase 出于备用状态：
 <br/>
 
 <div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hbase-集群搭建2.png"/> </div>
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

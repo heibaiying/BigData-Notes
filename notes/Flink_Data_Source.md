@@ -282,3 +282,6 @@ bin/kafka-console-producer.sh --broker-list hadoop001:9092 --topic flink-stream-
 1. data-sources：https://ci.apache.org/projects/flink/flink-docs-release-1.9/dev/datastream_api.html#data-sources 
 2. Streaming Connectors：https://ci.apache.org/projects/flink/flink-docs-release-1.9/dev/connectors/index.html
 3. Apache Kafka Connector： https://ci.apache.org/projects/flink/flink-docs-release-1.9/dev/connectors/kafka.html 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

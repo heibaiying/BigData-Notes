@@ -114,3 +114,6 @@ flume-ng agent \
 可以看到 `flume-kafka` 主题的消费端已经收到了对应的消息：
 
 <div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flume-kafka-2.png"/> </div>
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

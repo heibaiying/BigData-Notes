@@ -65,3 +65,6 @@ Broker 是集群 (Cluster) 的组成部分。每一个集群都会选举出一�
 ## 参考资料
 
 Neha Narkhede, Gwen Shapira ,Todd Palino(著) , 薛命灯 (译) . Kafka 权威指南 . 人民邮电出版社 . 2017-12-26
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

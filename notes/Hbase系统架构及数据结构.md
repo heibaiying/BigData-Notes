@@ -220,3 +220,6 @@ HBase 系统遵循 Master/Salve 架构，由三种不同类型的组件组成：
 
 
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

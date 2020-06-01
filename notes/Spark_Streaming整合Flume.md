@@ -357,3 +357,6 @@ spark-submit \
 
 - [streaming-flume-integration](https://spark.apache.org/docs/latest/streaming-flume-integration.html)
 - 关于大数据应用常用的打包方式可以参见：[大数据应用常用打包方式](https://github.com/heibaiying/BigData-Notes/blob/master/notes/大数据应用常用打包方式.md)
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

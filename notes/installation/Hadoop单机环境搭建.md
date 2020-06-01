@@ -260,3 +260,6 @@ cp mapred-site.xml.template mapred-site.xml
 方式二：查看 Web UI 界面，端口号为 `8088`：
 
 <div align="center"> <img width="700px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hadoop-yarn安装验证.png"/> </div>
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

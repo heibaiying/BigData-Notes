@@ -69,3 +69,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 [root@hadoop001 app]#
 ```
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

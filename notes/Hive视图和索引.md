@@ -234,3 +234,6 @@ SHOW INDEX ON emp;
 2. [Materialized views](https://cwiki.apache.org/confluence/display/Hive/Materialized+views)
 3. [Hive 索引](http://lxw1234.com/archives/2015/05/207.htm)
 4. [Overview of Hive Indexes](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Indexing)
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

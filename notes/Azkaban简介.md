@@ -74,3 +74,6 @@ Azkaban 和 Oozie 都是目前使用最为广泛的工作流调度程序，其�
 + **配置方面**：Azkaban Flow 1.0 基于 Properties 文件来定义工作流，这个时候的限制可能会多一点。但是在 Flow 2.0 就支持了 YARM。YARM 语法更加灵活简单，著名的微服务框架 Spring Boot 就采用的 YAML 代替了繁重的 XML。
 
  
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

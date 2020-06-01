@@ -257,3 +257,6 @@ res8: Boolean = false
 1. https://docs.scala-lang.org/overviews/collections/overview.html
 2. https://docs.scala-lang.org/overviews/collections/trait-traversable.html
 3. https://docs.scala-lang.org/overviews/collections/trait-iterable.html
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>

@@ -235,3 +235,6 @@ RDD(s) 及其之间的依赖关系组成了 DAG(有向无环图)，DAG 定义了
 
 
 
+
+
+<div align="center"> <img  src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"/> </div>
