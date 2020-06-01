@@ -43,11 +43,11 @@
 
 <div align="center">
 	<a href = "https://github.com/heibaiying/Full-Stack-Notes"> 
-	<img width="500px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/full-stack-notes.png"/> 
+	<img width="500px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin.png"/> 
 	</a> 
 </div>
+<div align="center"> <strong> 如果想要离线阅读，可以在公众号上发送 “bigdata” 获取离线阅读版的《大数据入门指南》！ </strong> </div>
 
-<div align="center"> <strong> 有对前后台开发感兴趣的小伙伴，欢迎关注我的新仓库：<a  href = "https://github.com/heibaiying/Full-Stack-Notes"> Full-Stack-Notes</a> ! </strong> </div>
 <br/>
 
 ## :black_nib: 前  言
