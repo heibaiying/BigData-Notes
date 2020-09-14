@@ -53,7 +53,7 @@ HBase 的运行需要依赖 Hadoop 和 JDK(`HBase 2.0+` 对应 `JDK 1.8+`) 。�
 添加环境变量：
 
 ```shell
-export HBASE_HOME=usr/app/hbase-1.2.0-cdh5.15.2
+export HBASE_HOME=/usr/app/hbase-1.2.0-cdh5.15.2
 export PATH=$HBASE_HOME/bin:$PATH
 ```
 
@@ -127,7 +127,7 @@ hadoop002
 **第一种** ：将 Hadoop 配置文件的位置信息添加到 `hbase-env.sh` 的 `HBASE_CLASSPATH` 属性，示例如下：
 
 ```shell
-export HBASE_CLASSPATH=usr/app/hadoop-2.6.0-cdh5.15.2/etc/hadoop
+export HBASE_CLASSPATH=/usr/app/hadoop-2.6.0-cdh5.15.2/etc/hadoop
 ```
 
 **第二种** ：将 Hadoop 的 ` hdfs-site.xml` 或 `hadoop-site.xml` 拷贝到  `${HBASE_HOME}/conf ` 目录下，或者通过符号链接的方式。如果采用这种方式的话，建议将两者都拷贝或建立符号链接，示例如下：
