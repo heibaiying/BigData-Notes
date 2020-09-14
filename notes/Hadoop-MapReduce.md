@@ -149,7 +149,7 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritabl
 
 
 
-`WordCountMapper` 继承自 `Mappe` 类，这是一个泛型类，定义如下：
+`WordCountMapper` 继承自 `Mapper` 类，这是一个泛型类，定义如下：
 
 ```java
 WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable>
