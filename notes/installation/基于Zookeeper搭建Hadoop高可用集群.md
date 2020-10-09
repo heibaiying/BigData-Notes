@@ -140,7 +140,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
     <property>
         <!-- ZooKeeper 集群的地址 -->
         <name>ha.zookeeper.quorum</name>
-        <value>hadoop001:2181,hadoop002:2181,hadoop002:2181</value>
+        <value>hadoop001:2181,hadoop002:2181,hadoop003:2181</value>
     </property>
     <property>
         <!-- ZKFC 连接到 ZooKeeper 超时时长 -->
