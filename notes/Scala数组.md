@@ -173,7 +173,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.collection.{JavaConverters, mutable}
 
 object ScalaApp extends App {
-
+shuzus
   val element = ArrayBuffer("hadoop", "spark", "storm")
   // Scala 转 Java
   val javaList: util.List[String] = JavaConverters.bufferAsJavaList(element)
