@@ -98,10 +98,10 @@ object ScalaApp extends App {
   // 4.tail 和 head 可以结合使用
   list.tail.head
 
-  // 5.返回列表中的最后一个元素 与 head 相反
+  // 5.返回列表中除了最后一个元素之外的其他元素；与 tail 相反 这里输出 List(hadoop, spark)
   list.init
 
-  // 6.返回列表中除了最后一个元素之外的其他元素 与 tail 相反 这里输出 List(hadoop, spark)
+  // 6.返回列表中的最后一个元素 与 head 相反
   list.last
 
   // 7.使用下标访问元素
