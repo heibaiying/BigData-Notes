@@ -48,7 +48,7 @@ export PATH=$HIVE_HOME/bin:$PATH
 
 **1. hive-env.sh**
 
-进入安装目录下的 `conf/` 目录，拷贝 Hive 的环境配置模板 `flume-env.sh.template`
+进入安装目录下的 `conf/` 目录，拷贝 Hive 的环境配置模板 `hive-env.sh.template`
 
 ```shell
 cp hive-env.sh.template hive-env.sh
