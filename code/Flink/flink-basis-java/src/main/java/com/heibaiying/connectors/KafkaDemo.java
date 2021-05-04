@@ -23,6 +23,6 @@ public class KafkaDemo {
         DataStream<String> stream = env.addSource(new FlinkKafkaConsumer<>("flink-stream-in-topic", new
                 SimpleStringSchema(), properties));
         stream.print();
-        env.execute("Flink Streaming ");
+        env.execute("Flink Streaming");
     }
 }
