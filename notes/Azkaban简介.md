@@ -71,7 +71,7 @@ Azkaban 和 Oozie 都是目前使用最为广泛的工作流调度程序，其�
 
 + **安装方面**：Azkaban 3.0 之前都是提供安装包的，直接解压部署即可。Azkaban 3.0 之后的版本需要编译，这个编译是基于 gradle 的，自动化程度比较高；
 + **页面设计**：所有任务的依赖关系、执行结果、执行日志都可以从界面上直观查看到；
-+ **配置方面**：Azkaban Flow 1.0 基于 Properties 文件来定义工作流，这个时候的限制可能会多一点。但是在 Flow 2.0 就支持了 YARM。YARM 语法更加灵活简单，著名的微服务框架 Spring Boot 就采用的 YAML 代替了繁重的 XML。
++ **配置方面**：Azkaban Flow 1.0 基于 Properties 文件来定义工作流，这个时候的限制可能会多一点。但是在 Flow 2.0 就支持了 YAML。YAML 语法更加灵活简单，著名的微服务框架 Spring Boot 就采用的 YAML 代替了繁重的 XML。
 
  
 
