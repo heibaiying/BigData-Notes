@@ -50,7 +50,7 @@ export PATH=$FLUME_HOME/bin:$PATH
 修改 `flume-env.sh`,指定 JDK 的安装路径：
 
 ```shell
-# Enviroment variables can be set here.
+# Environment variables can be set here.
 export JAVA_HOME=/usr/java/jdk1.8.0_201
 ```
 

@@ -35,7 +35,7 @@ Hive 是一个构建在 Hadoop 之上的数据仓库，它可以将结构化的�
 
 可以用 command-line shell 和 thrift／jdbc 两种方式来操作数据：
 
-+ **command-line shell**：通过 hive 命令行的的方式来操作数据；
++ **command-line shell**：通过 hive 命令行的方式来操作数据；
 + **thrift／jdbc**：通过 thrift 协议按照标准的 JDBC 的方式操作数据。
 
 ### 2.2 Metastore

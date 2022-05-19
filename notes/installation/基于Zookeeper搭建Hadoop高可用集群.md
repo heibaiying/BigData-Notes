@@ -356,7 +356,7 @@ scp -r /usr/app/hadoop-2.6.0-cdh5.15.2/  hadoop003:/usr/app/
 
 ### 5.2 启动Journalnode
 
-分别到三台服务器的的 `${HADOOP_HOME}/sbin` 目录下，启动 `journalnode` 进程：
+分别到三台服务器的 `${HADOOP_HOME}/sbin` 目录下，启动 `journalnode` 进程：
 
 ```shell
 hadoop-daemon.sh start journalnode
