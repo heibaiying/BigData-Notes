@@ -8,7 +8,7 @@
     <artifactId>spring-mybatis-phoenix</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <spring-base-version>5.1.6.RELEASE</spring-base-version>
+        <spring-base-version>5.2.22.RELEASE</spring-base-version>
     </properties>
 
     <dependencies>
