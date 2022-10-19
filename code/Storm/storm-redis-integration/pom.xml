@@ -9,7 +9,7 @@
     <version>1.0</version>
 
     <properties>
-        <storm.version>1.2.2</storm.version>
+        <storm.version>1.2.3</storm.version>
     </properties>
 
     <dependencies>
