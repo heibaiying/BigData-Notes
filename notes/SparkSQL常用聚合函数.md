@@ -198,7 +198,7 @@ case class SumAndCount(var sum: Double, var count: Long)
  */
 object MyAverage extends Aggregator[Emp, SumAndCount, Double] {
     
-    // 4.用于聚合操作的的初始零值
+    // 4.用于聚合操作的初始零值
     override def zero: SumAndCount = SumAndCount(0, 0)
     
     // 5.同一分区中的 reduce 操作
