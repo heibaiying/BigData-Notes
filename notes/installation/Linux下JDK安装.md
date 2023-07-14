@@ -13,7 +13,7 @@
 ```shell
 [root@ java]# tar -zxvf jdk-8u201-linux-x64.tar.gz
 ```
-
+> 注：官网近几年必须登录才能下载，可以从[华为云开源镜像站](https://repo.huaweicloud.com/java/jdk/)下载。推荐8u201/8u202及之前的版本，商用不用收费，作者用的8u201下载链接为 [jdk-8u201](https://repo.huaweicloud.com/java/jdk/8u201-b09/jdk-8u201-linux-x64.tar.gz)。
 
 
 ### 2. 设置环境变量
@@ -25,9 +25,7 @@
 添加如下配置：
 
 ```shell
-export JAVA_HOME=/usr/java/jdk1.8.0_201  
-export JRE_HOME=${JAVA_HOME}/jre  
-export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib  
+export JAVA_HOME=/usr/java/jdk1.8.0_201
 export PATH=${JAVA_HOME}/bin:$PATH
 ```
 
